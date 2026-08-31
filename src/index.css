@@ -412,3 +412,63 @@
     opacity: 1;
   }
 }
+
+@layer components {
+  /* ---------- carrousel op telefoon ----------
+     Kaartenrijen worden op een telefoon een verticale toren: vijf momenten of
+     twaalf smaken onder elkaar maken de pagina eindeloos lang. Onder sm
+     schuiven ze daarom horizontaal langs elkaar, met de volgende kaart net in
+     beeld zodat zichtbaar is dat er meer is. Vanaf sm valt alles terug in het
+     gewone raster, dus de kolomklassen (sm:grid-cols-3 en dergelijke) blijven
+     gewoon werken.
+
+     Vervangt de klasse `grid` op de rij; de kinderen hoeven niets te weten. */
+  .carrousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    /* Randloos doorlopen tot de schermrand, met de containerinspringing als
+       scroll-marge: de eerste kaart begint dus netjes onder de kop. */
+    margin-inline: calc(var(--spacing) * -6);
+    padding-inline: calc(var(--spacing) * 6);
+    scroll-padding-inline: calc(var(--spacing) * 6);
+    /* Ruimte voor de schaduw onder de kaarten, die anders wordt afgekapt. */
+    padding-bottom: 0.75rem;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .carrousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carrousel > * {
+    flex: 0 0 min(82%, 21rem);
+    scroll-snap-align: center;
+  }
+
+  @media (min-width: 40rem) {
+    .carrousel {
+      display: grid;
+      overflow: visible;
+      margin-inline: 0;
+      padding-inline: 0;
+      padding-bottom: 0;
+    }
+
+    .carrousel > * {
+      flex: initial;
+    }
+  }
+
+  /* Alleen zichtbaar zolang de rij echt schuift. */
+  .carrousel-hint {
+    display: block;
+  }
+
+  @media (min-width: 40rem) {
+    .carrousel-hint {
+      display: none;
+    }
+  }
+}

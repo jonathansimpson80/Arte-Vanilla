@@ -30,30 +30,59 @@ export function MoodsSection() {
   const kaartenRef = useRef<HTMLUListElement>(null)
 
   useEffect(() => {
-    const kaarten = kaartenRef.current?.querySelectorAll('li')
-    if (!kaarten?.length) return
+    const rij = kaartenRef.current
+    if (!rij) return
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // De kaart die het dichtst bij het midden van het scherm staat, wint.
-        const midden = window.innerHeight / 2
-        let beste = { index: -1, afstand: Infinity }
+    // Onder sm is de rij een carrousel: dan schuiven de kaarten zijwaarts en
+    // moet de vitrine meelopen met wat er horizontaal in beeld staat, niet met
+    // hoe ver de pagina naar beneden is.
+    const breed = window.matchMedia('(min-width: 40rem)')
 
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return
-          const index = Number((entry.target as HTMLElement).dataset.index)
-          const rect = entry.boundingClientRect
-          const afstand = Math.abs(rect.top + rect.height / 2 - midden)
-          if (afstand < beste.afstand) beste = { index, afstand }
-        })
+    let observer: IntersectionObserver | null = null
 
-        if (beste.index >= 0) setActive(beste.index)
-      },
-      { threshold: 0.4, rootMargin: '-15% 0px -15% 0px' },
-    )
+    function koppel() {
+      observer?.disconnect()
+      const kaarten = rij?.querySelectorAll('li')
+      if (!rij || !kaarten?.length) return
 
-    kaarten.forEach((kaart) => observer.observe(kaart))
-    return () => observer.disconnect()
+      const horizontaal = !breed.matches
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          // De kaart die het dichtst bij het midden staat, wint.
+          const kader = horizontaal ? rij!.getBoundingClientRect() : null
+          const midden = kader
+            ? kader.left + kader.width / 2
+            : window.innerHeight / 2
+          let beste = { index: -1, afstand: Infinity }
+
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return
+            const index = Number((entry.target as HTMLElement).dataset.index)
+            const rect = entry.boundingClientRect
+            const hart = horizontaal
+              ? rect.left + rect.width / 2
+              : rect.top + rect.height / 2
+            const afstand = Math.abs(hart - midden)
+            if (afstand < beste.afstand) beste = { index, afstand }
+          })
+
+          if (beste.index >= 0) setActive(beste.index)
+        },
+        horizontaal
+          ? { root: rij, threshold: 0.6 }
+          : { threshold: 0.4, rootMargin: '-15% 0px -15% 0px' },
+      )
+
+      kaarten.forEach((kaart) => observer!.observe(kaart))
+    }
+
+    koppel()
+    breed.addEventListener('change', koppel)
+    return () => {
+      breed.removeEventListener('change', koppel)
+      observer?.disconnect()
+    }
   }, [])
 
   const mood = moods[active]
@@ -153,7 +182,7 @@ export function MoodsSection() {
           </div>
 
           {/* de zes stemmingen: cijfer en iconen boven, beeld onder de tekst */}
-          <ul className="grid gap-6" ref={kaartenRef}>
+          <ul className="carrousel gap-6" ref={kaartenRef}>
             {moods.map((item, i) => (
               <li
                 key={item.number}

@@ -30,7 +30,7 @@ export function DealsRij() {
         </div>
       </Reveal>
 
-      <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-12 carrousel gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {deals.map((deal, i) => (
           <Reveal key={deal.name.nl} y={24} scale={0.96} delay={(i % 3) * 90}>
             <li

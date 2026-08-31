@@ -44,7 +44,7 @@ export function Momenten() {
             </div>
           </Reveal>
 
-          <div className="mt-14 grid gap-6 sm:grid-cols-3 lg:grid-cols-5">
+          <div className="mt-14 carrousel gap-6 sm:grid-cols-3 lg:grid-cols-5">
             {moments.map((moment, i) => (
               <Reveal key={moment.image} y={26} scale={0.95} delay={i * 90}>
                 <article className="group">

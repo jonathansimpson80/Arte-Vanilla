@@ -139,7 +139,7 @@ export function Dolci() {
           kaarten 219px breed en 528 hoog — dan liever de laatste de rij laten
           afmaken, alleen in de tweekolomsstand.
         */}
-        <ul className="mt-12 grid gap-6 sm:grid-cols-2 sm:[&>*:last-child]:col-span-2 lg:grid-cols-3 lg:[&>*:last-child]:col-span-1">
+        <ul className="mt-12 carrousel gap-6 sm:grid-cols-2 sm:[&>*:last-child]:col-span-2 lg:grid-cols-3 lg:[&>*:last-child]:col-span-1">
           {dolci.map((dolce, i) => (
             <Reveal key={dolce.name.nl} y={24} scale={0.96} delay={(i % 3) * 90}>
               <li

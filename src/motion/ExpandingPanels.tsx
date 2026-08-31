@@ -88,10 +88,10 @@ export function ExpandingPanels({ panels, onChange, className = '' }: Props) {
                 </span>
                 {panel.kiezer && (
                   <span className="mt-3 block max-w-sm border-t border-dashed border-crema-50/30 pt-3">
-                    <span className="chunk mr-2 inline-block rounded-full bg-crema-50/15 px-3 py-1 text-[0.66rem] text-crema-50 sm:text-[0.6rem]">
+                    <span className="chunk inline-block rounded-full bg-crema-50/15 px-3 py-1 text-[0.66rem] text-crema-50 sm:text-[0.6rem]">
                       {t(panel.kiezer.label)}
                     </span>
-                    <span className="text-sm leading-relaxed text-crema-50/85">
+                    <span className="mt-2 block text-sm leading-relaxed text-crema-50/85">
                       {t(panel.kiezer.zin)}
                     </span>
                   </span>

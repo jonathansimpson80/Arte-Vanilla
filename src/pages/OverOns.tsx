@@ -94,7 +94,7 @@ export function OverOns() {
 
       {/* ---------- in cijfers ---------- */}
       <section className="container-page pt-24">
-        <ul className="grid gap-5 sm:grid-cols-3">
+        <ul className="carrousel gap-5 sm:grid-cols-3">
           {cijfers.map((cijfer, i) => (
             <Reveal key={cijfer.getal + i} y={22} scale={0.96} delay={i * 90}>
               <li

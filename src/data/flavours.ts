@@ -254,7 +254,7 @@ export const panels = [
       it: 'Fiordilatte, morbido e servito generoso. Dove quasi tutti iniziano.',
     },
     kiezer: {
-      label: { nl: 'Iets romigs', en: 'Something creamy', it: 'Qualcosa di cremoso' },
+      label: { nl: 'Als je twijfelt', en: 'If you can’t decide', it: 'Se sei indeciso' },
       zin: {
         nl: 'Begin bij de romige rij en werk naar buiten.',
         en: 'Start at the creamy row and work outward.',
@@ -281,7 +281,7 @@ export const panels = [
       it: 'La fragola c’è quasi sempre; il resto cambia con il mercato.',
     },
     kiezer: {
-      label: { nl: 'Iets helders', en: 'Something bright', it: 'Qualcosa di vivace' },
+      label: { nl: 'Voor tussendoor', en: 'For in between', it: 'Per uno spuntino' },
       zin: {
         nl: 'Het fruit doet het werk: fel van kleur, licht van smaak.',
         en: 'The fruit does the work: loud in colour, light on the tongue.',
@@ -308,7 +308,7 @@ export const panels = [
       it: 'Fondente all’acqua invece che al latte. Scuro, intenso e per caso vegano.',
     },
     kiezer: {
-      label: { nl: 'Iets vols', en: 'Something rich', it: 'Qualcosa di corposo' },
+      label: { nl: 'Voor de echte trek', en: 'For a real craving', it: 'Per una voglia vera' },
       zin: {
         nl: 'De chocoladebakken. Donker, cacao-zwaar, voor de serieuze trek.',
         en: 'The chocolate tubs. Dark, cocoa-heavy, for a serious craving.',
@@ -335,7 +335,7 @@ export const panels = [
       it: 'Pistacchio siciliano e nocciola piemontese, tostati in casa.',
     },
     kiezer: {
-      label: { nl: 'Iets voor volwassenen', en: 'Something grown-up', it: 'Qualcosa da adulti' },
+      label: { nl: 'Voor de fijnproever', en: 'For the connoisseur', it: 'Per gli intenditori' },
       zin: {
         nl: 'Geroosterd, licht zout en niet te zoet. Lekker bij een espresso.',
         en: 'Roasted, lightly salted and not too sweet. Good with an espresso.',
@@ -362,7 +362,7 @@ export const panels = [
       it: 'Solo frutta, acqua e zucchero. Puro, deciso e senza latticini.',
     },
     kiezer: {
-      label: { nl: 'Iets fris', en: 'Something fresh', it: 'Qualcosa di fresco' },
+      label: { nl: 'Na het eten', en: 'After a big meal', it: 'Dopo un pasto' },
       zin: {
         nl: 'Ga naar de sorbet. Scherp, ijzig, klaarwakker.',
         en: 'Head for the sorbet. Sharp, icy, wide awake.',
@@ -389,7 +389,7 @@ export const panels = [
       it: 'Cannoli, tiramisù e quel che è stato sfornato la mattina.',
     },
     kiezer: {
-      label: { nl: 'Iets zoets erbij', en: 'Something sweet on the side', it: 'Qualcosa di dolce' },
+      label: { nl: 'Bij de koffie', en: 'With your coffee', it: 'Con il caffè' },
       zin: {
         nl: 'Vraag naar de dolci — cannoli, tiramisù en wat er vers is.',
         en: 'Ask about the dolci — cannoli, tiramisù and whatever is fresh.',

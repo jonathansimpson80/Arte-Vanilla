@@ -147,7 +147,7 @@ export function Flavours() {
           {zichtbaar.length} {t(ui.smakenZichtbaar)}
         </p>
 
-        <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-12 carrousel gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {zichtbaar.map((smaak, i) => (
             <Reveal key={smaak.name} y={24} scale={0.96} delay={(i % 3) * 90}>
               <li
@@ -231,7 +231,7 @@ export function Flavours() {
           </div>
         </Reveal>
 
-        <ul className="mt-10 grid gap-6 sm:grid-cols-2">
+        <ul className="mt-10 carrousel gap-6 sm:grid-cols-2">
           {serveervormen.map((vorm, i) => (
             <Reveal key={vorm.italian} y={24} scale={0.96} delay={i * 90}>
               <li
@@ -294,7 +294,7 @@ export function Flavours() {
           </div>
         </Reveal>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 carrousel gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {families.map((familie, i) => (
             <Reveal key={familie.id} y={24} scale={0.96} delay={(i % 3) * 90}>
               <FlipCard family={familie} />
