@@ -213,19 +213,65 @@ export function OverOns() {
         </div>
       </section>
 
-      {/* ---------- wat er nog ontbreekt ---------- */}
-      <section className="container-page pt-20">
-        <Reveal y={18}>
-          <div className="rounded-cone border border-dashed border-espresso-900/25 p-8 sm:p-10">
-            <p className="chunk text-[0.72rem] text-fragola-700 sm:text-[0.7rem]">
-              {t(ui.letOp)}
-            </p>
-            <h2 className="mt-3 max-w-2xl font-display text-2xl font-bold text-espresso-900">
-              {t(ui.overAanvullenKop)}
+      {/* ---------- de twee achter de toonbank ---------- */}
+      {/* Wat nog van de zaak zelf moet komen — de openingsdatum die ze willen
+          aanhouden, de prijzen van koffie en bollen, en een volledige
+          allergenenopgave — staat bewust niet op de pagina. Dat is een briefje
+          aan de eigenaar, geen tekst voor een bezoeker. */}
+      <section className="container-page pt-24" aria-labelledby="de-twee">
+        <Reveal y={16}>
+          <div className="text-center">
+            <span className="chunk inline-flex items-center gap-2 rounded-full bg-vaniglia-400 px-4 py-2 text-[0.7rem] text-espresso-900">
+              <Glyph name="hart" size={14} />
+              {t(ui.overTweeEyebrow)}
+            </span>
+            <h2
+              id="de-twee"
+              className="mx-auto mt-5 max-w-2xl font-display text-title font-bold text-espresso-900"
+            >
+              {t(ui.overTweeKop)}
             </h2>
-            <p className="mt-3 max-w-2xl text-cacao-700">{t(ui.overAanvullenLead)}</p>
+            <p className="mx-auto mt-4 max-w-2xl text-lead text-cacao-700">
+              {t(ui.overTweeLead)}
+            </p>
           </div>
         </Reveal>
+
+        <Carrousel as="ul" label={t(ui.overTweeEyebrow)} className="mt-12 gap-6 sm:grid-cols-2">
+          {[
+            {
+              naam: ui.overGiuliaNaam,
+              rol: ui.overGiuliaRol,
+              tekst: ui.overGiuliaTekst,
+              tint: '#fbe9ee',
+              accent: '#b4544c',
+            },
+            {
+              naam: ui.overSimoneNaam,
+              rol: ui.overSimoneRol,
+              tekst: ui.overSimoneTekst,
+              tint: '#eef4e4',
+              accent: '#5f6b3a',
+            },
+          ].map((persoon, i) => (
+            <Reveal key={persoon.naam.nl} y={24} scale={0.96} delay={i * 90}>
+              <li
+                className="flex h-full flex-col rounded-cone p-7 ring-1 ring-espresso-900/5 sm:p-8"
+                style={{ backgroundColor: persoon.tint }}
+              >
+                <p className="chunk text-[0.72rem] sm:text-[0.65rem]" style={{ color: persoon.accent }}>
+                  {t(persoon.rol)}
+                </p>
+                <h3 className="mt-3 font-display text-2xl font-bold text-espresso-900">
+                  {t(persoon.naam)}
+                </h3>
+                <p className="mt-4 text-sm leading-relaxed text-espresso-900/75">
+                  {t(persoon.tekst)}
+                </p>
+              </li>
+            </Reveal>
+          ))}
+        </Carrousel>
       </section>
 
       {/* ---------- afsluiter ---------- */}

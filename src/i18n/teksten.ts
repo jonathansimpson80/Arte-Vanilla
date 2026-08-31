@@ -497,15 +497,31 @@ export const ui = {
     en: 'kitchen: one, behind the counter',
     it: 'cucina: una, dietro il banco',
   },
-  overAanvullenKop: {
-    nl: 'Wat we nog van jullie nodig hebben.',
-    en: 'What we still need from you.',
-    it: 'Cosa ci serve ancora da voi.',
+  // ---------- de twee achter de toonbank ----------
+  overTweeEyebrow: { nl: 'De twee', en: 'The two of them', it: 'Loro due' },
+  overTweeKop: {
+    nl: 'Giulia en Simone.',
+    en: 'Giulia and Simone.',
+    it: 'Giulia e Simone.',
   },
-  overAanvullenLead: {
-    nl: 'Het verhaal hierboven komt uit het interview in indebuurt Amsterdam. Wat nog ontbreekt: de openingsdatum die jullie zelf aanhouden, de prijzen van de koffie en de bollen, en een volledige allergenenopgave per smaak. Doorgeven en het staat erin.',
-    en: 'The story above comes from the interview in indebuurt Amsterdam. Still missing: the opening date you want to use, the prices for coffee and scoops, and a complete allergen declaration per flavour. Pass them on and they go in.',
-    it: 'La storia qui sopra viene dall’intervista su indebuurt Amsterdam. Manca ancora: la data di apertura che volete usare, i prezzi di caffè e coppette e la dichiarazione completa degli allergeni per gusto. Mandateceli e li inseriamo.',
+  overTweeLead: {
+    nl: 'Allebei uit de omgeving van Bologna. Een jaar Australië om Engels te leren, daarna een rondje langs Europese steden — Kopenhagen was mooi, maar Amsterdam had waar het ze om ging: levendigheid, en mensen die elkaar aanspreken.',
+    en: 'Both from the countryside around Bologna. A year in Australia to learn English, then a tour of European cities — Copenhagen was beautiful, but Amsterdam had what they were after: liveliness, and people who talk to each other.',
+    it: 'Entrambi della zona di Bologna. Un anno in Australia per imparare l’inglese, poi un giro per le città europee — Copenaghen era bellissima, ma Amsterdam aveva quello che cercavano: vivacità e gente che si parla.',
+  },
+  overGiuliaNaam: { nl: 'Giulia De Iorio', en: 'Giulia De Iorio', it: 'Giulia De Iorio' },
+  overGiuliaRol: { nl: 'Patisserie en gelato', en: 'Pastry and gelato', it: 'Pasticceria e gelato' },
+  overGiuliaTekst: {
+    nl: 'Leerde bakken in de keuken van haar oma, die uit Zuid-Italië kwam en als meisje brood maakte voor het hele dorp. Op vakantie ging ze elke dag naar dezelfde ijssalon — het ging haar net zo goed om de mensen als om het ijs. Ze specialiseerde zich in patisserie en gelato en werd manager van een ijssalon bij Bologna.',
+    en: 'Learned to bake in her grandmother’s kitchen — she came from southern Italy and, as a girl, made bread for the whole village. On holidays Giulia went to the same gelateria every day; the people mattered to her as much as the gelato. She specialised in pastry and gelato and became manager of a gelateria near Bologna.',
+    it: 'Ha imparato a impastare nella cucina della nonna, che veniva dal Sud e da ragazzina faceva il pane per tutto il paese. In vacanza andava ogni giorno nella stessa gelateria: le importavano le persone quanto il gelato. Si è specializzata in pasticceria e gelato ed è diventata responsabile di una gelateria vicino a Bologna.',
+  },
+  overSimoneNaam: { nl: 'Simone Terontoli', en: 'Simone Terontoli', it: 'Simone Terontoli' },
+  overSimoneRol: { nl: 'Koffie en bar', en: 'Coffee and bar', it: 'Caffè e bancone' },
+  overSimoneTekst: {
+    nl: 'Begon achter de bar als barista en bartender, en raakte gefascineerd door het spelen met smaken: van koffie naar cocktails en mixologie. Via Giulia rolde hij het ijs in en volgde er opleidingen voor. “Bij cocktails meng je vloeistoffen om iets nieuws te maken. Bij gelato doe je hetzelfde, alleen wordt het daarna vast.”',
+    en: 'Started behind the bar as a barista and bartender, and got hooked on playing with flavour: from coffee into cocktails and mixology. Through Giulia he moved into gelato and trained for it. “With cocktails you mix liquids to make something new. With gelato you do the same, only afterwards it turns solid.”',
+    it: 'Ha iniziato dietro il bancone come barista e bartender, appassionandosi al gioco dei sapori: dal caffè ai cocktail e alla miscelazione. Grazie a Giulia è passato al gelato e si è formato. “Con i cocktail mescoli liquidi per creare qualcosa di nuovo. Col gelato fai lo stesso, solo che poi diventa solido.”',
   },
 
   // ---------- taart en cadeaubon (voorstel) ----------

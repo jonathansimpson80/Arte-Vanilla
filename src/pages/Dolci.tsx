@@ -132,7 +132,7 @@ export function Dolci() {
         {/* Een eigen laag in plaats van een achtergrond op de sectie: vanaf sm
             staat de rij stil en hoort er geen kleurvlak te zijn. */}
         <div
-          className="pointer-events-none absolute inset-x-[-1.5rem] inset-y-0 -z-10 transition-colors duration-500 ease-soft sm:hidden"
+          className="pointer-events-none absolute inset-0 -z-10 transition-colors duration-500 ease-soft sm:hidden"
           style={{ backgroundColor: dolci[voor]?.tintHex ?? 'transparent' }}
           aria-hidden="true"
         />
