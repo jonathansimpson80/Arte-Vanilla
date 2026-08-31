@@ -1,6 +1,5 @@
 import { useTaal } from '@/i18n/taal'
 import { ui } from '@/i18n/teksten'
-import { StripesBackground } from '@/components/StripesBackground'
 import { Glyph } from '@/components/ui/Glyph'
 import { moments } from '@/data/home'
 import { Reveal } from '@/motion/Reveal'
@@ -13,24 +12,19 @@ export function Momenten() {
     <>
       {/* ---------- momenten ---------- */}
       {/**
-       * Het streeppatroon uit het logo ligt eromheen, niet eronder.
-       *
-       * Een streep is een lijst, geen tafelblad: staat lopende tekst er direct
-       * op, dan snijdt elke naad door een woord en gaat je oog daarover
-       * struikelen. De inhoud krijgt daarom een eigen crèmevlak, en het
-       * patroon blijft zichtbaar als rand — inclusief het stuk dat doorloopt
-       * tot onder de ronde bovenrand van de sectie hierna.
+       * Rustig groen vlak. Het streeppatroon stond hier eerst, maar met een
+       * roze sectie erboven en het donkere reviewblok eronder werd dat te veel
+       * tegelijk. Het vlak loopt door tot onder de ronde bovenrand van de
+       * sectie hierna, zodat daar geen lichte balk tussen valt.
        */}
       <section className="relative py-16 lg:py-20" aria-labelledby="momenten">
         {/* De strepen lopen door tot onder de ronde bovenrand van de sectie
             hierna; die is `relative` en staat later in de DOM, dus hij dekt
             het overschot netjes af. */}
         <div
-          className="pointer-events-none absolute inset-x-0 top-0 overflow-hidden"
-          style={{ bottom: '-9rem' }}
-        >
-          <StripesBackground />
-        </div>
+          className="pointer-events-none absolute inset-x-0 top-0"
+          style={{ bottom: '-9rem', backgroundColor: '#eef4e4' }}
+        />
 
         <div className="container-page relative">
           <div className="rounded-cone bg-crema-50 px-6 py-14 shadow-lift ring-1 ring-espresso-900/5 sm:px-10 lg:px-14">

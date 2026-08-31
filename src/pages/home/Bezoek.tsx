@@ -5,6 +5,7 @@ import { Glyph } from '@/components/ui/Glyph'
 import { adresRegel, beoordeling, contact, kaartEmbed, kaartLink, routeLink } from '@/data/contact'
 import { openingHours } from '@/data/home'
 import { Reveal } from '@/motion/Reveal'
+import { StripesBackground } from '@/components/StripesBackground'
 import { Foto } from '@/components/ui/Foto'
 
 export function Bezoek() {
@@ -16,13 +17,16 @@ export function Bezoek() {
       {/* Geen bovenmarge: die liet de paginakleur als een lichte balk tussen
           deze sectie en de Famiglia Pack erboven doorschijnen. De lucht zit
           nu in de padding, binnen het gekleurde vlak zelf. */}
+      {/* Streeppatroon als ondergrond. Mag hier zonder waas: de inhoud zit in
+          twee gesloten kaarten, dus er staat geen lopende tekst op de naden. */}
       <section
-        className="py-20 lg:py-24"
-        style={{ backgroundColor: '#e9f0dd' }}
+        className="relative overflow-hidden py-20 lg:py-24"
         id="bezoek"
         aria-labelledby="bezoek-kop"
       >
-        <div className="container-page grid items-stretch gap-5 lg:grid-cols-[1.05fr_1fr]">
+        <StripesBackground />
+
+        <div className="container-page relative grid items-stretch gap-5 lg:grid-cols-[1.05fr_1fr]">
           <Reveal y={20}>
             <div className="flex h-full flex-col justify-between gap-8 rounded-cone bg-espresso-900 p-8 text-crema-50 sm:p-10">
               <div>

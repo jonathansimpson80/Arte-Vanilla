@@ -254,9 +254,12 @@ export const panels = [
       it: 'Fiordilatte, morbido e servito generoso. Dove quasi tutti iniziano.',
     },
     kiezer: {
-      nl: 'Wil je iets vertrouwds? Begin hier en werk naar buiten.',
-      en: 'Want something familiar? Start here and work outward.',
-      it: 'Vuoi qualcosa di familiare? Parti da qui e allargati.',
+      label: { nl: 'Iets romigs', en: 'Something creamy', it: 'Qualcosa di cremoso' },
+      zin: {
+        nl: 'Begin bij de romige rij en werk naar buiten.',
+        en: 'Start at the creamy row and work outward.',
+        it: 'Parti dalla fila cremosa e allargati.',
+      },
     },
     hint: {
       nl: 'Vraag welke romige er vandaag staan.',
@@ -278,9 +281,12 @@ export const panels = [
       it: 'La fragola c’è quasi sempre; il resto cambia con il mercato.',
     },
     kiezer: {
-      nl: 'Wil je iets fris? Het fruit is scherp en klaarwakker.',
-      en: 'Want something fresh? The fruit is sharp and wide awake.',
-      it: 'Vuoi qualcosa di fresco? La frutta è decisa e sveglia.',
+      label: { nl: 'Iets helders', en: 'Something bright', it: 'Qualcosa di vivace' },
+      zin: {
+        nl: 'Het fruit doet het werk: fel van kleur, licht van smaak.',
+        en: 'The fruit does the work: loud in colour, light on the tongue.',
+        it: 'È la frutta a lavorare: colore acceso, gusto leggero.',
+      },
     },
     hint: {
       nl: 'Meestal twee of drie tegelijk.',
@@ -302,9 +308,12 @@ export const panels = [
       it: 'Fondente all’acqua invece che al latte. Scuro, intenso e per caso vegano.',
     },
     kiezer: {
-      nl: 'Wil je iets vols? Dit is de donkere kant van de vitrine.',
-      en: 'Want something rich? This is the dark end of the cabinet.',
-      it: 'Vuoi qualcosa di corposo? Questo è il lato scuro del banco.',
+      label: { nl: 'Iets vols', en: 'Something rich', it: 'Qualcosa di corposo' },
+      zin: {
+        nl: 'De chocoladebakken. Donker, cacao-zwaar, voor de serieuze trek.',
+        en: 'The chocolate tubs. Dark, cocoa-heavy, for a serious craving.',
+        it: 'Le vaschette al cioccolato. Scure, cariche di cacao, per una voglia seria.',
+      },
     },
     hint: {
       nl: 'Ook als affogato te bestellen.',
@@ -326,9 +335,12 @@ export const panels = [
       it: 'Pistacchio siciliano e nocciola piemontese, tostati in casa.',
     },
     kiezer: {
-      nl: 'Wil je iets voor volwassenen? Geroosterd, zout, niet te zoet.',
-      en: 'Want something grown-up? Roasted, salted, not too sweet.',
-      it: 'Vuoi qualcosa da adulti? Tostato, salato, non troppo dolce.',
+      label: { nl: 'Iets voor volwassenen', en: 'Something grown-up', it: 'Qualcosa da adulti' },
+      zin: {
+        nl: 'Geroosterd, licht zout en niet te zoet. Lekker bij een espresso.',
+        en: 'Roasted, lightly salted and not too sweet. Good with an espresso.',
+        it: 'Tostato, appena salato e non troppo dolce. Ottimo con un espresso.',
+      },
     },
     hint: {
       nl: 'De volwassen bol.',
@@ -350,9 +362,12 @@ export const panels = [
       it: 'Solo frutta, acqua e zucchero. Puro, deciso e senza latticini.',
     },
     kiezer: {
-      nl: 'Wil je iets ijzigs? Fruit, water en suiker, verder niets.',
-      en: 'Want something icy? Fruit, water and sugar, nothing else.',
-      it: 'Vuoi qualcosa di ghiacciato? Frutta, acqua e zucchero, nient’altro.',
+      label: { nl: 'Iets fris', en: 'Something fresh', it: 'Qualcosa di fresco' },
+      zin: {
+        nl: 'Ga naar de sorbet. Scherp, ijzig, klaarwakker.',
+        en: 'Head for the sorbet. Sharp, icy, wide awake.',
+        it: 'Vai sul sorbetto. Deciso, ghiacciato, ben sveglio.',
+      },
     },
     hint: {
       nl: 'Citroen staat vast.',
@@ -374,9 +389,12 @@ export const panels = [
       it: 'Cannoli, tiramisù e quel che è stato sfornato la mattina.',
     },
     kiezer: {
-      nl: 'Wil je iets zoets ernaast? Vraag wat er die ochtend uit de oven kwam.',
-      en: 'Want something sweet on the side? Ask what came out of the oven that morning.',
-      it: 'Vuoi qualcosa di dolce accanto? Chiedi cosa è uscito dal forno stamattina.',
+      label: { nl: 'Iets zoets erbij', en: 'Something sweet on the side', it: 'Qualcosa di dolce' },
+      zin: {
+        nl: 'Vraag naar de dolci — cannoli, tiramisù en wat er vers is.',
+        en: 'Ask about the dolci — cannoli, tiramisù and whatever is fresh.',
+        it: 'Chiedi dei dolci: cannoli, tiramisù e quel che è fresco.',
+      },
     },
     hint: { nl: 'Op is op.', en: 'When it’s gone, it’s gone.', it: 'Fino a esaurimento.' },
     image: '/media/vitrine-gebak.jpg',

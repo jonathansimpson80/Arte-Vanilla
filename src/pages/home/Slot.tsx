@@ -3,7 +3,7 @@ import { ui } from '@/i18n/teksten'
 import { Drip } from '@/components/Drip'
 import { Button } from '@/components/ui/Button'
 import { Glyph } from '@/components/ui/Glyph'
-import { platforms, routeLink } from '@/data/contact'
+import { platforms } from '@/data/contact'
 import { Reveal } from '@/motion/Reveal'
 import { Sprinkles } from '@/motion/Sprinkles'
 
@@ -33,7 +33,6 @@ export function Slot() {
             </p>
 
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <Button href={routeLink}>{t(ui.route)}</Button>
               <Button variant="ghostLight" to="/smaken">
                 {t(ui.bekijkSmaken)}
                 <Glyph name="pijl" size={15} />

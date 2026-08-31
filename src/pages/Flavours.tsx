@@ -272,8 +272,6 @@ export function Flavours() {
         </ul>
       </section>
 
-      <AchterHetGlas />
-
       {/* ---------- smaakfamilies: flip-kaarten ---------- */}
       <section className="container-page pt-24" aria-labelledby="families">
         <Reveal y={16}>
@@ -306,6 +304,8 @@ export function Flavours() {
         </div>
       </section>
 
+      <AchterHetGlas />
+
       {/* ---------- bakken voor thuis ---------- */}
       <section className="container-page pt-24">
         <BakkenVoorThuis />
@@ -314,7 +314,7 @@ export function Flavours() {
       {/* ---------- marquee boven de footer ---------- */}
       {/* Tekst hoog in de band, en daaronder groen dat leeg blijft: daar valt
           de schulprand van de footer overheen zonder de woorden te raken. */}
-      <section className="mt-20 bg-pistacchio-400 pb-16 pt-4">
+      <section className="mt-16 bg-pistacchio-400 pb-16 pt-4">
         <Marquee speed={95}>
           {families.map((familie) => (
             <span key={familie.id} className="flex items-center gap-7 px-7">

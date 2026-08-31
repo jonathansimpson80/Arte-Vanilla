@@ -22,7 +22,9 @@ export function AchterHetGlas({ handschrift = true }: { handschrift?: boolean })
     /* Licht vlak, zoals de secties op de homepage: het donkere blok brak de
        pagina hier middendoor. */
     <section
-      className="relative mt-20 overflow-hidden py-20"
+      // Geen bovenmarge: het vlak heeft een eigen kleur, dus die marge liet de
+      // paginakleur als lichte balk tussen twee secties doorschijnen.
+      className="relative overflow-hidden py-20"
       style={{ backgroundColor: '#fbe9ee' }}
       aria-labelledby="vitrine-rij"
     >
