@@ -11,7 +11,7 @@ export type Vandaag = {
 /**
  * Wat er vandaag écht in de vitrine ligt.
  *
- * De vitrine draait dagelijks, maar de smakenlijst in de code staat vast. Dit
+ * De vitrine draait per week, maar de smakenlijst in de code staat vast. Dit
  * bestand staat los in `public/vandaag.json`, zodat de zaak het zelf kan
  * bijwerken zonder dat er iemand aan de site hoeft te bouwen. Ontbreekt het,
  * is het leeg, of is het van gisteren, dan toont de site gewoon de vaste

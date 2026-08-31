@@ -225,15 +225,15 @@ export const ui = {
   // Er staan er altijd twaalf, maar welke twaalf wisselt — dat is wat de kop
   // hoort te zeggen. "Elke dag anders" beloofde twaalf nieuwe smaken per dag.
   smakenKop: {
-    nl: 'Twaalf smaken, elke dag een andere mix.',
-    en: 'Twelve flavours, we mix it up each day.',
-    it: 'Dodici gusti, ogni giorno un mix diverso.',
+    nl: 'Twaalf smaken, elke week een andere mix.',
+    en: 'Twelve flavours, we mix it up each week.',
+    it: 'Dodici gusti, ogni settimana un mix diverso.',
   },
   // Het stuk uit de kop dat gekleurd meekomt; moet letterlijk in de kop staan.
   smakenKopAccent: {
-    nl: 'elke dag een andere mix',
-    en: 'we mix it up each day',
-    it: 'ogni giorno un mix diverso',
+    nl: 'elke week een andere mix',
+    en: 'we mix it up each week',
+    it: 'ogni settimana un mix diverso',
   },
   smakenLead: {
     nl: 'Drie rijen op het bord: fruit bovenaan, crème in het midden, en onderin de zware jongens met noten en chocolade.',
@@ -787,9 +787,9 @@ export const ui = {
 
   // ---------- smakenpagina: seo en filters ----------
   smakenSeo: {
-    nl: 'Het gelato, sorbet, dolci en caff\u00e8 van Arte Vanilla. De vitrine wisselt dagelijks.',
-    en: 'The gelato, sorbet, dolci and caff\u00e8 at Arte Vanilla. The cabinet changes daily.',
-    it: 'Gelato, sorbetto, dolci e caff\u00e8 di Arte Vanilla. Il banco cambia ogni giorno.',
+    nl: 'Het gelato, sorbet, dolci en caff\u00e8 van Arte Vanilla. De vitrine wisselt per week.',
+    en: 'The gelato, sorbet, dolci and caff\u00e8 at Arte Vanilla. The cabinet changes every week.',
+    it: 'Gelato, sorbetto, dolci e caff\u00e8 di Arte Vanilla. Il banco cambia ogni settimana.',
   },
   filterCategorie: {
     nl: 'Filter op categorie',

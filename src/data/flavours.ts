@@ -603,9 +603,9 @@ export const families = [
       { nl: 'Gelaagd', en: 'Layered', it: 'A strati' },
     ],
     mood: {
-      nl: 'Wisselt per dag, want het wordt vers gemaakt.',
-      en: 'Changes daily, because it is made fresh.',
-      it: 'Cambia ogni giorno, perché è fatto fresco.',
+      nl: 'Wisselt per week, want het wordt vers gemaakt.',
+      en: 'Changes every week, because it is made fresh.',
+      it: 'Cambia ogni settimana, perché è fatto fresco.',
     },
     bestFor: {
       nl: 'Meenemen naar huis, of bij de koffie.',
