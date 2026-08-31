@@ -18,7 +18,10 @@ import sharp from 'sharp'
 const MAP = 'public/media'
 const BREEDTES = [320, 480, 720, 960, 1440]
 
-const bestanden = (await readdir(MAP)).filter((n) => n.endsWith('.jpg'))
+// Alleen originelen: een variant eindigt op een breedte, en daar nog eens
+// varianten van maken levert bestanden als `bak-mango-960-480.jpg` op.
+const isVariant = (naam) => /-\d{3,4}\.(jpg|webp)$/.test(naam)
+const bestanden = (await readdir(MAP)).filter((n) => n.endsWith('.jpg') && !isVariant(n))
 let gemaakt = 0
 let overgeslagen = 0
 
