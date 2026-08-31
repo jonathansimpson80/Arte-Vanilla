@@ -5,10 +5,11 @@
  * van de zaak (Thuisbezorgd.nl, menu's "Koekjes" en "Desserts"). Dat zijn de
  * bezorgprijzen; controleer of het afhaaltarief hetzelfde is.
  *
- * 7 t/m 10 staan wel in de winkel maar niet op die kaart, dus zonder prijs.
- * De laatste twee zijn nog lege plekken (`concept: true`): geen foto, en de
- * kaart zegt dat er zelf bij. Zo staat de rij van twaalf klaar zonder gebak
- * te beloven dat er niet is. Allergenen ontbreken nog volledig.
+ * Wat er daarna staat is wel in de winkel maar niet op die kaart, dus zonder
+ * prijs. De laatste is nog een lege plek (`concept: true`): geen foto, en de
+ * kaart zegt dat er zelf bij. Negen stuks, precies drie rijen van drie —
+ * één kaart die alleen achterblijft leest als een fout. Allergenen ontbreken
+ * nog volledig.
  */
 
 import type { Vertaald } from '@/i18n/taal'
@@ -210,24 +211,6 @@ export const dolci: Dolce[] = [
     price: null,
     tintHex: '#f4ece2',
     accentHex: '#5d321c',
-    concept: true,
-  },
-  {
-    name: {
-      nl: 'Crostata',
-      en: 'Crostata',
-      it: 'Crostata',
-    },
-    italian: 'Crostata di frutta',
-    description: {
-      nl: 'Vlaai van zanddeeg met jam of vers fruit, afhankelijk van het seizoen.',
-      en: 'A shortcrust tart with jam or fresh fruit, depending on the season.',
-      it: 'Crostata di frolla con marmellata o frutta fresca, secondo la stagione.',
-    },
-    tags: [nogBevestigen],
-    price: null,
-    tintHex: '#f6e6d3',
-    accentHex: '#7d6229',
     concept: true,
   },
 ]

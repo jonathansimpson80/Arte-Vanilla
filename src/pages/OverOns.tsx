@@ -7,7 +7,9 @@ import { StripesBackground } from '@/components/StripesBackground'
 import { Reveal } from '@/motion/Reveal'
 import { ImageReveal } from '@/motion/ImageReveal'
 import { Sprinkles } from '@/motion/Sprinkles'
-import { beoordeling, platforms, routeLink } from '@/data/contact'
+import { VerticalMarquee } from '@/motion/VerticalMarquee'
+import { beoordeling, platforms } from '@/data/contact'
+import { reviews } from '@/data/reviews'
 import { flavours } from '@/data/flavours'
 import { useTaal } from '@/i18n/taal'
 import { ui } from '@/i18n/teksten'
@@ -155,19 +157,54 @@ export function OverOns() {
               <Button variant="secondary" href={beoordeling.link}>
                 {t(ui.homeLeesReviews)}
               </Button>
-              <Button variant="ghostLight" href={routeLink}>
-                {t(ui.route)}
+              <Button variant="ghostLight" to="/#bezoek">
+                {t(ui.navBezoek)}
                 <Glyph name="pijl" size={15} />
               </Button>
             </div>
           </Reveal>
 
+          {/* De reviews zelf in plaats van een foto: twee kolommen die langzaam
+              langsschuiven, klein gezet zodat ze naast de tekst passen. */}
           <Reveal y={20} delay={120}>
-            <Foto
-              src="/media/vitrine-gebak.jpg"
-              alt="De vitrine met gebak en het smakenbord erboven"
-              className="aspect-4/3 w-full rounded-cone object-cover"
-            />
+            <div className="grid h-[26rem] gap-4 sm:grid-cols-2">
+              {[0, 1].map((kolom) => (
+                <VerticalMarquee
+                  key={kolom}
+                  duration={46 + kolom * 13}
+                  direction={kolom === 1 ? 'down' : 'up'}
+                  className={kolom === 1 ? 'hidden sm:block' : ''}
+                >
+                  {reviews
+                    .filter((_, i) => i % 2 === kolom)
+                    .map((review) => (
+                      <article
+                        key={review.tekst}
+                        className="mb-4 flex overflow-hidden rounded-scoop bg-crema-50 text-espresso-900 shadow-float"
+                      >
+                        <span
+                          className="w-1.5 shrink-0"
+                          style={{ backgroundColor: review.accentHex }}
+                          aria-hidden="true"
+                        />
+                        <div className="flex-1 p-4">
+                          <span className="flex gap-1" aria-hidden="true">
+                            {Array.from({ length: review.sterren }, (_, i) => (
+                              <span key={i} className="size-1.5 rounded-full bg-vaniglia-400" />
+                            ))}
+                          </span>
+                          <p className="mt-2.5 text-[0.8rem] leading-relaxed text-espresso-900/80">
+                            “{review.tekst}”
+                          </p>
+                          <p className="mt-3 font-display text-xs font-bold text-espresso-900/70">
+                            {review.auteur ?? `${beoordeling.bron}-review`}
+                          </p>
+                        </div>
+                      </article>
+                    ))}
+                </VerticalMarquee>
+              ))}
+            </div>
           </Reveal>
         </div>
       </section>

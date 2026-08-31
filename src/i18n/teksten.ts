@@ -584,9 +584,9 @@ export const ui = {
     it: 'Quello che di solito c’è.',
   },
   dolciKaartLead: {
-    nl: 'Twaalf plekken op de kaart. De prijzen komen van onze eigen bestelkaart; twee plekken met streeppatroon staan nog open.',
-    en: 'Twelve places on the board. The prices come from our own order list; two striped places are still open.',
-    it: 'Dodici posti sul cartello. I prezzi vengono dal nostro listino; due posti a righe sono ancora liberi.',
+    nl: 'De prijzen komen van onze eigen bestelkaart. De plek met streeppatroon staat nog open — daar hebben we nog geen foto van.',
+    en: 'The prices come from our own order list. The striped place is still open — we don’t have a photo of that one yet.',
+    it: 'I prezzi vengono dal nostro listino. Il posto a righe è ancora libero: di quello non abbiamo ancora una foto.',
   },
   dolciLetOpKop: {
     nl: 'Prijzen kloppen, allergenen nog niet.',
