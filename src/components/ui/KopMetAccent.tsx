@@ -1,5 +1,5 @@
 import type { ElementType, ReactNode } from 'react'
-import { Reveal } from '@/motion/Reveal'
+import { Typewriter } from '@/motion/Typewriter'
 
 type Props = {
   /** De hele kop, in de taal van de pagina. */
@@ -27,9 +27,7 @@ export function KopMetAccent({ tekst, accent, as: Tag = 'h1', id, className }: P
     inhoud = (
       <>
         {tekst.slice(0, i)}
-        <Reveal as="span" className="inline-block text-fragola-500" y={14} delay={220}>
-          {accent}
-        </Reveal>
+        <Typewriter words={[accent]} once className="text-fragola-500" />
         {tekst.slice(i + accent.length)}
       </>
     )

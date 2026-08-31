@@ -9,6 +9,15 @@ type Props = {
   deleteSpeed?: number
   /** Hoe lang een compleet woord blijft staan. */
   holdTime?: number
+  /**
+   * Typt alleen het eerste woord en laat het daarna staan.
+   *
+   * Voor een paginakop: daar hoort één zin te staan, niet een woord dat om de
+   * twee tellen weer wordt uitgewist. Het gebaar blijft hetzelfde als op de
+   * homepage — letters die binnenkomen met een knipperende cursor — maar het
+   * eindigt in rust.
+   */
+  once?: boolean
   className?: string
 }
 
@@ -26,6 +35,7 @@ export function Typewriter({
   typeSpeed = 85,
   deleteSpeed = 45,
   holdTime = 1800,
+  once = false,
   className = '',
 }: Props) {
   const [index, setIndex] = useState(0)
@@ -46,6 +56,9 @@ export function Typewriter({
     if (still) return
 
     const woord = words[index % words.length]
+
+    // Eén keer typen: klaar is klaar.
+    if (once && text === woord) return
 
     // Woord compleet: even laten staan, daarna wissen.
     if (!deleting && text === woord) {
@@ -68,7 +81,7 @@ export function Typewriter({
       deleting ? deleteSpeed : typeSpeed,
     )
     return () => window.clearTimeout(timer)
-  }, [text, deleting, index, words, typeSpeed, deleteSpeed, holdTime, still])
+  }, [text, deleting, index, words, typeSpeed, deleteSpeed, holdTime, still, once])
 
   // Het langste woord reserveert de breedte, zodat de regel niet springt
   // terwijl er letters bij komen of af gaan.
@@ -79,9 +92,12 @@ export function Typewriter({
       <span className="typewriter__sizer" aria-hidden="true">
         {langste}
       </span>
-      <span className="typewriter__text">
+      {/* De letters die verschijnen zijn beeld, geen tekst om voor te lezen:
+          de volledige woorden staan hieronder in de sr-only regel. Zonder dit
+          hoort een schermlezer de kop twee keer. */}
+      <span className="typewriter__text" aria-hidden="true">
         {text}
-        {!still && (
+        {!still && !(once && text === words[0]) && (
           <span className="typewriter-caret" aria-hidden="true">
             |
           </span>

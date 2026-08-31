@@ -242,16 +242,6 @@ export function Dolci() {
         <DealsRij />
       </section>
 
-      {/* ---------- koffie ---------- */}
-      <section className="container-page pt-24" aria-labelledby="koffie">
-        <KoffieKaart />
-      </section>
-
-      {/* ---------- vaste combinaties ---------- */}
-      <section className="container-page pt-24" aria-labelledby="deals">
-        <DealsRij />
-      </section>
-
       {/* ---------- afsluiter ---------- */}
       <section className="relative mt-20 overflow-hidden bg-espresso-900 py-20">
         <Sprinkles columns={14} />
