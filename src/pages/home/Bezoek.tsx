@@ -89,7 +89,7 @@ export function Bezoek() {
             <div className="grid gap-5">
               <Foto
                 src="/media/gevel-bankjes.jpg"
-                alt="De gevel van Arte Vanilla met gasten op het bankje"
+                alt={t(ui.altGevelGasten)}
                 className="wiggle aspect-4/3 w-full rounded-cone object-cover"
               />
 

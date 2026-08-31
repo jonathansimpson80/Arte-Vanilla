@@ -40,8 +40,8 @@ export function Flavours() {
   return (
     <>
       <Seo
-        title="Smaken"
-        description="Het gelato, sorbet, dolci en caffè van Arte Vanilla. De vitrine wisselt dagelijks."
+        title={t(ui.smakenEyebrow)}
+        description={t(ui.smakenSeo)}
       />
 
       {/* ---------- kop ---------- */}
@@ -52,7 +52,7 @@ export function Flavours() {
           <Reveal y={14}>
             <span className="chunk inline-flex items-center gap-2 rounded-full bg-crema-50 px-4 py-2 text-[0.7rem] text-cacao-700 shadow-lift">
               <Glyph name="hoorntje" size={14} />
-              De kaart
+              {t(ui.smakenEyebrow)}
             </span>
           </Reveal>
 
@@ -64,8 +64,7 @@ export function Flavours() {
 
           <Reveal y={16} delay={160}>
             <p className="mx-auto mt-6 max-w-xl text-lead text-cacao-700">
-              Twaalf smaken op het bord, in drie rijen: fruit bovenaan, crème in het
-              midden, en onderin de zwaardere met noten of chocolade.
+              {t(ui.smakenLead)}
             </p>
           </Reveal>
 
@@ -127,7 +126,7 @@ export function Flavours() {
               </span>
             </div>
 
-            <div className="flex flex-wrap gap-2" role="group" aria-label="Filter op categorie">
+            <div className="flex flex-wrap gap-2" role="group" aria-label={t(ui.filterCategorie)}>
               <FilterKnop actief={actief === null} onClick={() => kies(null)}>
                 {t(ui.smakenAlles)}
               </FilterKnop>

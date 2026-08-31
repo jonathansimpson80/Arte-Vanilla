@@ -68,7 +68,7 @@ export function Ambacht() {
               ronding; bovenaan zacht gebogen hoeken in plaats van een halve cirkel. */}
           <ImageReveal
             src="/media/beker-wafel.jpg"
-            alt="Bakje gelato met een wafel erop"
+            alt={t(ui.altWafel)}
             className="mx-auto aspect-[7/6] w-full max-w-[26rem] self-end rounded-[4rem_4rem_0_0]"
           />
         </div>

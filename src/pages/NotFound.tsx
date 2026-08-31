@@ -9,7 +9,7 @@ export function NotFound() {
 
   return (
     <>
-      <Seo title="404" description="Deze pagina bestaat niet (meer)." />
+      <Seo title="404" description={t(ui.nietGevondenSeo)} />
       {/* Korte tekst, veel lucht: precies het soort plek waar het patroon
           wél werkt. Een 404 zonder merk is een 404 van niemand. */}
       <section className="relative -mt-22 overflow-hidden pt-22">

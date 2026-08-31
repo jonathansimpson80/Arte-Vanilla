@@ -1,9 +1,14 @@
+import { useTaal } from '@/i18n/taal'
+import { ui } from '@/i18n/teksten'
+
 /**
  * Wat er staat terwijl een pagina wordt opgehaald. Bewust rustig: een
  * spinner die een halve seconde flitst is onrustiger dan een leeg vlak
  * met de juiste hoogte.
  */
 export function PaginaLader() {
+  const { t } = useTaal()
+
   return (
     <div className="flex min-h-[60vh] items-center justify-center" role="status" aria-live="polite">
       <span className="flex gap-2" aria-hidden="true">
@@ -15,7 +20,7 @@ export function PaginaLader() {
           />
         ))}
       </span>
-      <span className="sr-only">Laden…</span>
+      <span className="sr-only">{t(ui.laden)}</span>
     </div>
   )
 }

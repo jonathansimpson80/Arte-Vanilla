@@ -76,7 +76,7 @@ export function OverOns() {
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <ImageReveal
             src="/media/gevel-bankjes.jpg"
-            alt="De gevel van Arte Vanilla met de gestreepte bankjes ervoor"
+            alt={t(ui.altGevel)}
             className="aspect-4/5 rounded-cone"
           />
 
@@ -136,7 +136,7 @@ export function OverOns() {
 
           <Foto
             src="/media/bak-pistacchio.jpg"
-            alt="Een bak pistachegelato op het streeppatroon van de zaak"
+            alt={t(ui.altPistache)}
             className="aspect-square w-full rounded-cone object-cover"
           />
         </div>

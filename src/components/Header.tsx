@@ -56,7 +56,7 @@ export function Header() {
           <span className="wordmark text-3xl leading-none text-espresso-900">Arte Vanilla</span>
         </Link>
 
-        <nav aria-label="Hoofdmenu" className="hidden items-center gap-7 lg:flex">
+        <nav aria-label={t(ui.hoofdmenu)} className="hidden items-center gap-7 lg:flex">
           {links.map((link) => (
             <Link
               key={link.href}
@@ -144,7 +144,7 @@ export function Header() {
       {open && (
         <nav
           id="mobiel-menu"
-          aria-label="Mobiel menu"
+          aria-label={t(ui.mobielMenu)}
           className="container-page mt-2 rounded-scoop bg-crema-50 p-2 shadow-lift ring-1 ring-espresso-900/5 lg:hidden"
         >
           <ul className="flex flex-col">

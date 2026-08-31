@@ -737,6 +737,74 @@ export const ui = {
     it: 'Mappa interattiva con la posizione di Arte Vanilla in Kinkerstraat',
   },
   buurt: { nl: 'Amsterdam-West', en: 'Amsterdam West', it: 'Amsterdam Ovest' },
+
+  // ---------- smakenpagina: seo en filters ----------
+  smakenSeo: {
+    nl: 'Het gelato, sorbet, dolci en caff\u00e8 van Arte Vanilla. De vitrine wisselt dagelijks.',
+    en: 'The gelato, sorbet, dolci and caff\u00e8 at Arte Vanilla. The cabinet changes daily.',
+    it: 'Gelato, sorbetto, dolci e caff\u00e8 di Arte Vanilla. Il banco cambia ogni giorno.',
+  },
+  filterCategorie: {
+    nl: 'Filter op categorie',
+    en: 'Filter by category',
+    it: 'Filtra per categoria',
+  },
+
+  // ---------- interface: navigatie, laden, fouten ----------
+  hoofdmenu: { nl: 'Hoofdmenu', en: 'Main menu', it: 'Menu principale' },
+  mobielMenu: { nl: 'Mobiel menu', en: 'Mobile menu', it: 'Menu mobile' },
+  naarHoofdinhoud: {
+    nl: 'Naar hoofdinhoud',
+    en: 'Skip to main content',
+    it: 'Vai al contenuto principale',
+  },
+  laden: { nl: 'Laden\u2026', en: 'Loading\u2026', it: 'Caricamento\u2026' },
+  nietGevondenSeo: {
+    nl: 'Deze pagina bestaat niet (meer).',
+    en: 'This page does not exist (any more).',
+    it: 'Questa pagina non esiste (pi\u00f9).',
+  },
+  foutEyebrow: { nl: 'Foutmelding', en: 'Error', it: 'Errore' },
+  foutKop: { nl: 'Er ging iets mis', en: 'Something went wrong', it: '\u00c8 andato storto qualcosa' },
+  foutDetail: {
+    nl: 'Probeer de pagina opnieuw te laden.',
+    en: 'Try reloading the page.',
+    it: 'Prova a ricaricare la pagina.',
+  },
+
+  // ---------- alt-teksten ----------
+  // Alt is tekst die iemand voorgelezen krijgt, dus hoort die net zo goed in
+  // de taal van de pagina te staan als alles wat je wel ziet.
+  altGevel: {
+    nl: 'De gevel van Arte Vanilla met de gestreepte bankjes ervoor',
+    en: 'The Arte Vanilla storefront with the striped benches outside',
+    it: 'La facciata di Arte Vanilla con le panchine a righe davanti',
+  },
+  altGevelGasten: {
+    nl: 'De gevel van Arte Vanilla met gasten op het bankje',
+    en: 'The Arte Vanilla storefront with guests on the bench',
+    it: 'La facciata di Arte Vanilla con clienti sulla panchina',
+  },
+  altPistache: {
+    nl: 'Een bak pistachegelato op het streeppatroon van de zaak',
+    en: 'A tub of pistachio gelato on the striped pattern of the shop',
+    it: 'Una vaschetta di gelato al pistacchio sul motivo a righe del locale',
+  },
+  altTiramisu: {
+    nl: 'Tiramis\u00f9 in potjes, met cacao bestoven',
+    en: 'Tiramis\u00f9 in jars, dusted with cocoa',
+    it: 'Tiramis\u00f9 in vasetto, spolverato di cacao',
+  },
+  altAffogato: {
+    nl: 'Espresso wordt over een bol gelato geschonken',
+    en: 'Espresso being poured over a scoop of gelato',
+    it: 'Espresso versato su una pallina di gelato',
+  },
+  altWafel: {
+    nl: 'Bakje gelato met een wafel erop',
+    en: 'A cup of gelato with a wafer on top',
+    it: 'Coppetta di gelato con una cialda sopra',
+  },
 } satisfies Record<string, Vertaald>
 
 export type UiSleutel = keyof typeof ui

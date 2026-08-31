@@ -89,7 +89,7 @@ export function Dolci() {
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <ImageReveal
             src="/media/tiramisu.jpg"
-            alt="Tiramisù in potjes, met cacao bestoven"
+            alt={t(ui.altTiramisu)}
             className="aspect-4/5 rounded-cone"
           />
 

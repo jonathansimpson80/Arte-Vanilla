@@ -16,7 +16,7 @@ export function KoffieKaart() {
     <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-stretch">
       <ImageReveal
         src="/media/affogato.jpg"
-        alt="Espresso wordt over een bol gelato geschonken"
+        alt={t(ui.altAffogato)}
         // Op breed scherm rekt het beeld mee met de kolom ernaast: het raster staat
         // op `items-stretch`, dus `h-full` levert precies de hoogte van de tekst.
         className="aspect-[4/5] rounded-cone sm:aspect-[16/11] lg:aspect-auto lg:h-full"
