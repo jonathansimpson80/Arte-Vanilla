@@ -1,7 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-import { copyFileSync } from 'node:fs'
+import { copyFileSync, mkdirSync } from 'node:fs'
+import { join } from 'node:path'
 import { fileURLToPath, URL } from 'node:url'
 
 /**
@@ -18,13 +19,33 @@ export default defineConfig({
     tailwindcss(),
     {
       /**
-       * GitHub Pages kent geen rewrite-regels: elk onbekend pad krijgt 404.html.
-       * Door daar dezelfde app neer te zetten werkt /smaken en /nl/afhalen ook
-       * als iemand die link rechtstreeks opent of ververst.
+       * Statische hosts kennen geen rewrite-regels: een pad zonder bestand
+       * krijgt 404.html. Dat toont de juiste pagina — de app pakt het pad zelf
+       * op — maar de statuscode blijft 404, en dat is voor een zoekmachine het
+       * verschil tussen "bestaat niet" en "bestaat".
+       *
+       * Daarom schrijven we elke route ook als echt bestand weg. Dan geeft
+       * /over-ons netjes 200. 404.html blijft als vangnet voor de rest.
        */
-      name: 'spa-fallback-404',
+      name: 'spa-paden',
       closeBundle() {
         copyFileSync('dist/index.html', 'dist/404.html')
+
+        const talen = ['', 'nl', 'it']
+        const paden = ['smaken', 'dolci', 'afhalen', 'over-ons']
+
+        for (const taal of talen) {
+          // De taalwortel zelf (/nl, /it) heeft ook een eigen bestand nodig.
+          if (taal) {
+            mkdirSync(join('dist', taal), { recursive: true })
+            copyFileSync('dist/index.html', join('dist', taal, 'index.html'))
+          }
+          for (const pad of paden) {
+            const map = join('dist', taal, pad)
+            mkdirSync(map, { recursive: true })
+            copyFileSync('dist/index.html', join(map, 'index.html'))
+          }
+        }
       },
     },
   ],
