@@ -509,6 +509,11 @@ export const ui = {
     en: 'Both from the countryside around Bologna. A year in Australia to learn English, then a tour of European cities — Copenhagen was beautiful, but Amsterdam had what they were after: liveliness, and people who talk to each other.',
     it: 'Entrambi della zona di Bologna. Un anno in Australia per imparare l’inglese, poi un giro per le città europee — Copenaghen era bellissima, ma Amsterdam aveva quello che cercavano: vivacità e gente che si parla.',
   },
+  altGiuliaSimone: {
+    nl: 'Giulia en Simone achter de toonbank in de winkel',
+    en: 'Giulia and Simone behind the counter in the shop',
+    it: 'Giulia e Simone dietro il banco nel negozio',
+  },
   overGiuliaNaam: { nl: 'Giulia De Iorio', en: 'Giulia De Iorio', it: 'Giulia De Iorio' },
   overGiuliaRol: { nl: 'Patisserie en gelato', en: 'Pastry and gelato', it: 'Pasticceria e gelato' },
   overGiuliaTekst: {
