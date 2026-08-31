@@ -306,9 +306,18 @@ export function Afhalen() {
 
   const onderwerp = `Arte Vanilla — ${t(ui.navAfhalen)}`
   const whatsappLink = `https://wa.me/${whatsappNummer}?text=${encodeURIComponent(bericht)}`
+
+  // E-mail kent de opmaak van WhatsApp niet: daar blijven de sterretjes en
+  // liggende streepjes gewoon staan. In de mail gaan ze eruit, en de koppen
+  // krijgen hoofdletters zodat de bon net zo leesbaar blijft.
+  const mailBericht = bericht
+    .replace(/^\*(.+)\*$/gm, (_, kop: string) => kop.toUpperCase())
+    .replace(/^_(.+)_$/gm, '$1')
+    .replace(/\*(.+?)\*/g, '$1')
+
   const mailLink = `mailto:${contact.email}?subject=${encodeURIComponent(
     onderwerp,
-  )}&body=${encodeURIComponent(bericht)}`
+  )}&body=${encodeURIComponent(mailBericht)}`
 
   function opnieuw() {
     setSoort('bak')
@@ -717,6 +726,7 @@ export function Afhalen() {
                     id="naam"
                     value={naam}
                     onChange={(e) => setNaam(e.target.value)}
+                    name="naam"
                     autoComplete="name"
                     className="mt-2 w-full rounded-soft border-0 bg-crema-50 px-4 py-3 text-espresso-900 ring-1 ring-espresso-900/10 focus:ring-2 focus:ring-cacao-700"
                   />
@@ -737,6 +747,7 @@ export function Afhalen() {
                     id="telefoon"
                     value={telefoon}
                     onChange={(e) => setTelefoon(e.target.value)}
+                    name="telefoon"
                     type="tel"
                     autoComplete="tel"
                     className="mt-2 w-full rounded-soft border-0 bg-crema-50 px-4 py-3 text-espresso-900 ring-1 ring-espresso-900/10 focus:ring-2 focus:ring-cacao-700"
@@ -754,10 +765,10 @@ export function Afhalen() {
               {/* Honeypot. Buiten beeld en buiten de tabvolgorde, dus een mens
                   komt er niet bij; een bot vult hem wel in. */}
               <div aria-hidden="true" className="absolute left-[-9999px] top-0 h-0 overflow-hidden">
-                <label htmlFor="bedrijf">Bedrijf</label>
+                <label htmlFor="voorkeur-ref">Ref</label>
                 <input
-                  id="bedrijf"
-                  name="bedrijf"
+                  id="voorkeur-ref"
+                  name="voorkeur-ref"
                   tabIndex={-1}
                   autoComplete="off"
                   value={bedrijf}
