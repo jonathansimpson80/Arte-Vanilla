@@ -237,16 +237,18 @@ export function OverOns() {
           </div>
         </Reveal>
 
-        {/* De twee zelf, achter hun eigen toonbank. Het beeld is niet breed —
-            360 pixels — dus het staat op ware grootte gecentreerd in plaats van
-            uitgerekt over de volle kolom. */}
+        {/* De twee zelf, achter hun eigen toonbank, over de volle breedte.
+            Het bestand heet altijd `giulia-simone.jpg`: een nieuwe foto onder
+            die naam neerzetten is genoeg, er hoeft niets aan de code te
+            veranderen. De uitsnede houdt hun gezichten in beeld, ook als de
+            band op een breed scherm laag wordt. */}
         <Reveal y={20} delay={80}>
-          <figure className="mx-auto mt-12 max-w-sm">
+          <figure className="mt-12">
             <Foto
-              src="/media/winkel.jpg"
+              src="/media/giulia-simone.jpg"
               alt={t(ui.altGiuliaSimone)}
-              sizes="(max-width: 640px) 88vw, 24rem"
-              className="aspect-[4/5] w-full rounded-cone object-cover object-[50%_30%] shadow-lift ring-1 ring-espresso-900/5"
+              sizes="(max-width: 640px) 100vw, (max-width: 1152px) 100vw, 1100px"
+              className="aspect-[4/5] w-full rounded-cone object-cover object-[50%_32%] shadow-lift ring-1 ring-espresso-900/5 sm:aspect-[16/9] lg:aspect-[21/9]"
             />
           </figure>
         </Reveal>
