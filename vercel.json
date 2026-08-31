@@ -10,6 +10,13 @@
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
   "headers": [
     {
+      "//": "De pagina zelf mag nooit blijven hangen: hij verwijst naar bestandsnamen met een hash, en een oude pagina vraagt om bestanden die na een nieuwe versie niet meer bestaan. Dan blijft het scherm leeg.",
+      "source": "/((?!assets/|media/).*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    },
+    {
       "source": "/assets/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
