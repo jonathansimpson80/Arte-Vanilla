@@ -1,0 +1,82 @@
+/**
+ * Arte Vanilla — design tokens
+ *
+ * Afgeleid van het Instagram-account @arte_vanilla (logo, gevel, interieur, foto's).
+ * Bron per token staat in DESIGN-SYSTEM.md. Alles wat hier staat is beschikbaar
+ * als Tailwind-utility (bv. --color-vaniglia-400 → bg-vaniglia-400).
+ */
+
+@theme {
+  /* ---------------------------------------------------------------
+   * Kleur — kern (uit het logo)
+   * ------------------------------------------------------------ */
+  --color-crema-50: #fffbf2;   /* papier / pagina-achtergrond            */
+  --color-crema-100: #fcf3e2;  /* logo-achtergrond, standaard vlak       */
+  --color-crema-200: #f6e7cb;  /* rustig vlak, randen op crema-100       */
+  --color-crema-300: #eed9b3;  /* deelstreep, uitgeschakelde staat       */
+
+  --color-vaniglia-300: #f9e2a0; /* lichte streep in het streeppatroon   */
+  --color-vaniglia-400: #f4cf64; /* MERKGEEL — logostrepen, gevel        */
+  --color-vaniglia-500: #e5b845; /* hover / dieper geel                  */
+  --color-oro-600: #a5864d;      /* goudbruin uit de logo-schaduw        */
+
+  --color-espresso-900: #1d0805; /* wordmark, primaire tekst             */
+  --color-espresso-800: #2f160c; /* koppen op geel                       */
+  --color-cacao-700: #5d321c;    /* secundaire tekst, cioccolato         */
+  --color-caramello-500: #af6e2c;/* caramel — grafisch, grote tekst      */
+
+  /* Warme neutralen (getint richting crème, geen grijs uit de doos) */
+  --color-neutral-600: #6b5b4e;  /* gedempte tekst — AA op crema         */
+  --color-neutral-400: #a2938a;  /* iconen, placeholders                 */
+  --color-neutral-200: #d9cec2;  /* randen                               */
+
+  /* Smaak-accenten (uitbreiding, niet uit het logo) */
+  --color-pistacchio-300: #c3d3a4; /* zachte groene wash                 */
+  --color-pistacchio-400: #9cb173; /* frisse band — espresso haalt 8,2:1 */
+  --color-pistacchio-500: #8a9a5b; /* kaki vlak — pistache zonder kleur  */
+  --color-pistacchio-700: #5f6b3a; /* tekstveilig op crema               */
+  --color-fragola-400: #c9455a;    /* fel — grote vlakken, banden        */
+  --color-fragola-500: #b4544c;    /* vlak                               */
+  --color-fragola-700: #8c3b36;    /* tekstveilig op crema               */
+
+  /* ---------------------------------------------------------------
+   * Typografie
+   * ------------------------------------------------------------ */
+  --font-script: "Grand Hotel", "Brush Script MT", cursive;             /* alleen de wordmark        */
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; /* koppen, groot en strak */
+  --font-chunk: "Baloo 2", ui-rounded, system-ui, sans-serif;          /* labels en mega-cijfers    */
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif; /* lopende tekst en UI       */
+
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.18em;
+  --text-eyebrow--font-weight: 600;
+
+  --text-mega: clamp(4.5rem, 13vw, 10.5rem);
+  --text-mega--line-height: 0.85;
+  --text-mega--letter-spacing: -0.03em;
+  --text-mega--font-weight: 800;
+
+  --text-display: clamp(3rem, 8vw, 6rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.03em;
+
+  --text-title: clamp(1.75rem, 3vw, 2.5rem);
+  --text-title--line-height: 1.1;
+  --text-title--letter-spacing: -0.02em;
+
+  --text-lead: 1.125rem;
+  --text-lead--line-height: 1.65;
+
+  /* ---------------------------------------------------------------
+   * Vorm, diepte, beweging
+   * ------------------------------------------------------------ */
+  --radius-soft: 0.75rem;   /* invoervelden, kleine vlakken */
+  --radius-scoop: 1.5rem;   /* kaarten, beeldvlakken        */
+  --radius-cone: 2.5rem;    /* grote secties                */
+
+  --shadow-lift: 0 1px 2px rgb(29 8 5 / 0.04), 0 8px 24px -12px rgb(29 8 5 / 0.18);
+  --shadow-float: 0 2px 4px rgb(29 8 5 / 0.05), 0 24px 48px -20px rgb(29 8 5 / 0.28);
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}

@@ -1,0 +1,5 @@
+{
+  "_uitleg": "Welke smaken er vandaag in de vitrine liggen. Namen moeten exact overeenkomen met src/data/flavours.ts. Laat 'smaken' leeg om de melding uit te zetten.",
+  "bijgewerkt": null,
+  "smaken": []
+}

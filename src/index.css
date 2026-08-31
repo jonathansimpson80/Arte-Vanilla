@@ -1,0 +1,414 @@
+@import "tailwindcss";
+@import "./styles/tokens.css";
+
+@layer base {
+  :root {
+    /* easing voor scroll-reveals; los token zodat het ook buiten Tailwind bruikbaar is */
+    --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-crema-50 text-espresso-900 font-sans antialiased;
+  }
+
+  ::selection {
+    @apply bg-vaniglia-400/60 text-espresso-900;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-cacao-700;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-6 sm:px-8;
+  }
+
+  /* Wordmark: "Arte Vanilla" in het script uit het logo. */
+  .wordmark {
+    @apply font-script leading-none;
+    /* Iets strakker gezet dan de standaard van het font: op groot formaat
+       vallen de lussen anders los van elkaar. */
+    letter-spacing: -0.015em;
+    text-rendering: geometricPrecision;
+    font-synthesis: none;
+  }
+
+  /* Kleine kapitalen boven een kop — de "GELATO, DOLCI & CAFFÈ"-regel. */
+  .eyebrow {
+    @apply text-eyebrow uppercase text-cacao-700;
+  }
+
+  /**
+   * Het streeppatroon uit het logo en de gevel.
+   * Standaard verticaal, 24px per streep-paar.
+   */
+  .stripes {
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--color-vaniglia-400) 0 12px,
+      var(--color-crema-100) 12px 24px
+    );
+  }
+
+  /* Zachte variant voor grote vlakken achter tekst. */
+  .stripes-soft {
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--color-vaniglia-300) 0 14px,
+      var(--color-crema-100) 14px 28px
+    );
+  }
+
+  /* Diagonale variant voor banners en randen. */
+  .stripes-diagonal {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      var(--color-vaniglia-400) 0 10px,
+      var(--color-crema-100) 10px 20px
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer components {
+  /* ---------- marquee ---------- */
+  .marquee {
+    overflow: hidden;
+    display: flex;
+  }
+  .marquee__track {
+    display: flex;
+    width: max-content;
+    animation-name: marquee-scroll;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    /* Eigen laag op de GPU: zonder dit schokt de rij bij elke repaint. */
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+  }
+  .marquee[data-direction='right'] .marquee__track {
+    animation-direction: reverse;
+  }
+  /* Ook pauzeren zodra er iets in de rij focus krijgt: met het toetsenbord
+     kun je anders geen link raken die onder je vinger wegschuift. */
+  .marquee--pausable:hover .marquee__track,
+  .marquee--pausable:focus-within .marquee__track {
+    animation-play-state: paused;
+  }
+
+  .vmarquee:focus-within .vmarquee__track {
+    animation-play-state: paused;
+  }
+  .marquee__row {
+    display: flex;
+    align-items: center;
+    flex: none;
+  }
+
+  /* Het masker waaronder de handgeschreven regel tevoorschijn komt. */
+  @keyframes schrijven {
+    from { clip-path: inset(-15% 100% -15% -2%); }
+    to { clip-path: inset(-15% -8% -15% -2%); }
+  }
+
+  /* Trage swirl als sectieondergrond; zie components/SwirlBackground.tsx. */
+  .swirl {
+    animation: swirl 90s linear infinite;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  @keyframes swirl {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  /* Zacht kloppen achter het statusbolletje: aanwezig, niet opdringerig. */
+  @keyframes klop {
+    0%, 100% { transform: scale(1); opacity: 0.55; }
+    50% { transform: scale(2.1); opacity: 0; }
+  }
+
+  @keyframes bolletje {
+    0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
+    40% { transform: scale(1); opacity: 1; }
+  }
+
+  @keyframes marquee-scroll {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); }
+  }
+
+  /* ---------- verticale marquee (kolommen met reviews) ---------- */
+  .vmarquee {
+    overflow: hidden;
+    /* Boven- en onderrand vervagen, zodat de kolom niet hard afkapt. */
+    mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      black 12%,
+      black 88%,
+      transparent
+    );
+  }
+  .vmarquee__track {
+    display: flex;
+    flex-direction: column;
+    animation-name: marquee-scroll-y;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+  }
+  .vmarquee[data-direction='down'] .vmarquee__track {
+    animation-direction: reverse;
+  }
+  .vmarquee:hover .vmarquee__track {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee-scroll-y {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(0, -50%, 0); }
+  }
+
+  /* ---------- sprinkles ---------- */
+  .sprinkles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .sprinkles__col {
+    position: absolute;
+    top: -10%;
+    animation-name: sprinkle-fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  .sprinkles__piece {
+    display: block;
+    width: 8px;
+    height: 14px;
+    opacity: 0.75;
+    animation-name: sprinkle-spin;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes sprinkle-fall {
+    from { transform: translate3d(0, -20vh, 0); }
+    to { transform: translate3d(0, 120vh, 0); }
+  }
+  @keyframes sprinkle-spin {
+    from { transform: rotate3d(1, 1, 0.2, 0deg); }
+    to { transform: rotate3d(1, 1, 0.2, 360deg); }
+  }
+
+  /* ---------- sticky stack ---------- */
+  .sticky-stack__item {
+    transition: transform 400ms var(--reveal-ease);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track,
+  .vmarquee__track,
+  .swirl,
+  [style*='klop'],
+  .sprinkles__col,
+  .sprinkles__piece {
+    animation: none !important;
+  }
+  .sprinkles { display: none; }
+}
+
+@layer components {
+  /* Chunky label uit de ronde letterfamilie — voor cijfers, pillen en badges. */
+  .chunk {
+    @apply font-chunk font-bold uppercase tracking-[0.12em];
+  }
+
+  /* Bol ijs: cirkel met een licht afgeplatte onderkant. */
+  .scoop {
+    border-radius: 50% 50% 46% 46% / 52% 52% 48% 48%;
+  }
+
+  /* Wafelpatroon voor hoorntjes en accentvlakken. */
+  .waffle {
+    background-image:
+      repeating-linear-gradient(45deg, rgb(29 8 5 / 0.12) 0 1px, transparent 1px 14px),
+      repeating-linear-gradient(-45deg, rgb(29 8 5 / 0.12) 0 1px, transparent 1px 14px);
+  }
+}
+
+@layer components {
+  /* Typemachine: sizer en tekst delen één rastercel, dus de breedte staat
+     vast op het langste woord en de regel springt niet. De tekst staat in
+     dat vak gecentreerd — links uitlijnen laat het korte woord uit het
+     midden hangen ten opzichte van de regels erboven. */
+  .typewriter {
+    display: inline-grid;
+    text-align: center;
+  }
+  .typewriter__sizer,
+  .typewriter__text {
+    grid-area: 1 / 1;
+  }
+  .typewriter__sizer {
+    visibility: hidden;
+  }
+
+  /* Knipperende cursor achter de typemachine-tekst. */
+  .typewriter-caret {
+    display: inline-block;
+    margin-left: 0.06em;
+    font-weight: 400;
+    animation: caret-blink 1.05s steps(1, end) infinite;
+  }
+
+  @keyframes caret-blink {
+    0%, 45% { opacity: 1; }
+    50%, 95% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  /* Langzaam draaiende ring om het hero-insigne. */
+  .badge-spin {
+    animation: badge-spin 26s linear infinite;
+  }
+
+  @keyframes badge-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Zachte, golvende ondergrond — geeft het crème vlak textuur zonder beeld. */
+  .texture-wave {
+    background-image:
+      radial-gradient(120% 80% at 15% 0%, rgb(244 207 100 / 0.22) 0%, transparent 55%),
+      radial-gradient(90% 70% at 85% 10%, rgb(175 110 44 / 0.12) 0%, transparent 60%),
+      repeating-linear-gradient(102deg, rgb(165 134 77 / 0.05) 0 2px, transparent 2px 22px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typewriter-caret,
+  .badge-spin {
+    animation: none !important;
+  }
+}
+
+@layer components {
+  /* Trage drift van de gemarmerde ondergrond. Alleen transform, zodat het
+     ruisfilter niet per beeldje opnieuw berekend hoeft te worden. */
+  .swirl-drift {
+    transform-origin: 50% 50%;
+    animation: swirl-drift 90s ease-in-out infinite alternate;
+  }
+
+  @keyframes swirl-drift {
+    from { transform: translate3d(-1.5%, -1%, 0) rotate(-1.5deg) scale(1.04); }
+    to { transform: translate3d(1.5%, 1%, 0) rotate(1.5deg) scale(1.1); }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swirl-drift { animation: none !important; }
+}
+
+@layer components {
+  /* Kleine wiebel wanneer je over een feed-foto gaat. */
+  .wiggle:hover {
+    animation: wiggle 600ms ease-in-out;
+  }
+
+  @keyframes wiggle {
+    0% { transform: rotate(var(--rust, 0deg)) scale(1); }
+    25% { transform: rotate(calc(var(--rust, 0deg) - 2.5deg)) scale(1.03); }
+    55% { transform: rotate(calc(var(--rust, 0deg) + 2deg)) scale(1.03); }
+    80% { transform: rotate(calc(var(--rust, 0deg) - 1deg)) scale(1.01); }
+    100% { transform: rotate(var(--rust, 0deg)) scale(1); }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wiggle:hover { animation: none; }
+}
+
+
+@layer components {
+  /* ---------- flip-kaart ---------- */
+  .flip {
+    perspective: 1400px;
+  }
+
+  .flip__inner {
+    position: relative;
+    display: block;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 700ms var(--reveal-ease);
+  }
+
+  .flip__inner--om {
+    transform: rotateY(180deg);
+  }
+
+  .flip__face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    backface-visibility: hidden;
+  }
+
+  .flip__face--back {
+    transform: rotateY(180deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Geen draaiing maar een overvloeiing; de kaart wisselt dan zonder beweging. */
+  .flip__inner,
+  .flip__inner--om {
+    transition: opacity 200ms linear;
+    transform: none !important;
+  }
+
+  .flip__face {
+    backface-visibility: visible;
+  }
+
+  .flip__face--back {
+    transform: none;
+    opacity: 0;
+  }
+
+  .flip__inner--om .flip__face {
+    opacity: 0;
+  }
+
+  .flip__inner--om .flip__face--back {
+    opacity: 1;
+  }
+}
