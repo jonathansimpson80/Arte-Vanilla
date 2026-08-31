@@ -88,6 +88,11 @@ export const ui = {
     en: 'The same cabinet, only on your own sofa. Four sizes from 450 to 1450 ml, and you decide what goes in.',
     it: 'Lo stesso banco, ma sul tuo divano. Quattro formati da 450 a 1450 ml, e decidi tu cosa ci va.',
   },
+  bakkenMeenemen: {
+    nl: 'Bakken reizen goed. Neem twee favorieten mee.',
+    en: 'Tubs travel well. Take two favourites with you.',
+    it: 'Le vaschette viaggiano bene. Portane due preferite.',
+  },
   bakSmaken: {
     nl: 'smaken naar keuze',
     en: 'flavours of your choice',
@@ -222,6 +227,12 @@ export const ui = {
     en: 'Twelve flavours, different every day.',
     it: 'Dodici gusti, diversi ogni giorno.',
   },
+  // Het stuk uit de kop dat gekleurd meekomt; moet letterlijk in de kop staan.
+  smakenKopAccent: {
+    nl: 'elke dag anders',
+    en: 'different every day',
+    it: 'diversi ogni giorno',
+  },
   smakenLead: {
     nl: 'Drie rijen op het bord: fruit bovenaan, crème in het midden, en onderin de zware jongens met noten en chocolade.',
     en: 'Three rows on the board: fruit up top, cream in the middle, and the heavy hitters with nuts and chocolate below.',
@@ -304,6 +315,11 @@ export const ui = {
     nl: 'Stel je bak samen, wij zetten hem klaar.',
     en: 'Build your tub, we’ll have it ready.',
     it: 'Componi la tua vaschetta, la teniamo pronta.',
+  },
+  afhalenKopAccent: {
+    nl: 'wij zetten hem klaar',
+    en: 'we\u2019ll have it ready',
+    it: 'la teniamo pronta',
   },
   afhalenLead: {
     nl: 'Kies een formaat, je smaken en een tijdstip. Betalen doe je aan de toonbank, zoals het hoort.',
@@ -429,40 +445,48 @@ export const ui = {
     en: 'Nonna’s recipes, in Amsterdam West.',
     it: 'Le ricette della nonna, ad Amsterdam Ovest.',
   },
+  overKopAccent: {
+    nl: 'Nonna',
+    en: 'Nonna\u2019s',
+    it: 'nonna',
+  },
+  // Bron voor dit blok: het interview met Giulia en Simone in indebuurt
+  // Amsterdam (14 augustus 2026). Alles hieronder staat letterlijk in dat
+  // artikel; wat er niet in staat, staat hier ook niet.
   overLead: {
-    nl: 'Een klein familiebedrijf aan de Kinkerstraat. Twee mensen, één machine, en recepten die niet uit een boek komen.',
-    en: 'A small family business on Kinkerstraat. Two people, one machine, and recipes that didn’t come out of a book.',
-    it: 'Una piccola impresa di famiglia in Kinkerstraat. Due persone, una macchina, e ricette che non vengono da un libro.',
+    nl: 'Giulia De Iorio en Simone Terontoli ruilden de omgeving van Bologna in voor de Kinkerstraat. Zij bracht de patisserie en het gelato mee, hij de koffie en de bar.',
+    en: 'Giulia De Iorio and Simone Terontoli swapped the countryside around Bologna for the Kinkerstraat. She brought the pastry and the gelato, he brought the coffee and the bar.',
+    it: 'Giulia De Iorio e Simone Terontoli hanno lasciato la zona di Bologna per la Kinkerstraat. Lei ha portato la pasticceria e il gelato, lui il caffè e il bancone.',
   },
   overVerhaalKop: {
-    nl: 'Het begint bij haar.',
-    en: 'It starts with her.',
-    it: 'Comincia da lei.',
+    nl: 'Het begon in de keuken van haar oma.',
+    en: 'It started in her grandmother’s kitchen.',
+    it: 'È cominciato nella cucina di sua nonna.',
   },
   overVerhaalLead: {
-    nl: 'Nonna schreef niets op. Wat we maken is wat zij voordeed: proeven, bijstellen, nog eens proeven. Dat is ook waarom er twaalf smaken staan en niet dertig — meer krijg je op één ochtend niet goed.',
-    en: 'Nonna never wrote anything down. What we make is what she showed us: taste, adjust, taste again. It’s also why there are twelve flavours and not thirty — you can’t get more than that right in one morning.',
-    it: 'La nonna non ha mai scritto niente. Facciamo quello che ci ha mostrato: assaggia, aggiusta, riassaggia. È anche il motivo dei dodici gusti e non trenta: di più, in una mattina, non vengono bene.',
+    nl: 'Giulia’s oma kwam uit Zuid-Italië en bakte als jong meisje brood voor het hele dorp; Giulia stond van kleins af aan mee te bakken. Op vakantie ging ze elke dag naar dezelfde ijssalon, tot ze er niet meer in de rij hoefde. Later maakte ze er haar vak van: patisserie, gelato, en het managen van een ijssalon bij Bologna.',
+    en: 'Giulia’s grandmother came from southern Italy and, as a girl, baked bread for the whole village; Giulia was in that kitchen from the start. On holidays she went to the same gelateria every day, until they knew her well enough that she no longer had to queue. Later she made it her trade: pastry, gelato, and managing a gelateria near Bologna.',
+    it: 'La nonna di Giulia veniva dal Sud e da ragazzina faceva il pane per tutto il paese; Giulia impastava con lei fin da piccola. In vacanza andava ogni giorno nella stessa gelateria, finché non dovette più mettersi in fila. Poi ne ha fatto un mestiere: pasticceria, gelato e la gestione di una gelateria vicino a Bologna.',
   },
   overWerkKop: {
-    nl: 'Elke ochtend opnieuw.',
-    en: 'Every morning, from scratch.',
-    it: 'Ogni mattina, da capo.',
+    nl: 'Wat we zelf kunnen maken, maken we zelf.',
+    en: 'What we can make ourselves, we make ourselves.',
+    it: 'Quello che possiamo fare noi, lo facciamo noi.',
   },
   overWerkLead: {
-    nl: 'De keuken zit achter de toonbank, dus wat je proeft is diezelfde ochtend gedraaid. Melk uit de buurt, pistache uit Sicilië, geen kleurstof en geen pasta uit een emmer. Dat je het ziet aan de kleur is precies de bedoeling.',
-    en: 'The kitchen is right behind the counter, so what you taste was churned that same morning. Milk from nearby, pistachio from Sicily, no colouring and no paste out of a bucket. That you can see it in the colour is rather the point.',
-    it: 'La cucina è dietro il banco: quello che assaggi è mantecato la mattina stessa. Latte di zona, pistacchio dalla Sicilia, niente coloranti e niente paste industriali. Che si veda dal colore è proprio il punto.',
+    nl: 'Pistachenoten worden hier geroosterd en tot pasta gemalen. De citroenen gaan met de hand door de pers, kilo’s tegelijk: machinaal komt er stof uit de schil mee en wordt het sap bitter. Pistache, pure chocolade en gianduia maken we op waterbasis — melk erbij verandert de smaak, en je moet pistache kunnen proeven.',
+    en: 'The pistachios are roasted and ground into paste here. The lemons are squeezed by hand, kilos at a time: press them by machine and something from the peel comes with it, and the juice turns bitter. Pistachio, dark chocolate and gianduia are made on a water base — milk changes the taste, and pistachio should taste of pistachio.',
+    it: 'I pistacchi qui vengono tostati e macinati in pasta. I limoni si spremono a mano, chili alla volta: a macchina viene via qualcosa dalla buccia e il succo diventa amaro. Pistacchio, cioccolato fondente e gianduia li facciamo a base acqua — il latte cambia il gusto, e il pistacchio deve sapere di pistacchio.',
   },
   overBuurtKop: {
-    nl: 'En de buurt kwam langs.',
-    en: 'And the neighbourhood turned up.',
-    it: 'E il quartiere è arrivato.',
+    nl: 'Goed eten en emotie.',
+    en: 'Good food and emotion.',
+    it: 'Buon cibo ed emozione.',
   },
   overBuurtLead: {
-    nl: 'Wat begon als een gok op een winkelpand werd het vaste rondje na het eten. Pistache wordt in de reviews met stip het vaakst genoemd — 39 keer, meer dan elke andere smaak.',
-    en: 'What started as a bet on an empty shop became the standing after-dinner walk. Pistachio leads the reviews by a mile — mentioned 39 times, more than any other flavour.',
-    it: 'Quel che è iniziato come una scommessa su un negozio vuoto è diventato la passeggiata fissa dopo cena. Il pistacchio domina le recensioni: citato 39 volte, più di ogni altro gusto.',
+    nl: 'Via een jaar Australië en een blik op Kopenhagen werd het Amsterdam: hier vonden ze de levendigheid en het onderlinge contact die ze zochten. “Horeca draait voor ons om twee dingen: goed eten en emotie. Als een van die twee ontbreekt, klopt het niet”, zegt Simone. Pistache wordt in de reviews met stip het vaakst genoemd — 39 keer.',
+    en: 'By way of a year in Australia and a look at Copenhagen it became Amsterdam: here they found the liveliness and the way people deal with each other that they were after. “For us hospitality comes down to two things: good food and emotion. If one of them is missing, something is off,” says Simone. Pistachio leads the reviews by a mile — mentioned 39 times.',
+    it: 'Dopo un anno in Australia e uno sguardo a Copenaghen è stata Amsterdam: qui hanno trovato la vivacità e il rapporto tra le persone che cercavano. “Per noi la ristorazione è due cose: buon cibo ed emozione. Se ne manca una, non torna”, dice Simone. Il pistacchio domina le recensioni: citato 39 volte.',
   },
   overCijferSmaken: { nl: 'smaken in de vitrine', en: 'flavours in the cabinet', it: 'gusti al banco' },
   overCijferReviews: { nl: 'op Google', en: 'on Google', it: 'su Google' },
@@ -472,14 +496,14 @@ export const ui = {
     it: 'cucina: una, dietro il banco',
   },
   overAanvullenKop: {
-    nl: 'Dit stukje moet van jullie komen.',
-    en: 'This part has to come from you.',
-    it: 'Questa parte deve arrivare da voi.',
+    nl: 'Wat we nog van jullie nodig hebben.',
+    en: 'What we still need from you.',
+    it: 'Cosa ci serve ancora da voi.',
   },
   overAanvullenLead: {
-    nl: 'Wat hierboven staat is nagetrokken: het adres, de beoordeling, de smaken, de werkwijze uit jullie eigen berichten. Wat er nog niet staat zijn de namen van de eigenaren, het jaar van openen en uit welke streek de recepten komen. Dat verzin ik niet — geef het door en het staat er.',
-    en: 'Everything above is checked: the address, the rating, the flavours, the way of working from your own posts. What isn’t here yet: the owners’ names, the year you opened, and which part of Italy the recipes come from. I won’t invent that — pass it on and it goes in.',
-    it: 'Tutto quello che c’è sopra è verificato: indirizzo, valutazione, gusti, il modo di lavorare dai vostri post. Quello che manca: i nomi dei titolari, l’anno di apertura e da quale zona vengono le ricette. Non me li invento: ditemeli e li inserisco.',
+    nl: 'Het verhaal hierboven komt uit het interview in indebuurt Amsterdam. Wat nog ontbreekt: de openingsdatum die jullie zelf aanhouden, de prijzen van de koffie en de bollen, en een volledige allergenenopgave per smaak. Doorgeven en het staat erin.',
+    en: 'The story above comes from the interview in indebuurt Amsterdam. Still missing: the opening date you want to use, the prices for coffee and scoops, and a complete allergen declaration per flavour. Pass them on and they go in.',
+    it: 'La storia qui sopra viene dall’intervista su indebuurt Amsterdam. Manca ancora: la data di apertura che volete usare, i prezzi di caffè e coppette e la dichiarazione completa degli allergeni per gusto. Mandateceli e li inseriamo.',
   },
 
   // ---------- taart en cadeaubon (voorstel) ----------
@@ -562,6 +586,11 @@ export const ui = {
     nl: 'Dolci uit dezelfde keuken.',
     en: 'Dolci from the same kitchen.',
     it: 'Dolci dalla stessa cucina.',
+  },
+  dolciKopAccent: {
+    nl: 'dezelfde keuken',
+    en: 'the same kitchen',
+    it: 'stessa cucina',
   },
   dolciLead: {
     nl: 'Gebak, koffie en alles wat naast de vitrine staat. Dezelfde ochtend gemaakt, door dezelfde handen die het gelato draaien.',

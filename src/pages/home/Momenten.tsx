@@ -3,6 +3,7 @@ import { ui } from '@/i18n/teksten'
 import { Glyph } from '@/components/ui/Glyph'
 import { moments } from '@/data/home'
 import { Reveal } from '@/motion/Reveal'
+import { Carrousel } from '@/components/ui/Carrousel'
 import { Foto } from '@/components/ui/Foto'
 
 export function Momenten() {
@@ -44,7 +45,7 @@ export function Momenten() {
             </div>
           </Reveal>
 
-          <div className="mt-14 carrousel gap-6 sm:grid-cols-3 lg:grid-cols-5">
+          <Carrousel as="div" label={t(ui.homeStemmingenEyebrow)} className="mt-14 gap-6 sm:grid-cols-3 lg:grid-cols-5">
             {moments.map((moment, i) => (
               <Reveal key={moment.image} y={26} scale={0.95} delay={i * 90}>
                 <article className="group">
@@ -64,7 +65,7 @@ export function Momenten() {
                 </article>
               </Reveal>
             ))}
-          </div>
+          </Carrousel>
           </div>
         </div>
       </section>

@@ -1,5 +1,6 @@
 import { Drip } from '@/components/Drip'
 import { Reveal } from '@/motion/Reveal'
+import { Carrousel } from '@/components/ui/Carrousel'
 import { deals } from '@/data/deals'
 import { useTaal } from '@/i18n/taal'
 import { ui } from '@/i18n/teksten'
@@ -30,25 +31,37 @@ export function DealsRij() {
         </div>
       </Reveal>
 
-      <ul className="mt-12 carrousel gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <Carrousel as="ul" label={t(ui.aanbiedingEyebrow)} className="mt-12 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {deals.map((deal, i) => (
           <Reveal key={deal.name.nl} y={24} scale={0.96} delay={(i % 3) * 90}>
             <li
               className="flex h-full flex-col overflow-hidden rounded-cone ring-1 ring-espresso-900/5"
               style={{ backgroundColor: deal.tintHex }}
             >
-              {deal.image && (
-                <div className="relative">
+              <div className="relative">
+                {deal.image ? (
                   <Foto
                     src={deal.image}
                     alt={t(deal.name)}
                     className="aspect-[16/10] w-full object-cover"
                   />
-                  <div className="absolute inset-x-0 bottom-0" style={{ color: deal.tintHex }}>
-                    <Drip className="" flip waves={4} heightClass="h-5" />
+                ) : (
+                  /* Geen eigen foto: het streeppatroon met de naam erin, net
+                     als bij de smaken. Zo houdt elke kaart in de rij dezelfde
+                     opbouw en valt er geen gat waar het beeld hoort. */
+                  <div className="stripes-soft flex aspect-[16/10] items-center justify-center px-6">
+                    <span
+                      className="wordmark text-center text-4xl opacity-60"
+                      style={{ color: deal.accentHex }}
+                    >
+                      {t(deal.name)}
+                    </span>
                   </div>
+                )}
+                <div className="absolute inset-x-0 bottom-0" style={{ color: deal.tintHex }}>
+                  <Drip className="" flip waves={4} heightClass="h-5" />
                 </div>
-              )}
+              </div>
 
               <div className="flex flex-1 flex-col p-7">
                 <div className="flex items-start justify-between gap-4">
@@ -128,7 +141,7 @@ export function DealsRij() {
             </span>
           </li>
         </Reveal>
-      </ul>
+      </Carrousel>
 
       <Reveal y={14} delay={120}>
         <p className="mt-8 text-center text-sm text-espresso-900/55">{t(ui.aanbiedingPrijsNoot)}</p>

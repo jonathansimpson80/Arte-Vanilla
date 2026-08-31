@@ -4,6 +4,7 @@ import { ui } from '@/i18n/teksten'
 import { Button } from '@/components/ui/Button'
 import { Glyph } from '@/components/ui/Glyph'
 import { Reveal } from '@/motion/Reveal'
+import { Carrousel } from '@/components/ui/Carrousel'
 import { HandGeschreven } from '@/motion/HandGeschreven'
 import { moods, type Mood } from '@/data/home'
 import { flavours } from '@/data/flavours'
@@ -24,64 +25,141 @@ function smakenVan(item: Mood, t: (tekst: Vertaald) => string) {
  * De vitrine: een vaste kaart links die meeloopt met de rij die in beeld
  * staat, en rechts de rijen en uitgelichte smaken.
  */
+/**
+ * De vitrinekaart: beeld, nummer en de smaken van één stemming. Staat op
+ * telefoon vijf keer naast elkaar in een carrousel, en daarboven één keer
+ * naast de genummerde rij.
+ */
+function Vitrine({
+  item,
+  actief,
+  t,
+}: {
+  item: Mood
+  actief: number
+  t: (tekst: Vertaald) => string
+}) {
+  return (
+    <div
+      className="flex h-full flex-col rounded-cone p-4 shadow-lift ring-1 ring-espresso-900/5 transition-colors duration-500 ease-soft"
+      style={{ backgroundColor: item.tintHex }}
+    >
+      <div className="relative overflow-hidden rounded-scoop">
+        <Foto src={item.image} alt={t(item.title)} className="aspect-4/3 w-full object-cover" />
+        <span className="chunk absolute left-4 top-4 rounded-full bg-crema-50 px-4 py-2 text-[0.7rem] tabular-nums text-espresso-900">
+          {item.number} / 0{moods.length}
+        </span>
+      </div>
+
+      <div className="flex items-center justify-between gap-4 px-2 pt-5">
+        <p className="chunk text-[0.7rem] text-espresso-900/60">{t(item.label)}</p>
+        <span
+          className="size-3 rounded-full"
+          style={{ backgroundColor: item.numberHex }}
+          aria-hidden="true"
+        />
+      </div>
+
+      <h3 className="mt-2 px-2 font-display text-2xl font-bold text-espresso-900">
+        {t(item.title)}
+      </h3>
+      <p className="mt-2 px-2 text-sm text-espresso-900/70">{t(item.body)}</p>
+
+      <ul className="mt-auto flex gap-2 px-2 pb-2 pt-6">
+        {moods.map((stemming, i) => (
+          <li
+            key={stemming.number}
+            className="size-2 rounded-full transition-colors duration-300"
+            style={{ backgroundColor: i === actief ? stemming.numberHex : 'rgb(29 8 5 / 0.2)' }}
+          >
+            <span className="sr-only">{t(stemming.label)}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
 export function MoodsSection() {
   const { t } = useTaal()
   const [active, setActive] = useState(0)
   const kaartenRef = useRef<HTMLUListElement>(null)
+  const vegenRef = useRef<HTMLUListElement | null>(null)
 
   useEffect(() => {
-    const rij = kaartenRef.current
-    if (!rij) return
-
-    // Onder sm is de rij een carrousel: dan schuiven de kaarten zijwaarts en
-    // moet de vitrine meelopen met wat er horizontaal in beeld staat, niet met
-    // hoe ver de pagina naar beneden is.
+    // Twee rijen, één tegelijk in beeld: op telefoon veeg je door de
+    // vitrinekaarten zelf, vanaf sm scrol je langs de genummerde rij.
     const breed = window.matchMedia('(min-width: 40rem)')
 
-    let observer: IntersectionObserver | null = null
+    let opruimen: (() => void) | null = null
 
     function koppel() {
-      observer?.disconnect()
-      const kaarten = rij?.querySelectorAll('li')
+      opruimen?.()
+      opruimen = null
+
+      const rij = breed.matches ? kaartenRef.current : vegenRef.current
+      const kaarten = rij?.querySelectorAll<HTMLElement>('li[data-index]')
       if (!rij || !kaarten?.length) return
 
-      const horizontaal = !breed.matches
+      // Zijwaarts vegen: de kaart die tegen de linkerrand klikt is de kaart
+      // die je leest. Dat rekenen we zelf uit — een waarnemer meldt alleen
+      // kaarten die net over een grens gingen, en dan mist de rest.
+      if (!breed.matches) {
+        const meet = () => {
+          // Aan het eind van de rij kan de laatste kaart niet meer tot de
+          // linkerrand schuiven, maar hij is dan wel wat je ziet.
+          if (rij.scrollLeft >= rij.scrollWidth - rij.clientWidth - 2) {
+            setActive(kaarten.length - 1)
+            return
+          }
 
-      observer = new IntersectionObserver(
+          const rand =
+            rij.getBoundingClientRect().left +
+            (parseFloat(getComputedStyle(rij).scrollPaddingLeft) || 0)
+          let beste = { index: 0, afstand: Infinity }
+          kaarten.forEach((kaart) => {
+            const afstand = Math.abs(kaart.getBoundingClientRect().left - rand)
+            if (afstand < beste.afstand) {
+              beste = { index: Number(kaart.dataset.index), afstand }
+            }
+          })
+          setActive(beste.index)
+        }
+
+        meet()
+        rij.addEventListener('scroll', meet, { passive: true })
+        opruimen = () => rij.removeEventListener('scroll', meet)
+        return
+      }
+
+      // Verticaal: de kaart die het dichtst bij het midden van het scherm staat.
+      const observer = new IntersectionObserver(
         (entries) => {
-          // De kaart die het dichtst bij het midden staat, wint.
-          const kader = horizontaal ? rij!.getBoundingClientRect() : null
-          const midden = kader
-            ? kader.left + kader.width / 2
-            : window.innerHeight / 2
+          const midden = window.innerHeight / 2
           let beste = { index: -1, afstand: Infinity }
 
           entries.forEach((entry) => {
             if (!entry.isIntersecting) return
             const index = Number((entry.target as HTMLElement).dataset.index)
             const rect = entry.boundingClientRect
-            const hart = horizontaal
-              ? rect.left + rect.width / 2
-              : rect.top + rect.height / 2
-            const afstand = Math.abs(hart - midden)
+            const afstand = Math.abs(rect.top + rect.height / 2 - midden)
             if (afstand < beste.afstand) beste = { index, afstand }
           })
 
           if (beste.index >= 0) setActive(beste.index)
         },
-        horizontaal
-          ? { root: rij, threshold: 0.6 }
-          : { threshold: 0.4, rootMargin: '-15% 0px -15% 0px' },
+        { threshold: 0.4, rootMargin: '-15% 0px -15% 0px' },
       )
 
-      kaarten.forEach((kaart) => observer!.observe(kaart))
+      kaarten.forEach((kaart) => observer.observe(kaart))
+      opruimen = () => observer.disconnect()
     }
 
     koppel()
     breed.addEventListener('change', koppel)
     return () => {
       breed.removeEventListener('change', koppel)
-      observer?.disconnect()
+      opruimen?.()
     }
   }, [])
 
@@ -128,50 +206,27 @@ export function MoodsSection() {
         </Reveal>
 
         <div className="mt-14 grid gap-8 lg:grid-cols-[380px_1fr] lg:items-start">
-          {/* vaste kaart die meeloopt met de rij in beeld */}
-          <div className="lg:sticky lg:top-28">
-            <div
-              className="rounded-cone p-4 shadow-lift ring-1 ring-espresso-900/5 transition-colors duration-500 ease-soft"
-              style={{ backgroundColor: mood.tintHex }}
+          {/* De vitrinekaart. Op een telefoon is dit de hele sectie: je veegt
+              er zelf doorheen en de achtergrond kleurt mee. Vanaf sm loopt de
+              kaart mee met de rij ernaast, en blijft hij op laptop staan. */}
+          <div className="min-w-0 lg:sticky lg:top-28">
+            <Carrousel
+              as="ul"
+              label={t(ui.homeStemmingenEyebrow)}
+              className="gap-4 sm:hidden"
+              innerRef={(el) => {
+                vegenRef.current = el as HTMLUListElement | null
+              }}
             >
-              <div className="relative overflow-hidden rounded-scoop">
-                <Foto
-                  src={mood.image}
-                  alt={t(mood.title)}
-                  className="aspect-4/3 w-full object-cover"
-                />
-                <span className="chunk absolute left-4 top-4 rounded-full bg-crema-50 px-4 py-2 text-[0.7rem] tabular-nums text-espresso-900">
-                  {mood.number} / 0{moods.length}
-                </span>
-              </div>
+              {moods.map((item, i) => (
+                <li key={item.number} data-index={i}>
+                  <Vitrine item={item} actief={active} t={t} />
+                </li>
+              ))}
+            </Carrousel>
 
-              <div className="flex items-center justify-between gap-4 px-2 pt-5">
-                <p className="chunk text-[0.7rem] text-espresso-900/60">{t(mood.label)}</p>
-                <span
-                  className="size-3 rounded-full"
-                  style={{ backgroundColor: mood.numberHex }}
-                  aria-hidden="true"
-                />
-              </div>
-
-              <h3 className="mt-2 px-2 font-display text-2xl font-bold text-espresso-900">
-                {t(mood.title)}
-              </h3>
-              <p className="mt-2 px-2 text-sm text-espresso-900/70">{t(mood.body)}</p>
-
-              <ul className="flex gap-2 px-2 pb-2 pt-6">
-                {moods.map((item, i) => (
-                  <li
-                    key={item.number}
-                    className="size-2 rounded-full transition-colors duration-300"
-                    style={{
-                      backgroundColor: i === active ? item.numberHex : 'rgb(29 8 5 / 0.2)',
-                    }}
-                  >
-                    <span className="sr-only">{t(item.label)}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="hidden sm:block">
+              <Vitrine item={mood} actief={active} t={t} />
             </div>
 
             <div className="mt-4 px-2">
@@ -182,7 +237,7 @@ export function MoodsSection() {
           </div>
 
           {/* de zes stemmingen: cijfer en iconen boven, beeld onder de tekst */}
-          <ul className="carrousel gap-6" ref={kaartenRef}>
+          <ul className="hidden gap-6 sm:grid" ref={kaartenRef}>
             {moods.map((item, i) => (
               <li
                 key={item.number}

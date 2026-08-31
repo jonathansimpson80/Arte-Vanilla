@@ -427,6 +427,9 @@
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    /* Aan het einde van een rij mag de veeg niet doorslaan naar de pagina
+       eronder of naar de terugknop van de browser. */
+    overscroll-behavior-x: contain;
     /* Randloos doorlopen tot de schermrand, met de containerinspringing als
        scroll-marge: de eerste kaart begint dus netjes onder de kop. */
     margin-inline: calc(var(--spacing) * -6);
@@ -436,6 +439,9 @@
     padding-bottom: 0.75rem;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
+    /* Zonder dit mag de rij in een raster net zo breed worden als zijn eigen
+       inhoud, en dan duwt hij de pagina zijwaarts open. */
+    min-width: 0;
   }
 
   .carrousel::-webkit-scrollbar {
@@ -443,8 +449,27 @@
   }
 
   .carrousel > * {
-    flex: 0 0 min(82%, 21rem);
-    scroll-snap-align: center;
+    /* Ten opzichte van het scherm, niet van de rij: een percentage van de rij
+       gaat rondzingen als de rij zelf nog naar zijn inhoud wordt gemeten, en
+       dan worden de kaarten zo breed als hun langste zin. */
+    flex: 0 0 min(82vw, 21rem);
+    scroll-snap-align: start;
+  }
+
+  /* Even hoog, ongeacht hoeveel tekst erin staat: anders springt de onderrand
+     per kaart een stuk mee en veegt de rij onrustig. */
+  .carrousel > * > * {
+    height: 100%;
+  }
+
+  /* De opkomanimatie hoort bij naar beneden scrollen. In een carrousel komen
+     kaarten zijwaarts in beeld en schoven ze dus tijdens het vegen omhoog —
+     dan staat de rij niet stil. Binnen de rij zetten we dat uit; het
+     uitroepteken is nodig omdat de animatie in een stijlattribuut staat. */
+  .carrousel > * {
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
   }
 
   @media (min-width: 40rem) {
@@ -459,6 +484,11 @@
     .carrousel > * {
       flex: initial;
     }
+
+    /* In het raster bepalen de kaarten hun hoogte weer zelf. */
+    .carrousel > * > * {
+      height: auto;
+    }
   }
 
   /* Alleen zichtbaar zolang de rij echt schuift. */
@@ -469,6 +499,38 @@
   @media (min-width: 40rem) {
     .carrousel-hint {
       display: none;
+    }
+  }
+}
+
+
+@layer base {
+  /* De muisaanwijzer als ijsje. Alleen waar er echt een muis is: op een
+     telefoon bestaat er geen aanwijzer, en wie met een toetsenbord of
+     schermlezer werkt merkt er niets van. De gewone aanwijzer staat er als
+     terugval achter, dus valt er niets weg als het plaatje niet laadt. */
+  @media (hover: hover) and (pointer: fine) {
+    body {
+      cursor: url("data:image/svg+xml,<svg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2232%22%20height=%2232%22%20viewBox=%220%200%2032%2032%22><path%20d=%22M8%203.5%20L24.5%2012%20L11%2024%20Z%22%20fill=%22#1d0805%22/><path%20d=%22M9.2%205.2%20L22.4%2011.9%20L11.4%2021.6%20Z%22%20fill=%22#f4cf64%22/><circle%20cx=%2212.4%22%20cy=%228.6%22%20r=%222.5%22%20fill=%22#fdfaf3%22/><circle%20cx=%2217%22%20cy=%2211.2%22%20r=%222.1%22%20fill=%22#e9a7b8%22/></svg>") 6 3, auto;
+    }
+
+    a,
+    button,
+    summary,
+    label,
+    select,
+    [role='button'],
+    [tabindex]:not([tabindex='-1']) {
+      cursor: url("data:image/svg+xml,<svg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2232%22%20height=%2232%22%20viewBox=%220%200%2032%2032%22><circle%20cx=%2216%22%20cy=%2216%22%20r=%2211%22%20fill=%22#1d0805%22/><circle%20cx=%2216%22%20cy=%2216%22%20r=%229%22%20fill=%22#f4cf64%22/><circle%20cx=%2213%22%20cy=%2213.5%22%20r=%223%22%20fill=%22#fdfaf3%22/><circle%20cx=%2219.5%22%20cy=%2217.5%22%20r=%222.4%22%20fill=%22#e9a7b8%22/></svg>") 16 16, pointer;
+    }
+
+    input,
+    textarea {
+      cursor: text;
+    }
+
+    :disabled {
+      cursor: not-allowed;
     }
   }
 }

@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/Button'
 import { Glyph } from '@/components/ui/Glyph'
 import { Reveal } from '@/motion/Reveal'
+import { Carrousel } from '@/components/ui/Carrousel'
 import { bakken } from '@/data/thuis'
 import { useTaal } from '@/i18n/taal'
 import { ui } from '@/i18n/teksten'
@@ -39,7 +40,7 @@ export function BakkenVoorThuis({ compact = false }: { compact?: boolean }) {
         </div>
       </Reveal>
 
-      <ul className="mt-12 carrousel gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <Carrousel as="ul" label={t(ui.bakkenEyebrow)} className="mt-12 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {bakken.map((bak, i) => (
           <Reveal key={bak.name} y={24} scale={0.96} delay={i * 90}>
             <li
@@ -74,10 +75,18 @@ export function BakkenVoorThuis({ compact = false }: { compact?: boolean }) {
             </li>
           </Reveal>
         ))}
-      </ul>
+      </Carrousel>
+
+      <Reveal y={14} delay={160}>
+        <p
+          className={`mt-7 text-sm italic text-espresso-900/55 ${compact ? '' : 'text-center'}`}
+        >
+          {t(ui.bakkenMeenemen)}
+        </p>
+      </Reveal>
 
       <Reveal y={16} delay={200}>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
           <Button variant="accent" to="/afhalen">
             {t(ui.bakSamenstellen)}
             <Glyph name="pijl" size={15} />

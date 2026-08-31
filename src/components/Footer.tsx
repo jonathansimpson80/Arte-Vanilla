@@ -49,9 +49,9 @@ export function Footer() {
         <Scallop className="text-espresso-900" />
       </div>
 
-      <div className="-mt-0.5 bg-espresso-900 pt-16 text-crema-50">
-        <div className="container-page grid gap-12 pb-14 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
+      <div className="-mt-0.5 bg-espresso-900 pt-12 text-crema-50 sm:pt-16">
+        <div className="container-page grid auto-rows-min grid-cols-2 gap-x-6 gap-y-9 pb-10 sm:auto-rows-auto sm:gap-12 sm:pb-14 lg:grid-cols-4">
+          <div className="col-span-2 lg:col-span-1">
             <p className="wordmark text-3xl">Arte Vanilla</p>
             <p className="chunk mt-2 text-[0.7rem] text-vaniglia-400">Gelato, dolci &amp; caffè</p>
             <p className="mt-4 max-w-xs text-sm text-crema-200/70">
@@ -66,7 +66,10 @@ export function Footer() {
             <h2 className="chunk text-[0.7rem] text-vaniglia-400">{t(ui.openingstijden)}</h2>
             <dl className="mt-4 space-y-2 text-sm">
               {openingHours.map((row) => (
-                <div key={row.time} className="flex justify-between gap-4 text-crema-200/70">
+                <div
+                  key={row.time}
+                  className="flex flex-col text-crema-200/70 sm:flex-row sm:justify-between sm:gap-4"
+                >
                   <dt>{t(row.day)}</dt>
                   <dd className="tabular-nums text-crema-50">{row.time}</dd>
                 </div>
@@ -74,14 +77,16 @@ export function Footer() {
             </dl>
           </div>
 
-          {kolommen.map((kolom) => (
-            <div key={kolom.titel.nl}>
+          {kolommen.map((kolom, i) => (
+            /* De langste linkkolom pakt twee rijen, zodat de korte blokken
+               eronder aansluiten in plaats van na een gat te beginnen. */
+            <div key={kolom.titel.nl} className={i === 0 ? 'row-span-2 sm:row-span-1' : ''}>
               <h2 className="chunk text-[0.7rem] text-vaniglia-400">{t(kolom.titel)}</h2>
               <ul className="mt-4 space-y-2 text-sm">
                 {kolom.items.map((item) => {
                   const intern = item.href.startsWith('/')
                   const klasse =
-                    'block py-2.5 text-crema-200/70 transition-colors hover:text-crema-50 sm:py-1'
+                    'block py-2 text-crema-200/70 transition-colors hover:text-crema-50 sm:py-1'
 
                   return (
                     <li key={item.href}>

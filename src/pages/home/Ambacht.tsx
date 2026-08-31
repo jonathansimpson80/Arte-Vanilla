@@ -16,8 +16,11 @@ export function Ambacht() {
         style={{ backgroundColor: '#fbe6e8' }}
         aria-labelledby="ambacht"
       >
+        {/* Ook op een telefoon: daar begint de lijn dichter bij de linkerrand
+            en is hij wat lager, zodat hij boven de kop langs loopt in plaats
+            van er dwars doorheen. */}
         <DrawnLine
-          className="pointer-events-none absolute left-[26%] right-[6%] top-0 hidden md:block"
+          className="pointer-events-none absolute left-[8%] right-[4%] top-2 md:left-[26%] md:right-[6%] md:top-0"
           stroke="rgb(140 59 54 / 0.38)"
           dot="#f4cf64"
         />

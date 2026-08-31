@@ -1,9 +1,12 @@
+import { useState } from 'react'
 import { Seo } from '@/lib/seo'
 import { Button } from '@/components/ui/Button'
 import { Glyph } from '@/components/ui/Glyph'
 import { Drip } from '@/components/Drip'
 import { StripesBackground } from '@/components/StripesBackground'
 import { Reveal } from '@/motion/Reveal'
+import { KopMetAccent } from '@/components/ui/KopMetAccent'
+import { Carrousel } from '@/components/ui/Carrousel'
 import { Marquee } from '@/motion/Marquee'
 import { ImageReveal } from '@/motion/ImageReveal'
 import { Sprinkles } from '@/motion/Sprinkles'
@@ -17,6 +20,7 @@ import { Foto } from '@/components/ui/Foto'
 
 export function Dolci() {
   const { t } = useTaal()
+  const [voor, setVoor] = useState(0)
 
   return (
     <>
@@ -38,9 +42,11 @@ export function Dolci() {
           </Reveal>
 
           <Reveal y={22} delay={80}>
-            <h1 className="mx-auto mt-6 max-w-[15ch] font-display text-display font-bold text-espresso-900">
-              {t(ui.dolciKop)}
-            </h1>
+            <KopMetAccent
+              tekst={t(ui.dolciKop)}
+              accent={t(ui.dolciKopAccent)}
+              className="mx-auto mt-6 max-w-[15ch] font-display text-display font-bold text-espresso-900"
+            />
           </Reveal>
 
           <Reveal y={16} delay={160}>
@@ -118,7 +124,18 @@ export function Dolci() {
       </section>
 
       {/* ---------- de kaart ---------- */}
-      <section className="container-page pt-24" aria-labelledby="dolci-kaart">
+      {/* De achtergrond loopt mee met de kaart die vooraan staat: op een
+          telefoon zie je maar één dolce tegelijk, en de kleur vertelt dan mee
+          waar je bent. Vanaf sm staat de rij stil en blijft de kleur dus ook
+          staan. */}
+      <section className="container-page relative pt-24" aria-labelledby="dolci-kaart">
+        {/* Een eigen laag in plaats van een achtergrond op de sectie: vanaf sm
+            staat de rij stil en hoort er geen kleurvlak te zijn. */}
+        <div
+          className="pointer-events-none absolute inset-x-[-1.5rem] inset-y-0 -z-10 transition-colors duration-500 ease-soft sm:hidden"
+          style={{ backgroundColor: dolci[voor]?.tintHex ?? 'transparent' }}
+          aria-hidden="true"
+        />
         <Reveal y={16}>
           <div className="text-center">
             <h2
@@ -139,7 +156,7 @@ export function Dolci() {
           kaarten 219px breed en 528 hoog — dan liever de laatste de rij laten
           afmaken, alleen in de tweekolomsstand.
         */}
-        <ul className="mt-12 carrousel gap-6 sm:grid-cols-2 sm:[&>*:last-child]:col-span-2 lg:grid-cols-3 lg:[&>*:last-child]:col-span-1">
+        <Carrousel as="ul" label={t(ui.navGebak)} onActief={setVoor} className="mt-12 gap-6 sm:grid-cols-2 sm:[&>*:last-child]:col-span-2 lg:grid-cols-3 lg:[&>*:last-child]:col-span-1">
           {dolci.map((dolce, i) => (
             <Reveal key={dolce.name.nl} y={24} scale={0.96} delay={(i % 3) * 90}>
               <li
@@ -212,7 +229,7 @@ export function Dolci() {
               </li>
             </Reveal>
           ))}
-        </ul>
+        </Carrousel>
       </section>
 
       {/* ---------- koffie ---------- */}

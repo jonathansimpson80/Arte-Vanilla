@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/Button'
 import { Glyph } from '@/components/ui/Glyph'
 import { StripesBackground } from '@/components/StripesBackground'
 import { Reveal } from '@/motion/Reveal'
+import { KopMetAccent } from '@/components/ui/KopMetAccent'
 import { useTaal } from '@/i18n/taal'
 import { ui } from '@/i18n/teksten'
 import { afhaaldagen, extras, formaten, tijdvakken, type Formaat } from '@/data/afhalen'
@@ -347,7 +348,11 @@ export function Afhalen() {
 
           <Reveal y={22} delay={80}>
             <h1 className="mx-auto mt-6 grid min-h-[2.85em] max-w-[16ch] place-items-center font-display text-display font-bold leading-[0.95] text-espresso-900">
-              <span>{t(ui.afhalenKop)}</span>
+              <KopMetAccent
+                as="span"
+                tekst={t(ui.afhalenKop)}
+                accent={t(ui.afhalenKopAccent)}
+              />
             </h1>
           </Reveal>
 

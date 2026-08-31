@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/Button'
 import { Glyph } from '@/components/ui/Glyph'
 import { Drip } from '@/components/Drip'
 import { Reveal } from '@/motion/Reveal'
+import { KopMetAccent } from '@/components/ui/KopMetAccent'
+import { Carrousel } from '@/components/ui/Carrousel'
 import { Marquee } from '@/motion/Marquee'
 import { StripesBackground } from '@/components/StripesBackground'
 import { AchterHetGlas } from '@/components/AchterHetGlas'
@@ -57,9 +59,11 @@ export function Flavours() {
           </Reveal>
 
           <Reveal y={22} delay={80}>
-            <h1 className="mx-auto mt-6 max-w-[16ch] font-display text-display font-bold text-espresso-900">
-              {t(ui.smakenKop)}
-            </h1>
+            <KopMetAccent
+              tekst={t(ui.smakenKop)}
+              accent={t(ui.smakenKopAccent)}
+              className="mx-auto mt-6 max-w-[16ch] font-display text-display font-bold text-espresso-900"
+            />
           </Reveal>
 
           <Reveal y={16} delay={160}>
@@ -147,7 +151,7 @@ export function Flavours() {
           {zichtbaar.length} {t(ui.smakenZichtbaar)}
         </p>
 
-        <ul className="mt-12 carrousel gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <Carrousel as="ul" label={t(ui.smakenEyebrow)} className="mt-12 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {zichtbaar.map((smaak, i) => (
             <Reveal key={smaak.name} y={24} scale={0.96} delay={(i % 3) * 90}>
               <li
@@ -210,7 +214,7 @@ export function Flavours() {
               </li>
             </Reveal>
           ))}
-        </ul>
+        </Carrousel>
 
         {zichtbaar.length === 0 && (
           <p className="py-16 text-center text-cacao-700">{t(ui.smakenLeeg)}</p>
@@ -231,7 +235,7 @@ export function Flavours() {
           </div>
         </Reveal>
 
-        <ul className="mt-10 carrousel gap-6 sm:grid-cols-2">
+        <Carrousel as="ul" label={t(ui.smakenHeleKaart)} className="mt-10 gap-6 sm:grid-cols-2">
           {serveervormen.map((vorm, i) => (
             <Reveal key={vorm.italian} y={24} scale={0.96} delay={i * 90}>
               <li
@@ -268,7 +272,7 @@ export function Flavours() {
               </li>
             </Reveal>
           ))}
-        </ul>
+        </Carrousel>
       </section>
 
       {/* ---------- smaakfamilies: flip-kaarten ---------- */}
@@ -294,13 +298,13 @@ export function Flavours() {
           </div>
         </Reveal>
 
-        <div className="mt-12 carrousel gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <Carrousel as="div" label={t(ui.smakenEyebrow)} className="mt-12 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {families.map((familie, i) => (
             <Reveal key={familie.id} y={24} scale={0.96} delay={(i % 3) * 90}>
               <FlipCard family={familie} />
             </Reveal>
           ))}
-        </div>
+        </Carrousel>
       </section>
 
       <AchterHetGlas />

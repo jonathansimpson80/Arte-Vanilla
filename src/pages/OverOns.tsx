@@ -5,6 +5,8 @@ import { Foto } from '@/components/ui/Foto'
 import { Drip } from '@/components/Drip'
 import { StripesBackground } from '@/components/StripesBackground'
 import { Reveal } from '@/motion/Reveal'
+import { KopMetAccent } from '@/components/ui/KopMetAccent'
+import { Carrousel } from '@/components/ui/Carrousel'
 import { ImageReveal } from '@/motion/ImageReveal'
 import { Sprinkles } from '@/motion/Sprinkles'
 import { VerticalMarquee } from '@/motion/VerticalMarquee'
@@ -60,9 +62,11 @@ export function OverOns() {
           </Reveal>
 
           <Reveal y={22} delay={80}>
-            <h1 className="mx-auto mt-6 max-w-[16ch] font-display text-display font-bold text-espresso-900">
-              {t(ui.overKop)}
-            </h1>
+            <KopMetAccent
+              tekst={t(ui.overKop)}
+              accent={t(ui.overKopAccent)}
+              className="mx-auto mt-6 max-w-[16ch] font-display text-display font-bold text-espresso-900"
+            />
           </Reveal>
 
           <Reveal y={16} delay={160}>
@@ -94,7 +98,7 @@ export function OverOns() {
 
       {/* ---------- in cijfers ---------- */}
       <section className="container-page pt-24">
-        <ul className="carrousel gap-5 sm:grid-cols-3">
+        <Carrousel as="ul" label={t(ui.navOverOns)} className="gap-5 sm:grid-cols-3">
           {cijfers.map((cijfer, i) => (
             <Reveal key={cijfer.getal + i} y={22} scale={0.96} delay={i * 90}>
               <li
@@ -111,7 +115,7 @@ export function OverOns() {
               </li>
             </Reveal>
           ))}
-        </ul>
+        </Carrousel>
       </section>
 
       {/* ---------- hoe het gemaakt wordt ---------- */}
@@ -167,36 +171,36 @@ export function OverOns() {
           {/* De reviews zelf in plaats van een foto: twee kolommen die langzaam
               langsschuiven, klein gezet zodat ze naast de tekst passen. */}
           <Reveal y={20} delay={120}>
-            <div className="grid h-[26rem] gap-4 sm:grid-cols-2">
+            <div className="grid h-[22rem] grid-cols-2 gap-3 sm:h-[26rem] sm:gap-4">
               {[0, 1].map((kolom) => (
                 <VerticalMarquee
                   key={kolom}
                   duration={46 + kolom * 13}
                   direction={kolom === 1 ? 'down' : 'up'}
-                  className={kolom === 1 ? 'hidden sm:block' : ''}
+                  
                 >
                   {reviews
                     .filter((_, i) => i % 2 === kolom)
                     .map((review) => (
                       <article
                         key={review.tekst}
-                        className="mb-4 flex overflow-hidden rounded-scoop bg-crema-50 text-espresso-900 shadow-float"
+                        className="mb-3 flex overflow-hidden rounded-scoop bg-crema-50 text-espresso-900 shadow-float sm:mb-4"
                       >
                         <span
                           className="w-1.5 shrink-0"
                           style={{ backgroundColor: review.accentHex }}
                           aria-hidden="true"
                         />
-                        <div className="flex-1 p-4">
+                        <div className="flex-1 p-3 sm:p-4">
                           <span className="flex gap-1" aria-hidden="true">
                             {Array.from({ length: review.sterren }, (_, i) => (
                               <span key={i} className="size-1.5 rounded-full bg-vaniglia-400" />
                             ))}
                           </span>
-                          <p className="mt-2.5 text-[0.8rem] leading-relaxed text-espresso-900/80">
+                          <p className="mt-2 text-[0.72rem] leading-relaxed text-espresso-900/80 sm:mt-2.5 sm:text-[0.8rem]">
                             “{review.tekst}”
                           </p>
-                          <p className="mt-3 font-display text-xs font-bold text-espresso-900/70">
+                          <p className="mt-2.5 font-display text-[0.68rem] font-bold text-espresso-900/70 sm:mt-3 sm:text-xs">
                             {review.auteur ?? `${beoordeling.bron}-review`}
                           </p>
                         </div>

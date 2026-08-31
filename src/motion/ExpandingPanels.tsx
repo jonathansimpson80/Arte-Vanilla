@@ -36,6 +36,28 @@ export function ExpandingPanels({ panels, onChange, className = '' }: Props) {
     onChange?.(index)
   }
 
+  /**
+   * Op een telefoon staat de rij in een zijwaartse schuifbalk. Klap je daar
+   * een paneel open, dan groeit het deels buiten beeld. Daarom schuift het
+   * geopende paneel netjes in het midden — één keer meteen, en nog een keer
+   * als het uitklappen klaar is, want pas dan is de eindbreedte bekend.
+   */
+  function inBeeld(el: HTMLElement) {
+    const rij = el.parentElement
+    if (!rij || rij.scrollWidth <= rij.clientWidth + 1) return
+
+    const zacht = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const centreer = () =>
+      el.scrollIntoView({
+        behavior: zacht ? 'smooth' : 'auto',
+        inline: 'center',
+        block: 'nearest',
+      })
+
+    centreer()
+    el.addEventListener('transitionend', centreer, { once: true })
+  }
+
   return (
     <div className={`flex gap-2 overflow-x-auto sm:overflow-visible ${className}`}>
       {panels.map((panel, i) => {
@@ -48,8 +70,14 @@ export function ExpandingPanels({ panels, onChange, className = '' }: Props) {
             // Muis opent bij het erlangs gaan; klik en focus blijven werken
             // voor touch en toetsenbord, waar hover niet bestaat.
             onMouseEnter={() => openen(i)}
-            onClick={() => openen(i)}
-            onFocus={() => openen(i)}
+            onClick={(e) => {
+              openen(i)
+              inBeeld(e.currentTarget)
+            }}
+            onFocus={(e) => {
+              openen(i)
+              inBeeld(e.currentTarget)
+            }}
             aria-expanded={isOpen}
             className="group relative h-80 shrink-0 overflow-hidden rounded-scoop text-left transition-[flex-grow,width] duration-500 ease-soft sm:h-96 sm:shrink"
             style={{

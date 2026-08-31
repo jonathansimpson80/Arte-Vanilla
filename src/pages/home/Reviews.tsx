@@ -36,7 +36,7 @@ export function Reviews() {
                   {beoordeling.score.toFixed(1).replace('.', ',')}
                 </p>
                 <div className="pb-3 text-left">
-                  <span className="flex gap-1.5" aria-hidden="true">
+                  <span className="flex gap-1 sm:gap-1.5" aria-hidden="true">
                     {['#f4cf64', '#f4cf64', '#f4cf64', '#f4cf64', '#f4cf64'].map((kleur, i) => (
                       <span
                         key={i}
@@ -74,44 +74,46 @@ export function Reviews() {
             </Reveal>
           </div>
 
-          {/* Drie kolommen, elk op een eigen tempo en richting. */}
-          <div className="mt-14 grid h-[34rem] gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Drie banen, elk op een eigen tempo en richting. Op een telefoon
+              lopen er twee, kleiner gezet: twee smalle banen lezen prettiger
+              dan één brede kolom die het scherm vult. */}
+          <div className="mt-14 grid h-[26rem] grid-cols-2 gap-3 sm:h-[34rem] sm:gap-5 lg:grid-cols-3">
             {[0, 1, 2].map((kolom) => (
               <VerticalMarquee
                 key={kolom}
                 duration={52 + kolom * 11}
                 direction={kolom === 1 ? 'down' : 'up'}
-                className={kolom === 2 ? 'hidden lg:block' : kolom === 1 ? 'hidden sm:block' : ''}
+                className={kolom === 2 ? 'hidden lg:block' : ''}
               >
                 {reviews
                   .filter((_, i) => i % 3 === kolom)
                   .map((review) => (
                     <article
                       key={review.tekst}
-                      className="mb-5 flex overflow-hidden rounded-scoop bg-crema-50 text-espresso-900 shadow-float"
+                      className="mb-3 flex overflow-hidden rounded-scoop bg-crema-50 text-espresso-900 shadow-float sm:mb-5"
                     >
                       <span
-                        className="w-2 shrink-0"
+                        className="w-1.5 shrink-0 sm:w-2"
                         style={{ backgroundColor: review.accentHex }}
                         aria-hidden="true"
                       />
 
-                      <div className="flex-1 p-6">
+                      <div className="flex-1 p-4 sm:p-6">
                         <span className="flex gap-1.5" aria-hidden="true">
                           {Array.from({ length: review.sterren }, (_, i) => (
                             <span
                               key={i}
-                              className="size-2.5 rounded-full bg-vaniglia-400"
+                              className="size-1.5 rounded-full bg-vaniglia-400 sm:size-2.5"
                             />
                           ))}
                         </span>
 
-                        <p className="mt-4 text-[0.95rem] leading-relaxed text-espresso-900/80">
+                        <p className="mt-3 text-[0.78rem] leading-relaxed text-espresso-900/80 sm:mt-4 sm:text-[0.95rem]">
                           “{review.tekst}”
                         </p>
 
-                        <div className="mt-5 flex items-center justify-between gap-4 border-t border-dashed border-espresso-900/20 pt-3.5">
-                          <p className="font-display text-sm font-bold text-espresso-900">
+                        <div className="mt-3.5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-t border-dashed border-espresso-900/20 pt-3 sm:mt-5 sm:pt-3.5">
+                          <p className="font-display text-xs font-bold text-espresso-900 sm:text-sm">
                             {review.auteur ?? `${beoordeling.bron}-review`}
                           </p>
                           {review.rol && (
