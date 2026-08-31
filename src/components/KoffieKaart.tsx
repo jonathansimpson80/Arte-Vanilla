@@ -1,4 +1,5 @@
 import { Reveal } from '@/motion/Reveal'
+import { Carrousel } from '@/components/ui/Carrousel'
 import { ImageReveal } from '@/motion/ImageReveal'
 import { extras, koffie } from '@/data/koffie'
 import { useTaal } from '@/i18n/taal'
@@ -22,7 +23,7 @@ export function KoffieKaart() {
         className="aspect-[4/5] rounded-cone sm:aspect-[16/11] lg:aspect-auto lg:h-full"
       />
 
-      <div>
+      <div className="min-w-0">
         <Reveal y={16}>
           <span className="chunk inline-flex items-center gap-2 rounded-full bg-cacao-700/12 px-4 py-2 text-[0.7rem] text-cacao-700">
             {t(ui.koffieEyebrow)}
@@ -33,7 +34,7 @@ export function KoffieKaart() {
           <p className="mt-4 max-w-md text-lead text-cacao-700">{t(ui.koffieLead)}</p>
         </Reveal>
 
-        <ul className="mt-8 grid gap-3">
+        <Carrousel as="ul" label={t(ui.koffieEyebrow)} className="mt-8 gap-3">
           {koffie.map((drank, i) => (
             <Reveal key={drank.name.nl} y={18} delay={i * 60}>
               <li className="flex items-baseline justify-between gap-6 rounded-scoop bg-crema-100 px-6 py-5 ring-1 ring-espresso-900/5">
@@ -52,7 +53,7 @@ export function KoffieKaart() {
               </li>
             </Reveal>
           ))}
-        </ul>
+        </Carrousel>
 
         <Reveal y={16} delay={200}>
           <div className="mt-6 rounded-scoop border border-dashed border-espresso-900/25 p-6">
