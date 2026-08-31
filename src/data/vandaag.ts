@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { bestand } from '@/lib/pad'
 
 export type Vandaag = {
   /** Datum waarop de winkel dit heeft bijgewerkt, als JJJJ-MM-DD. */
@@ -22,7 +23,7 @@ export function useVandaag(): Vandaag | null {
   useEffect(() => {
     let afgebroken = false
 
-    fetch('/vandaag.json', { cache: 'no-cache' })
+    fetch(bestand('/vandaag.json'), { cache: 'no-cache' })
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
         if (afgebroken || !data || !Array.isArray(data.smaken) || data.smaken.length === 0) return

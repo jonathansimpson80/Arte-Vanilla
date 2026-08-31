@@ -9,7 +9,12 @@
 import { mkdirSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
-const SITE = (process.env.VITE_SITE_URL ?? 'https://artevanilla.nl').replace(/\/$/, '')
+// Vercel geeft het productie-adres mee bij het bouwen; anders VITE_SITE_URL.
+const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL
+const SITE = (
+  process.env.VITE_SITE_URL ??
+  (vercel ? `https://${vercel}` : 'https://artevanilla.nl')
+).replace(/\/$/, '')
 // Op GitHub Pages staat de site onder /<repo>/; dat pad hoort in elke URL.
 const BASIS = (process.env.VITE_BASE ?? '/').replace(/\/$/, '')
 const TALEN = ['en', 'nl', 'it']

@@ -8,7 +8,17 @@ import { padInTaal, talen, useTaal } from '@/i18n/taal'
  * — canonical, hreflang, og-beeld — moet absoluut zijn, dus dit moet kloppen
  * bij het bouwen. Zet het per omgeving in `VITE_SITE_URL`.
  */
-const SITE = (import.meta.env.VITE_SITE_URL ?? 'https://artevanilla.nl').replace(/\/$/, '')
+/**
+ * Het adres waar de site staat.
+ *
+ * Zonder `VITE_SITE_URL` pakken we het adres uit de adresbalk. Dat klopt op
+ * elke omgeving — een preview-URL van Vercel, een eigen domein, of localhost —
+ * zonder dat er per omgeving iets ingesteld hoeft te worden.
+ */
+const SITE = (
+  import.meta.env.VITE_SITE_URL ??
+  (typeof window !== 'undefined' ? window.location.origin : 'https://artevanilla.nl')
+).replace(/\/$/, '')
 
 /**
  * Op GitHub Pages staat de site onder /<repo>/. De router haalt dat pad uit

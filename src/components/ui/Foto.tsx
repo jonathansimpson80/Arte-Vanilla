@@ -1,4 +1,5 @@
 import { beeldmaten } from '@/data/beeldmaten'
+import { bestand } from '@/lib/pad'
 
 type Props = {
   src: string
@@ -28,14 +29,17 @@ export function Foto({
   sizes,
   style,
 }: Props) {
+  // De maten staan onder het pad zoals het in de data staat; de URL krijgt het
+  // basispad er pas bij het uitserveren voor.
   const maat = beeldmaten[src]
-  const webp = src.replace(/\.jpg$/, '.webp')
+  const webp = bestand(src.replace(/\.jpg$/, '.webp'))
+  const bron = bestand(src)
 
   return (
     <picture>
       <source srcSet={webp} type="image/webp" sizes={sizes} />
       <img
-        src={src}
+        src={bron}
         alt={alt}
         width={maat?.[0]}
         height={maat?.[1]}
