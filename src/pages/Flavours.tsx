@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { useSearchParams } from 'react-router'
 import { Seo } from '@/lib/seo'
 import { useTaal } from '@/i18n/taal'
@@ -9,12 +9,12 @@ import { Drip } from '@/components/Drip'
 import { Reveal } from '@/motion/Reveal'
 import { Marquee } from '@/motion/Marquee'
 import { StripesBackground } from '@/components/StripesBackground'
-import { Sprinkles } from '@/motion/Sprinkles'
-import { ExpandingPanels } from '@/motion/ExpandingPanels'
-import { FlipCard } from '@/motion/FlipCard'
+import { AchterHetGlas } from '@/components/AchterHetGlas'
 import { HandGeschreven } from '@/motion/HandGeschreven'
+import { FlipCard } from '@/motion/FlipCard'
 import { BakkenVoorThuis } from '@/components/BakkenVoorThuis'
 import { useVandaag } from '@/data/vandaag'
+import { Allergenen } from '@/components/Allergenen'
 import { serveervormen } from '@/data/serveervormen'
 import { Foto } from '@/components/ui/Foto'
 import {
@@ -24,14 +24,12 @@ import {
   families,
   flavours,
   guides,
-  panels,
   type Category,
 } from '@/data/flavours'
 
 export function Flavours() {
   const { t } = useTaal()
   const vandaag = useVandaag()
-  const [paneel, setPaneel] = useState(0)
   const [params, setParams] = useSearchParams()
   const actief = params.get('categorie') as Category | null
   const zichtbaar = actief ? flavours.filter((f) => f.category === actief) : flavours
@@ -196,6 +194,8 @@ export function Flavours() {
                     {t(smaak.description)}
                   </p>
 
+                  <Allergenen lijst={smaak.allergenen} kleur={smaak.accentHex} />
+
                   {smaak.tags.length > 0 && (
                     <ul className="mt-5 flex flex-wrap gap-2">
                       {smaak.tags.map((tag) => (
@@ -273,62 +273,7 @@ export function Flavours() {
         </ul>
       </section>
 
-      {/* ---------- achter het glas ---------- */}
-      <section className="relative mt-20 overflow-hidden bg-espresso-900 py-20" aria-labelledby="vitrine-rij">
-        <Sprinkles columns={12} />
-
-        <div className="container-page relative">
-          <Reveal y={16}>
-            <div className="text-center">
-              <span className="chunk inline-flex items-center gap-2 rounded-full bg-fragola-400 px-4 py-2 text-[0.7rem] text-crema-50">
-                <Glyph name="hoorntje" size={14} />
-                {t(ui.smakenGlasEyebrow)}
-              </span>
-
-              <h2
-                id="vitrine-rij"
-                className="mx-auto mt-5 max-w-3xl font-display text-title font-bold text-crema-50"
-              >
-                {t(ui.smakenGlasKop1)}{' '}
-                <span className="text-fragola-400">{t(ui.smakenGlasKop2)}</span>
-              </h2>
-
-              <p className="mx-auto mt-4 max-w-md text-crema-200/75">
-                {t(ui.smakenGlasLead)}
-              </p>
-
-              {/* Het lepeltje proeven vóór je kiest, in het schrift van het
-                  logo. Blijft in alle talen hetzelfde: het is een uitdrukking,
-                  geen zin — net als de wordmark zelf. */}
-              <span className="mt-9 block text-vaniglia-400">
-                <HandGeschreven className="text-[clamp(1.9rem,5.5vw,3.25rem)]">
-                  Try before you buy
-                </HandGeschreven>
-              </span>
-            </div>
-          </Reveal>
-
-          <Reveal y={22} delay={120}>
-            <div className="mt-12 rounded-cone bg-crema-50 p-3 sm:p-4">
-              <ExpandingPanels panels={panels} onChange={setPaneel} />
-
-              {/* Voortgang: laat zien hoeveel van de rij je hebt gehad. */}
-              <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-espresso-900/10">
-                <div
-                  className="h-full rounded-full bg-fragola-400 transition-[width] duration-500 ease-soft"
-                  style={{ width: `${((paneel + 1) / panels.length) * 100}%` }}
-                />
-              </div>
-            </div>
-          </Reveal>
-
-          <Reveal y={14} delay={200}>
-            <p className="mx-auto mt-8 w-fit rounded-full bg-crema-50 px-5 py-2.5 text-center text-sm text-espresso-900">
-              {t(ui.vitrineWisselt)}
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      <AchterHetGlas />
 
       {/* ---------- smaakfamilies: flip-kaarten ---------- */}
       <section className="container-page pt-24" aria-labelledby="families">
@@ -395,22 +340,6 @@ export function Flavours() {
           ))}
         </ul>
       </section>
-
-      {/* ---------- voorbehoud ---------- */}
-      <section className="container-page pt-16">
-        <Reveal y={18}>
-          <div className="rounded-cone bg-crema-100 p-8 ring-1 ring-espresso-900/5 sm:p-10">
-            <p className="chunk text-[0.7rem] text-fragola-700">{t(ui.letOp)}</p>
-            <h2 className="mt-3 max-w-2xl font-display text-2xl font-bold text-espresso-900">
-              {t(ui.smakenVoorbehoudKop)}
-            </h2>
-            <p className="mt-3 max-w-2xl text-cacao-700">
-              {t(ui.smakenVoorbehoudLead)}
-            </p>
-          </div>
-        </Reveal>
-      </section>
-
 
       {/* ---------- bakken voor thuis ---------- */}
       <section className="container-page pt-24">

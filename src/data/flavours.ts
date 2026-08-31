@@ -1,4 +1,5 @@
 import type { Vertaald } from '@/i18n/taal'
+import type { AllergeenSleutel } from '@/data/allergenen'
 
 /**
  * De kaart zoals hij in de winkel hangt: altijd twaalf smaken in drie rijen
@@ -42,8 +43,8 @@ export type Flavour = {
   category: Category
   description: Vertaald
   tags: Tag[]
-  /** Zie de opmerking in data/dolci.ts: alleen invullen met opgave van de zaak. */
-  allergenen?: string[]
+  /** Zie data/allergenen.ts: alleen wat uit de omschrijving zelf volgt. */
+  allergenen?: AllergeenSleutel[]
   tintHex: string
   accentHex: string
   image?: string
@@ -126,6 +127,7 @@ export const flavours: Flavour[] = [
       en: 'The house recipe with real pods. Where nearly everyone starts.',
       it: 'La ricetta della casa con bacche vere. Dove quasi tutti cominciano.',
     },
+    allergenen: ['melk'],
     tags: ['klassieker'],
     tintHex: '#fdf7ea',
     accentHex: '#8f5720',
@@ -140,6 +142,7 @@ export const flavours: Flavour[] = [
       en: 'Dark chocolate, intense and straight to the point.',
       it: 'Cioccolato fondente, intenso e senza giri di parole.',
     },
+    allergenen: ['melk'],
     tags: [],
     tintHex: '#f4ece2',
     accentHex: '#5d321c',
@@ -153,6 +156,7 @@ export const flavours: Flavour[] = [
       en: 'The Italian custard of egg and wine: soft, rich, old-fashioned in the best way.',
       it: 'Crema di uova e vino: morbida, ricca, buona come una volta.',
     },
+    allergenen: ['melk', 'ei'],
     tags: [],
     image: '/media/bak-zabaglione.jpg',
     tintHex: '#fdf1cf',
@@ -171,6 +175,7 @@ export const flavours: Flavour[] = [
       en: 'Pineapple with rosemary. Sweet fruit with a herbal finish — the odd one out, in a good way.',
       it: 'Ananas e rosmarino. Frutta dolce con una chiusura erbacea: il tipo strano della fila.',
     },
+    allergenen: ['melk'],
     tags: [],
     tintHex: '#eef3e4',
     accentHex: '#5f6b3a',
@@ -185,6 +190,7 @@ export const flavours: Flavour[] = [
       en: 'Roasted pistachio, lightly salted. No colouring, so khaki rather than bright green.',
       it: 'Pistacchio tostato, leggermente salato. Senza coloranti: cachi, non verde acceso.',
     },
+    allergenen: ['melk', 'noten'],
     tags: ['klassieker'],
     tintHex: '#eef3e4',
     accentHex: '#5f6b3a',
@@ -198,6 +204,7 @@ export const flavours: Flavour[] = [
       en: 'Chocolate with hazelnut, the Piedmontese recipe. Soft and full.',
       it: 'Cioccolato e nocciola, la ricetta piemontese. Morbido e pieno.',
     },
+    allergenen: ['melk', 'noten'],
     tags: [],
     image: '/media/bak-gianduia.jpg',
     tintHex: '#f4ece2',
@@ -211,6 +218,7 @@ export const flavours: Flavour[] = [
       en: 'Milk gelato with chocolate shards that crack as you scoop.',
       it: 'Fiordilatte con scaglie di cioccolato che si rompono al cucchiaio.',
     },
+    allergenen: ['melk'],
     tags: ['klassieker'],
     image: '/media/bak-stracciatella.jpg',
     tintHex: '#fdf7ea',
@@ -224,6 +232,7 @@ export const flavours: Flavour[] = [
       en: 'Crunchy nut with amarena cherry. The heaviest one on the board.',
       it: 'Croccante alla nocciola con amarena. Il più corposo del cartello.',
     },
+    allergenen: ['melk', 'noten'],
     tags: ['klassieker'],
     tintHex: '#fbdde6',
     accentHex: '#b4544c',
@@ -249,7 +258,7 @@ export const panels = [
       en: 'Ask which creamy ones are in today.',
       it: 'Chiedi quali cremosi ci sono oggi.',
     },
-    image: '/media/vitrine-bakken.jpg',
+    image: '/media/bak-vaniglia-cacao.jpg',
   },
   {
     label: { nl: 'Fruitig', en: 'Fruity', it: 'Fruttato' },
@@ -268,7 +277,7 @@ export const panels = [
       en: 'Usually two or three at a time.',
       it: 'Di solito due o tre alla volta.',
     },
-    image: '/media/fragola-crumble.jpg',
+    image: '/media/bak-fragola.jpg',
   },
   {
     label: { nl: 'Chocolade', en: 'Chocolate', it: 'Cioccolato' },
@@ -287,7 +296,7 @@ export const panels = [
       en: 'Also available as an affogato.',
       it: 'Si può ordinare anche come affogato.',
     },
-    image: '/media/chocolade.jpg',
+    image: '/media/bak-cioccolato.jpg',
   },
   {
     label: { nl: 'Noten', en: 'Nutty', it: 'Frutta secca' },
@@ -306,7 +315,7 @@ export const panels = [
       en: 'The grown-up scoop.',
       it: 'La pallina adulta.',
     },
-    image: '/media/pistache-scheppen.jpg',
+    image: '/media/bak-pistacchio.jpg',
   },
   {
     label: { nl: 'Sorbet', en: 'Sorbet', it: 'Sorbetto' },
@@ -325,7 +334,7 @@ export const panels = [
       en: 'Lemon is always there.',
       it: 'Il limone c’è sempre.',
     },
-    image: '/media/dolci-koekjes.jpg',
+    image: '/media/bak-mango.jpg',
   },
   {
     label: { nl: 'Dolci', en: 'Pastry', it: 'Dolci' },
@@ -340,7 +349,7 @@ export const panels = [
       it: 'Cannoli, tiramisù e quel che è stato sfornato la mattina.',
     },
     hint: { nl: 'Op is op.', en: 'When it’s gone, it’s gone.', it: 'Fino a esaurimento.' },
-    image: '/media/beker-toonbank.jpg',
+    image: '/media/vitrine-gebak.jpg',
   },
 ]
 
@@ -358,6 +367,8 @@ export const families = [
       en: 'Soft, milky and thickly scooped. The familiar side of the cabinet.',
       it: 'Morbido, latteo e generoso. Il lato familiare del banco.',
     },
+    /** Wat er in deze familie op het bord staat; zie de lijst bovenaan. */
+    smaken: ['Vanilla', 'Zabaglione', 'Stracciatella', 'Pineapple & Rosemary'],
     tags: [
       { nl: 'Melkig', en: 'Milky', it: 'Latteo' },
       { nl: 'Zacht', en: 'Soft', it: 'Morbido' },
@@ -378,7 +389,7 @@ export const families = [
       en: 'Ask which creamy ones are in today.',
       it: 'Chiedi quali cremosi ci sono oggi.',
     },
-    image: '/media/vitrine-bakken.jpg',
+    image: '/media/bak-vaniglia-cacao.jpg',
     tintHex: '#fdf7ea',
     backHex: '#8f5720',
     accentHex: '#8f5720',
@@ -392,6 +403,8 @@ export const families = [
       en: 'Bright, fresh and led by colour. For the lighter mood.',
       it: 'Vivace, fresco e guidato dal colore. Per l’umore leggero.',
     },
+    /** Wat er in deze familie op het bord staat; zie de lijst bovenaan. */
+    smaken: ['Strawberry', 'Mango', 'Lemon', 'Melon & Mint'],
     tags: [
       { nl: 'Helder', en: 'Bright', it: 'Vivace' },
       { nl: 'Fris', en: 'Fresh', it: 'Fresco' },
@@ -412,7 +425,7 @@ export const families = [
       en: 'Ask which fruit is doing the talking this week.',
       it: 'Chiedi quale frutta comanda questa settimana.',
     },
-    image: '/media/fragola-crumble.jpg',
+    image: '/media/bak-fragola.jpg',
     tintHex: '#fbdde6',
     backHex: '#b4544c',
     accentHex: '#b4544c',
@@ -426,6 +439,8 @@ export const families = [
       en: 'Dark, full and spoon-ready. For a serious craving.',
       it: 'Scuro, pieno e da cucchiaio. Per una voglia seria.',
     },
+    /** Wat er in deze familie op het bord staat; zie de lijst bovenaan. */
+    smaken: ['Dark Chocolate', 'Gianduia'],
     tags: [
       { nl: 'Vol', en: 'Full', it: 'Pieno' },
       { nl: 'Diep', en: 'Deep', it: 'Profondo' },
@@ -446,7 +461,7 @@ export const families = [
       en: 'Ask whether the fondente is in today.',
       it: 'Chiedi se oggi c’è il fondente.',
     },
-    image: '/media/chocolade.jpg',
+    image: '/media/bak-cioccolato.jpg',
     tintHex: '#f4ece2',
     backHex: '#5d321c',
     accentHex: '#5d321c',
@@ -460,6 +475,8 @@ export const families = [
       en: 'Rounded, roasted and lightly savoury. The richer row of the cabinet.',
       it: 'Rotondo, tostato e leggermente sapido. La fila più ricca del banco.',
     },
+    /** Wat er in deze familie op het bord staat; zie de lijst bovenaan. */
+    smaken: ['Pistacchio', 'Gianduia', "Croccantino all'Amarena"],
     tags: [
       { nl: 'Geroosterd', en: 'Roasted', it: 'Tostato' },
       { nl: 'Zout', en: 'Salted', it: 'Salato' },
@@ -480,7 +497,7 @@ export const families = [
       en: 'Ask about the Sicilian pistachio.',
       it: 'Chiedi del pistacchio siciliano.',
     },
-    image: '/media/pistache-scheppen.jpg',
+    image: '/media/bak-pistacchio.jpg',
     tintHex: '#eef3e4',
     backHex: '#5f6b3a',
     accentHex: '#5f6b3a',
@@ -494,6 +511,8 @@ export const families = [
       en: 'Clear, ice-cold and refreshing. Fruit without the heavy finish.',
       it: 'Limpido, ghiacciato e rinfrescante. Frutta senza chiusura pesante.',
     },
+    /** Wat er in deze familie op het bord staat; zie de lijst bovenaan. */
+    smaken: ['Lemon', 'Mango', 'Strawberry'],
     tags: [
       { nl: 'IJzig', en: 'Icy', it: 'Ghiacciato' },
       { nl: 'Scherp', en: 'Sharp', it: 'Deciso' },
@@ -514,7 +533,7 @@ export const families = [
       en: 'Lemon is always there; ask about the rest.',
       it: 'Il limone c’è sempre; chiedi del resto.',
     },
-    image: '/media/beker-wafel.jpg',
+    image: '/media/bak-mango.jpg',
     tintHex: '#fce6c6',
     backHex: '#8f5720',
     accentHex: '#8f5720',
@@ -528,6 +547,8 @@ export const families = [
       en: 'Everything beside the gelato: pastry, cannoli and whatever left the oven that morning.',
       it: 'Tutto accanto al gelato: dolci, cannoli e quel che è uscito dal forno la mattina.',
     },
+    /** Wat er in deze familie op het bord staat; zie de lijst bovenaan. */
+    smaken: ['Tiramisù', 'Cannoncini', 'Nonna’s Koekjes'],
     tags: [
       { nl: 'Bakjes', en: 'Cups', it: 'Coppette' },
       { nl: 'Taart', en: 'Cake', it: 'Torta' },
@@ -548,7 +569,7 @@ export const families = [
       en: 'Ask what was baked today.',
       it: 'Chiedi cosa è stato sfornato oggi.',
     },
-    image: '/media/beker-toonbank.jpg',
+    image: '/media/vitrine-gebak.jpg',
     tintHex: '#f6e6d3',
     backHex: '#b4544c',
     accentHex: '#7d6229',

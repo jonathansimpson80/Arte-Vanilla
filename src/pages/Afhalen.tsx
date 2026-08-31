@@ -365,7 +365,10 @@ export function Afhalen() {
               <div className="rounded-cone bg-crema-100 p-6 ring-1 ring-espresso-900/5 sm:p-8">
                 <p className="chunk text-[0.7rem] text-cacao-700">{t(ui.stapSoort)}</p>
 
-                <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {/* Twee bij twee, nooit vier naast elkaar: in de linkerkolom is een
+                    vierde tegel maar 160px breed en valt de zin uiteen in
+                    losse woorden. */}
+                <div className="mt-4 grid gap-3 sm:grid-cols-2">
                   {(
                     [
                       { id: 'bak', titel: ui.soortBak, uitleg: ui.soortBakUitleg, glyph: 'hoorntje' },
@@ -394,17 +397,6 @@ export function Afhalen() {
                   ))}
                 </div>
 
-                {/* Zolang de zaak dit niet heeft bevestigd, zegt de pagina dat
-                    er zelf bij. Een prijsloze taart is eerlijk; een verzonnen
-                    bedrag is dat niet. */}
-                {(soort === 'taart' || soort === 'bon') && (
-                  <div className="mt-5 rounded-scoop border border-dashed border-fragola-700/40 bg-crema-50 p-5">
-                    <p className="chunk text-[0.72rem] sm:text-[0.65rem] text-fragola-700">{t(ui.voorstelKop)}</p>
-                    <p className="mt-2 text-sm leading-relaxed text-espresso-900/70">
-                      {t(ui.voorstelUitleg)}
-                    </p>
-                  </div>
-                )}
               </div>
             )}
 

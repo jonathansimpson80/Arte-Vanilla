@@ -13,6 +13,7 @@
  */
 
 import type { Vertaald } from '@/i18n/taal'
+import type { AllergeenSleutel } from '@/data/allergenen'
 
 export type Dolce = {
   /**
@@ -26,12 +27,8 @@ export type Dolce = {
   tags: Vertaald[]
   /** Bezorgprijs in euro; null zolang die niet bekend is. */
   price: number | null
-  /**
-   * Allergenen zoals de zaak ze opgeeft. Leeg betekent: nog niet doorgegeven,
-   * en dan zegt de kaart dat ook. Nooit zelf invullen — een gemiste allergeen
-   * is het enige dat op deze site echt gevaarlijk is.
-   */
-  allergenen?: string[]
+  /** Zie data/allergenen.ts: alleen wat uit de omschrijving zelf volgt. */
+  allergenen?: AllergeenSleutel[]
   /** Ontbreekt zolang er geen eigen foto van dit gebak is. */
   image?: string
   tintHex: string
@@ -64,6 +61,7 @@ export const dolci: Dolce[] = [
       it: 'Mascarpone, espresso e savoiardi, montati in vasetto. Monoporzione, fatta al mattino.',
     },
     tags: [metLepel, bevatEi],
+    allergenen: ['melk', 'ei', 'gluten'],
     price: 7.65,
     image: '/media/tiramisu.jpg',
     tintHex: '#f4ece2',
@@ -82,6 +80,7 @@ export const dolci: Dolce[] = [
       it: 'Pasta frolla con crema pasticcera e pinoli tostati. La ricetta della nonna, monoporzione.',
     },
     tags: [metLepel, bevatNoten],
+    allergenen: ['gluten', 'ei', 'melk', 'noten'],
     price: 5,
     // Nog geen eigen foto van dit gebak; de kaart toont het streeppatroon.
     tintHex: '#fdf7ea',
@@ -100,6 +99,7 @@ export const dolci: Dolce[] = [
       it: 'Due strati di frolla immersi nel cioccolato, con crema di mandorle e nocciola caramellata.',
     },
     tags: [bevatNoten],
+    allergenen: ['gluten', 'melk', 'noten'],
     price: 5.85,
     image: '/media/cioccolato.jpg',
     tintHex: '#f1dfd0',
@@ -118,6 +118,7 @@ export const dolci: Dolce[] = [
       it: 'Frolla friabile con la finestra di zucchero a velo. Ripieno di nutella fatta in casa, pistacchio o amarena.',
     },
     tags: [drieVullingen, bevatNoten],
+    allergenen: ['gluten', 'ei', 'melk', 'noten'],
     price: 3.75,
     image: '/media/dolci-koekjes.jpg',
     tintHex: '#fdf1cf',
@@ -136,6 +137,7 @@ export const dolci: Dolce[] = [
       it: 'Un cestino di frolla, riempito fino all’orlo di nutella fatta in casa o pistacchio.',
     },
     tags: [tweeVullingen, bevatNoten],
+    allergenen: ['gluten', 'melk', 'noten'],
     price: 3.25,
     // Nog geen eigen foto van dit koekje; de kaart toont het streeppatroon.
     tintHex: '#eef3e4',
@@ -155,6 +157,7 @@ export const dolci: Dolce[] = [
     },
     tags: [uitDeOven, drieVullingen],
     // Los verkocht in de winkel; op de bestelkaart alleen als 3 voor € 14,50.
+    allergenen: ['gluten', 'melk', 'ei'],
     price: null,
     tintHex: '#fbdde6',
     accentHex: '#b4544c',
@@ -172,6 +175,7 @@ export const dolci: Dolce[] = [
       it: 'Una pallina di vaniglia, affogata in un espresso appena fatto. La risposta a gelato o caffè.',
     },
     tags: [metEspresso],
+    allergenen: ['melk'],
     price: null,
     image: '/media/affogato.jpg',
     tintHex: '#f0e2d3',
@@ -190,6 +194,7 @@ export const dolci: Dolce[] = [
       it: 'Ciambellone del nostro forno, con cioccolata calda versata al momento.',
     },
     tags: [warm, uitDeOven],
+    allergenen: ['gluten', 'ei', 'melk'],
     price: null,
     image: '/media/cake-chocoladesaus.jpg',
     tintHex: '#fdf7ea',
@@ -208,6 +213,7 @@ export const dolci: Dolce[] = [
       it: 'Un panino morbido, tagliato e riempito di panna. Colazione romana, qui peccato del pomeriggio.',
     },
     tags: [nogBevestigen],
+    allergenen: ['gluten', 'melk'],
     price: null,
     tintHex: '#f4ece2',
     accentHex: '#5d321c',

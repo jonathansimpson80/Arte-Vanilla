@@ -57,6 +57,11 @@ export const ui = {
     en: 'Allergens not listed yet — please ask at the counter.',
     it: 'Allergeni non ancora indicati: chiedi al banco.',
   },
+  allergenenNoot: {
+    nl: 'Allergenen volgen uit onze omschrijving. Heb je een allergie, vraag het dan even na aan de toonbank.',
+    en: 'Allergens follow from our own description. If you have an allergy, please check with us at the counter.',
+    it: 'Gli allergeni derivano dalla nostra descrizione. In caso di allergia, chiedi conferma al banco.',
+  },
   openingstijden: { nl: 'Openingstijden', en: 'Opening hours', it: 'Orari' },
   vandaagOpen: { nl: 'Vandaag open', en: 'Open today', it: 'Oggi aperto' },
   nuOpen: { nl: 'Nu open', en: 'Open now', it: 'Aperto ora' },
@@ -103,6 +108,7 @@ export const ui = {
   draaiKaart: { nl: 'Draai voor de sfeer', en: 'Flip for the mood', it: 'Gira per l’atmosfera' },
   sfeer: { nl: 'Sfeer', en: 'Mood', it: 'Atmosfera' },
   pastBij: { nl: 'Past bij', en: 'Best for', it: 'Ideale per' },
+  familieSmaken: { nl: 'Op het bord', en: 'On the board', it: 'Sul cartello' },
   vraagInWinkel: { nl: 'Vraag in de winkel', en: 'Ask in store', it: 'Chiedi in negozio' },
 
   // ---------- homepage ----------

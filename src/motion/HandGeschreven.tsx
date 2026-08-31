@@ -26,7 +26,13 @@ type Props = {
  * alles er meteen, zonder animatie.
  */
 export function HandGeschreven({ children, tilt = -2.5, tempo = 55, className = '' }: Props) {
-  const { ref, shown, animating } = useReveal<HTMLSpanElement>({ y: 0, amount: 0.4 })
+  // `once: false`: hij schrijft zichzelf opnieuw elke keer dat je erlangs
+  // scrollt. Eén keer en daarna stil zien de meeste bezoekers nooit.
+  const { ref, shown, animating } = useReveal<HTMLSpanElement>({
+    y: 0,
+    amount: 0.4,
+    once: false,
+  })
 
   const tekens = children.length
   const schrijftijd = tekens * tempo

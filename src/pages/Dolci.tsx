@@ -8,6 +8,7 @@ import { Marquee } from '@/motion/Marquee'
 import { ImageReveal } from '@/motion/ImageReveal'
 import { Sprinkles } from '@/motion/Sprinkles'
 import { dolci } from '@/data/dolci'
+import { Allergenen } from '@/components/Allergenen'
 import { KoffieKaart } from '@/components/KoffieKaart'
 import { DealsRij } from '@/components/DealsRij'
 import { useTaal } from '@/i18n/taal'
@@ -132,7 +133,13 @@ export function Dolci() {
           </div>
         </Reveal>
 
-        <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {/*
+          Negen kaarten. Bij drie kolommen komt dat precies uit; bij twee blijft
+          er één alleen achter. Drie kolommen forceren op een tablet maakt de
+          kaarten 219px breed en 528 hoog — dan liever de laatste de rij laten
+          afmaken, alleen in de tweekolomsstand.
+        */}
+        <ul className="mt-12 grid gap-6 sm:grid-cols-2 sm:[&>*:last-child]:col-span-2 lg:grid-cols-3 lg:[&>*:last-child]:col-span-1">
           {dolci.map((dolce, i) => (
             <Reveal key={dolce.name.nl} y={24} scale={0.96} delay={(i % 3) * 90}>
               <li
@@ -185,12 +192,7 @@ export function Dolci() {
                     </p>
                   )}
 
-                  {dolce.allergenen && dolce.allergenen.length > 0 && (
-                    <p className="mt-4 text-xs text-espresso-900/60">
-                      <span className="chunk text-[0.7rem] sm:text-[0.6rem]">{t(ui.allergenen)}:</span>{' '}
-                      {dolce.allergenen.join(', ')}
-                    </p>
-                  )}
+                  <Allergenen lijst={dolce.allergenen} kleur={dolce.accentHex} />
 
                   <ul className="mt-5 flex flex-wrap gap-2">
                     {dolce.tags.map((tag) => (
@@ -211,6 +213,16 @@ export function Dolci() {
             </Reveal>
           ))}
         </ul>
+      </section>
+
+      {/* ---------- koffie ---------- */}
+      <section className="container-page pt-24" aria-labelledby="koffie">
+        <KoffieKaart />
+      </section>
+
+      {/* ---------- vaste combinaties ---------- */}
+      <section className="container-page pt-24" aria-labelledby="deals">
+        <DealsRij />
       </section>
 
       {/* ---------- koffie ---------- */}

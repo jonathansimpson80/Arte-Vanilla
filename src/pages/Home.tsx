@@ -2,6 +2,8 @@ import { Seo } from '@/lib/seo'
 import { useTaal } from '@/i18n/taal'
 import { ui } from '@/i18n/teksten'
 
+import { AchterHetGlas } from '@/components/AchterHetGlas'
+
 import { Hero } from './home/Hero'
 import { Ticker } from './home/Ticker'
 import { MoodsSection } from './home/Stemmingen'
@@ -31,6 +33,7 @@ export function Home() {
       <Ticker />
       <MoodsSection />
       <Thuis />
+      <AchterHetGlas handschrift={false} />
       <Vitrine />
       <Ambacht />
       <Momenten />
