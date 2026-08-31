@@ -3,6 +3,21 @@
 
 @layer base {
   /**
+   * Zijwaarts schuiven hoort bij een carrousel, niet bij de pagina. Eén element
+   * dat een paar pixels buiten de rand valt — een sierletter, een schaduw, een
+   * blok dat net te breed rekent — maakt het hele document sleepbaar, en op een
+   * telefoon voelt dat alsof de pagina niet stil kan staan.
+   *
+   * `clip` en niet `hidden`: `hidden` maakt van de wortel een schuifbak en
+   * daarmee werkt `position: sticky` in de kopbalk niet meer.
+   */
+  html,
+  body {
+    overflow-x: clip;
+    overscroll-behavior-x: none;
+  }
+
+  /**
    * De kopbalk zweeft over de pagina heen. Zonder deze marge landt een sprong
    * naar #bezoek of #koffie precies achter die balk, en staat de kop waar je
    * heen sprong onder een vlak dat je niet weg kunt scrollen.

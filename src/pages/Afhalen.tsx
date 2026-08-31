@@ -762,7 +762,7 @@ export function Afhalen() {
 
               {/* Honeypot. Buiten beeld en buiten de tabvolgorde, dus een mens
                   komt er niet bij; een bot vult hem wel in. */}
-              <div aria-hidden="true" className="absolute left-[-9999px] top-0 h-0 overflow-hidden">
+              <div aria-hidden="true" className="sr-only">
                 <label htmlFor="voorkeur-ref">Ref</label>
                 <input
                   id="voorkeur-ref"
