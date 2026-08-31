@@ -7,7 +7,6 @@ import { StripesBackground } from '@/components/StripesBackground'
 import { Reveal } from '@/motion/Reveal'
 import { ImageReveal } from '@/motion/ImageReveal'
 import { Sprinkles } from '@/motion/Sprinkles'
-import { HandGeschreven } from '@/motion/HandGeschreven'
 import { beoordeling, platforms, routeLink } from '@/data/contact'
 import { flavours } from '@/data/flavours'
 import { useTaal } from '@/i18n/taal'
@@ -24,14 +23,22 @@ import { ui } from '@/i18n/teksten'
 export function OverOns() {
   const { t } = useTaal()
 
+  // Elk cijfer op zijn eigen merkvlak, net als de bakken en de smaakrijen.
+  // Het cijfer haalt overal minstens 4,1:1 op zijn ondergrond, het label 16:1.
   const cijfers = [
-    { getal: String(flavours.length), label: ui.overCijferSmaken, accent: '#b4544c' },
+    {
+      getal: String(flavours.length),
+      label: ui.overCijferSmaken,
+      accent: '#b4544c',
+      tint: '#fbe9ee',
+    },
     {
       getal: beoordeling.score.toFixed(1).replace('.', ','),
       label: ui.overCijferReviews,
       accent: '#8f5720',
+      tint: '#fdf1cf',
     },
-    { getal: '1', label: ui.overCijferBatch, accent: '#5f6b3a' },
+    { getal: '1', label: ui.overCijferBatch, accent: '#5f6b3a', tint: '#eef4e4' },
   ]
 
   return (
@@ -79,12 +86,6 @@ export function OverOns() {
               {t(ui.overVerhaalKop)}
             </h2>
             <p className="mt-4 max-w-md text-lead text-cacao-700">{t(ui.overVerhaalLead)}</p>
-
-            <span className="mt-8 block text-fragola-500">
-              <HandGeschreven className="text-[clamp(1.5rem,4vw,2.25rem)]" tilt={-2}>
-                Try before you buy
-              </HandGeschreven>
-            </span>
           </Reveal>
         </div>
       </section>
@@ -94,7 +95,10 @@ export function OverOns() {
         <ul className="grid gap-5 sm:grid-cols-3">
           {cijfers.map((cijfer, i) => (
             <Reveal key={cijfer.getal + i} y={22} scale={0.96} delay={i * 90}>
-              <li className="rounded-cone bg-crema-100 p-8 text-center ring-1 ring-espresso-900/5">
+              <li
+                className="rounded-cone p-8 text-center ring-1 ring-espresso-900/5"
+                style={{ backgroundColor: cijfer.tint }}
+              >
                 <p
                   className="font-chunk text-[clamp(3rem,7vw,4.5rem)] leading-none"
                   style={{ color: cijfer.accent }}
