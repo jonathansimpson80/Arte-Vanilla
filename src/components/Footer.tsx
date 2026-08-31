@@ -86,7 +86,7 @@ export function Footer() {
                 {kolom.items.map((item) => {
                   const intern = item.href.startsWith('/')
                   const klasse =
-                    'block py-2 text-crema-200/70 transition-colors hover:text-crema-50 sm:py-1'
+                    'block py-2.5 text-crema-200/70 transition-colors hover:text-crema-50 sm:py-1'
 
                   return (
                     <li key={item.href}>

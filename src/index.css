@@ -489,15 +489,14 @@
       margin-inline: 0;
       padding-inline: 0;
       padding-bottom: 0;
+      /* Elke rij even hoog, zodat de onderranden van kaarten naast elkaar
+         uitlijnen. Zonder dit hangt elke kaart op de lengte van zijn eigen
+         tekst en loopt de rij onderaan rafelig af. */
+      grid-auto-rows: 1fr;
     }
 
     .carrousel > * {
       flex: initial;
-    }
-
-    /* In het raster bepalen de kaarten hun hoogte weer zelf. */
-    .carrousel > * > * {
-      height: auto;
     }
   }
 
