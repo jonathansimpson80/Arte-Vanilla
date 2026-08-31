@@ -2,6 +2,16 @@
 @import "./styles/tokens.css";
 
 @layer base {
+  /**
+   * De kopbalk zweeft over de pagina heen. Zonder deze marge landt een sprong
+   * naar #bezoek of #koffie precies achter die balk, en staat de kop waar je
+   * heen sprong onder een vlak dat je niet weg kunt scrollen.
+   */
+  :target,
+  [id] {
+    scroll-margin-top: 6.5rem;
+  }
+
   :root {
     /* easing voor scroll-reveals; los token zodat het ook buiten Tailwind bruikbaar is */
     --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);

@@ -87,6 +87,37 @@ export function Typewriter({
   // terwijl er letters bij komen of af gaan.
   const langste = words.reduce((a, b) => (b.length > a.length ? b : a), '')
 
+  /**
+   * Eén keer typen (een paginakop) werkt anders dan woorden die elkaar
+   * afwisselen. Bij het wisselende geval houdt een onzichtbare kopie van het
+   * langste woord de breedte vast, in een raster. Dat raster is een blok, en
+   * in een kop van drie regels zet dat de tekst op een eigen regel — met een
+   * losse punt eronder als de zin net anders afbreekt.
+   *
+   * Voor de kop zetten we daarom de nog niet getypte letters onzichtbaar
+   * achter de zichtbare: de regelafbreking is meteen die van de eindtekst,
+   * alles blijft gewone inline-tekst, en er springt niets.
+   */
+  if (once) {
+    const woord = words[0] ?? ''
+    const rest = woord.slice(text.length)
+
+    return (
+      <span className={className}>
+        <span aria-hidden="true">{text}</span>
+        {!still && text !== woord && (
+          <span className="typewriter-caret" aria-hidden="true">
+            |
+          </span>
+        )}
+        <span aria-hidden="true" style={{ visibility: 'hidden' }}>
+          {rest}
+        </span>
+        <span className="sr-only">{woord}</span>
+      </span>
+    )
+  }
+
   return (
     <span className={`typewriter ${className}`}>
       <span className="typewriter__sizer" aria-hidden="true">
@@ -97,7 +128,7 @@ export function Typewriter({
           hoort een schermlezer de kop twee keer. */}
       <span className="typewriter__text" aria-hidden="true">
         {text}
-        {!still && !(once && text === words[0]) && (
+        {!still && (
           <span className="typewriter-caret" aria-hidden="true">
             |
           </span>
