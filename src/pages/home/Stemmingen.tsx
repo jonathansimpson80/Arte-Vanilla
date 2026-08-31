@@ -237,7 +237,7 @@ export function MoodsSection() {
           </div>
 
           {/* de zes stemmingen: cijfer en iconen boven, beeld onder de tekst */}
-          <ul className="hidden gap-6 sm:grid" ref={kaartenRef}>
+          <ul className="hidden gap-6 sm:grid sm:auto-rows-fr" ref={kaartenRef}>
             {moods.map((item, i) => (
               <li
                 key={item.number}

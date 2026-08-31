@@ -32,7 +32,11 @@ export default defineConfig({
         copyFileSync('dist/index.html', 'dist/404.html')
 
         const talen = ['', 'nl', 'it']
-        const paden = ['smaken', 'dolci', 'afhalen', 'over-ons']
+        // Ook de oude adressen: die leiden binnen de app door naar de
+        // gebakpagina, maar zonder eigen bestand geeft een statische host er
+        // eerst een 404 bij — en dat is voor een zoekmachine het signaal dat
+        // de link dood is.
+        const paden = ['smaken', 'dolci', 'afhalen', 'over-ons', 'koffie', 'aanbieding']
 
         for (const taal of talen) {
           // De taalwortel zelf (/nl, /it) heeft ook een eigen bestand nodig.
