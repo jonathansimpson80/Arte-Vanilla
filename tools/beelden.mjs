@@ -16,7 +16,7 @@ import { join, parse } from 'node:path'
 import sharp from 'sharp'
 
 const MAP = 'public/media'
-const BREEDTES = [480, 960, 1440]
+const BREEDTES = [320, 480, 720, 960, 1440]
 
 const bestanden = (await readdir(MAP)).filter((n) => n.endsWith('.jpg'))
 let gemaakt = 0

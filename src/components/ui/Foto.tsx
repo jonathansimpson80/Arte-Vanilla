@@ -2,7 +2,7 @@ import { beeldmaten } from '@/data/beeldmaten'
 import { bestand } from '@/lib/pad'
 
 /** Breedtes die `tools/beelden.mjs` aanmaakt. */
-const VARIANTEN = [480, 960, 1440]
+const VARIANTEN = [320, 480, 720, 960, 1440]
 
 type Props = {
   src: string
@@ -54,10 +54,15 @@ export function Foto({
     return regels.join(', ')
   }
 
-  // Zonder `sizes` weet de browser niet hoe breed het beeld op de pagina komt
-  // en pakt hij de grootste. Standaard: op een telefoon vult het beeld het
-  // scherm, daarboven hooguit de halve pagina.
-  const maten = sizes ?? '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 640px'
+  /**
+   * Zonder `sizes` gaat de browser uit van de volle schermbreedte en haalt hij
+   * het grootste bestand op — ook voor een kaartje van 276 pixels breed.
+   *
+   * De meeste beelden op deze site staan in zo'n kaart, dus dat is de
+   * standaard. Een beeld dat wél groot staat (de kop van een pagina, een halve
+   * pagina beeld) geeft zijn eigen `sizes` mee.
+   */
+  const maten = sizes ?? '(max-width: 640px) 88vw, (max-width: 1024px) 45vw, 400px'
 
   return (
     <picture>
