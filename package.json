@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build && node tools/sitemap.mjs",
     "preview": "vite preview",
-    "typecheck": "tsc -b --noEmit"
+    "typecheck": "tsc -b --noEmit",
+    "deploy": "node tools/deploy.mjs"
   },
   "dependencies": {
     "react": "^19.2.0",

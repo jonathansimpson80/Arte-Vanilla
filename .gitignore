@@ -10,3 +10,13 @@ dist-ssr
 # build-artefacten
 dist/
 .vite/
+
+# GitHub Actions-workflow.
+#
+# Staat lokaal klaar, maar wordt niet meegepusht: een token zonder de
+# `workflow`-scope mag geen bestanden in .github/workflows aanmaken en dan
+# weigert GitHub de hele push. Publiceren gaat via `npm run deploy`.
+#
+# Wil je alsnog automatisch deployen bij elke push, haal deze regel dan weg
+# nadat je je token de `workflow`-scope hebt gegeven.
+.github/workflows/deploy.yml
