@@ -18,7 +18,7 @@ import {
   type Bestelsoort,
   type Taartmaat,
 } from '@/data/bestelsoorten'
-import { contact, whatsappNummer } from '@/data/contact'
+import { adresRegel, contact, whatsappNummer } from '@/data/contact'
 
 /**
  * Waar de bestelling heen gaat.
@@ -178,6 +178,19 @@ export function Afhalen() {
       })
       .join(', ') || '—'
 
+  /** Het bedrag zoals het in het overzicht én in het bericht staat. */
+  const basisPrijs =
+    soort === 'bak' && formaat
+      ? formaat.prijs
+      : soort === 'bon' && bonOk && bonWaarde
+        ? bonWaarde
+        : null
+  const totaalBedrag = (basisPrijs ?? 0) + gebakTotaal
+  const totaalTekst =
+    basisPrijs === null && gebakTotaal === 0
+      ? null
+      : `€ ${totaalBedrag.toFixed(2).replace('.', ',')}${gebakDeelsOnbekend ? ' +' : ''}`
+
   const soortLabel =
     soort === 'bak'
       ? t(ui.soortBak)
@@ -187,40 +200,50 @@ export function Afhalen() {
           ? t(ui.soortTaart)
           : t(ui.soortBon)
 
-  const bericht = [
-    `Arte Vanilla — ${t(ui.navAfhalen)}`,
+  /**
+   * De bestelbon zoals de winkel hem binnenkrijgt.
+   *
+   * WhatsApp kent opmaak: *vet* voor de koppen, _cursief_ voor het kenmerk.
+   * Daardoor leest het als een bon in plaats van als één lange zin — iemand
+   * achter de toonbank moet dit in twee tellen kunnen overzien.
+   *
+   * Dezelfde tekst gaat als e-mail en als JSON naar de server; die kan er de
+   * bevestiging naar de klant op baseren.
+   */
+  const regels: (string | null)[] = [
+    `*Arte Vanilla — ${t(ui.berichtKop)}*`,
     '',
-    `${t(ui.stapSoort)} ${soortLabel}`,
+    `*${t(ui.berichtBestelling)}*`,
     soort === 'bak'
-      ? `${t(ui.stapFormaat)}: ${formaat ? `${formaat.naam} (${formaat.inhoud})` : '—'}`
+      ? `• ${soortLabel} — ${formaat ? `${formaat.naam} (${formaat.inhoud})` : '—'}`
       : soort === 'taart'
-        ? `${t(ui.stapTaartmaat)}: ${
+        ? `• ${soortLabel} — ${
             taartmaat ? `${taartmaat.naam} (${taartmaat.personen} ${t(ui.personen)})` : '—'
           }`
         : soort === 'bon'
-          ? `${t(ui.stapBedrag)}: ${
-              bonWaarde ? `€ ${bonWaarde.toFixed(2).replace('.', ',')}` : '—'
-            }`
-          : null,
-    ...(kiestSmaken ? [`${t(ui.stapSmaken)}: ${smaken.join(', ') || '—'}`] : []),
-    ...(soort === 'bak' ? [`${t(ui.stapExtras)}: ${gekozenExtrasTekst}`] : []),
-    ...(soort === 'taart' || soort === 'bon'
-      ? [`${t(ui.stapBoodschap)}: ${boodschap.trim() || '—'}`]
-      : []),
-    ...(gebakLijst.length > 0
-      ? [
-          `${soort === 'gebak' ? t(ui.stapGebakAlleen) : t(ui.stapGebak)}: ${gebakLijst
-            .map((r) => `${r.aantal} × ${r.naam}`)
-            .join(', ')}`,
-        ]
-      : []),
-    `${t(ui.stapMoment)}: ${datum} — ${tijd || '—'}`,
-    `${t(ui.naam)}: ${naam || '—'}`,
-    `${t(ui.telefoon)}: ${telefoon || '—'}`,
+          ? `• ${soortLabel} — ${bonWaarde ? `€ ${bonWaarde.toFixed(2).replace('.', ',')}` : '—'}`
+          : `• ${soortLabel}`,
+    kiestSmaken && smaken.length > 0 ? `• ${t(ui.berichtSmaken)}: ${smaken.join(', ')}` : null,
+    soort === 'bak' && gekozenExtras.length > 0
+      ? `• ${t(ui.stapExtras)}: ${gekozenExtrasTekst}`
+      : null,
+    (soort === 'taart' || soort === 'bon') && boodschap.trim()
+      ? `• ${t(ui.stapBoodschap)}: “${boodschap.trim()}”`
+      : null,
+    ...gebakLijst.map((r) => `• ${r.aantal} × ${r.naam}`),
+    '',
+    `*${t(ui.berichtOphalen)}*`,
+    `${datum}${tijd ? ` — ${tijd}` : ''}`,
+    adresRegel,
+    '',
+    `*${t(ui.berichtKlant)}*`,
+    `${naam.trim() || '—'} · ${telefoon.trim() || '—'}`,
+    '',
+    totaalTekst ? `*${t(ui.totaal)}* ${totaalTekst}` : null,
+    `_${t(ui.berichtSlot)}_`,
   ]
-    // Alleen de weggelaten regels eruit; de lege regel onder de kop blijft.
-    .filter((regel) => regel !== null)
-    .join('\n')
+
+  const bericht = regels.filter((regel) => regel !== null).join('\n')
 
   async function verstuur() {
     if (!compleet || status === 'bezig') return
@@ -798,17 +821,7 @@ export function Afhalen() {
               <div className="mt-5 flex items-baseline justify-between gap-4 border-t border-dashed border-crema-50/25 pt-4">
                 <span className="chunk text-[0.7rem] text-crema-50/60">{t(ui.totaal)}</span>
                 <span className="font-display text-2xl font-bold tabular-nums text-vaniglia-400">
-                  {(() => {
-                    const basis =
-                      soort === 'bak' && formaat
-                        ? formaat.prijs
-                        : soort === 'bon' && bonOk && bonWaarde
-                          ? bonWaarde
-                          : null
-                    const som = (basis ?? 0) + gebakTotaal
-                    if (basis === null && gebakTotaal === 0) return '—'
-                    return `€ ${som.toFixed(2).replace('.', ',')}`
-                  })()}
+                  {totaalTekst ?? '—'}
                 </span>
               </div>
 
@@ -831,18 +844,28 @@ export function Afhalen() {
               )}
 
               {status === 'gelukt' ? (
-                <div className="mt-6 rounded-scoop bg-pistacchio-400 p-5 text-espresso-900">
-                  <p className="font-display text-lg font-bold">{t(ui.bestellingGelukt)}</p>
-                  <p className="mt-2 text-sm leading-relaxed text-espresso-900/80">
+                <div className="mt-6 rounded-scoop bg-pistacchio-400 p-6 text-espresso-900">
+                  <p className="font-display text-xl font-bold">{t(ui.bevestigingKop)}</p>
+
+                  {/* Het ophaalmoment groot: dat is het enige dat iemand later
+                      nog wil terugvinden. */}
+                  <p className="mt-4 text-sm text-espresso-900/70">{t(ui.bevestigingKlaar)}</p>
+                  <p className="font-display text-2xl font-bold leading-tight">
+                    {datum}
+                    {tijd ? ` · ${tijd}` : ''}
+                  </p>
+
+                  <p className="mt-4 text-sm leading-relaxed text-espresso-900/80">
                     {t(ui.bestellingGeluktUitleg)}
                   </p>
-                  {nummer && (
-                    <p className="chunk mt-4 inline-flex items-center gap-2 rounded-full bg-espresso-900 px-4 py-2 text-[0.7rem] text-crema-50">
-                      {t(ui.bestellingNummer)} · {nummer}
-                    </p>
-                  )}
-                  <div className="mt-4">
-                    <Button variant="ghost" onClick={opnieuw}>
+
+                  <div className="mt-5 flex flex-wrap items-center gap-3">
+                    {nummer && (
+                      <span className="chunk inline-flex items-center rounded-full bg-espresso-900 px-4 py-2 text-[0.7rem] text-crema-50">
+                        {t(ui.bestellingNummer)} · {nummer}
+                      </span>
+                    )}
+                    <Button variant="ghost" size="sm" onClick={opnieuw}>
                       {t(ui.nogEenBestelling)}
                     </Button>
                   </div>

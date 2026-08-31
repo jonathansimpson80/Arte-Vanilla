@@ -15,6 +15,7 @@ import { FlipCard } from '@/motion/FlipCard'
 import { HandGeschreven } from '@/motion/HandGeschreven'
 import { BakkenVoorThuis } from '@/components/BakkenVoorThuis'
 import { useVandaag } from '@/data/vandaag'
+import { serveervormen } from '@/data/serveervormen'
 import { Foto } from '@/components/ui/Foto'
 import {
   categoryLabels,
@@ -216,6 +217,60 @@ export function Flavours() {
         {zichtbaar.length === 0 && (
           <p className="py-16 text-center text-cacao-700">{t(ui.smakenLeeg)}</p>
         )}
+      </section>
+
+      {/* ---------- hoe je het meeneemt ---------- */}
+      <section className="container-page pt-24" aria-labelledby="serveren">
+        <Reveal y={16}>
+          <div className="text-center">
+            <h2
+              id="serveren"
+              className="font-display text-title font-bold text-espresso-900"
+            >
+              {t(ui.serveerKop)}
+            </h2>
+            <p className="mx-auto mt-3 max-w-md text-cacao-700">{t(ui.serveerLead)}</p>
+          </div>
+        </Reveal>
+
+        <ul className="mt-10 grid gap-6 sm:grid-cols-2">
+          {serveervormen.map((vorm, i) => (
+            <Reveal key={vorm.italian} y={24} scale={0.96} delay={i * 90}>
+              <li
+                className="flex h-full flex-col overflow-hidden rounded-cone ring-1 ring-espresso-900/5"
+                style={{ backgroundColor: vorm.tintHex }}
+              >
+                <div className="relative">
+                  <Foto
+                    src={vorm.image}
+                    alt={t(vorm.name)}
+                    className="aspect-[16/10] w-full object-cover"
+                  />
+                  <div className="absolute inset-x-0 bottom-0" style={{ color: vorm.tintHex }}>
+                    <Drip className="" flip waves={4} heightClass="h-5" />
+                  </div>
+                </div>
+
+                <div className="flex flex-1 flex-col p-6">
+                  <p className="chunk text-[0.72rem] sm:text-[0.65rem]" style={{ color: vorm.accentHex }}>
+                    {vorm.italian}
+                  </p>
+                  <h3 className="mt-2 font-display text-2xl font-bold text-espresso-900">
+                    {t(vorm.name)}
+                  </h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-espresso-900/70">
+                    {t(vorm.description)}
+                  </p>
+                  <p className="chunk mt-5 tabular-nums text-espresso-900/50">
+                    {vorm.price === null
+                      ? '—'
+                      : `€ ${vorm.price.toFixed(2).replace('.', ',')}`}
+                  </p>
+                </div>
+              </li>
+            </Reveal>
+          ))}
+        </ul>
       </section>
 
       {/* ---------- achter het glas ---------- */}

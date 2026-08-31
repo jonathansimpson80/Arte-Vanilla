@@ -235,6 +235,16 @@ export const ui = {
   },
   smakenAlles: { nl: 'Alles', en: 'All', it: 'Tutti' },
   smakenZichtbaar: { nl: 'smaken zichtbaar', en: 'flavours shown', it: 'gusti visibili' },
+  serveerKop: {
+    nl: 'Hoorntje of beker?',
+    en: 'Cone or cup?',
+    it: 'Cono o coppetta?',
+  },
+  serveerLead: {
+    nl: 'Twee manieren om het mee te nemen. De prijzen staan op het bord in de winkel.',
+    en: 'Two ways to take it with you. The prices are on the board in the shop.',
+    it: 'Due modi per portarlo via. I prezzi sono sul cartello in negozio.',
+  },
   vandaagInVitrine: { nl: 'Vandaag in de vitrine', en: 'In the cabinet today', it: 'Oggi al banco' },
   vandaagLijst: {
     nl: 'De winkel heeft vandaag doorgegeven wat er ligt. De rest van de kaart wisselt mee met het seizoen.',
@@ -360,9 +370,9 @@ export const ui = {
     it: 'Segnato. A presto.',
   },
   bestellingGeluktUitleg: {
-    nl: 'De winkel heeft hem binnengekregen en zet je bak klaar op het gekozen tijdstip. Je krijgt een bevestiging op het nummer dat je hebt opgegeven.',
-    en: 'The shop has received it and will have your tub ready at the time you chose. You’ll get a confirmation on the number you gave us.',
-    it: 'Il negozio l’ha ricevuto e preparerà la vaschetta per l’orario scelto. Riceverai una conferma al numero che hai indicato.',
+    nl: 'Je krijgt een bevestiging op het nummer dat je hebt opgegeven. Betalen doe je aan de toonbank.',
+    en: 'You’ll get a confirmation on the number you gave us. You pay at the counter.',
+    it: 'Riceverai una conferma al numero che hai indicato. Si paga al banco.',
   },
   bestellingMislukt: {
     nl: 'Versturen lukte niet.',
@@ -383,6 +393,28 @@ export const ui = {
     it: 'Preferisci inviarlo tu? Lo stesso ordine parte come messaggio.',
   },
   nogEenBestelling: { nl: 'Nog een bestelling', en: 'Another order', it: 'Un altro ordine' },
+
+  // ---------- het bericht dat de winkel binnenkrijgt ----------
+  berichtKop: { nl: 'Afhaalbestelling', en: 'Pickup order', it: 'Ordine da ritirare' },
+  berichtBestelling: { nl: 'Bestelling', en: 'Order', it: 'Ordine' },
+  berichtOphalen: { nl: 'Ophalen', en: 'Collection', it: 'Ritiro' },
+  berichtKlant: { nl: 'Klant', en: 'Customer', it: 'Cliente' },
+  berichtSmaken: { nl: 'Smaken', en: 'Flavours', it: 'Gusti' },
+  berichtSlot: {
+    nl: 'Betalen bij het afhalen.',
+    en: 'Payment on collection.',
+    it: 'Si paga al ritiro.',
+  },
+  bevestigingKop: {
+    nl: 'Bedankt voor je bestelling.',
+    en: 'Thank you for your order.',
+    it: 'Grazie per il tuo ordine.',
+  },
+  bevestigingKlaar: {
+    nl: 'We zetten hem klaar voor',
+    en: 'We’ll have it ready for',
+    it: 'La prepariamo per',
+  },
 
   // ---------- over ons ----------
   navOverOns: { nl: 'Over ons', en: 'About us', it: 'Chi siamo' },
@@ -666,6 +698,17 @@ export const ui = {
     it: 'Ordina su Thuisbezorgd',
   },
   aanbiedingOokThuis: { nl: 'Ook thuis', en: 'At home too', it: 'Anche a casa' },
+  dealsMeerEyebrow: { nl: 'Alleen in de winkel', en: 'In store only', it: 'Solo in negozio' },
+  dealsMeerKop: {
+    nl: 'De special offer hangt bij de deur.',
+    en: 'The special offer is by the door.',
+    it: 'L’offerta speciale è vicino alla porta.',
+  },
+  dealsMeerLead: {
+    nl: 'Er is er altijd één die niet op de kaart staat. Kom langs, vraag ernaar, en je loopt met een zoete deal de deur uit.',
+    en: 'There’s always one that isn’t on the list. Visit the store, ask for it, and you’ll leave with a sweet deal.',
+    it: 'Ce n’è sempre una che non è in lista. Passa in negozio, chiedila, ed esci con un dolce affare.',
+  },
   aanbiedingPrijsNoot: {
     nl: 'Prijzen van onze bestelkaart. Vraag in de winkel naar het afhaaltarief.',
     en: 'Prices from our order list. Ask in store about the collection rate.',

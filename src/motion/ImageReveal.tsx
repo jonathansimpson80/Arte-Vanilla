@@ -29,6 +29,7 @@ export function ImageReveal({
   return (
     <div ref={ref} className={`overflow-hidden ${className}`}>
       <div
+        className="h-full"
         style={{
           clipPath: shown ? 'inset(0% 0 0% 0)' : 'inset(0% 0 100% 0)',
           transition: animating ? `clip-path 900ms var(--reveal-ease) ${delay}ms` : undefined,

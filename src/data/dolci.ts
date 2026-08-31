@@ -46,8 +46,6 @@ const drieVullingen: Vertaald = { nl: 'Drie vullingen', en: 'Three fillings', it
 const tweeVullingen: Vertaald = { nl: 'Twee vullingen', en: 'Two fillings', it: 'Due ripieni' }
 const uitDeOven: Vertaald = { nl: 'Uit de oven', en: 'From the oven', it: 'Dal forno' }
 const metEspresso: Vertaald = { nl: 'Met espresso', en: 'With espresso', it: 'Con espresso' }
-const meenemen: Vertaald = { nl: 'Meenemen', en: 'To take away', it: 'Da asporto' }
-const terPlekke: Vertaald = { nl: 'Ter plekke', en: 'Eaten here', it: 'Da mangiare qui' }
 const warm: Vertaald = { nl: 'Warm geserveerd', en: 'Served warm', it: 'Servito caldo' }
 const nogBevestigen: Vertaald = { nl: 'Nog bevestigen', en: 'To be confirmed', it: 'Da confermare' }
 
@@ -138,7 +136,7 @@ export const dolci: Dolce[] = [
     },
     tags: [tweeVullingen, bevatNoten],
     price: 3.25,
-    image: '/media/bak-stracciatella.jpg',
+    // Nog geen eigen foto van dit koekje; de kaart toont het streeppatroon.
     tintHex: '#eef3e4',
     accentHex: '#5f6b3a',
   },
@@ -195,42 +193,6 @@ export const dolci: Dolce[] = [
     image: '/media/cake-chocoladesaus.jpg',
     tintHex: '#fdf7ea',
     accentHex: '#8f5720',
-  },
-  {
-    name: {
-      nl: 'Beker met wafel',
-      en: 'Cup with a wafer',
-      it: 'Coppetta con cialda',
-    },
-    italian: 'Coppa con cialda',
-    description: {
-      nl: 'Twee bollen naar keuze in een beker, met een wafel erbij. De klassieke manier om mee te nemen.',
-      en: 'Two scoops of your choice in a cup, with a wafer. The classic way to take it with you.',
-      it: 'Due palline a scelta in coppetta, con la cialda. Il modo classico per portarlo via.',
-    },
-    tags: [meenemen],
-    price: null,
-    image: '/media/beker-wafel.jpg',
-    tintHex: '#fbdde6',
-    accentHex: '#b4544c',
-  },
-  {
-    name: {
-      nl: 'Hoorntje',
-      en: 'Cone',
-      it: 'Cono',
-    },
-    italian: 'Cono',
-    description: {
-      nl: 'Drie bollen op een hoorntje, gestapeld tot het net niet meer kan. Buiten opeten aanbevolen.',
-      en: 'Three scoops on a cone, stacked to just before it topples. Best eaten outside.',
-      it: 'Tre palline sul cono, impilate fin quasi al limite. Meglio mangiarlo fuori.',
-    },
-    tags: [terPlekke],
-    price: null,
-    image: '/media/hoorntje-gevel.jpg',
-    tintHex: '#eef3e4',
-    accentHex: '#5f6b3a',
   },
   {
     name: {
