@@ -107,36 +107,12 @@ export const moods: Mood[] = [
 
   /**
    * Twee uitgelichte smaken na de drie rijen. Allebei op iets echts gebaseerd:
-   * Sinaas Aperol staat op de poster in de winkel, en pistache is met afstand
-   * het vaakst genoemd in de Google-reviews (39 keer).
+   * Pistache is met afstand het vaakst genoemd in de Google-reviews (39 keer)
+   * en staat daarom vooraan; Sinaas Aperol hangt op de poster in de winkel en
+   * sluit de rij als de gast van het seizoen.
    */
   {
     number: '04',
-    label: { nl: 'Seizoensgast', en: 'Seasonal guest', it: 'Ospite di stagione' },
-    italian: 'Di stagione',
-    title: {
-      nl: 'Sinaas Aperol, zolang het duurt.',
-      en: 'Sinaas Aperol, while it lasts.',
-      it: 'Sinaas Aperol, finché c’è.',
-    },
-    body: {
-      nl: 'Sinaasappel met Aperol: bitter, fris en fel oranje. Hij hangt op de poster naast de deur en verdwijnt weer met het seizoen.',
-      en: 'Orange with Aperol: bitter, fresh and bright orange. It’s on the poster by the door, and it leaves with the season.',
-      it: 'Arancia e Aperol: amaro, fresco e arancione acceso. È sul poster accanto alla porta e se ne va con la stagione.',
-    },
-    smaken: ['Sinaas Aperol'],
-    chipLabel: { nl: 'Nu in de vitrine', en: 'In the cabinet now', it: 'Ora al banco' },
-    swatch: 'bg-caramello-500',
-    image: '/media/sinaas-aperol.jpg',
-    tint: 'bg-caramello-500/14',
-    dot: 'bg-caramello-500',
-    tintHex: '#fcefdc',
-    numberHex: '#8f5720',
-    wash: '#e0c493',
-    glyphs: ['citrus', 'sprankel'] as const,
-  },
-  {
-    number: '05',
     label: { nl: 'Signature', en: 'Signature', it: 'Signature' },
     italian: 'La firma',
     title: {
@@ -159,6 +135,31 @@ export const moods: Mood[] = [
     numberHex: '#5f6b3a',
     wash: '#c5d2a4',
     glyphs: ['blad', 'ster'] as const,
+  },
+  {
+    number: '05',
+    label: { nl: 'Seizoensgast', en: 'Seasonal guest', it: 'Ospite di stagione' },
+    italian: 'Di stagione',
+    title: {
+      nl: 'Sinaas Aperol, zolang het duurt.',
+      en: 'Sinaas Aperol, while it lasts.',
+      it: 'Sinaas Aperol, finché c’è.',
+    },
+    body: {
+      nl: 'Sinaasappel met Aperol: bitter, fris en fel oranje. Hij hangt op de poster naast de deur en verdwijnt weer met het seizoen.',
+      en: 'Orange with Aperol: bitter, fresh and bright orange. It’s on the poster by the door, and it leaves with the season.',
+      it: 'Arancia e Aperol: amaro, fresco e arancione acceso. È sul poster accanto alla porta e se ne va con la stagione.',
+    },
+    smaken: ['Sinaas Aperol'],
+    chipLabel: { nl: 'Nu in de vitrine', en: 'In the cabinet now', it: 'Ora al banco' },
+    swatch: 'bg-caramello-500',
+    image: '/media/sinaas-aperol.jpg',
+    tint: 'bg-caramello-500/14',
+    dot: 'bg-caramello-500',
+    tintHex: '#fcefdc',
+    numberHex: '#8f5720',
+    wash: '#e0c493',
+    glyphs: ['citrus', 'sprankel'] as const,
   },
 ]
 
