@@ -41,7 +41,6 @@ export const ui = {
     it: 'Le ricette della nonna, mantecate in piccole quantità nella nostra cucina. Finito è finito, e domani c’è altro.',
   },
   chipGelato: { nl: 'Gelato & sorbet', en: 'Gelato & sorbet', it: 'Gelato e sorbetto' },
-  chipBakjes: { nl: 'Bakjes, hoorntjes & bakken', en: 'Cups, cones & tubs', it: 'Coppette, coni e vaschette' },
   chipDolci: { nl: 'Dolci & caffè', en: 'Pastry & coffee', it: 'Dolci e caffè' },
 
   // ---------- terugkerend ----------

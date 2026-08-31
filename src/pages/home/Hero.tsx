@@ -96,7 +96,6 @@ export function Hero() {
             <div className="mt-8 flex flex-wrap justify-center gap-2">
               {[
                 { label: ui.chipGelato, glyph: 'hoorntje' as const, naar: '/smaken' },
-                { label: ui.chipBakjes, glyph: 'ster' as const, naar: '/afhalen' },
                 { label: ui.chipDolci, glyph: 'sprankel' as const, naar: '/dolci' },
               ].map((chip) => (
                 <Link
