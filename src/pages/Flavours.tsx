@@ -23,7 +23,6 @@ import {
   categories,
   families,
   flavours,
-  guides,
   type Category,
 } from '@/data/flavours'
 
@@ -305,40 +304,6 @@ export function Flavours() {
             </Reveal>
           ))}
         </div>
-      </section>
-
-      {/* ---------- keuzehulp ---------- */}
-      <section className="container-page pt-24" aria-labelledby="kiezen">
-        <Reveal y={16}>
-          <div className="text-center">
-            <span className="chunk inline-flex items-center gap-2 rounded-full bg-fragola-400 px-4 py-2 text-[0.7rem] text-crema-50">
-              <Glyph name="sprankel" size={14} />
-              Hoe kies je
-            </span>
-            <h2
-              id="kiezen"
-              className="mx-auto mt-5 max-w-2xl font-display text-title font-bold text-espresso-900"
-            >
-              Zeg wat je zoekt. Wij wijzen.
-            </h2>
-          </div>
-        </Reveal>
-
-        <ul className="mx-auto mt-12 grid max-w-3xl gap-3">
-          {guides.map((gids, i) => (
-            <Reveal key={gids.id} y={18} delay={i * 70}>
-              <li className="flex flex-wrap items-center gap-4 rounded-full border border-dashed border-espresso-900/20 bg-crema-100 px-4 py-3">
-                <span
-                  className="rounded-full px-4 py-2 text-sm font-medium text-crema-50"
-                  style={{ backgroundColor: gids.color }}
-                >
-                  {t(gids.label)}
-                </span>
-                <span className="text-sm text-espresso-900/75">{t(gids.line)}</span>
-              </li>
-            </Reveal>
-          ))}
-        </ul>
       </section>
 
       {/* ---------- bakken voor thuis ---------- */}

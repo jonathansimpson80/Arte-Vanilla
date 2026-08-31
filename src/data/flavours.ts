@@ -253,6 +253,11 @@ export const panels = [
       en: 'Milk gelato, soft and thickly scooped. Where nearly everyone starts.',
       it: 'Fiordilatte, morbido e servito generoso. Dove quasi tutti iniziano.',
     },
+    kiezer: {
+      nl: 'Wil je iets vertrouwds? Begin hier en werk naar buiten.',
+      en: 'Want something familiar? Start here and work outward.',
+      it: 'Vuoi qualcosa di familiare? Parti da qui e allargati.',
+    },
     hint: {
       nl: 'Vraag welke romige er vandaag staan.',
       en: 'Ask which creamy ones are in today.',
@@ -271,6 +276,11 @@ export const panels = [
       nl: 'Aardbei staat er bijna altijd; de rest wisselt met wat de markt geeft.',
       en: 'Strawberry is nearly always there; the rest changes with the market.',
       it: 'La fragola c’è quasi sempre; il resto cambia con il mercato.',
+    },
+    kiezer: {
+      nl: 'Wil je iets fris? Het fruit is scherp en klaarwakker.',
+      en: 'Want something fresh? The fruit is sharp and wide awake.',
+      it: 'Vuoi qualcosa di fresco? La frutta è decisa e sveglia.',
     },
     hint: {
       nl: 'Meestal twee of drie tegelijk.',
@@ -291,6 +301,11 @@ export const panels = [
       en: 'Dark chocolate on water instead of milk. Deep, intense and vegan by accident.',
       it: 'Fondente all’acqua invece che al latte. Scuro, intenso e per caso vegano.',
     },
+    kiezer: {
+      nl: 'Wil je iets vols? Dit is de donkere kant van de vitrine.',
+      en: 'Want something rich? This is the dark end of the cabinet.',
+      it: 'Vuoi qualcosa di corposo? Questo è il lato scuro del banco.',
+    },
     hint: {
       nl: 'Ook als affogato te bestellen.',
       en: 'Also available as an affogato.',
@@ -309,6 +324,11 @@ export const panels = [
       nl: 'Pistache uit Sicilië en hazelnoot uit Piemonte, in huis geroosterd.',
       en: 'Sicilian pistachio and Piedmontese hazelnut, roasted in house.',
       it: 'Pistacchio siciliano e nocciola piemontese, tostati in casa.',
+    },
+    kiezer: {
+      nl: 'Wil je iets voor volwassenen? Geroosterd, zout, niet te zoet.',
+      en: 'Want something grown-up? Roasted, salted, not too sweet.',
+      it: 'Vuoi qualcosa da adulti? Tostato, salato, non troppo dolce.',
     },
     hint: {
       nl: 'De volwassen bol.',
@@ -329,6 +349,11 @@ export const panels = [
       en: 'Just fruit, water and sugar. Clean, sharp and dairy-free.',
       it: 'Solo frutta, acqua e zucchero. Puro, deciso e senza latticini.',
     },
+    kiezer: {
+      nl: 'Wil je iets ijzigs? Fruit, water en suiker, verder niets.',
+      en: 'Want something icy? Fruit, water and sugar, nothing else.',
+      it: 'Vuoi qualcosa di ghiacciato? Frutta, acqua e zucchero, nient’altro.',
+    },
     hint: {
       nl: 'Citroen staat vast.',
       en: 'Lemon is always there.',
@@ -347,6 +372,11 @@ export const panels = [
       nl: 'Cannoli, tiramisù en wat er die ochtend gebakken is.',
       en: 'Cannoli, tiramisù and whatever was baked that morning.',
       it: 'Cannoli, tiramisù e quel che è stato sfornato la mattina.',
+    },
+    kiezer: {
+      nl: 'Wil je iets zoets ernaast? Vraag wat er die ochtend uit de oven kwam.',
+      en: 'Want something sweet on the side? Ask what came out of the oven that morning.',
+      it: 'Vuoi qualcosa di dolce accanto? Chiedi cosa è uscito dal forno stamattina.',
     },
     hint: { nl: 'Op is op.', en: 'When it’s gone, it’s gone.', it: 'Fino a esaurimento.' },
     image: '/media/vitrine-gebak.jpg',
@@ -577,55 +607,3 @@ export const families = [
 ]
 
 /** Hulp bij kiezen aan de vitrine; wijst door naar een familie. */
-export const guides = [
-  {
-    id: 'fris',
-    label: { nl: 'Iets fris', en: 'Something fresh', it: 'Qualcosa di fresco' },
-    line: {
-      nl: 'Ga naar de sorbet. Scherp, ijzig, klaarwakker.',
-      en: 'Head for the sorbet. Sharp, icy, wide awake.',
-      it: 'Vai sul sorbetto. Deciso, ghiacciato, ben sveglio.',
-    },
-    color: '#8f5720',
-  },
-  {
-    id: 'vol',
-    label: { nl: 'Iets vols', en: 'Something rich', it: 'Qualcosa di corposo' },
-    line: {
-      nl: 'De chocoladebakken. Donker, cacao-zwaar, voor de serieuze trek.',
-      en: 'The chocolate tubs. Dark, cocoa-heavy, for a serious craving.',
-      it: 'Le vaschette al cioccolato. Scure, cariche di cacao, per una voglia seria.',
-    },
-    color: '#5d321c',
-  },
-  {
-    id: 'romig',
-    label: { nl: 'Iets romigs', en: 'Something creamy', it: 'Qualcosa di cremoso' },
-    line: {
-      nl: 'Begin bij de romige rij en werk naar buiten.',
-      en: 'Start at the creamy row and work outward.',
-      it: 'Parti dalla fila cremosa e allargati.',
-    },
-    color: '#5f6b3a',
-  },
-  {
-    id: 'zoet',
-    label: { nl: 'Iets zoets erbij', en: 'Something sweet on the side', it: 'Qualcosa di dolce' },
-    line: {
-      nl: 'Vraag naar de dolci — cannoli, tiramisù en wat er vers is.',
-      en: 'Ask about the dolci — cannoli, tiramisù and whatever is fresh.',
-      it: 'Chiedi dei dolci: cannoli, tiramisù e quel che è fresco.',
-    },
-    color: '#b4544c',
-  },
-  {
-    id: 'thuis',
-    label: { nl: 'Mee naar huis', en: 'To take home', it: 'Da portare a casa' },
-    line: {
-      nl: 'Bakken reizen prima. Neem twee favorieten mee.',
-      en: 'Tubs travel well. Take two favourites with you.',
-      it: 'Le vaschette viaggiano bene. Portane due preferite.',
-    },
-    color: '#c9455a',
-  },
-]

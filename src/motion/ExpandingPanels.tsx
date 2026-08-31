@@ -8,6 +8,8 @@ export type Panel = {
   body: Vertaald
   /** Regel die eronder staat, in cursief — bedoeld als tip voor in de winkel. */
   hint?: Vertaald
+  /** De keuzehulp: "wil je iets fris? dan hierheen". */
+  kiezer?: Vertaald
   image: string
 }
 
@@ -84,6 +86,11 @@ export function ExpandingPanels({ panels, onChange, className = '' }: Props) {
                 <span className="mt-2 block max-w-xs text-sm leading-relaxed text-crema-50/85">
                   {t(panel.body)}
                 </span>
+                {panel.kiezer && (
+                  <span className="mt-3 block max-w-xs border-t border-dashed border-crema-50/30 pt-3 text-sm leading-relaxed text-crema-50/85">
+                    {t(panel.kiezer)}
+                  </span>
+                )}
                 {panel.hint && (
                   <span className="mt-2 block text-sm italic text-crema-50/65">{t(panel.hint)}</span>
                 )}

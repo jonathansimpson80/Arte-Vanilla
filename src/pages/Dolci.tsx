@@ -235,21 +235,6 @@ export function Dolci() {
         <DealsRij />
       </section>
 
-      {/* ---------- voorbehoud ---------- */}
-      <section className="container-page pt-16">
-        <Reveal y={18}>
-          <div className="rounded-cone bg-crema-100 p-8 ring-1 ring-espresso-900/5 sm:p-10">
-            <p className="chunk text-[0.7rem] text-fragola-700">{t(ui.letOp)}</p>
-            <h2 className="mt-3 max-w-2xl font-display text-2xl font-bold text-espresso-900">
-              {t(ui.dolciLetOpKop)}
-            </h2>
-            <p className="mt-3 max-w-2xl text-cacao-700">
-              {t(ui.dolciLetOpLead)}
-            </p>
-          </div>
-        </Reveal>
-      </section>
-
       {/* ---------- afsluiter ---------- */}
       <section className="relative mt-20 overflow-hidden bg-espresso-900 py-20">
         <Sprinkles columns={14} />
