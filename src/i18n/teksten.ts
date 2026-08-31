@@ -164,9 +164,9 @@ export const ui = {
     it: 'Cremoso, pulito, fatto per finire presto.',
   },
   homeAmbachtLead: {
-    nl: 'Eén machine, één kleine keuken achterin, en verder zo min mogelijk. Melk uit de buurt, pistache uit Sicilië, geen kleurstof — daarom is die groen ook geen neon.',
-    en: 'One machine, one small kitchen out back, and as little else as possible. Milk from nearby, pistachio from Sicily, no colouring — which is why the green isn’t neon.',
-    it: 'Una macchina, una cucina piccola sul retro, e il meno possibile per il resto. Latte di zona, pistacchio dalla Sicilia, niente coloranti: per questo il verde non è fluo.',
+    nl: 'Eén machine, één kleine keuken achterin, en verder zo min mogelijk. De pistache komt uit Sicilië en wordt hier zelf geroosterd en gemalen, zonder kleurstof — daarom is die groen ook geen neon.',
+    en: 'One machine, one small kitchen out back, and as little else as possible. The pistachio comes from Sicily and is roasted and ground here, no colouring — which is why the green isn’t neon.',
+    it: 'Una macchina, una cucina piccola sul retro, e il meno possibile per il resto. Il pistacchio arriva dalla Sicilia e qui lo tostiamo e maciniamo noi, senza coloranti: per questo il verde non è fluo.',
   },
   homeKenmerk1: { nl: 'Elke ochtend vers gedraaid', en: 'Churned fresh every morning', it: 'Mantecato ogni mattina' },
   homeKenmerk2: { nl: 'Kleine batches, geen voorraad', en: 'Small batches, no stockpiles', it: 'Piccole quantità, niente scorte' },
@@ -476,9 +476,9 @@ export const ui = {
     it: 'Quello che possiamo fare noi, lo facciamo noi.',
   },
   overWerkLead: {
-    nl: 'Pistachenoten worden hier geroosterd en tot pasta gemalen. De citroenen gaan met de hand door de pers, kilo’s tegelijk: machinaal komt er stof uit de schil mee en wordt het sap bitter. Pistache, pure chocolade en gianduia maken we op waterbasis — melk erbij verandert de smaak, en je moet pistache kunnen proeven.',
-    en: 'The pistachios are roasted and ground into paste here. The lemons are squeezed by hand, kilos at a time: press them by machine and something from the peel comes with it, and the juice turns bitter. Pistachio, dark chocolate and gianduia are made on a water base — milk changes the taste, and pistachio should taste of pistachio.',
-    it: 'I pistacchi qui vengono tostati e macinati in pasta. I limoni si spremono a mano, chili alla volta: a macchina viene via qualcosa dalla buccia e il succo diventa amaro. Pistacchio, cioccolato fondente e gianduia li facciamo a base acqua — il latte cambia il gusto, e il pistacchio deve sapere di pistacchio.',
+    nl: 'De pistachenoten komen uit Sicilië en worden hier geroosterd en tot pasta gemalen. De citroenen gaan met de hand door de pers, kilo’s tegelijk: machinaal komt er stof uit de schil mee en wordt het sap bitter. Pistache, pure chocolade en gianduia maken we op waterbasis — melk erbij verandert de smaak, en je moet pistache kunnen proeven.',
+    en: 'The pistachios come from Sicily and are roasted and ground into paste here. The lemons are squeezed by hand, kilos at a time: press them by machine and something from the peel comes with it, and the juice turns bitter. Pistachio, dark chocolate and gianduia are made on a water base — milk changes the taste, and pistachio should taste of pistachio.',
+    it: 'I pistacchi arrivano dalla Sicilia e qui vengono tostati e macinati in pasta. I limoni si spremono a mano, chili alla volta: a macchina viene via qualcosa dalla buccia e il succo diventa amaro. Pistacchio, cioccolato fondente e gianduia li facciamo a base acqua — il latte cambia il gusto, e il pistacchio deve sapere di pistacchio.',
   },
   overBuurtKop: {
     nl: 'Goed eten en emotie.',
