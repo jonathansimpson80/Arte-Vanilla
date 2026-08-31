@@ -1,6 +1,9 @@
 import { beeldmaten } from '@/data/beeldmaten'
 import { bestand } from '@/lib/pad'
 
+/** Breedtes die `tools/beelden.mjs` aanmaakt. */
+const VARIANTEN = [480, 960, 1440]
+
 type Props = {
   src: string
   alt: string
@@ -35,9 +38,31 @@ export function Foto({
   const webp = bestand(src.replace(/\.jpg$/, '.webp'))
   const bron = bestand(src)
 
+  /**
+   * De varianten die `tools/beelden.mjs` naast het origineel heeft gezet.
+   * Alleen breedtes kleiner dan het origineel bestaan als bestand — groter
+   * opschalen levert geen scherpte op, dus die maakt het script niet.
+   */
+  const kaal = src.replace(/\.jpg$/, '')
+  const breedtes = VARIANTEN.filter((b) => !maat || b < maat[0])
+
+  function setVoor(ext: 'webp' | 'jpg') {
+    const regels = breedtes.map((b) => `${bestand(`${kaal}-${b}.${ext}`)} ${b}w`)
+    // Het origineel sluit de rij, met zijn echte breedte.
+    const groot = ext === 'webp' ? webp : bron
+    if (maat) regels.push(`${groot} ${maat[0]}w`)
+    return regels.join(', ')
+  }
+
+  // Zonder `sizes` weet de browser niet hoe breed het beeld op de pagina komt
+  // en pakt hij de grootste. Standaard: op een telefoon vult het beeld het
+  // scherm, daarboven hooguit de halve pagina.
+  const maten = sizes ?? '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 640px'
+
   return (
     <picture>
-      <source srcSet={webp} type="image/webp" sizes={sizes} />
+      <source srcSet={setVoor('webp')} type="image/webp" sizes={maten} />
+      <source srcSet={setVoor('jpg')} type="image/jpeg" sizes={maten} />
       <img
         src={bron}
         alt={alt}
@@ -46,7 +71,7 @@ export function Foto({
         loading={loading}
         fetchPriority={fetchPriority}
         decoding="async"
-        sizes={sizes}
+        sizes={maten}
         className={className}
         style={style}
       />

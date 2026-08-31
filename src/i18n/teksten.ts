@@ -393,9 +393,9 @@ export const ui = {
     it: 'Segnato. A presto.',
   },
   bestellingGeluktUitleg: {
-    nl: 'Je krijgt een bevestiging op het nummer dat je hebt opgegeven. Betalen doe je aan de toonbank.',
-    en: 'You’ll get a confirmation on the number you gave us. You pay at the counter.',
-    it: 'Riceverai una conferma al numero che hai indicato. Si paga al banco.',
+    nl: 'De bestelling staat bij ons binnen. De winkel belt of appt je als er iets onduidelijk is; betalen doe je aan de toonbank.',
+    en: 'Your order has reached us. The shop will call or message you if anything is unclear; you pay at the counter.',
+    it: 'Il tuo ordine è arrivato. Il negozio ti chiama o ti scrive se qualcosa non è chiaro; si paga al banco.',
   },
   bestellingMislukt: {
     nl: 'Versturen lukte niet.',
@@ -403,9 +403,9 @@ export const ui = {
     it: 'Invio non riuscito.',
   },
   bestellingMisluktUitleg: {
-    nl: 'Er ging iets mis onderweg. Probeer het opnieuw, of bel de winkel even — je keuze blijft hieronder staan.',
-    en: 'Something went wrong on the way. Try again, or give the shop a call — your choices stay below.',
-    it: 'Qualcosa è andato storto. Riprova, oppure chiama il negozio: le tue scelte restano qui sotto.',
+    nl: 'Er ging iets mis onderweg. Probeer het opnieuw, of stuur dezelfde bestelling met een van de knoppen hieronder — je keuze blijft staan.',
+    en: 'Something went wrong on the way. Try again, or send the same order with one of the buttons below — your choices stay put.',
+    it: 'Qualcosa è andato storto. Riprova, oppure invia lo stesso ordine con uno dei pulsanti qui sotto: le tue scelte restano.',
   },
   opnieuwProberen: { nl: 'Opnieuw proberen', en: 'Try again', it: 'Riprova' },
   ofViaWhatsapp: { nl: 'Of stuur via WhatsApp', en: 'Or send via WhatsApp', it: 'Oppure invia su WhatsApp' },

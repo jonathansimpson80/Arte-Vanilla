@@ -32,7 +32,14 @@ import { adresRegel, contact, whatsappNummer } from '@/data/contact'
  * Dat werkt wél, en het is beter dan een knop die altijd op een foutmelding
  * uitkomt.
  */
-const ENDPOINT = import.meta.env.VITE_BESTEL_ENDPOINT ?? null
+/**
+ * Waar de bestelling heen gaat. Op Vercel draait `api/bestelling.ts` op
+ * `/api`, dus daar hoeft niets voor ingesteld te worden. Op een host zonder
+ * serverfuncties — GitHub Pages bijvoorbeeld — bestaat dat adres niet; dan
+ * mislukt de aanroep en laat het formulier de knoppen zien waarmee de klant
+ * de bon alsnog zelf verstuurt.
+ */
+const ENDPOINT = import.meta.env.VITE_BESTEL_ENDPOINT ?? '/api'
 
 type Verzendstatus = 'klaar' | 'bezig' | 'gelukt' | 'mislukt'
 
@@ -257,19 +264,10 @@ export function Afhalen() {
     }
 
     const kenmerk = bestelnummer()
-
-    // Geen server: dan verstuurt de klant hem zelf via WhatsApp.
-    if (!ENDPOINT) {
-      setNummer(kenmerk)
-      setStatus('gelukt')
-      window.open(`${whatsappLink}%0A%0A${encodeURIComponent(kenmerk)}`, '_blank', 'noreferrer')
-      return
-    }
-
     setStatus('bezig')
 
     try {
-      const antwoord = await fetch(ENDPOINT, {
+      const antwoord = await fetch(`${ENDPOINT}/bestelling`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
