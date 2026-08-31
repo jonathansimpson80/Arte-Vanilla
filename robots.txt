@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# De styleguide is een intern document, geen pagina voor bezoekers.
+Disallow: /styleguide
+
+Sitemap: https://jonathansimpson80.github.io/sitemap.xml
