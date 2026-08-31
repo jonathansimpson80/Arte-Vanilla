@@ -24,11 +24,16 @@ export function KopMetAccent({ tekst, accent, as: Tag = 'h1', id, className }: P
 
   let inhoud: ReactNode = tekst
   if (i >= 0) {
+    // De punt of het uitroepteken erachter hoort bij het woord: laat je die
+    // zwart staan, dan hangt er een los teken naast de gekleurde zin.
+    let eind = i + accent.length
+    if ('.!?'.includes(tekst[eind] ?? '')) eind += 1
+
     inhoud = (
       <>
         {tekst.slice(0, i)}
-        <Typewriter words={[accent]} once className="text-fragola-500" />
-        {tekst.slice(i + accent.length)}
+        <Typewriter words={[tekst.slice(i, eind)]} once className="text-fragola-500" />
+        {tekst.slice(eind)}
       </>
     )
   }

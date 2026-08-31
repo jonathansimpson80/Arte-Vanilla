@@ -33,27 +33,44 @@ export function Carrousel({
   children,
 }: Props) {
   const rijRef = useRef<HTMLElement | null>(null)
+  const laatsteRef = useRef(-1)
   const [staat, setStaat] = useState({ schuift: false, begin: true, eind: false })
 
   const meet = useCallback(() => {
     const rij = rijRef.current
     if (!rij) return
     const speling = rij.scrollWidth - rij.clientWidth
-    setStaat({
+    const nu = {
       schuift: speling > 4,
       begin: rij.scrollLeft <= 2,
       eind: rij.scrollLeft >= speling - 2,
-    })
+    }
+
+    // Alleen bijwerken als er echt iets verandert. Een nieuw object bij elke
+    // meting geeft een nieuwe tekenbeurt, die de waarnemer weer laat meten:
+    // dat is de lus waarin de pagina vastloopt.
+    setStaat((vorig) =>
+      vorig.schuift === nu.schuift && vorig.begin === nu.begin && vorig.eind === nu.eind
+        ? vorig
+        : nu,
+    )
 
     if (!onActief) return
+
     // Welke kaart tegen de linkerrand klikt, is de kaart die je leest.
+    let index: number
     if (rij.scrollLeft >= speling - 2) {
-      onActief(rij.children.length - 1)
-      return
+      index = rij.children.length - 1
+    } else {
+      const stap = (rij.firstElementChild as HTMLElement | null)?.offsetWidth ?? 1
+      const gat = parseFloat(getComputedStyle(rij).columnGap) || 0
+      index = Math.round(rij.scrollLeft / (stap + gat))
     }
-    const stap = (rij.firstElementChild as HTMLElement | null)?.offsetWidth ?? 1
-    const gat = parseFloat(getComputedStyle(rij).columnGap) || 0
-    onActief(Math.round(rij.scrollLeft / (stap + gat)))
+
+    if (index !== laatsteRef.current) {
+      laatsteRef.current = index
+      onActief(index)
+    }
   }, [onActief])
 
   useEffect(() => {

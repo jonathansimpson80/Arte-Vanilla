@@ -222,16 +222,18 @@ export const ui = {
 
   // ---------- smakenpagina ----------
   smakenEyebrow: { nl: 'De kaart', en: 'The board', it: 'Il cartello' },
+  // Er staan er altijd twaalf, maar welke twaalf wisselt — dat is wat de kop
+  // hoort te zeggen. "Elke dag anders" beloofde twaalf nieuwe smaken per dag.
   smakenKop: {
-    nl: 'Twaalf smaken, elke dag anders.',
-    en: 'Twelve flavours, different every day.',
-    it: 'Dodici gusti, diversi ogni giorno.',
+    nl: 'Twaalf smaken, elke dag een andere mix.',
+    en: 'Twelve flavours, we mix it up each day.',
+    it: 'Dodici gusti, ogni giorno un mix diverso.',
   },
   // Het stuk uit de kop dat gekleurd meekomt; moet letterlijk in de kop staan.
   smakenKopAccent: {
-    nl: 'elke dag anders',
-    en: 'different every day',
-    it: 'diversi ogni giorno',
+    nl: 'elke dag een andere mix',
+    en: 'we mix it up each day',
+    it: 'ogni giorno un mix diverso',
   },
   smakenLead: {
     nl: 'Drie rijen op het bord: fruit bovenaan, crème in het midden, en onderin de zware jongens met noten en chocolade.',
