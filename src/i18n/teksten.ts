@@ -19,6 +19,11 @@ export const ui = {
   route: { nl: 'Route', en: 'Directions', it: 'Indicazioni' },
   routeEnAdres: { nl: 'Route en adres', en: 'Directions and address', it: 'Indicazioni e indirizzo' },
   belOns: { nl: 'Bel ons', en: 'Call us', it: 'Chiamaci' },
+  ontdekGebak: {
+    nl: 'Ontdek het gebak',
+    en: 'Explore the pastry',
+    it: 'Scopri i dolci',
+  },
   bekijkSmaken: { nl: 'Bekijk de smaken', en: 'See the flavours', it: 'Guarda i gusti' },
   bestelUberEats: { nl: 'Bestel via Uber Eats', en: 'Order on Uber Eats', it: 'Ordina su Uber Eats' },
   komLangs: { nl: 'Kom langs', en: 'Come by', it: 'Passa a trovarci' },
@@ -158,24 +163,43 @@ export const ui = {
    */
   homeKiesJeBol: { nl: 'Lekker gebak', en: 'Tasty Pastry', it: 'Dolci golosi' },
   homeHeleKaartGebak: { nl: 'De hele gebakkaart', en: 'The full pastry list', it: 'Tutti i dolci' },
+  // Alles hieronder komt uit het interview met Giulia en Simone: het roosteren
+  // en malen, de citroenen met de hand, de waterbasis, geen kleurstof.
   homeAmbachtEyebrow: {
-    nl: 'De textuur van de zaak',
-    en: 'The texture of the place',
-    it: 'La texture del locale',
+    nl: 'Hoe het gemaakt wordt',
+    en: 'How it’s made',
+    it: 'Come si fa',
   },
   homeAmbachtKop: {
-    nl: 'Romig, helder, gemaakt om snel op te gaan.',
-    en: 'Creamy, clean, made to disappear fast.',
-    it: 'Cremoso, pulito, fatto per finire presto.',
+    nl: 'Hier komt niets kant-en-klaar binnen.',
+    en: 'Nothing here arrives ready-made.',
+    it: 'Qui non arriva niente di pronto.',
   },
   homeAmbachtLead: {
-    nl: 'Eén machine, één kleine keuken achterin, en verder zo min mogelijk. De pistache komt uit Sicilië en wordt hier zelf geroosterd en gemalen, zonder kleurstof — daarom is die groen ook geen neon.',
-    en: 'One machine, one small kitchen out back, and as little else as possible. The pistachio comes from Sicily and is roasted and ground here, no colouring — which is why the green isn’t neon.',
-    it: 'Una macchina, una cucina piccola sul retro, e il meno possibile per il resto. Il pistacchio arriva dalla Sicilia e qui lo tostiamo e maciniamo noi, senza coloranti: per questo il verde non è fluo.',
+    nl: 'Giulia leerde bakken in de keuken van haar oma — die kwam uit Zuid-Italië — en dat zijn nog steeds de recepten. Wat hier gemaakt kan worden, wordt hier gemaakt: de pistachenoten worden achterin geroosterd en tot pasta gemalen, de citroenen gaan met de hand door de pers, kilo’s tegelijk.',
+    en: 'Giulia learned to bake in her grandmother’s kitchen — she came from southern Italy — and those are still the recipes. What can be made here is made here: the pistachios are roasted and ground into paste out back, and the lemons go through the press by hand, kilos at a time.',
+    it: 'Giulia ha imparato a impastare nella cucina della nonna — veniva dal Sud — e sono ancora quelle le ricette. Quello che si può fare qui, qui si fa: i pistacchi li tostiamo e maciniamo sul retro, e i limoni passano al torchio a mano, chili alla volta.',
   },
-  homeKenmerk1: { nl: 'Elke ochtend vers gedraaid', en: 'Churned fresh every morning', it: 'Mantecato ogni mattina' },
-  homeKenmerk2: { nl: 'Kleine batches, geen voorraad', en: 'Small batches, no stockpiles', it: 'Piccole quantità, niente scorte' },
-  homeKenmerk3: { nl: 'Zitplaatsen binnen en buiten', en: 'Seats inside and out', it: 'Posti dentro e fuori' },
+  homeAmbachtTweede: {
+    nl: 'Waarom met de hand? Een machine perst de schil mee en dan wordt het sap bitter. En de pistache, de pure chocolade en de gianduia gaan op water in plaats van melk: melk verzacht de smaak, en pistache moet naar pistache smaken. Kleurstof komt er nergens aan te pas — daarom is dat groen kaki en geen neon.',
+    en: 'Why by hand? A machine presses the peel along with the juice and the whole thing turns bitter. And the pistachio, the dark chocolate and the gianduia are made on water instead of milk: milk softens the flavour, and pistachio should taste of pistachio. No colouring anywhere — which is why that green is khaki and not neon.',
+    it: 'Perché a mano? La macchina spreme anche la buccia e il succo diventa amaro. E pistacchio, cioccolato fondente e gianduia li facciamo a base acqua invece che latte: il latte smorza il gusto, e il pistacchio deve sapere di pistacchio. Coloranti non ne entrano — per questo quel verde è cachi e non fluo.',
+  },
+  homeKenmerk1: {
+    nl: 'De recepten van Nonna, onveranderd',
+    en: 'Nonna’s recipes, unchanged',
+    it: 'Le ricette della nonna, intatte',
+  },
+  homeKenmerk2: {
+    nl: 'Zelf geroosterd en gemalen',
+    en: 'Roasted and ground in house',
+    it: 'Tostati e macinati da noi',
+  },
+  homeKenmerk3: {
+    nl: 'Diezelfde ochtend gedraaid',
+    en: 'Churned that same morning',
+    it: 'Mantecato la mattina stessa',
+  },
   homeMomentenEyebrow: { nl: 'Momenten', en: 'Moments', it: 'Momenti' },
   homeMomentenKop: {
     nl: 'Kleine rituelen, zoete afsluiters.',

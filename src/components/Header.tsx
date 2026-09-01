@@ -5,7 +5,7 @@ import { Foto } from '@/components/ui/Foto'
 import { OpenNu } from '@/components/OpenNu'
 import { padInTaal, talen, useTaal } from '@/i18n/taal'
 import { ui } from '@/i18n/teksten'
-import { kaartLink, routeLink } from '@/data/contact'
+import { routeLink } from '@/data/contact'
 
 /** De vier delen van het aanbod, plus de weg naar de winkel. */
 /**
@@ -96,19 +96,6 @@ export function Header() {
             ))}
           </div>
 
-          {/* Zolang er geen telefoonnummer bekend is: de weg ernaartoe. */}
-          <a
-            href={kaartLink}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={t(ui.kaartOpenen)}
-            className="hidden size-10 items-center justify-center rounded-full ring-1 ring-espresso-900/15 transition-colors hover:bg-crema-100 sm:flex"
-          >
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z" />
-              <circle cx="12" cy="10" r="3" />
-            </svg>
-          </a>
 
           <div className="hidden sm:block">
             <Button size="sm" variant="secondary" href={routeLink}>

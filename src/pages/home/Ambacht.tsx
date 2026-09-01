@@ -44,8 +44,14 @@ export function Ambacht() {
             </Reveal>
 
             <Reveal y={16} delay={160}>
-              <p className="mt-5 max-w-md text-lead text-espresso-900/70">
+              <p className="mt-5 max-w-md text-lead text-espresso-900/75">
                 {t(ui.homeAmbachtLead)}
+              </p>
+            </Reveal>
+
+            <Reveal y={16} delay={200}>
+              <p className="mt-4 max-w-md text-espresso-900/60">
+                {t(ui.homeAmbachtTweede)}
               </p>
             </Reveal>
 

@@ -3,7 +3,6 @@ import { ui } from '@/i18n/teksten'
 import { Drip } from '@/components/Drip'
 import { Button } from '@/components/ui/Button'
 import { Glyph } from '@/components/ui/Glyph'
-import { platforms } from '@/data/contact'
 import { Reveal } from '@/motion/Reveal'
 import { Sprinkles } from '@/motion/Sprinkles'
 
@@ -37,8 +36,8 @@ export function Slot() {
                 {t(ui.bekijkSmaken)}
                 <Glyph name="pijl" size={15} />
               </Button>
-              <Button variant="ghostLight" href={platforms.instagram}>
-                {t(ui.homeVolgInstagram)}
+              <Button variant="ghostLight" to="/dolci">
+                {t(ui.ontdekGebak)}
                 <Glyph name="pijl" size={15} />
               </Button>
             </div>

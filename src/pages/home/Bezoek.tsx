@@ -20,7 +20,7 @@ export function Bezoek() {
       {/* Streeppatroon als ondergrond. Mag hier zonder waas: de inhoud zit in
           twee gesloten kaarten, dus er staat geen lopende tekst op de naden. */}
       <section
-        className="relative overflow-hidden py-20 lg:py-24"
+        className="relative overflow-hidden py-14 lg:py-16"
         id="bezoek"
         aria-labelledby="bezoek-kop"
       >
@@ -28,7 +28,7 @@ export function Bezoek() {
 
         <div className="container-page relative grid items-stretch gap-5 lg:grid-cols-[1.05fr_1fr]">
           <Reveal y={20}>
-            <div className="flex h-full flex-col justify-between gap-8 rounded-cone bg-espresso-900 p-8 text-crema-50 sm:p-10">
+            <div className="flex h-full flex-col justify-between gap-6 rounded-cone bg-espresso-900 p-6 text-crema-50 sm:p-8">
               <div>
                 <span className="chunk inline-flex w-fit items-center gap-2 rounded-full bg-crema-50/12 px-4 py-2 text-[0.7rem]">
                   <Glyph name="locatie" size={14} />
@@ -73,7 +73,7 @@ export function Bezoek() {
                 </dl>
               </div>
 
-              <div className="flex flex-wrap gap-3 border-t border-dashed border-crema-50/25 pt-6">
+              <div className="flex flex-wrap gap-3 border-t border-dashed border-crema-50/25 pt-5">
                 <Button size="lg" variant="secondary" href={routeLink}>
                   {t(ui.route)}
                   <Glyph name="pijl" size={15} />
@@ -90,7 +90,7 @@ export function Bezoek() {
               <Foto
                 src="/media/gevel-bankjes.jpg"
                 alt={t(ui.altGevelGasten)}
-                className="wiggle aspect-4/3 w-full rounded-cone object-cover"
+                className="wiggle aspect-[16/10] w-full rounded-cone object-cover"
               />
 
               {/* Google geocodeert het adres zelf, dus er staat geen verzonnen
@@ -101,10 +101,10 @@ export function Bezoek() {
                   title={t(ui.kaartInteractief)}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  className="h-64 w-full border-0"
+                  className="h-56 w-full border-0"
                 />
 
-                <div className="flex flex-wrap items-center justify-between gap-4 p-6">
+                <div className="flex flex-wrap items-center justify-between gap-3 p-5">
                   <div className="flex items-center gap-3">
                     <span className="grid size-9 shrink-0 place-items-center rounded-full bg-pistacchio-400/35 text-pistacchio-700">
                       <Glyph name="locatie" size={16} />
