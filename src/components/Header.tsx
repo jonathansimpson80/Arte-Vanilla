@@ -5,7 +5,6 @@ import { Foto } from '@/components/ui/Foto'
 import { OpenNu } from '@/components/OpenNu'
 import { padInTaal, talen, useTaal } from '@/i18n/taal'
 import { ui } from '@/i18n/teksten'
-import { routeLink } from '@/data/contact'
 
 /** De vier delen van het aanbod, plus de weg naar de winkel. */
 /**
@@ -61,9 +60,19 @@ export function Header() {
             <Link
               key={link.href}
               to={pad(link.href)}
-              className="font-display text-[0.95rem] font-bold text-cacao-700 transition-colors hover:text-fragola-700"
+              className="rol font-display text-[0.95rem] font-bold text-cacao-700 transition-colors hover:text-fragola-700"
             >
-              {t(link.tekst)}
+              {/* Twee keer dezelfde tekst boven elkaar in een venster van één
+                  regel: bij hover schuift het geheel precies één regelhoogte
+                  op, dus de kopie neemt de plek van het origineel in. */}
+              <span className="rol__venster">
+                <span className="rol__baan">
+                  <span className="rol__regel">{t(link.tekst)}</span>
+                  <span className="rol__regel" aria-hidden="true">
+                    {t(link.tekst)}
+                  </span>
+                </span>
+              </span>
             </Link>
           ))}
         </nav>
@@ -98,7 +107,7 @@ export function Header() {
 
 
           <div className="hidden sm:block">
-            <Button size="sm" variant="secondary" href={routeLink}>
+            <Button size="sm" variant="secondary" to="/#bezoek">
               {t(ui.route)}
             </Button>
           </div>

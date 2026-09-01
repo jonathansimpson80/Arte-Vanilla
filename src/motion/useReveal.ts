@@ -111,5 +111,5 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>({
     willChange: phase === 'hidden' ? 'opacity, transform' : undefined,
   }
 
-  return { ref, shown, animating: phase === 'animate', style }
+  return { ref, shown, animating: phase === 'animate', phase, style }
 }

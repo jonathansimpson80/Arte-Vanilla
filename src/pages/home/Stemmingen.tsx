@@ -4,6 +4,7 @@ import { ui } from '@/i18n/teksten'
 import { Button } from '@/components/ui/Button'
 import { Glyph } from '@/components/ui/Glyph'
 import { Reveal } from '@/motion/Reveal'
+import { RolCijfer } from '@/motion/RolCijfer'
 import { Carrousel } from '@/components/ui/Carrousel'
 import { HandGeschreven } from '@/motion/HandGeschreven'
 import { moods, type Mood } from '@/data/home'
@@ -233,12 +234,11 @@ export function MoodsSection() {
                 }`}
               >
                 <div className="flex items-center justify-between gap-6">
-                  <span
+                  <RolCijfer
+                    waarde={item.number}
                     className="font-chunk text-5xl leading-none"
                     style={{ color: item.numberHex }}
-                  >
-                    {item.number}
-                  </span>
+                  />
 
                   {/* Elk teken in een even groot vakje: de tekeningen vullen hun
                       viewBox verschillend, dus zonder vast vak hangen ze scheef. */}

@@ -564,3 +564,42 @@
     }
   }
 }
+
+
+@layer components {
+  /* ---------- rollende tekst ---------- */
+  .rol__venster {
+    display: block;
+    overflow: hidden;
+    /* Precies één regel hoog, zodat er nooit een tweede regel doorheen piept. */
+    line-height: 1.25;
+    height: 1.25em;
+  }
+
+  .rol__baan {
+    display: block;
+    transition: transform 380ms var(--ease-soft);
+  }
+
+  .rol__regel {
+    display: block;
+    height: 1.25em;
+  }
+
+  .rol:hover .rol__baan,
+  .rol:focus-visible .rol__baan,
+  .rol:active .rol__baan {
+    transform: translateY(-1.25em);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rol__baan {
+      transition: none;
+    }
+    .rol:hover .rol__baan,
+    .rol:focus-visible .rol__baan,
+    .rol:active .rol__baan {
+      transform: none;
+    }
+  }
+}
