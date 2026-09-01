@@ -11,11 +11,25 @@ import { STANDAARDTAAL, talen } from '@/i18n/taal'
  * pas opgehaald als iemand er heen klikt — het bestelformulier hoeft niet mee
  * te reizen met een bezoeker die alleen de smaken bekijkt.
  */
-const Flavours = lazy(() => import('@/pages/Flavours').then((m) => ({ default: m.Flavours })))
-const Dolci = lazy(() => import('@/pages/Dolci').then((m) => ({ default: m.Dolci })))
-const Afhalen = lazy(() => import('@/pages/Afhalen').then((m) => ({ default: m.Afhalen })))
-const OverOns = lazy(() => import('@/pages/OverOns').then((m) => ({ default: m.OverOns })))
-const NotFound = lazy(() => import('@/pages/NotFound').then((m) => ({ default: m.NotFound })))
+/**
+ * Alle pagina's zitten in een bundel.
+ *
+ * Ze werden eerst pas bij het klikken opgehaald. Dat klinkt zuinig, maar het
+ * kostte meer dan het opleverde: bij elke nieuwe versie kregen die losse
+ * bestanden een nieuwe naam, en een tabblad dat al openstond vroeg om namen
+ * die niet meer bestonden. Je klikte op een tab en er gebeurde niets tot je
+ * ververste.
+ *
+ * Samen zijn de vijf pagina's zo'n 25 kB gecomprimeerd, minder dan een foto.
+ * Daarvoor is elke tab meteen open en kan die fout niet meer optreden.
+ */
+import { Flavours } from '@/pages/Flavours'
+import { Dolci } from '@/pages/Dolci'
+import { Afhalen } from '@/pages/Afhalen'
+import { OverOns } from '@/pages/OverOns'
+import { NotFound } from '@/pages/NotFound'
+
+// De styleguide is een intern document en hoort niet in de bundel van een gast.
 const StyleGuide = lazy(() => import('@/pages/StyleGuide').then((m) => ({ default: m.StyleGuide })))
 
 function Laat({ children }: { children: ReactNode }) {
@@ -29,17 +43,17 @@ function Laat({ children }: { children: ReactNode }) {
 function paginas(): RouteObject[] {
   return [
     { index: true, element: <Home /> },
-    { path: 'smaken', element: <Laat><Flavours /></Laat> },
-    { path: 'dolci', element: <Laat><Dolci /></Laat> },
-    { path: 'afhalen', element: <Laat><Afhalen /></Laat> },
-    { path: 'over-ons', element: <Laat><OverOns /></Laat> },
+    { path: 'smaken', element: <Flavours /> },
+    { path: 'dolci', element: <Dolci /> },
+    { path: 'afhalen', element: <Afhalen /> },
+    { path: 'over-ons', element: <OverOns /> },
 
     // De koffiekaart en de deals staan nu op de gebakpagina. De oude adressen
     // blijven werken, zodat gedeelde links en zoekresultaten niet doodlopen.
     { path: 'koffie', element: <Navigate to="../dolci#koffie" replace relative="path" /> },
     { path: 'aanbieding', element: <Navigate to="../dolci#deals" replace relative="path" /> },
 
-    { path: '*', element: <Laat><NotFound /></Laat> },
+    { path: '*', element: <NotFound /> },
   ]
 }
 
