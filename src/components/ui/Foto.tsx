@@ -35,18 +35,19 @@ export function Foto({
   // De maten staan onder het pad zoals het in de data staat; de URL krijgt het
   // basispad er pas bij het uitserveren voor.
   const maat = beeldmaten[src]
-  const webp = bestand(src.replace(/\.jpg$/, '.webp'))
+  const kaal = src.replace(/\.(jpe?g|png)$/i, '')
+  const webp = bestand(`${kaal}.webp`)
   const bron = bestand(src)
+  const terugval = /\.png$/i.test(src) ? 'image/png' : 'image/jpeg'
 
   /**
    * De varianten die `tools/beelden.mjs` naast het origineel heeft gezet.
    * Alleen breedtes kleiner dan het origineel bestaan als bestand — groter
    * opschalen levert geen scherpte op, dus die maakt het script niet.
    */
-  const kaal = src.replace(/\.jpg$/, '')
   const breedtes = VARIANTEN.filter((b) => !maat || b < maat[0])
 
-  function setVoor(ext: 'webp' | 'jpg') {
+  function setVoor(ext: string) {
     const regels = breedtes.map((b) => `${bestand(`${kaal}-${b}.${ext}`)} ${b}w`)
     // Het origineel sluit de rij, met zijn echte breedte.
     const groot = ext === 'webp' ? webp : bron
@@ -67,7 +68,7 @@ export function Foto({
   return (
     <picture>
       <source srcSet={setVoor('webp')} type="image/webp" sizes={maten} />
-      <source srcSet={setVoor('jpg')} type="image/jpeg" sizes={maten} />
+      <source srcSet={setVoor(src.split('.').pop() ?? 'jpg')} type={terugval} sizes={maten} />
       <img
         src={bron}
         alt={alt}

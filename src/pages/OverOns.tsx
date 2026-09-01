@@ -238,7 +238,7 @@ export function OverOns() {
         </Reveal>
 
         {/* De twee zelf, achter hun eigen toonbank, over de volle breedte.
-            Het bestand heet altijd `giulia-simone.jpg`: een nieuwe foto onder
+            Het bestand heet altijd `pair.png`: een nieuwe foto onder
             die naam neerzetten is genoeg, er hoeft niets aan de code te
             veranderen. De uitsnede houdt hun gezichten in beeld, ook als de
             band op een breed scherm laag wordt. */}
@@ -249,7 +249,7 @@ export function OverOns() {
               `max-w-sm` weg en `sm:aspect-[16/9]` erbij. */}
           <figure className="mx-auto mt-12 max-w-sm">
             <Foto
-              src="/media/giulia-simone.jpg"
+              src="/media/pair.png"
               alt={t(ui.altGiuliaSimone)}
               sizes="(max-width: 640px) 88vw, 24rem"
               className="aspect-[4/5] w-full rounded-cone object-cover object-[50%_30%] shadow-lift ring-1 ring-espresso-900/5"
