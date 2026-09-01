@@ -25,7 +25,7 @@ export const beeldmaten: Record<string, [number, number]> = {
   '/media/cannoncini-trio.jpg': [1536, 1024],
   '/media/basket-koekje.jpg': [1536, 1024],
   '/media/maritozzo.jpg': [1536, 1024],
-  '/media/sandwich-koekje.jpg': [1448, 1086],
+  '/media/sandwich-vitrine.jpg': [1448, 1086],
   '/media/cannoncini-vitrine.jpg': [1536, 1024],
   '/media/nonna-taart.jpg': [1536, 1024],
   '/media/cake-chocoladesaus.jpg': [1400, 1877],

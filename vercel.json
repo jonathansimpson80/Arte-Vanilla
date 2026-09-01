@@ -18,7 +18,7 @@
     {
       "source": "/media/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=604800, must-revalidate" }
+        { "key": "Cache-Control", "value": "public, no-cache" }
       ]
     }
   ]
