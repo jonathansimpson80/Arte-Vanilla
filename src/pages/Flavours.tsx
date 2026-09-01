@@ -13,7 +13,6 @@ import { Marquee } from '@/motion/Marquee'
 import { StripesBackground } from '@/components/StripesBackground'
 import { AchterHetGlas } from '@/components/AchterHetGlas'
 import { HandGeschreven } from '@/motion/HandGeschreven'
-import { FlipCard } from '@/motion/FlipCard'
 import { BakkenVoorThuis } from '@/components/BakkenVoorThuis'
 import { useVandaag } from '@/data/vandaag'
 import { Allergenen } from '@/components/Allergenen'
@@ -270,38 +269,6 @@ export function Flavours() {
                   </p>
                 </div>
               </li>
-            </Reveal>
-          ))}
-        </Carrousel>
-      </section>
-
-      {/* ---------- smaakfamilies: flip-kaarten ---------- */}
-      <section className="container-page pt-24" aria-labelledby="families">
-        <Reveal y={16}>
-          <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end">
-            <div>
-              <span className="chunk inline-flex items-center gap-2 rounded-full bg-pistacchio-500/25 px-4 py-2 text-[0.7rem] text-pistacchio-700">
-                <Glyph name="blad" size={14} />
-                {t(ui.smakenFamiliesEyebrow)}
-              </span>
-              <h2
-                id="families"
-                className="mt-5 max-w-xl font-display text-title font-bold text-espresso-900"
-              >
-                {t(ui.smakenFamiliesKop)}
-              </h2>
-            </div>
-
-            <p className="text-cacao-700 lg:text-right">
-              {t(ui.smakenFamiliesLead)}
-            </p>
-          </div>
-        </Reveal>
-
-        <Carrousel as="div" label={t(ui.smakenEyebrow)} className="mt-12 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {families.map((familie, i) => (
-            <Reveal key={familie.id} y={24} scale={0.96} delay={(i % 3) * 90}>
-              <FlipCard family={familie} />
             </Reveal>
           ))}
         </Carrousel>

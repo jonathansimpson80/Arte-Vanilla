@@ -113,6 +113,11 @@ export const ui = {
   draaiKaart: { nl: 'Draai voor de sfeer', en: 'Flip for the mood', it: 'Gira per l’atmosfera' },
   sfeer: { nl: 'Sfeer', en: 'Mood', it: 'Atmosfera' },
   pastBij: { nl: 'Past bij', en: 'Best for', it: 'Ideale per' },
+  draaiVoorSmaken: {
+    nl: 'Tik voor de smaken',
+    en: 'Tap for the flavours',
+    it: 'Tocca per i gusti',
+  },
   familieSmaken: { nl: 'Op het bord', en: 'On the board', it: 'Sul cartello' },
   vraagInWinkel: { nl: 'Vraag in de winkel', en: 'Ask in store', it: 'Chiedi in negozio' },
 

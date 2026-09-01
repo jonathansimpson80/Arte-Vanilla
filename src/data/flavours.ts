@@ -242,6 +242,7 @@ export const flavours: Flavour[] = [
 /** Panelen voor de uitklaprij; zelfde indeling als de vitrine in de winkel. */
 export const panels = [
   {
+    familie: 'romig',
     label: { nl: 'Romig', en: 'Creamy', it: 'Cremoso' },
     title: {
       nl: 'De rustige rij',
@@ -269,6 +270,7 @@ export const panels = [
     image: '/media/bak-vaniglia-cacao.jpg',
   },
   {
+    familie: 'fruitig',
     label: { nl: 'Fruitig', en: 'Fruity', it: 'Fruttato' },
     title: {
       nl: 'Het fruit doet het werk',
@@ -296,6 +298,7 @@ export const panels = [
     image: '/media/bak-fragola.jpg',
   },
   {
+    familie: 'chocolade',
     label: { nl: 'Chocolade', en: 'Chocolate', it: 'Cioccolato' },
     title: {
       nl: 'Het diepe deel',
@@ -323,6 +326,7 @@ export const panels = [
     image: '/media/bak-cioccolato.jpg',
   },
   {
+    familie: 'noten',
     label: { nl: 'Noten', en: 'Nutty', it: 'Frutta secca' },
     title: {
       nl: 'Geroosterd en zout',
@@ -350,6 +354,7 @@ export const panels = [
     image: '/media/bak-pistacchio.jpg',
   },
   {
+    familie: 'sorbet',
     label: { nl: 'Sorbet', en: 'Sorbet', it: 'Sorbetto' },
     title: {
       nl: 'IJskoud en wakker',
@@ -377,6 +382,7 @@ export const panels = [
     image: '/media/bak-mango.jpg',
   },
   {
+    familie: 'dolci',
     label: { nl: 'Dolci', en: 'Pastry', it: 'Dolci' },
     title: {
       nl: 'Naast het ijs',

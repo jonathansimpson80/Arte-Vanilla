@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { useTaal, type Vertaald } from '@/i18n/taal'
+import { ui } from '@/i18n/teksten'
 import { Foto } from '@/components/ui/Foto'
+import { Glyph } from '@/components/ui/Glyph'
+import type { Family } from '@/motion/FlipCard'
 
 export type Panel = {
   label: Vertaald
@@ -10,11 +13,15 @@ export type Panel = {
   hint?: Vertaald
   /** De keuzehulp: een label als "iets fris" met de zin die erbij hoort. */
   kiezer?: { label: Vertaald; zin: Vertaald }
+  /** Welke smaakfamilie achter dit paneel zit; vult de achterkant. */
+  familie?: string
   image: string
 }
 
 type Props = {
   panels: Panel[]
+  /** De families waar de panelen naar verwijzen, voor de achterkant. */
+  families?: Family[]
   /** Wordt aangeroepen zodra er een ander paneel opengaat. */
   onChange?: (index: number) => void
   className?: string
@@ -27,11 +34,15 @@ type Props = {
  * De panelen zijn knoppen, geen divs met een klik-handler: zo werkt tabben en
  * bedienen met de spatiebalk vanzelf, en leest een schermlezer de open staat.
  */
-export function ExpandingPanels({ panels, onChange, className = '' }: Props) {
+export function ExpandingPanels({ panels, families = [], onChange, className = '' }: Props) {
   const { t } = useTaal()
   const [open, setOpen] = useState(0)
+  // Alleen het geopende paneel kan omklappen; een smalle strook is te krap
+  // voor de achterkant.
+  const [om, setOm] = useState(false)
 
   function openen(index: number) {
+    if (index !== open) setOm(false)
     setOpen(index)
     onChange?.(index)
   }
@@ -42,6 +53,11 @@ export function ExpandingPanels({ panels, onChange, className = '' }: Props) {
    * geopende paneel netjes in het midden — één keer meteen, en nog een keer
    * als het uitklappen klaar is, want pas dan is de eindbreedte bekend.
    */
+  /** De familie die bij dit paneel hoort, als die er is. */
+  function familieVan(panel: Panel) {
+    return panel.familie ? families.find((f) => f.id === panel.familie) : undefined
+  }
+
   function inBeeld(el: HTMLElement) {
     const rij = el.parentElement
     if (!rij || rij.scrollWidth <= rij.clientWidth + 1) return
@@ -71,7 +87,9 @@ export function ExpandingPanels({ panels, onChange, className = '' }: Props) {
             // voor touch en toetsenbord, waar hover niet bestaat.
             onMouseEnter={() => openen(i)}
             onClick={(e) => {
-              openen(i)
+              // Al open? Dan is de klik bedoeld om de achterkant te zien.
+              if (isOpen && familieVan(panel)) setOm((v) => !v)
+              else openen(i)
               inBeeld(e.currentTarget)
             }}
             onFocus={(e) => {
@@ -104,7 +122,9 @@ export function ExpandingPanels({ panels, onChange, className = '' }: Props) {
             />
 
             {isOpen ? (
-              <span className="absolute inset-x-0 bottom-0 block p-6">
+              <span className="flip absolute inset-0 block">
+                <span className={`flip__inner ${om ? 'flip__inner--om' : ''}`}>
+                  <span className="flip__face justify-end p-6">
                 <span className="chunk inline-block rounded-full bg-crema-50 px-3 py-1.5 text-[0.7rem] sm:text-[0.6rem] text-espresso-900">
                   {t(panel.label)}
                 </span>
@@ -127,6 +147,77 @@ export function ExpandingPanels({ panels, onChange, className = '' }: Props) {
                 {panel.hint && (
                   <span className="mt-2 block text-sm italic text-crema-50/65">{t(panel.hint)}</span>
                 )}
+
+                    {familieVan(panel) && (
+                      <span className="chunk mt-4 flex items-center gap-2 text-[0.68rem] text-crema-50/70 sm:text-[0.6rem]">
+                        {t(ui.draaiVoorSmaken)}
+                        <Glyph name="pijl" size={12} />
+                      </span>
+                    )}
+                  </span>
+
+                  {/* Achterkant: dezelfde inhoud die eerst op de losse
+                      flipkaarten stond. Zo hoeft die rij niet nog een keer
+                      onder deze te staan. */}
+                  {(() => {
+                    const familie = familieVan(panel)
+                    if (!familie) return null
+                    return (
+                      <span
+                        className="flip__face flip__face--back justify-center overflow-hidden p-6 text-crema-50"
+                        style={{ backgroundColor: familie.backHex }}
+                        aria-hidden={!om}
+                      >
+                        <span className="block font-display text-2xl font-bold">
+                          {t(familie.name)}
+                        </span>
+
+                        <span className="mt-4 block">
+                          <span className="chunk block text-[0.68rem] opacity-70 sm:text-[0.6rem]">
+                            {t(ui.sfeer)}
+                          </span>
+                          <span className="mt-1 block text-sm leading-relaxed">
+                            {t(familie.mood)}
+                          </span>
+                        </span>
+
+                        <span className="mt-3 block">
+                          <span className="chunk block text-[0.68rem] opacity-70 sm:text-[0.6rem]">
+                            {t(ui.pastBij)}
+                          </span>
+                          <span className="mt-1 block text-sm leading-relaxed">
+                            {t(familie.bestFor)}
+                          </span>
+                        </span>
+
+                        <span className="mt-3 block">
+                          <span className="chunk block text-[0.68rem] opacity-70 sm:text-[0.6rem]">
+                            {t(ui.familieSmaken)}
+                          </span>
+                          <span className="mt-1.5 flex flex-wrap gap-1.5">
+                            {familie.smaken.map((naam) => (
+                              <span
+                                key={naam}
+                                className="rounded-full bg-crema-50/15 px-3 py-1 text-xs"
+                              >
+                                {naam}
+                              </span>
+                            ))}
+                          </span>
+                        </span>
+
+                        <span className="mt-4 block border-t border-dashed border-crema-50/25 pt-3">
+                          <span className="chunk block text-[0.68rem] opacity-70 sm:text-[0.6rem]">
+                            {t(ui.vraagInWinkel)}
+                          </span>
+                          <span className="mt-1 block text-sm leading-relaxed">
+                            {t(familie.ask)}
+                          </span>
+                        </span>
+                      </span>
+                    )
+                  })()}
+                </span>
               </span>
             ) : (
               <span

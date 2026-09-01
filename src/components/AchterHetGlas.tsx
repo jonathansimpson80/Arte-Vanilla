@@ -4,7 +4,7 @@ import { Reveal } from '@/motion/Reveal'
 import { Sprinkles } from '@/motion/Sprinkles'
 import { ExpandingPanels } from '@/motion/ExpandingPanels'
 import { HandGeschreven } from '@/motion/HandGeschreven'
-import { panels } from '@/data/flavours'
+import { families, panels } from '@/data/flavours'
 import { useTaal } from '@/i18n/taal'
 import { ui } from '@/i18n/teksten'
 
@@ -65,7 +65,7 @@ export function AchterHetGlas({ handschrift = true }: { handschrift?: boolean })
 
         <Reveal y={22} delay={120}>
           <div className="mt-12 rounded-cone bg-crema-50 p-3 sm:p-4">
-            <ExpandingPanels panels={panels} onChange={setPaneel} />
+            <ExpandingPanels panels={panels} families={families} onChange={setPaneel} />
 
             {/* Voortgang: laat zien hoeveel van de rij je hebt gehad. */}
             <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-espresso-900/10">
