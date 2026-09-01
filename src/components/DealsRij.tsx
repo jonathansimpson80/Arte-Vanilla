@@ -117,10 +117,22 @@ export function DealsRij() {
             zesde is geen optie, dus staat hier de uitnodiging die de zaak aan
             de toonbank ook doet. */}
         <Reveal y={24} scale={0.96} delay={180}>
-          <li
-            className="flex h-full flex-col justify-center rounded-cone p-7 ring-1 ring-espresso-900/5"
-            style={{ backgroundColor: '#fdf1cf' }}
-          >
+          {/* Het streeppatroon in plaats van een egaal vlak: deze kaart heeft
+              geen foto, en dan is het patroon uit het logo de plaatshouder.
+              Er staat wel lopende tekst op, en dan snijdt elke streepnaad door
+              de woorden — vandaar de crème waas over het midden, dezelfde
+              oplossing als in de koppen op de strepen. */}
+          <li className="relative flex h-full flex-col justify-center overflow-hidden rounded-cone p-7 ring-1 ring-espresso-900/5">
+            <span className="stripes-soft absolute inset-0" aria-hidden="true" />
+            <span
+              className="absolute inset-0"
+              aria-hidden="true"
+              style={{
+                background:
+                  'radial-gradient(120% 75% at 50% 50%, rgb(252 243 226 / 0.93) 0%, rgb(252 243 226 / 0.72) 55%, transparent 100%)',
+              }}
+            />
+            <span className="relative block">
             <span className="chunk text-[0.72rem] sm:text-[0.65rem]" style={{ color: '#8f5720' }}>
               {t(ui.dealsMeerEyebrow)}
             </span>
@@ -138,6 +150,7 @@ export function DealsRij() {
                 aria-hidden="true"
               />
               {t(ui.vraagInWinkel)}
+            </span>
             </span>
           </li>
         </Reveal>
