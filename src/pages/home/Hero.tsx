@@ -81,10 +81,6 @@ export function Hero() {
                 {t(ui.routeEnAdres)}
                 <Glyph name="pijl" size={15} />
               </Button>
-              <Button variant="ghost" to="/smaken">
-                {t(ui.bekijkSmaken)}
-                <Glyph name="pijl" size={15} />
-              </Button>
               <Button variant="ghost" to="/afhalen">
                 {t(ui.navAfhalen)}
                 <Glyph name="pijl" size={15} />

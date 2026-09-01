@@ -102,7 +102,7 @@ export function StyleGuide() {
         <div className="space-y-8">
           <div className="rounded-scoop bg-crema-100 p-8 ring-1 ring-espresso-900/5">
             <p className="text-xs text-neutral-600">font-script — uitsluitend wordmark</p>
-            <p className="wordmark mt-3 text-5xl text-espresso-900">Arte Vanilla</p>
+            <div className="mt-3"><Wordmark className="h-14" /></div>
           </div>
           {typeScale.map((item) => (
             <div key={item.token} className="border-b border-espresso-900/10 pb-6">
@@ -216,7 +216,7 @@ export function StyleGuide() {
             </div>
             <div className="stripes flex aspect-square items-center justify-center rounded-scoop">
               <span className="rounded-full bg-crema-50/90 px-8 py-6 text-center">
-                <Wordmark withTagline className="text-4xl" />
+                <Wordmark withTagline className="h-20" />
               </span>
             </div>
           </div>

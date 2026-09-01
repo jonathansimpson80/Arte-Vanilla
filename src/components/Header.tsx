@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Wordmark } from '@/components/ui/Wordmark'
 import { Link, useLocation } from 'react-router'
 import { Button } from '@/components/ui/Button'
 import { Foto } from '@/components/ui/Foto'
@@ -52,7 +53,7 @@ export function Header() {
             fetchPriority="high"
             className="size-12 rounded-full object-cover ring-1 ring-espresso-900/15"
           />
-          <span className="wordmark text-3xl leading-none text-espresso-900">Arte Vanilla</span>
+          <Wordmark prioriteit className="h-9 sm:h-10" />
         </Link>
 
         <nav aria-label={t(ui.hoofdmenu)} className="hidden items-center gap-7 lg:flex">

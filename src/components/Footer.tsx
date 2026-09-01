@@ -1,4 +1,5 @@
 import { Link } from 'react-router'
+import { Wordmark } from '@/components/ui/Wordmark'
 import { Scallop } from '@/components/Scallop'
 import { openingHours } from '@/data/home'
 import { adresRegel, kaartLink, platforms } from '@/data/contact'
@@ -52,7 +53,7 @@ export function Footer() {
       <div className="-mt-0.5 bg-espresso-900 pt-12 text-crema-50 sm:pt-16">
         <div className="container-page grid auto-rows-min grid-cols-2 gap-x-6 gap-y-9 pb-10 sm:auto-rows-auto sm:gap-12 sm:pb-14 lg:grid-cols-4">
           <div className="col-span-2 lg:col-span-1">
-            <p className="wordmark text-3xl">Arte Vanilla</p>
+            <Wordmark licht className="h-9" />
             <p className="chunk mt-2 text-[0.7rem] text-vaniglia-400">Gelato, dolci &amp; caffè</p>
             <p className="mt-4 max-w-xs text-sm text-crema-200/70">
               {t(ui.footerTagline)}

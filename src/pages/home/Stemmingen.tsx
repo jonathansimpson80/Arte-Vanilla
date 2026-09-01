@@ -61,10 +61,16 @@ function Vitrine({
         />
       </div>
 
-      <h3 className="mt-2 px-2 font-display text-2xl font-bold text-espresso-900">
+      {/* Vaste ruimte voor kop en tekst: een kaart met één regel minder hield
+          anders een gat over voor de bolletjes, waardoor hij korter oogde dan
+          zijn buren. `text-balance` en `text-pretty` houden bovendien het
+          laatste woord van een alinea van zijn eentje af. */}
+      <h3 className="mt-2 min-h-[3.75rem] px-2 font-display text-2xl leading-tight font-bold text-balance text-espresso-900">
         {t(item.title)}
       </h3>
-      <p className="mt-2 px-2 text-sm text-espresso-900/70">{t(item.body)}</p>
+      <p className="mt-2 min-h-[3.75rem] px-2 text-sm text-pretty text-espresso-900/70">
+        {t(item.body)}
+      </p>
 
       <ul className="mt-auto flex gap-2 px-2 pb-2 pt-6">
         {moods.map((stemming, i) => (
@@ -236,6 +242,7 @@ export function MoodsSection() {
                 <div className="flex items-center justify-between gap-6">
                   <RolCijfer
                     waarde={item.number}
+                    actief={i === active}
                     className="font-chunk text-5xl leading-none"
                     style={{ color: item.numberHex }}
                   />
@@ -251,10 +258,10 @@ export function MoodsSection() {
                   </span>
                 </div>
 
-                <h3 className="mt-4 max-w-lg font-display text-xl font-bold text-espresso-900 sm:text-2xl">
+                <h3 className="mt-4 max-w-lg font-display text-xl font-bold text-balance text-espresso-900 sm:text-2xl">
                   {t(item.title)}
                 </h3>
-                <p className="mt-3 max-w-lg text-espresso-900/65">{t(item.body)}</p>
+                <p className="mt-3 max-w-lg text-pretty text-espresso-900/65">{t(item.body)}</p>
 
                 <div className="mt-6 flex flex-wrap items-end gap-6">
                   <Foto
