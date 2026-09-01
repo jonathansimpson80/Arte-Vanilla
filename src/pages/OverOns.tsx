@@ -5,6 +5,7 @@ import { Foto } from '@/components/ui/Foto'
 import { Drip } from '@/components/Drip'
 import { StripesBackground } from '@/components/StripesBackground'
 import { Reveal } from '@/motion/Reveal'
+import { Teller } from '@/motion/Teller'
 import { KopMetAccent } from '@/components/ui/KopMetAccent'
 import { Carrousel } from '@/components/ui/Carrousel'
 import { ImageReveal } from '@/motion/ImageReveal'
@@ -42,7 +43,14 @@ export function OverOns() {
       accent: '#8f5720',
       tint: '#fdf1cf',
     },
-    { getal: '1', label: ui.overCijferBatch, accent: '#5f6b3a', tint: '#eef4e4' },
+    {
+      // Het aantal dat de zaak zelf noemt. De gebakpagina toont er negen; dat
+      // is de selectie die we van hen kregen, niet de hele vitrine.
+      getal: '15',
+      label: ui.overCijferGebak,
+      accent: '#5f6b3a',
+      tint: '#eef4e4',
+    },
   ]
 
   return (
@@ -105,12 +113,11 @@ export function OverOns() {
                 className="rounded-cone p-8 text-center ring-1 ring-espresso-900/5"
                 style={{ backgroundColor: cijfer.tint }}
               >
-                <p
-                  className="font-chunk text-[clamp(3rem,7vw,4.5rem)] leading-none"
+                <Teller
+                  waarde={cijfer.getal}
+                  className="block font-chunk text-[clamp(3rem,7vw,4.5rem)] leading-none tabular-nums"
                   style={{ color: cijfer.accent }}
-                >
-                  {cijfer.getal}
-                </p>
+                />
                 <p className="mt-3 text-sm text-espresso-900/65">{t(cijfer.label)}</p>
               </li>
             </Reveal>

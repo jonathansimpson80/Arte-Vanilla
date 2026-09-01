@@ -26,8 +26,8 @@ export function Ambacht() {
           dot="#f4cf64"
         />
 
-        <div className="container-page relative grid items-end gap-14 lg:grid-cols-[1.05fr_1fr]">
-          <div className="pb-24">
+        <div className="container-page relative grid items-end gap-8 lg:grid-cols-[1.05fr_1fr] lg:gap-14">
+          <div className="pb-10 lg:pb-24">
             <Reveal y={16}>
               <span className="chunk inline-flex items-center gap-2 rounded-full bg-fragola-400 px-4 py-2 text-[0.7rem] text-crema-50">
                 <Glyph name="druppel" size={14} />
@@ -51,7 +51,7 @@ export function Ambacht() {
             </Reveal>
 
             <Reveal y={16} delay={240}>
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="mt-7 grid gap-2 sm:mt-8 sm:flex sm:flex-wrap sm:gap-3">
                 {[
                   ui.homeKenmerk1,
                   ui.homeKenmerk2,
@@ -59,7 +59,7 @@ export function Ambacht() {
                 ].map((kenmerk) => (
                   <span
                     key={kenmerk.nl}
-                    className="whitespace-nowrap rounded-full bg-crema-50 px-3.5 py-1.5 text-[0.75rem] font-medium text-espresso-900 shadow-lift"
+                    className="rounded-full bg-crema-50 px-4 py-2 text-[0.78rem] font-medium text-espresso-900 shadow-lift sm:whitespace-nowrap sm:px-3.5 sm:py-1.5 sm:text-[0.75rem]"
                   >
                     {t(kenmerk)}
                   </span>

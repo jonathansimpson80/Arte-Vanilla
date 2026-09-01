@@ -545,10 +545,10 @@ export const ui = {
   },
   overCijferSmaken: { nl: 'smaken in de vitrine', en: 'flavours in the cabinet', it: 'gusti al banco' },
   overCijferReviews: { nl: 'op Google', en: 'on Google', it: 'su Google' },
-  overCijferBatch: {
-    nl: 'keukens: één, achter de toonbank',
-    en: 'kitchen: one, behind the counter',
-    it: 'cucina: una, dietro il banco',
+  overCijferGebak: {
+    nl: 'soorten gebak om uit te kiezen',
+    en: 'pastries to choose from',
+    it: 'dolci fra cui scegliere',
   },
   // ---------- de twee achter de toonbank ----------
   overTweeEyebrow: { nl: 'De twee', en: 'The two of them', it: 'Loro due' },
