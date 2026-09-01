@@ -156,9 +156,9 @@ export const moods: Mood[] = [
     image: '/media/sinaas-aperol.jpg',
     tint: 'bg-caramello-500/14',
     dot: 'bg-caramello-500',
-    tintHex: '#fcefdc',
+    tintHex: '#fce4cb',
     numberHex: '#8f5720',
-    wash: '#e0c493',
+    wash: '#f7cba3',
     glyphs: ['citrus', 'sprankel'] as const,
   },
 ]
