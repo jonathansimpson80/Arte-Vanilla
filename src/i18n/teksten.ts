@@ -622,6 +622,11 @@ export const ui = {
   },
   personen: { nl: 'personen', en: 'people', it: 'persone' },
   stapBedrag: { nl: 'Kies een bedrag', en: 'Choose an amount', it: 'Scegli un importo' },
+  bonBereik: {
+    nl: 'Tussen € 5 en € 500.',
+    en: 'Between € 5 and € 500.',
+    it: 'Tra € 5 e € 500.',
+  },
   vrijBedrag: { nl: 'Eigen bedrag', en: 'Other amount', it: 'Altro importo' },
   taartVooruit: {
     nl: 'Een ijstaart moet opgebouwd worden en hard worden, dus die maken we minstens twee dagen vooruit.',

@@ -143,8 +143,19 @@ export function Afhalen() {
   const gebakDeelsOnbekend = gebakLijst.some((r) => r.prijs === null)
 
   const bon = bonbedragen.find((b) => b.id === bonId) ?? null
+  /**
+   * Grenzen aan een eigen bedrag: minstens vijf euro, hooguit vijfhonderd.
+   * Zonder bovengrens is `1e9` een geldig getal en staat er een bon van een
+   * miljard in de bestelbon — dat is geen bestelling maar een typefout.
+   */
+  const BON_MIN = 5
+  const BON_MAX = 500
+
   const bonWaarde = bon?.vrij ? Number(vrijBedrag.replace(',', '.')) : (bon?.bedrag ?? null)
-  const bonOk = bon !== null && (!bon.vrij || (Number.isFinite(bonWaarde) && (bonWaarde ?? 0) >= 5))
+  const bonOk =
+    bon !== null &&
+    (!bon.vrij ||
+      (Number.isFinite(bonWaarde) && (bonWaarde ?? 0) >= BON_MIN && (bonWaarde ?? 0) <= BON_MAX))
 
   function wisselSmaak(naamVanSmaak: string) {
     setSmaken((huidig) => {
@@ -538,6 +549,15 @@ export function Afhalen() {
                       placeholder="15,00"
                       className="mt-2 w-full rounded-soft border-0 bg-crema-50 px-4 py-3 text-espresso-900 ring-1 ring-espresso-900/10 focus:ring-2 focus:ring-cacao-700"
                     />
+                    <p className="mt-1.5 text-xs text-espresso-900/60">
+                      {vrijBedrag.trim() && !bonOk ? (
+                        <span className="text-fragola-700">
+                          {t(ui.bonBereik)}
+                        </span>
+                      ) : (
+                        t(ui.bonBereik)
+                      )}
+                    </p>
                   </div>
                 )}
               </Stap>
