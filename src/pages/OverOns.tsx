@@ -251,7 +251,7 @@ export function OverOns() {
               src="/media/pair.png"
               alt={t(ui.altGiuliaSimone)}
               sizes="(max-width: 640px) 100vw, (max-width: 1152px) 100vw, 1100px"
-              className="aspect-[4/5] w-full rounded-cone object-cover object-[50%_42%] shadow-lift ring-1 ring-espresso-900/5 sm:aspect-[16/9] lg:aspect-[2.4/1]"
+              className="aspect-[4/5] w-full rounded-cone object-cover object-[50%_45%] shadow-lift ring-1 ring-espresso-900/5 sm:aspect-[16/10] lg:aspect-[16/9]"
             />
           </figure>
         </Reveal>
