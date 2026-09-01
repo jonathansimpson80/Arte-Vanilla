@@ -41,7 +41,6 @@ const metLepel: Vertaald = { nl: 'Met de lepel', en: 'Eaten with a spoon', it: '
 const bevatEi: Vertaald = { nl: 'Bevat ei', en: 'Contains egg', it: 'Contiene uovo' }
 const bevatNoten: Vertaald = { nl: 'Bevat noten', en: 'Contains nuts', it: 'Contiene frutta secca' }
 const drieVullingen: Vertaald = { nl: 'Drie vullingen', en: 'Three fillings', it: 'Tre ripieni' }
-const tweeVullingen: Vertaald = { nl: 'Twee vullingen', en: 'Two fillings', it: 'Due ripieni' }
 const uitDeOven: Vertaald = { nl: 'Uit de oven', en: 'From the oven', it: 'Dal forno' }
 const metEspresso: Vertaald = { nl: 'Met espresso', en: 'With espresso', it: 'Con espresso' }
 const warm: Vertaald = { nl: 'Warm geserveerd', en: 'Served warm', it: 'Servito caldo' }
@@ -132,15 +131,16 @@ export const dolci: Dolce[] = [
       it: 'Cestino',
     },
     italian: 'Cestino',
+    // Hetzelfde koekje als hierboven, maar dan een mandje vol. Vulling en
+    // allergenen zijn dus gelijk; alleen het aantal verschilt.
     description: {
-      nl: 'Klein mandje van koekdeeg, tot de rand gevuld met huisgemaakte nutella of pistache.',
-      en: 'A small basket of biscuit dough, filled to the rim with house-made nutella or pistachio.',
-      it: 'Un cestino di frolla, riempito fino all’orlo di nutella fatta in casa o pistacchio.',
+      nl: 'Een mandje vol van hetzelfde koekje: bros zandkoekje met een venster poedersuiker, gevuld met huisgemaakte nutella, pistache of kersenjam.',
+      en: 'A basket of the same cookie: crisp shortbread with a window of icing sugar, filled with house-made nutella, pistachio or cherry jam.',
+      it: 'Un cestino degli stessi biscotti: frolla friabile con la finestra di zucchero a velo, ripieni di nutella fatta in casa, pistacchio o amarena.',
     },
-    tags: [tweeVullingen, bevatNoten],
-    allergenen: ['gluten', 'melk', 'noten'],
+    tags: [drieVullingen, bevatNoten],
+    allergenen: ['gluten', 'ei', 'melk', 'noten'],
     price: 3.25,
-    // Nog geen eigen foto van dit koekje; de kaart toont het streeppatroon.
     tintHex: '#eef3e4',
     image: '/media/basket-koekje.jpg',
     accentHex: '#5f6b3a',
@@ -219,6 +219,7 @@ export const dolci: Dolce[] = [
     allergenen: ['gluten', 'melk'],
     price: null,
     tintHex: '#f4ece2',
+    image: '/media/maritozzo.jpg',
     accentHex: '#5d321c',
     concept: true,
   },
