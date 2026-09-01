@@ -160,6 +160,7 @@ export const dolci: Dolce[] = [
     allergenen: ['gluten', 'melk', 'ei'],
     price: null,
     tintHex: '#fbdde6',
+    image: '/media/cannoncini.jpg',
     accentHex: '#b4544c',
   },
   {

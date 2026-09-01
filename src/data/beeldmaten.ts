@@ -21,6 +21,7 @@ export const beeldmaten: Record<string, [number, number]> = {
   '/media/beker-toonbank.jpg': [1400, 1858],
   '/media/beker-wafel.jpg': [1600, 900],
   '/media/bezorgauto.jpg': [1400, 1856],
+  '/media/cannoncini.jpg': [1536, 1024],
   '/media/cake-chocoladesaus.jpg': [1400, 1877],
   '/media/caramello.jpg': [360, 640],
   '/media/chocolade.jpg': [1400, 1849],

@@ -72,6 +72,7 @@ export const deals: Deal[] = [
     },
     keuzes: ['Custard cream', 'Chocolate', 'Whipped cream'],
     tintHex: '#fbdde6',
+    image: '/media/cannoncini.jpg',
     accentHex: '#b4544c',
   },
   {
