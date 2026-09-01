@@ -449,7 +449,7 @@ export const families = [
     },
     image: '/media/bak-vaniglia-cacao.jpg',
     tintHex: '#fdf7ea',
-    backHex: '#8f5720',
+    backHex: '#f6e7cb',
     accentHex: '#8f5720',
   },
   {
@@ -593,7 +593,7 @@ export const families = [
     },
     image: '/media/bak-mango.jpg',
     tintHex: '#fce6c6',
-    backHex: '#8f5720',
+    backHex: '#e5b845',
     accentHex: '#8f5720',
   },
   {

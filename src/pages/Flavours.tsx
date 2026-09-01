@@ -221,7 +221,7 @@ export function Flavours() {
       </section>
 
       {/* ---------- hoe je het meeneemt ---------- */}
-      <section className="container-page pt-24" aria-labelledby="serveren">
+      <section className="container-page pb-16 pt-24" aria-labelledby="serveren">
         <Reveal y={16}>
           <div className="text-center">
             <h2

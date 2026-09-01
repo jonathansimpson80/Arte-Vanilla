@@ -34,6 +34,24 @@ type Props = {
  * De panelen zijn knoppen, geen divs met een klik-handler: zo werkt tabben en
  * bedienen met de spatiebalk vanzelf, en leest een schermlezer de open staat.
  */
+/**
+ * Welke tekstkleur op een vlak leesbaar is.
+ *
+ * De achterkanten hebben elk hun eigen kleur, van bijna wit tot donkerbruin.
+ * Eén vaste tekstkleur werkt dan niet: crème verdwijnt op licht geel, espresso
+ * verdwijnt op donkerbruin. Daarom rekenen we de helderheid uit en kiezen we
+ * de kant die het meeste contrast geeft.
+ */
+function tekstOp(achtergrond: string) {
+  const hex = achtergrond.replace('#', '')
+  const kanaal = (i: number) => {
+    const c = parseInt(hex.slice(i, i + 2), 16) / 255
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
+  }
+  const helderheid = 0.2126 * kanaal(0) + 0.7152 * kanaal(2) + 0.0722 * kanaal(4)
+  return helderheid > 0.4 ? '#1d0805' : '#fffbf2'
+}
+
 export function ExpandingPanels({ panels, families = [], onChange, className = '' }: Props) {
   const { t } = useTaal()
   const [open, setOpen] = useState(0)
@@ -174,10 +192,16 @@ export function ExpandingPanels({ panels, families = [], onChange, className = '
                   {(() => {
                     const familie = familieVan(panel)
                     if (!familie) return null
+                    // Alles op de achterkant — strepen, pilletjes, de stippellijn —
+                    // volgt de tekstkleur. Crème op crème is onzichtbaar.
+                    const inkt = tekstOp(familie.backHex)
                     return (
                       <span
-                        className="flip__face flip__face--back items-start justify-start gap-4 overflow-hidden p-6 text-crema-50 sm:p-7"
-                        style={{ backgroundColor: familie.backHex }}
+                        className="flip__face flip__face--back items-start justify-start gap-4 overflow-hidden p-6 sm:p-7"
+                        style={{
+                          backgroundColor: familie.backHex,
+                          color: inkt,
+                        }}
                         aria-hidden={!om}
                       >
                         {/* Het streeppatroon uit het logo, heel zacht: geeft het
@@ -186,8 +210,7 @@ export function ExpandingPanels({ panels, families = [], onChange, className = '
                           className="pointer-events-none absolute inset-0 opacity-[0.07]"
                           aria-hidden="true"
                           style={{
-                            backgroundImage:
-                              'repeating-linear-gradient(90deg, #fffbf2 0 5.6%, transparent 5.6% 9.1%)',
+                            backgroundImage: `repeating-linear-gradient(90deg, ${inkt} 0 5.6%, transparent 5.6% 9.1%)`,
                           }}
                         />
 
@@ -218,14 +241,18 @@ export function ExpandingPanels({ panels, families = [], onChange, className = '
                           {familie.smaken.map((naam) => (
                             <span
                               key={naam}
-                              className="rounded-full bg-crema-50/16 px-3 py-1 text-xs font-medium"
+                              className="rounded-full px-3 py-1 text-xs font-medium"
+                              style={{ backgroundColor: `${inkt}24` }}
                             >
                               {naam}
                             </span>
                           ))}
                         </span>
 
-                        <span className="relative mt-auto grid w-full gap-0.5 border-t border-dashed border-crema-50/25 pt-3">
+                        <span
+                          className="relative mt-auto grid w-full gap-0.5 border-t border-dashed pt-3"
+                          style={{ borderColor: `${inkt}40` }}
+                        >
                           <span className="chunk text-[0.64rem] opacity-55 sm:text-[0.56rem]">
                             {t(ui.vraagInWinkel)}
                           </span>
