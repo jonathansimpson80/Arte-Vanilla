@@ -59,7 +59,7 @@ export function Ambacht() {
                 ].map((kenmerk) => (
                   <span
                     key={kenmerk.nl}
-                    className="rounded-full bg-crema-50 px-4 py-2 text-[0.78rem] font-medium text-espresso-900 shadow-lift sm:whitespace-nowrap sm:px-3.5 sm:py-1.5 sm:text-[0.75rem]"
+                    className="rounded-full bg-crema-50 px-4 py-2 text-center text-[0.78rem] font-medium text-espresso-900 shadow-lift sm:whitespace-nowrap sm:px-3.5 sm:py-1.5 sm:text-left sm:text-[0.75rem]"
                   >
                     {t(kenmerk)}
                   </span>
