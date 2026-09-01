@@ -36,7 +36,7 @@ export function CardDeck<T>({
       className={className}
       style={{ height: `${items.length * perCard * 100}vh` }}
     >
-      <div className="sticky top-0 flex h-dvh items-center justify-center overflow-hidden">
+      <div className="sticky top-0 flex h-[82dvh] items-center justify-center overflow-hidden">
         {backdrop}
 
         {/* 384px speelveld minus 2×16px = kaarten van ~352px breed */}

@@ -124,34 +124,42 @@ export function ExpandingPanels({ panels, families = [], onChange, className = '
             {isOpen ? (
               <span className="flip absolute inset-0 block">
                 <span className={`flip__inner ${om ? 'flip__inner--om' : ''}`}>
-                  <span className="flip__face justify-end p-6">
-                <span className="chunk inline-block rounded-full bg-crema-50 px-3 py-1.5 text-[0.7rem] sm:text-[0.6rem] text-espresso-900">
-                  {t(panel.label)}
-                </span>
-                <span className="mt-3 block font-display text-2xl font-bold text-crema-50">
-                  {t(panel.title)}
-                </span>
-                <span className="mt-2 block max-w-xs text-sm leading-relaxed text-crema-50/85">
-                  {t(panel.body)}
-                </span>
-                {panel.kiezer && (
-                  <span className="mt-3 block max-w-sm border-t border-dashed border-crema-50/30 pt-3">
-                    <span className="chunk inline-block rounded-full bg-crema-50/15 px-3 py-1 text-[0.66rem] text-crema-50 sm:text-[0.6rem]">
-                      {t(panel.kiezer.label)}
+                  {/* `items-start` is nodig omdat een flip-kant een flexkolom
+                      is: zonder dat rekken de pilletjes zich over de volle
+                      breedte uit in plaats van om hun tekst heen te sluiten. */}
+                  <span className="flip__face items-start justify-end gap-3 p-6 sm:p-7">
+                    <span className="chunk rounded-full bg-crema-50 px-3.5 py-1.5 text-[0.7rem] text-espresso-900 sm:text-[0.6rem]">
+                      {t(panel.label)}
                     </span>
-                    <span className="mt-2 block text-sm leading-relaxed text-crema-50/85">
-                      {t(panel.kiezer.zin)}
+
+                    <span className="block max-w-sm">
+                      <span className="block font-display text-2xl font-bold leading-tight text-crema-50 sm:text-[1.7rem]">
+                        {t(panel.title)}
+                      </span>
+                      <span className="mt-2 block text-sm leading-relaxed text-crema-50/85">
+                        {t(panel.body)}
+                      </span>
                     </span>
-                  </span>
-                )}
-                {panel.hint && (
-                  <span className="mt-2 block text-sm italic text-crema-50/65">{t(panel.hint)}</span>
-                )}
+
+                    {panel.kiezer && (
+                      <span className="block max-w-sm border-t border-dashed border-crema-50/30 pt-3">
+                        <span className="chunk rounded-full bg-crema-50/15 px-3 py-1 text-[0.66rem] text-crema-50 sm:text-[0.6rem]">
+                          {t(panel.kiezer.label)}
+                        </span>
+                        <span className="mt-2 block text-sm leading-relaxed text-crema-50/85">
+                          {t(panel.kiezer.zin)}
+                        </span>
+                      </span>
+                    )}
+
+                    {panel.hint && (
+                      <span className="block text-sm italic text-crema-50/65">{t(panel.hint)}</span>
+                    )}
 
                     {familieVan(panel) && (
-                      <span className="chunk mt-4 flex items-center gap-2 text-[0.68rem] text-crema-50/70 sm:text-[0.6rem]">
+                      <span className="chunk mt-1 flex items-center gap-2 rounded-full bg-crema-50/12 px-3 py-1.5 text-[0.66rem] text-crema-50/80 transition-colors group-hover:bg-crema-50/20 sm:text-[0.58rem]">
                         {t(ui.draaiVoorSmaken)}
-                        <Glyph name="pijl" size={12} />
+                        <Glyph name="pijl" size={11} />
                       </span>
                     )}
                   </span>
@@ -164,55 +172,60 @@ export function ExpandingPanels({ panels, families = [], onChange, className = '
                     if (!familie) return null
                     return (
                       <span
-                        className="flip__face flip__face--back justify-center overflow-hidden p-6 text-crema-50"
+                        className="flip__face flip__face--back items-start justify-start gap-4 overflow-hidden p-6 text-crema-50 sm:p-7"
                         style={{ backgroundColor: familie.backHex }}
                         aria-hidden={!om}
                       >
-                        <span className="block font-display text-2xl font-bold">
-                          {t(familie.name)}
+                        {/* Het streeppatroon uit het logo, heel zacht: geeft het
+                            vlak textuur zonder de tekst in de weg te zitten. */}
+                        <span
+                          className="pointer-events-none absolute inset-0 opacity-[0.07]"
+                          aria-hidden="true"
+                          style={{
+                            backgroundImage:
+                              'repeating-linear-gradient(90deg, #fffbf2 0 5.6%, transparent 5.6% 9.1%)',
+                          }}
+                        />
+
+                        <span className="relative flex w-full items-baseline justify-between gap-4">
+                          <span className="font-display text-[1.7rem] font-bold leading-none">
+                            {t(familie.name)}
+                          </span>
+                          <span className="chunk text-[0.66rem] opacity-45 sm:text-[0.58rem]">
+                            {t(ui.familieSmaken)} · {familie.smaken.length}
+                          </span>
                         </span>
 
-                        <span className="mt-4 block">
-                          <span className="chunk block text-[0.68rem] opacity-70 sm:text-[0.6rem]">
-                            {t(ui.sfeer)}
-                          </span>
-                          <span className="mt-1 block text-sm leading-relaxed">
-                            {t(familie.mood)}
-                          </span>
-                        </span>
-
-                        <span className="mt-3 block">
-                          <span className="chunk block text-[0.68rem] opacity-70 sm:text-[0.6rem]">
-                            {t(ui.pastBij)}
-                          </span>
-                          <span className="mt-1 block text-sm leading-relaxed">
-                            {t(familie.bestFor)}
-                          </span>
-                        </span>
-
-                        <span className="mt-3 block">
-                          <span className="chunk block text-[0.68rem] opacity-70 sm:text-[0.6rem]">
-                            {t(ui.familieSmaken)}
-                          </span>
-                          <span className="mt-1.5 flex flex-wrap gap-1.5">
-                            {familie.smaken.map((naam) => (
-                              <span
-                                key={naam}
-                                className="rounded-full bg-crema-50/15 px-3 py-1 text-xs"
-                              >
-                                {naam}
+                        <span className="relative grid w-full gap-3">
+                          {[
+                            { label: ui.sfeer, waarde: familie.mood },
+                            { label: ui.pastBij, waarde: familie.bestFor },
+                          ].map((regel) => (
+                            <span key={regel.label.nl} className="grid gap-0.5">
+                              <span className="chunk text-[0.64rem] opacity-55 sm:text-[0.56rem]">
+                                {t(regel.label)}
                               </span>
-                            ))}
-                          </span>
+                              <span className="text-sm leading-snug">{t(regel.waarde)}</span>
+                            </span>
+                          ))}
                         </span>
 
-                        <span className="mt-4 block border-t border-dashed border-crema-50/25 pt-3">
-                          <span className="chunk block text-[0.68rem] opacity-70 sm:text-[0.6rem]">
+                        <span className="relative flex w-full flex-wrap gap-1.5">
+                          {familie.smaken.map((naam) => (
+                            <span
+                              key={naam}
+                              className="rounded-full bg-crema-50/16 px-3 py-1 text-xs font-medium"
+                            >
+                              {naam}
+                            </span>
+                          ))}
+                        </span>
+
+                        <span className="relative mt-auto grid w-full gap-0.5 border-t border-dashed border-crema-50/25 pt-3">
+                          <span className="chunk text-[0.64rem] opacity-55 sm:text-[0.56rem]">
                             {t(ui.vraagInWinkel)}
                           </span>
-                          <span className="mt-1 block text-sm leading-relaxed">
-                            {t(familie.ask)}
-                          </span>
+                          <span className="text-sm leading-snug">{t(familie.ask)}</span>
                         </span>
                       </span>
                     )
