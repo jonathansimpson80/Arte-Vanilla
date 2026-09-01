@@ -65,13 +65,15 @@ export function Footer() {
           <div>
             <h2 className="chunk text-[0.7rem] text-vaniglia-400">{t(ui.openingstijden)}</h2>
             <dl className="mt-4 space-y-2 text-sm">
+              {/* Dag boven, tijd eronder. Naast elkaar brak "14:00 – 22:00" in
+                  een smalle kolom middenin af, en dan staat er 14:00 op de ene
+                  regel en 22:00 op de volgende. */}
               {openingHours.map((row) => (
-                <div
-                  key={row.time}
-                  className="flex flex-col text-crema-200/70 sm:flex-row sm:justify-between sm:gap-4"
-                >
-                  <dt>{t(row.day)}</dt>
-                  <dd className="tabular-nums text-crema-50">{row.time}</dd>
+                <div key={row.day.nl} className="grid gap-0.5">
+                  <dt className="text-crema-200/60">{t(row.day)}</dt>
+                  <dd className="whitespace-nowrap tabular-nums text-crema-50">
+                    {row.time ?? t(ui.gesloten)}
+                  </dd>
                 </div>
               ))}
             </dl>

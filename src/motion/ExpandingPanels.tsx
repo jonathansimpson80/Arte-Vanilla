@@ -97,11 +97,15 @@ export function ExpandingPanels({ panels, families = [], onChange, className = '
               inBeeld(e.currentTarget)
             }}
             aria-expanded={isOpen}
-            className="group relative h-80 shrink-0 overflow-hidden rounded-scoop text-left transition-[flex-grow,width] duration-500 ease-soft sm:h-96 sm:shrink"
+            // 27rem op een telefoon: de inhoud van een open paneel is daar zo'n
+            // 400 pixels hoog, en bij 320 werd de kop bovenaan afgesneden.
+            className="group relative h-[27rem] shrink-0 overflow-hidden rounded-scoop text-left transition-[flex-grow,width] duration-500 ease-soft sm:h-96 sm:shrink"
             style={{
               flexGrow: isOpen ? 5 : 1,
               flexBasis: 0,
-              minWidth: isOpen ? '15rem' : '4.5rem',
+              // Breder open op een smal scherm, anders wringt elke zin zich
+              // door 240 pixels heen.
+              minWidth: isOpen ? 'min(18rem, 72vw)' : '4.5rem',
             }}
           >
             <Foto

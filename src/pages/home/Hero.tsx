@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/Button'
 import { Glyph } from '@/components/ui/Glyph'
 import { Reveal } from '@/motion/Reveal'
 import { Sprinkles } from '@/motion/Sprinkles'
+import { Scooter } from '@/motion/Scooter'
 import { Typewriter } from '@/motion/Typewriter'
 import { Link } from 'react-router'
 
@@ -20,6 +21,10 @@ export function Hero() {
       <section className="relative -mt-22 overflow-hidden pb-20 pt-32 sm:pt-36">
         <StripesBackground scrim />
         <Sprinkles columns={30} />
+
+        {/* Rijdt onderlangs de strepen het scherm door. Onder de tekst, boven
+            het patroon: hij hoort bij de achtergrond, niet bij de kop. */}
+        <Scooter className="bottom-6 z-0 sm:bottom-8" duur={26} />
 
         {/* draaiend insigne */}
         <div className="pointer-events-none absolute right-20 top-24 hidden lg:block">

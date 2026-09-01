@@ -290,18 +290,20 @@ export const tickerWords = [
  * echte tijden in data/contact.ts. Verander je die daar, dan verandert dit
  * mee — en niet één van de twee.
  */
-export const openingHours: { day: Vertaald; time: string }[] = [
+export const openingHours: { day: Vertaald; time: string | null }[] = [
   {
     day: { nl: 'Maandag', en: 'Monday', it: 'Lunedì' },
+    // `null` betekent gesloten. Een streepje leest als ontbrekende informatie;
+    // het woord "gesloten" zegt wat er aan de hand is.
     time: openingstijden[1]
       ? `${alsTijd(openingstijden[1].van)} – ${alsTijd(openingstijden[1].tot)}`
-      : '—',
+      : null,
   },
   {
     day: { nl: 'Dinsdag t/m zondag', en: 'Tuesday to Sunday', it: 'Da martedì a domenica' },
     time: openingstijden[2]
       ? `${alsTijd(openingstijden[2].van)} – ${alsTijd(openingstijden[2].tot)}`
-      : '—',
+      : null,
   },
 ]
 

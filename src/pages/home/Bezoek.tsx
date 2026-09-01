@@ -57,8 +57,11 @@ export function Bezoek() {
                     <dt className="chunk text-[0.7rem] sm:text-[0.6rem] text-crema-50/50">{t(ui.open)}</dt>
                     <dd className="mt-1 text-crema-50/90">
                       {openingHours.map((rij) => (
-                        <span key={rij.time} className="block">
-                          {t(rij.day)}: {rij.time}
+                        <span key={rij.day.nl} className="block">
+                          {t(rij.day)}:{' '}
+                          <span className="whitespace-nowrap tabular-nums">
+                            {rij.time ?? t(ui.gesloten)}
+                          </span>
                         </span>
                       ))}
                     </dd>

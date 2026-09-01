@@ -67,6 +67,7 @@ export const ui = {
     en: 'Allergens follow from our own description. If you have an allergy, please check with us at the counter.',
     it: 'Gli allergeni derivano dalla nostra descrizione. In caso di allergia, chiedi conferma al banco.',
   },
+  gesloten: { nl: 'Gesloten', en: 'Closed', it: 'Chiuso' },
   openingstijden: { nl: 'Openingstijden', en: 'Opening hours', it: 'Orari' },
   vandaagOpen: { nl: 'Vandaag open', en: 'Open today', it: 'Oggi aperto' },
   nuOpen: { nl: 'Nu open', en: 'Open now', it: 'Aperto ora' },
