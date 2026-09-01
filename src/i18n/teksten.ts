@@ -199,14 +199,9 @@ export const ui = {
     it: 'Qui non arriva niente di pronto.',
   },
   homeAmbachtLead: {
-    nl: 'Giulia leerde bakken in de keuken van haar oma — die kwam uit Zuid-Italië — en dat zijn nog steeds de recepten. Wat hier gemaakt kan worden, wordt hier gemaakt: de pistachenoten worden achterin geroosterd en tot pasta gemalen, de citroenen gaan met de hand door de pers, kilo’s tegelijk.',
-    en: 'Giulia learned to bake in her grandmother’s kitchen — she came from southern Italy — and those are still the recipes. What can be made here is made here: the pistachios are roasted and ground into paste out back, and the lemons go through the press by hand, kilos at a time.',
-    it: 'Giulia ha imparato a impastare nella cucina della nonna — veniva dal Sud — e sono ancora quelle le ricette. Quello che si può fare qui, qui si fa: i pistacchi li tostiamo e maciniamo sul retro, e i limoni passano al torchio a mano, chili alla volta.',
-  },
-  homeAmbachtTweede: {
-    nl: 'Waarom met de hand? Een machine perst de schil mee en dan wordt het sap bitter. En de pistache, de pure chocolade en de gianduia gaan op water in plaats van melk: melk verzacht de smaak, en pistache moet naar pistache smaken. Kleurstof komt er nergens aan te pas — daarom is dat groen kaki en geen neon.',
-    en: 'Why by hand? A machine presses the peel along with the juice and the whole thing turns bitter. And the pistachio, the dark chocolate and the gianduia are made on water instead of milk: milk softens the flavour, and pistachio should taste of pistachio. No colouring anywhere — which is why that green is khaki and not neon.',
-    it: 'Perché a mano? La macchina spreme anche la buccia e il succo diventa amaro. E pistacchio, cioccolato fondente e gianduia li facciamo a base acqua invece che latte: il latte smorza il gusto, e il pistacchio deve sapere di pistacchio. Coloranti non ne entrano — per questo quel verde è cachi e non fluo.',
+    nl: 'De recepten van Nonna, gemaakt in onze eigen keuken: pistache achterin geroosterd en gemalen, citroenen met de hand geperst. Geen kleurstof, geen omwegen — daarom is dat groen kaki en geen neon.',
+    en: 'Nonna’s recipes, made in our own kitchen: pistachios roasted and ground out back, lemons pressed by hand. No colouring, no shortcuts — which is why that green is khaki and not neon.',
+    it: 'Le ricette della nonna, fatte nella nostra cucina: pistacchi tostati e macinati sul retro, limoni spremuti a mano. Niente coloranti, niente scorciatoie — per questo quel verde è cachi e non fluo.',
   },
   homeKenmerk1: {
     nl: 'De recepten van Nonna, onveranderd',

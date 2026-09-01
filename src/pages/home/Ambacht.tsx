@@ -50,15 +50,6 @@ export function Ambacht() {
               </p>
             </Reveal>
 
-            {/* Alleen in het concept: de tweede alinea die het waarom uitlegt. */}
-            {TOON_CONCEPT_AMBACHT && (
-              <Reveal y={16} delay={200}>
-                <p className="mt-4 max-w-md text-espresso-900/60">
-                  {t(ui.homeAmbachtTweede)}
-                </p>
-              </Reveal>
-            )}
-
             <Reveal y={16} delay={240}>
               <div className="mt-8 flex flex-wrap gap-3">
                 {[
