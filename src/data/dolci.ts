@@ -84,6 +84,7 @@ export const dolci: Dolce[] = [
     price: 5,
     // Nog geen eigen foto van dit gebak; de kaart toont het streeppatroon.
     tintHex: '#fdf7ea',
+    image: '/media/nonna-taart.jpg',
     accentHex: '#8f5720',
   },
   {
@@ -141,6 +142,7 @@ export const dolci: Dolce[] = [
     price: 3.25,
     // Nog geen eigen foto van dit koekje; de kaart toont het streeppatroon.
     tintHex: '#eef3e4',
+    image: '/media/basket-koekje.jpg',
     accentHex: '#5f6b3a',
   },
   {
@@ -160,7 +162,7 @@ export const dolci: Dolce[] = [
     allergenen: ['gluten', 'melk', 'ei'],
     price: null,
     tintHex: '#fbdde6',
-    image: '/media/cannoncini.jpg',
+    image: '/media/cannoncini-vitrine.jpg',
     accentHex: '#b4544c',
   },
   {

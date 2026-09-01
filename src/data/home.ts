@@ -193,6 +193,7 @@ export const cabinet = [
     },
     tone: 'bg-vaniglia-400 text-espresso-900',
     tintHex: '#fdf7ea',
+    image: '/media/nonna-taart.jpg',
     accentHex: '#a5864d',
   },
   {
@@ -219,7 +220,7 @@ export const cabinet = [
       it: 'Cannoncini di sfoglia dal forno, farciti con crema, cioccolato o panna.',
     },
     tone: 'bg-espresso-900 text-crema-50',
-    image: '/media/cannoncini.jpg',
+    image: '/media/cannoncini-vitrine.jpg',
     tintHex: '#fbe9ee',
     accentHex: '#b4544c',
   },
