@@ -97,62 +97,47 @@ export function MoodsSection() {
       opruimen?.()
       opruimen = null
 
-      const rij = breed.matches ? kaartenRef.current : vegenRef.current
+      const horizontaal = !breed.matches
+      const rij = horizontaal ? vegenRef.current : kaartenRef.current
       const kaarten = rij?.querySelectorAll<HTMLElement>('li[data-index]')
       if (!rij || !kaarten?.length) return
 
-      // Zijwaarts vegen: de kaart die tegen de linkerrand klikt is de kaart
-      // die je leest. Dat rekenen we zelf uit — een waarnemer meldt alleen
-      // kaarten die net over een grens gingen, en dan mist de rest.
-      if (!breed.matches) {
-        const meet = () => {
-          // Aan het eind van de rij kan de laatste kaart niet meer tot de
-          // linkerrand schuiven, maar hij is dan wel wat je ziet.
-          if (rij.scrollLeft >= rij.scrollWidth - rij.clientWidth - 2) {
-            setActive(kaarten.length - 1)
-            return
-          }
-
-          const rand =
-            rij.getBoundingClientRect().left +
+      /**
+       * Welke kaart je leest, rekenen we zelf uit in plaats van het aan een
+       * waarnemer te vragen. Een waarnemer meldt alleen kaarten die net over
+       * een drempel gingen; wat er tussenin gebeurt mist hij, en dan blijft de
+       * vitrine op de eerste kaart staan terwijl je al lang verder bent.
+       *
+       * Zijwaarts telt de linkerrand van de rij, verticaal het midden van het
+       * scherm — in beide gevallen wint de kaart die daar het dichtst bij ligt.
+       */
+      const meet = () => {
+        const doel = horizontaal
+          ? rij.getBoundingClientRect().left +
             (parseFloat(getComputedStyle(rij).scrollPaddingLeft) || 0)
-          let beste = { index: 0, afstand: Infinity }
-          kaarten.forEach((kaart) => {
-            const afstand = Math.abs(kaart.getBoundingClientRect().left - rand)
-            if (afstand < beste.afstand) {
-              beste = { index: Number(kaart.dataset.index), afstand }
-            }
-          })
-          setActive(beste.index)
+          : window.innerHeight / 2
+
+        if (horizontaal && rij.scrollLeft >= rij.scrollWidth - rij.clientWidth - 2) {
+          setActive(kaarten.length - 1)
+          return
         }
 
-        meet()
-        rij.addEventListener('scroll', meet, { passive: true })
-        opruimen = () => rij.removeEventListener('scroll', meet)
-        return
+        let beste = { index: 0, afstand: Infinity }
+        kaarten.forEach((kaart) => {
+          const r = kaart.getBoundingClientRect()
+          const hart = horizontaal ? r.left : r.top + r.height / 2
+          const afstand = Math.abs(hart - doel)
+          if (afstand < beste.afstand) {
+            beste = { index: Number(kaart.dataset.index), afstand }
+          }
+        })
+        setActive(beste.index)
       }
 
-      // Verticaal: de kaart die het dichtst bij het midden van het scherm staat.
-      const observer = new IntersectionObserver(
-        (entries) => {
-          const midden = window.innerHeight / 2
-          let beste = { index: -1, afstand: Infinity }
-
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return
-            const index = Number((entry.target as HTMLElement).dataset.index)
-            const rect = entry.boundingClientRect
-            const afstand = Math.abs(rect.top + rect.height / 2 - midden)
-            if (afstand < beste.afstand) beste = { index, afstand }
-          })
-
-          if (beste.index >= 0) setActive(beste.index)
-        },
-        { threshold: 0.4, rootMargin: '-15% 0px -15% 0px' },
-      )
-
-      kaarten.forEach((kaart) => observer.observe(kaart))
-      opruimen = () => observer.disconnect()
+      meet()
+      const bron: EventTarget = horizontaal ? rij : window
+      bron.addEventListener('scroll', meet, { passive: true })
+      opruimen = () => bron.removeEventListener('scroll', meet)
     }
 
     koppel()

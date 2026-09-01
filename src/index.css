@@ -11,8 +11,11 @@
    * `clip` en niet `hidden`: `hidden` maakt van de wortel een schuifbak en
    * daarmee werkt `position: sticky` in de kopbalk niet meer.
    */
-  html,
-  body {
+  html {
+    /* Alleen op de wortel. Zet je `overflow-x` ook op `body`, dan wordt body
+       een eigen schuifbak: `window.scrollTo` doet dan niets meer en alles wat
+       op het scrollen van het venster meeluistert — de vitrine die meeloopt
+       met de rij — blijft op de eerste kaart staan. */
     overflow-x: clip;
     overscroll-behavior-x: none;
   }
