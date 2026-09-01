@@ -51,12 +51,13 @@ function Vitrine({
     >
       <div className="relative overflow-hidden rounded-scoop">
         <Foto src={item.image} alt={t(item.title)} className="aspect-4/3 w-full object-cover" />
-        {/* Het nummer rolt mee zodra deze kaart de toon zet en de achtergrond
-            van kleur wisselt. Op laptop staat er één kaart en wisselt het
-            getal zelf; ook dan rolt hij. */}
-        <span className="chunk absolute left-4 top-4 flex items-center gap-1 rounded-full bg-crema-50 px-4 py-1.5 text-[0.7rem] tabular-nums text-espresso-900">
+        {/* Alleen het nummer. Hoeveel kaarten er zijn lees je onderaan al af
+            aan de bolletjes; het er hier nog eens bij zetten voegt niets toe.
+            Het rolt zodra deze kaart de toon zet en de achtergrond van kleur
+            wisselt. Op laptop staat er één kaart voor de hele rij en wisselt
+            het getal zelf; ook dan rolt hij. */}
+        <span className="chunk absolute left-4 top-4 rounded-full bg-crema-50 px-4 py-1.5 text-[0.7rem] tabular-nums text-espresso-900">
           <RolCijfer waarde={item.number} actief={eigen === undefined ? undefined : eigen === actief} />
-          <span aria-hidden="true">/ 0{moods.length}</span>
         </span>
       </div>
 
