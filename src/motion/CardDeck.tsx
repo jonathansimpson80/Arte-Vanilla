@@ -36,7 +36,13 @@ export function CardDeck<T>({
       className={className}
       style={{ height: `${items.length * perCard * 100}vh` }}
     >
-      <div className="sticky top-0 flex h-[82dvh] items-center justify-center overflow-hidden">
+      {/* Het speelveld is een heel scherm hoog en plakt vanaf de bovenrand, met
+          de hoogte van de zwevende menubalk als kussen erboven: daardoor komt
+          de stapel in het midden van wat je écht ziet te staan in plaats van
+          half achter de balk. De stapel laat ook precies los op het moment dat
+          de laatste kaart weg is — met een korter speelveld bleef er daarna
+          nog een leeg scherm plakken. */}
+      <div className="sticky top-0 flex h-dvh items-center justify-center overflow-hidden pt-[5.5rem]">
         {backdrop}
 
         {/* 384px speelveld minus 2×16px = kaarten van ~352px breed */}

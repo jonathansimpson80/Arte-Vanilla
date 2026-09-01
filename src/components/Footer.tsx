@@ -53,7 +53,7 @@ export function Footer() {
       <div className="-mt-0.5 bg-espresso-900 pt-12 text-crema-50 sm:pt-16">
         <div className="container-page grid auto-rows-min grid-cols-2 gap-x-6 gap-y-9 pb-10 sm:auto-rows-auto sm:gap-12 sm:pb-14 lg:grid-cols-4">
           <div className="col-span-2 lg:col-span-1">
-            <Wordmark licht className="h-9" />
+            <Wordmark tint="creme" className="h-9" />
             <p className="chunk mt-2 text-[0.7rem] text-vaniglia-400">Gelato, dolci &amp; caffè</p>
             <p className="mt-4 max-w-xs text-sm text-crema-200/70">
               {t(ui.footerTagline)}
@@ -114,14 +114,10 @@ export function Footer() {
           <span>© {new Date().getFullYear()} Arte Vanilla</span>
         </div>
 
-        {/* Wordmark als afsluiter, in het script van het logo en gevuld in crème. */}
+        {/* Het logo als afsluiter: hij loopt net onder de rand door, zodat de
+            onderkant van de letters wordt afgesneden en de footer doorloopt. */}
         <div className="overflow-hidden">
-          <p
-            className="wordmark translate-y-[0.08em] whitespace-nowrap text-center text-[clamp(3.5rem,15vw,13rem)] leading-none text-crema-100"
-            aria-hidden="true"
-          >
-            Arte Vanilla
-          </p>
+          <Wordmark tint="zacht" vol stil sizes="100vw" className="translate-y-[7%]" />
         </div>
       </div>
     </footer>
