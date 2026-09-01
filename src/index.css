@@ -21,6 +21,26 @@
   }
 
   /**
+   * En dan nog de veeg zelf. `overflow-x: clip` snijdt af wat te breed is,
+   * maar de browser mag de pagina nog steeds zijwaarts meebewegen — daardoor
+   * bleef er op een telefoon een klein wiebeltje over. `pan-y` zegt: van dit
+   * vlak mag alleen verticaal geveegd worden. `pinch-zoom` blijft staan, want
+   * inzoomen moet gewoon kunnen.
+   *
+   * Waar zijwaarts vegen wél de bedoeling is — de carrousels en de panelen —
+   * staat het hieronder weer aan.
+   */
+  html,
+  body {
+    touch-action: pan-y pinch-zoom;
+  }
+
+  .carrousel,
+  .veegbaar {
+    touch-action: pan-x pan-y pinch-zoom;
+  }
+
+  /**
    * De kopbalk zweeft over de pagina heen. Zonder deze marge landt een sprong
    * naar #bezoek of #koffie precies achter die balk, en staat de kop waar je
    * heen sprong onder een vlak dat je niet weg kunt scrollen.
