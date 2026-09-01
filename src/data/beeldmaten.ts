@@ -54,5 +54,5 @@ export const beeldmaten: Record<string, [number, number]> = {
   '/media/bak-limone.jpg': [1094, 1438],
   '/media/bak-melone-menta.jpg': [1094, 1438],
   '/media/bak-ananas-rosmarino.jpg': [1093, 1438],
-  '/media/bak-croccantino.jpg': [1093, 1438],
+  '/media/bak-croccantino.jpg': [1092, 1440],
 }
