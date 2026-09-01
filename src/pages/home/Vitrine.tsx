@@ -125,9 +125,6 @@ export function Vitrine() {
         <div className="hidden sm:block">
           <CardDeck
             items={cabinet}
-            // Korter: vier kaarten × 0,45 schermhoogte in plaats van 0,7. Je hebt
-            // nog steeds een scroll per kaart, maar zonder de lege lucht eromheen.
-            perCard={0.34}
             backdrop={
               <p className="pointer-events-none absolute inset-x-0 select-none text-center font-chunk text-mega leading-none text-espresso-900">
                 {t(ui.homeKiesJeBol)}
