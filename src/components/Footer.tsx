@@ -114,10 +114,17 @@ export function Footer() {
           <span>© {new Date().getFullYear()} Arte Vanilla</span>
         </div>
 
-        {/* Het logo als afsluiter: hij loopt net onder de rand door, zodat de
-            onderkant van de letters wordt afgesneden en de footer doorloopt. */}
-        <div className="overflow-hidden">
-          <Wordmark tint="zacht" vol stil sizes="100vw" className="translate-y-[7%]" />
+        {/* Het logo als afsluiter. Op de breedte van de pagina, dus links
+            uitgelijnd op de kolommen en de copyrightregel erboven. Over de
+            volle schermbreedte liep de uithaal van de A er aan weerskanten af,
+            en dat las als een fout in plaats van als een keuze. */}
+        <div className="container-page pb-10">
+          <Wordmark
+            tint="zacht"
+            vol
+            stil
+            sizes="(max-width: 72rem) calc(100vw - 3rem), 68rem"
+          />
         </div>
       </div>
     </footer>
