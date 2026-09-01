@@ -1,5 +1,6 @@
 import { useTaal } from '@/i18n/taal'
 import { ui } from '@/i18n/teksten'
+import { TOON_CONCEPT_AMBACHT } from '@/data/conceptcopy'
 import { Glyph } from '@/components/ui/Glyph'
 import { DrawnLine } from '@/motion/DrawnLine'
 import { ImageReveal } from '@/motion/ImageReveal'
@@ -30,7 +31,7 @@ export function Ambacht() {
             <Reveal y={16}>
               <span className="chunk inline-flex items-center gap-2 rounded-full bg-fragola-400 px-4 py-2 text-[0.7rem] text-crema-50">
                 <Glyph name="druppel" size={14} />
-                {t(ui.homeAmbachtEyebrow)}
+                {t(TOON_CONCEPT_AMBACHT ? ui.homeAmbachtEyebrow : ui.homeAmbachtEyebrowKort)}
               </span>
             </Reveal>
 
@@ -39,28 +40,31 @@ export function Ambacht() {
                 id="ambacht"
                 className="mt-6 max-w-lg font-display text-title font-bold text-espresso-900"
               >
-                {t(ui.homeAmbachtKop)}
+                {t(TOON_CONCEPT_AMBACHT ? ui.homeAmbachtKop : ui.homeAmbachtKopKort)}
               </h2>
             </Reveal>
 
             <Reveal y={16} delay={160}>
               <p className="mt-5 max-w-md text-lead text-espresso-900/75">
-                {t(ui.homeAmbachtLead)}
+                {t(TOON_CONCEPT_AMBACHT ? ui.homeAmbachtLead : ui.homeAmbachtLeadKort)}
               </p>
             </Reveal>
 
-            <Reveal y={16} delay={200}>
-              <p className="mt-4 max-w-md text-espresso-900/60">
-                {t(ui.homeAmbachtTweede)}
-              </p>
-            </Reveal>
+            {/* Alleen in het concept: de tweede alinea die het waarom uitlegt. */}
+            {TOON_CONCEPT_AMBACHT && (
+              <Reveal y={16} delay={200}>
+                <p className="mt-4 max-w-md text-espresso-900/60">
+                  {t(ui.homeAmbachtTweede)}
+                </p>
+              </Reveal>
+            )}
 
             <Reveal y={16} delay={240}>
               <div className="mt-8 flex flex-wrap gap-3">
                 {[
                   ui.homeKenmerk1,
                   ui.homeKenmerk2,
-                  ui.homeKenmerk3,
+                  TOON_CONCEPT_AMBACHT ? ui.homeKenmerk3 : ui.homeKenmerkKort3,
                 ].map((kenmerk) => (
                   <span
                     key={kenmerk.nl}

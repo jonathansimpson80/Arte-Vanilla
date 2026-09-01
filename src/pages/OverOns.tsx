@@ -243,16 +243,15 @@ export function OverOns() {
             veranderen. De uitsnede houdt hun gezichten in beeld, ook als de
             band op een breed scherm laag wordt. */}
         <Reveal y={20} delay={80}>
-          {/* Staat op ware grootte in plaats van uitgerekt: het bestand is
-              360 pixels breed, en een brede band zou daar een wazige strook
-              van maken. Komt er een grotere foto onder dezelfde naam, dan mag
-              `max-w-sm` weg en `sm:aspect-[16/9]` erbij. */}
-          <figure className="mx-auto mt-12 max-w-sm">
+          {/* Over de volle breedte. De uitsnede houdt hun gezichten in beeld,
+              ook als de band op een breed scherm laag wordt: het zwaartepunt
+              van de foto ligt iets boven het midden. */}
+          <figure className="mt-12">
             <Foto
               src="/media/pair.png"
               alt={t(ui.altGiuliaSimone)}
-              sizes="(max-width: 640px) 88vw, 24rem"
-              className="aspect-[4/5] w-full rounded-cone object-cover object-[50%_30%] shadow-lift ring-1 ring-espresso-900/5"
+              sizes="(max-width: 640px) 100vw, (max-width: 1152px) 100vw, 1100px"
+              className="aspect-[4/5] w-full rounded-cone object-cover object-[50%_42%] shadow-lift ring-1 ring-espresso-900/5 sm:aspect-[16/9] lg:aspect-[2.4/1]"
             />
           </figure>
         </Reveal>

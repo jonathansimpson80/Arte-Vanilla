@@ -74,6 +74,7 @@ export const flavours: Flavour[] = [
     tags: ['klassieker'],
     tintHex: '#fdf1cf',
     accentHex: '#8f5720',
+    image: '/media/bak-limone.jpg',
   },
   {
     name: 'Strawberry',
@@ -114,6 +115,7 @@ export const flavours: Flavour[] = [
     tags: [],
     tintHex: '#eef3e4',
     accentHex: '#5f6b3a',
+    image: '/media/bak-melone-menta.jpg',
   },
 
 
@@ -179,6 +181,7 @@ export const flavours: Flavour[] = [
     tags: [],
     tintHex: '#eef3e4',
     accentHex: '#5f6b3a',
+    image: '/media/bak-ananas-rosmarino.jpg',
   },
 
   // ---------- onderste rij: noten en chocolade ----------
@@ -236,6 +239,7 @@ export const flavours: Flavour[] = [
     tags: ['klassieker'],
     tintHex: '#fbdde6',
     accentHex: '#b4544c',
+    image: '/media/bak-croccantino.jpg',
   },
 ]
 

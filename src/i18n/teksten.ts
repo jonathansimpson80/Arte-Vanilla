@@ -163,8 +163,31 @@ export const ui = {
    */
   homeKiesJeBol: { nl: 'Lekker gebak', en: 'Tasty Pastry', it: 'Dolci golosi' },
   homeHeleKaartGebak: { nl: 'De hele gebakkaart', en: 'The full pastry list', it: 'Tutti i dolci' },
-  // Alles hieronder komt uit het interview met Giulia en Simone: het roosteren
-  // en malen, de citroenen met de hand, de waterbasis, geen kleurstof.
+  // ---------- vakmanschap ----------
+  // De korte versie zoals die er stond voordat het interview verwerkt werd.
+  // Blijft staan als terugval; zie data/conceptcopy.ts.
+  homeAmbachtEyebrowKort: {
+    nl: 'De textuur van de zaak',
+    en: 'The texture of the place',
+    it: 'La texture del locale',
+  },
+  homeAmbachtKopKort: {
+    nl: 'Romig, helder, gemaakt om snel op te gaan.',
+    en: 'Creamy, clean, made to disappear fast.',
+    it: 'Cremoso, pulito, fatto per finire presto.',
+  },
+  homeAmbachtLeadKort: {
+    nl: 'Eén machine, één kleine keuken achterin, en verder zo min mogelijk. De pistache komt uit Sicilië en wordt hier zelf geroosterd en gemalen, zonder kleurstof — daarom is die groen ook geen neon.',
+    en: 'One machine, one small kitchen out back, and as little else as possible. The pistachio comes from Sicily and is roasted and ground here, no colouring — which is why the green isn’t neon.',
+    it: 'Una macchina, una cucina piccola sul retro, e il meno possibile per il resto. Il pistacchio arriva dalla Sicilia e qui lo tostiamo e maciniamo noi, senza coloranti: per questo il verde non è fluo.',
+  },
+  homeKenmerkKort3: {
+    nl: 'Zitplaatsen binnen en buiten',
+    en: 'Seats inside and out',
+    it: 'Posti dentro e fuori',
+  },
+
+  // CONCEPT — nog niet door de zaak bevestigd. Zie data/conceptcopy.ts.
   homeAmbachtEyebrow: {
     nl: 'Hoe het gemaakt wordt',
     en: 'How it’s made',
