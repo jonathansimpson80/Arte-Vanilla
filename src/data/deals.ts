@@ -88,7 +88,7 @@ export const deals: Deal[] = [
       en: 'Two layers of shortbread dipped in chocolate, with almond spread and caramelised hazelnut between them.',
       it: 'Due strati di frolla immersi nel cioccolato, con crema di mandorle e nocciola caramellata.',
     },
-    image: '/media/cioccolato.jpg',
+    image: '/media/sandwich-koekje.jpg',
     tintHex: '#f1dfd0',
     accentHex: '#5d321c',
   },

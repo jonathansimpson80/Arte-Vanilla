@@ -101,7 +101,7 @@ export const dolci: Dolce[] = [
     tags: [bevatNoten],
     allergenen: ['gluten', 'melk', 'noten'],
     price: 5.85,
-    image: '/media/cioccolato.jpg',
+    image: '/media/sandwich-koekje.jpg',
     tintHex: '#f1dfd0',
     accentHex: '#5d321c',
   },
