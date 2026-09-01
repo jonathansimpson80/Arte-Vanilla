@@ -456,6 +456,12 @@
      Vervangt de klasse `grid` op de rij; de kinderen hoeven niets te weten. */
   .carrousel {
     display: flex;
+    /* Anker voor alles wat erbinnen absoluut staat. Zonder dit valt zo'n
+       element terug op het scherm als houvast, en dan telt het op de plek
+       waar het in de rij staat mee als paginabreedte — een sr-only-label in
+       de vijfde kaart maakte de homepage zo 1406px breed op een scherm van
+       375px, en dan laat de pagina zich zijwaarts wegduwen. */
+    position: relative;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     /* Aan het einde van een rij mag de veeg niet doorslaan naar de pagina
