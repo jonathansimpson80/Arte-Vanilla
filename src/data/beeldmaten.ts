@@ -41,6 +41,7 @@ export const beeldmaten: Record<string, [number, number]> = {
   '/media/sinaas-aperol.jpg': [1400, 933],
   '/media/tiramisu.jpg': [1400, 1871],
   '/media/vitrine-bakken.jpg': [1400, 1871],
+  '/media/vitrine-dichtbij.jpg': [1672, 941],
   '/media/vitrine-gebak.jpg': [1400, 1050],
   '/media/winkel.jpg': [360, 640],
   '/media/pair.png': [1254, 1254],

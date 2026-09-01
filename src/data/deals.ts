@@ -36,7 +36,7 @@ export const deals: Deal[] = [
       it: 'Una fetta di torta della nonna con crema e pinoli, un cestino con gianduia o pistacchio, e un occhio di bue con lo stesso ripieno.',
     },
     keuzes: ['Gianduia', 'Pistache'],
-    image: '/media/vitrine-gebak.jpg',
+    image: '/media/vitrine-dichtbij.jpg',
     tintHex: '#fdf7ea',
     accentHex: '#8f5720',
   },

@@ -19,11 +19,25 @@ export function Vitrine() {
             style={{ backgroundColor: item.tintHex }}
           >
             <div className="relative">
-              <Foto
-                src={item.image}
-                alt={t(item.name)}
-                className="aspect-[16/10] w-full object-cover"
-              />
+              {item.image ? (
+                <Foto
+                  src={item.image}
+                  alt={t(item.name)}
+                  className="aspect-[16/10] w-full object-cover"
+                />
+              ) : (
+                /* Geen eigen foto: het streeppatroon met de naam erin. Zelfde
+                   oplossing als bij de smaken, en eerlijker dan het beeld van
+                   een ander gebakje lenen. */
+                <div className="stripes-soft flex aspect-[16/10] items-center justify-center px-6">
+                  <span
+                    className="wordmark text-center text-4xl opacity-60"
+                    style={{ color: item.accentHex }}
+                  >
+                    {t(item.name)}
+                  </span>
+                </div>
+              )}
               <span className="chunk absolute left-4 top-4 rounded-full bg-espresso-900/55 px-4 py-2 text-[0.7rem] sm:text-[0.6rem] text-crema-50 backdrop-blur-sm">
                 {t(ui.homeVitrineLabel)} · № {item.number}
               </span>
