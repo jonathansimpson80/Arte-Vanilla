@@ -1,6 +1,5 @@
 import { Link } from 'react-router'
 import { Scallop } from '@/components/Scallop'
-import { Scooter } from '@/motion/Scooter'
 import { openingHours } from '@/data/home'
 import { adresRegel, kaartLink, platforms } from '@/data/contact'
 import { useTaal } from '@/i18n/taal'
@@ -110,16 +109,8 @@ export function Footer() {
           ))}
         </div>
 
-        {/* De streep boven de copyrightregel is de weg. De scooter staat er
-            met zijn wielen precies op: het beeld is 52 hoog en de wielen raken
-            de grond op 49, dus hij hangt 49 pixels boven de rand. Hij zit in
-            de voettekst en rijdt dus op elke pagina. */}
-        <div className="relative border-t border-crema-50/10">
-          <Scooter kleur="licht" duur={30} className="-top-[49px] z-10" />
-
-          <div className="container-page py-6 text-xs text-crema-200/60">
-            <span>© {new Date().getFullYear()} Arte Vanilla</span>
-          </div>
+        <div className="container-page border-t border-crema-50/10 py-6 text-xs text-crema-200/60">
+          <span>© {new Date().getFullYear()} Arte Vanilla</span>
         </div>
 
         {/* Wordmark als afsluiter, in het script van het logo en gevuld in crème. */}
