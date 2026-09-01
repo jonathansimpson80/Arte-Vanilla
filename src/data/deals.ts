@@ -37,7 +37,7 @@ export const deals: Deal[] = [
     },
     keuzes: ['Gianduia', 'Pistache'],
     image: '/media/vitrine-dichtbij.jpg',
-    tintHex: '#fdf7ea',
+    tintHex: '#faeab4',
     accentHex: '#8f5720',
   },
   {

@@ -104,7 +104,7 @@ export function DealsRij() {
                   </div>
                 )}
 
-                <p className="mt-6 border-t border-dashed border-espresso-900/25 pt-4 text-xs tabular-nums text-espresso-900/50">
+                <p className="mt-6 border-t border-dashed border-espresso-900/25 pt-4 text-xs tabular-nums text-espresso-900/60">
                   € {(deal.price / deal.aantal).toFixed(2).replace('.', ',')}{' '}
                   {t(ui.aanbiedingPerStuk)}
                 </p>
@@ -121,17 +121,17 @@ export function DealsRij() {
         <Reveal y={24} scale={0.96} delay={180}>
           <li
             className="flex h-full flex-col overflow-hidden rounded-cone ring-1 ring-espresso-900/5"
-            style={{ backgroundColor: '#fdf1cf' }}
+            style={{ backgroundColor: '#eef4e4' }}
           >
             <div className="relative">
               <div className="stripes aspect-[16/10] w-full" aria-hidden="true" />
-              <div className="absolute inset-x-0 bottom-0" style={{ color: '#fdf1cf' }}>
+              <div className="absolute inset-x-0 bottom-0" style={{ color: '#eef4e4' }}>
                 <Drip className="" flip waves={4} heightClass="h-5" />
               </div>
             </div>
 
             <div className="flex flex-1 flex-col p-7">
-              <p className="chunk text-[0.72rem] sm:text-[0.65rem]" style={{ color: '#8f5720' }}>
+              <p className="chunk text-[0.72rem] sm:text-[0.65rem]" style={{ color: '#5f6b3a' }}>
                 {t(ui.dealsMeerEyebrow)}
               </p>
               <h3 className="mt-2 font-display text-2xl font-bold text-espresso-900">
@@ -141,10 +141,10 @@ export function DealsRij() {
                 {t(ui.dealsMeerLead)}
               </p>
 
-              <p className="mt-6 flex items-center gap-2 border-t border-dashed border-espresso-900/25 pt-4 text-xs text-espresso-900/50">
+              <p className="mt-6 flex items-center gap-2 border-t border-dashed border-espresso-900/25 pt-4 text-xs text-espresso-900/60">
                 <span
                   className="size-2.5 shrink-0 rounded-full"
-                  style={{ backgroundColor: '#8f5720' }}
+                  style={{ backgroundColor: '#5f6b3a' }}
                   aria-hidden="true"
                 />
                 {t(ui.vraagInWinkel)}
