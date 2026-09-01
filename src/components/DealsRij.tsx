@@ -115,34 +115,41 @@ export function DealsRij() {
 
         {/* Zesde plek in het raster. Er zijn vijf echte deals en een verzonnen
             zesde is geen optie, dus staat hier de uitnodiging die de zaak aan
-            de toonbank ook doet. */}
+            de toonbank ook doet. Zelfde opbouw als de kaarten ernaast — beeld
+            boven, tekst onder — alleen is het beeld hier het streeppatroon uit
+            het logo, want er valt geen product te fotograferen. */}
         <Reveal y={24} scale={0.96} delay={180}>
-          {/* Het streeppatroon uit het logo op volle sterkte, zonder waas
-              eroverheen. Espresso haalt 12,8:1 op het geel en 18,7:1 op de
-              crème ertussen, dus de tekst blijft leesbaar; de strepen lopen
-              alleen wel dwars achter de regels door. */}
-          <li className="relative flex h-full flex-col justify-center overflow-hidden rounded-cone p-7 ring-1 ring-espresso-900/5">
-            <span className="stripes absolute inset-0" aria-hidden="true" />
-            <span className="relative block">
-            <span className="chunk text-[0.72rem] sm:text-[0.65rem]" style={{ color: '#8f5720' }}>
-              {t(ui.dealsMeerEyebrow)}
-            </span>
-            <h3 className="mt-3 font-display text-2xl font-bold text-espresso-900">
-              {t(ui.dealsMeerKop)}
-            </h3>
-            <p className="mt-3 text-sm leading-relaxed text-espresso-900/70">
-              {t(ui.dealsMeerLead)}
-            </p>
+          <li
+            className="flex h-full flex-col overflow-hidden rounded-cone ring-1 ring-espresso-900/5"
+            style={{ backgroundColor: '#fdf1cf' }}
+          >
+            <div className="relative">
+              <div className="stripes aspect-[16/10] w-full" aria-hidden="true" />
+              <div className="absolute inset-x-0 bottom-0" style={{ color: '#fdf1cf' }}>
+                <Drip className="" flip waves={4} heightClass="h-5" />
+              </div>
+            </div>
 
-            <span className="mt-6 flex items-center gap-2 border-t border-dashed border-espresso-900/25 pt-4 text-xs text-espresso-900/50">
-              <span
-                className="size-2.5 shrink-0 rounded-full"
-                style={{ backgroundColor: '#8f5720' }}
-                aria-hidden="true"
-              />
-              {t(ui.vraagInWinkel)}
-            </span>
-            </span>
+            <div className="flex flex-1 flex-col p-7">
+              <p className="chunk text-[0.72rem] sm:text-[0.65rem]" style={{ color: '#8f5720' }}>
+                {t(ui.dealsMeerEyebrow)}
+              </p>
+              <h3 className="mt-2 font-display text-2xl font-bold text-espresso-900">
+                {t(ui.dealsMeerKop)}
+              </h3>
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-espresso-900/70">
+                {t(ui.dealsMeerLead)}
+              </p>
+
+              <p className="mt-6 flex items-center gap-2 border-t border-dashed border-espresso-900/25 pt-4 text-xs text-espresso-900/50">
+                <span
+                  className="size-2.5 shrink-0 rounded-full"
+                  style={{ backgroundColor: '#8f5720' }}
+                  aria-hidden="true"
+                />
+                {t(ui.vraagInWinkel)}
+              </p>
+            </div>
           </li>
         </Reveal>
       </Carrousel>
