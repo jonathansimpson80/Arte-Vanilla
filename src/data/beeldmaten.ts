@@ -9,7 +9,7 @@
  */
 
 export const beeldmaten: Record<string, [number, number]> = {
-  '/media/affogato.jpg': [1600, 900],
+  '/media/affogato.jpg': [1672, 941],
   '/media/bak-cioccolato.jpg': [1400, 1749],
   '/media/bak-fragola.jpg': [1400, 1749],
   '/media/bak-gianduia.jpg': [1400, 1749],

@@ -691,26 +691,30 @@ export function Afhalen() {
               {vakken.length === 0 ? (
                 <p className="mt-2 text-sm text-fragola-700">{t(ui.geenTijdvakken)}</p>
               ) : (
-                <ul className="mt-2 flex flex-wrap gap-2">
-                  {vakken.map((vak) => (
-                    <li key={vak}>
-                      <button
-                        type="button"
-                        onClick={() => setTijd(vak)}
-                        aria-pressed={tijd === vak}
-                        disabled={bezet.includes(vak)}
-                        title={bezet.includes(vak) ? t(ui.tijdvakVol) : undefined}
-                        className={`chunk rounded-full px-4 py-3 text-[0.7rem] tabular-nums transition-colors sm:px-3.5 sm:py-2 ${
-                          tijd === vak
-                            ? 'bg-espresso-900 text-crema-50'
-                            : 'bg-crema-50 text-espresso-900 ring-1 ring-espresso-900/10 hover:brightness-[0.97] disabled:cursor-not-allowed disabled:line-through disabled:opacity-40'
-                        }`}
-                      >
+                /* Een keuzelijst in plaats van losse knopjes: met kwartieren
+                   zijn het er ruim dertig, en dan is een rij pillen een muur.
+                   Een `select` geeft op een telefoon bovendien het wiel van het
+                   toestel zelf, wat sneller kiest dan mikken op een pil. */
+                <div className="mt-2 max-w-xs">
+                  <label htmlFor="ophaaltijd" className="sr-only">
+                    {t(ui.kiesTijd)}
+                  </label>
+                  <select
+                    id="ophaaltijd"
+                    name="ophaaltijd"
+                    value={tijd}
+                    onChange={(e) => setTijd(e.target.value)}
+                    className="w-full rounded-soft border-0 bg-crema-50 px-4 py-3 text-espresso-900 tabular-nums ring-1 ring-espresso-900/10 focus:ring-2 focus:ring-cacao-700"
+                  >
+                    <option value="">{t(ui.kiesTijdPlaatshouder)}</option>
+                    {vakken.map((vak) => (
+                      <option key={vak} value={vak} disabled={bezet.includes(vak)}>
                         {vak}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+                        {bezet.includes(vak) ? ` — ${t(ui.tijdvakVol)}` : ''}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               )}
             </Stap>
 

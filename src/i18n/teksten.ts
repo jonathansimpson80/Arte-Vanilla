@@ -395,6 +395,11 @@ export const ui = {
   },
   kiesDag: { nl: 'Dag', en: 'Day', it: 'Giorno' },
   kiesTijd: { nl: 'Tijdstip', en: 'Time', it: 'Orario' },
+  kiesTijdPlaatshouder: {
+    nl: 'Kies een tijd',
+    en: 'Choose a time',
+    it: 'Scegli un orario',
+  },
   geenTijdvakken: {
     nl: 'Voor deze dag zijn er geen tijden meer. Kies een andere dag.',
     en: 'No times left for this day. Pick another day.',

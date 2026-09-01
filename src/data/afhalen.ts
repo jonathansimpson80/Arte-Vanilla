@@ -116,23 +116,28 @@ export function afhaaldagen(vanaf = new Date(), aantal = 7): Date[] {
   return dagen
 }
 
+/** Stap tussen twee ophaaltijden, in minuten. */
+const STAP_MINUTEN = 15
+
 /**
- * Tijdvakken van een half uur voor één dag. Voor vandaag vervallen de vakken
- * die te dichtbij liggen, zodat de winkel de bestelling nog kan klaarzetten.
+ * Ophaaltijden voor één dag, in stappen van een kwartier binnen de
+ * openingstijden. Voor vandaag vervallen de tijden die te dichtbij liggen,
+ * zodat de winkel de bestelling nog kan klaarzetten.
  */
 export function tijdvakken(dag: Date, nu = new Date()): string[] {
   const uren = tijdenVoor(dag)
   if (!uren) return []
 
   const isVandaag = dag.toDateString() === nu.toDateString()
-  const vroegst = isVandaag ? nu.getHours() + nu.getMinutes() / 60 + VOORBEREIDING_UREN : 0
+  const vroegst = isVandaag ? nu.getHours() * 60 + nu.getMinutes() + VOORBEREIDING_UREN * 60 : 0
 
   const vakken: string[] = []
-  for (let t = uren.van; t <= uren.tot - MARGE_VOOR_SLUITING; t += 0.5) {
-    if (t < vroegst) continue
-    const uur = Math.floor(t)
-    const minuten = t % 1 === 0 ? '00' : '30'
-    vakken.push(`${String(uur).padStart(2, '0')}:${minuten}`)
+  const laatste = (uren.tot - MARGE_VOOR_SLUITING) * 60
+  for (let m = uren.van * 60; m <= laatste; m += STAP_MINUTEN) {
+    if (m < vroegst) continue
+    const uur = Math.floor(m / 60)
+    const minuut = m % 60
+    vakken.push(`${String(uur).padStart(2, '0')}:${String(minuut).padStart(2, '0')}`)
   }
   return vakken
 }
