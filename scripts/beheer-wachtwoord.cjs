@@ -35,8 +35,23 @@ const RONDES = 210000
 
 const argumenten = process.argv.slice(2)
 const naam = argumenten.find((a) => !a.startsWith('--'))
-const isBeheerder = argumenten.includes('--beheerder')
-const weghalen = argumenten.includes('--weg')
+
+/*
+ * De vlaggen komen langs twee wegen binnen.
+ *
+ * `npm run beheer:login "Giulia" --beheerder` ziet er logisch uit, maar npm
+ * pakt die vlag zelf af voordat het script hem ziet, en zet hem in
+ * `npm_config_beheerder`. Zonder deze tweede weg wordt Giulia dan stilletjes
+ * als gewone gebruiker toegevoegd in plaats van als beheerder, en dat merk je
+ * pas als ze de toegang niet blijkt te kunnen wijzigen.
+ *
+ * `npm run beheer:login -- "Giulia" --beheerder` en rechtstreeks met node doen
+ * het allebei ook; dit vangt alleen de vorm af die iedereen als eerste
+ * probeert.
+ */
+const vlag = (naam) => argumenten.includes(`--${naam}`) || Boolean(process.env[`npm_config_${naam}`])
+const isBeheerder = vlag('beheerder')
+const weghalen = vlag('weg')
 
 if (!naam) {
   console.error('Geef een naam mee: node scripts/beheer-wachtwoord.cjs "Giulia" --beheerder')

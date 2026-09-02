@@ -101,7 +101,7 @@ npm run beheer                 # bouwt public/beheer.html
 npm run beheer -- --ververs    # maakt alle voorbeeldjes van de foto's opnieuw
 npm run beheer -- --uit ~/Desktop/beheer.html   # een kopie om te mailen
 npm run beheer:letters         # haalt de lettertypes opnieuw op
-npm run beheer:login "Giulia" --beheerder       # zet iemand in de lijst
+npm run beheer:login -- "Giulia" --beheerder     # zet iemand in de lijst
 npm run beheer:toepassen bestand.json           # proefronde
 npm run beheer:toepassen bestand.json --schrijf # echt terugzetten
 ```

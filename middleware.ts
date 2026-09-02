@@ -24,7 +24,14 @@
  */
 
 import { next } from '@vercel/edge'
-import { adresVan, controleer, maakBewijs, KOEKJENAAM, uitInlogkop } from './lib/beheer-mensen'
+import {
+  adresVan,
+  controleer,
+  leesBewijs,
+  maakBewijs,
+  KOEKJENAAM,
+  uitInlogkop,
+} from './lib/beheer-mensen'
 
 export const config = {
   matcher: ['/beheer', '/beheer.html', '/beheer/:pad*'],
@@ -69,6 +76,29 @@ export default async function middleware(verzoek: Request) {
       `${KOEKJENAAM}=; Path=/; Max-Age=0; HttpOnly; Secure; SameSite=Strict`,
     )
     return antwoord
+  }
+
+  /**
+   * Eerst kijken of er al een geldig bewijsje ligt.
+   *
+   * Het wachtwoord controleren kost tweehonderdduizend rondes PBKDF2, en dat is
+   * met opzet: de repo is openbaar, dus de afdrukken zijn dat ook, en een
+   * goedkope afdruk is een uitnodiging. Maar het is ook zo'n vijftig
+   * milliseconden rekenwerk, en dit draait op de rand van het netwerk waar het
+   * tijdsbudget krap is.
+   *
+   * Het koekje dat na de eerste keer inloggen wordt gezet is met een geheim
+   * ondertekend en draagt zijn eigen houdbaarheid. Dat narekenen is een enkele
+   * HMAC. Zo betaalt alleen de eerste pagina de volle prijs.
+   *
+   * Dit maakt het slot niet zwakker: zonder het geheim is er geen geldig
+   * koekje te maken, en uitloggen gooit het weg.
+   */
+  const bewijsje = await leesBewijs(verzoek.headers.get('cookie'))
+  if (bewijsje) {
+    return url.pathname === '/beheer'
+      ? new Response(null, { status: 307, headers: { ...KOPPEN, Location: '/beheer.html' } })
+      : next({ headers: KOPPEN })
   }
 
   const kop = uitInlogkop(verzoek.headers.get('authorization'))
