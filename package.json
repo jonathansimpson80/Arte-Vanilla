@@ -5,12 +5,17 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && node tools/sitemap.mjs",
+    "build": "node scripts/beheer.cjs && tsc -b && vite build && node tools/sitemap.mjs",
     "preview": "vite preview",
     "typecheck": "tsc -b --noEmit",
-    "deploy": "node tools/deploy.mjs"
+    "deploy": "node tools/deploy.mjs",
+    "beheer": "node scripts/beheer.cjs",
+    "beheer:letters": "node scripts/beheer-fonts.cjs",
+    "beheer:toepassen": "node scripts/beheer-toepassen.cjs",
+    "beheer:login": "node scripts/beheer-wachtwoord.cjs"
   },
   "dependencies": {
+    "@vercel/edge": "^1.3.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router": "^7.18.0"

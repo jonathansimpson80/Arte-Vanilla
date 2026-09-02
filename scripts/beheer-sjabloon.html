@@ -1,0 +1,2215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>{{TITEL}}</title>
+<link rel="icon" href="{{FAVICON}}" />
+
+<!--
+  Het beheerdocument van deze site.
+
+  Een bestand, gewone HTML en JavaScript, geen framework en geen bundel. Alles
+  zit erin: de letters, het woordmerk, de voorbeeldjes van de foto's en de hele
+  inhoud van de site. Het werkt dus zonder internet en zonder map ernaast.
+  Alleen het voorbeeldvenster rechts haalt de echte site op, en dat staat uit
+  tot iemand het aanzet.
+
+  Twee talen in dit bestand, en de grens ligt bij wie het leest. Alles wat op
+  het scherm komt is Engels, want de salon leest Engels. Het commentaar en de
+  namen van variabelen en functies zijn Nederlands, want dat leest Jonathan.
+
+  De kleuren en de typografische schaal hieronder komen uit
+  src/styles/tokens.css en worden bij het bouwen ingevuld. Verandert daar een
+  kleur, dan verandert dit document mee. De donkere stand is afgeleid van
+  diezelfde tokens: de site zelf heeft er geen, dus espresso wordt de grond en
+  crema de tekst, met dezelfde accenten.
+-->
+
+<style>{{FONTS}}</style>
+
+<style>
+/* ---------------------------------------------------------------------------
+   De tokens van de site, letterlijk uit src/styles/tokens.css.
+   ------------------------------------------------------------------------- */
+{{TOKENS}}
+
+/* ---------------------------------------------------------------------------
+   Wat dit document daarvan maakt. De namen hieronder zeggen wat iets doet,
+   niet welke kleur het is: dat is het enige wat een donkere stand mogelijk
+   maakt zonder elke regel twee keer te schrijven.
+   ------------------------------------------------------------------------- */
+:root {
+  --grond: var(--color-crema-50);
+  --vlak: #ffffff;
+  --vlak-rustig: var(--color-crema-100);
+  --rand: var(--color-neutral-200);
+  --rand-zacht: var(--color-crema-200);
+  --tekst: var(--color-espresso-900);
+  --tekst-gedempt: var(--color-neutral-600);
+  --tekst-tweede: var(--color-cacao-700);
+  --accent: var(--color-vaniglia-400);
+  --accent-diep: var(--color-vaniglia-500);
+  --accent-tekst: var(--color-espresso-900);
+  --merk: var(--color-fragola-700);
+  --goed: var(--color-pistacchio-700);
+  --let-op: var(--color-fragola-700);
+  --schaduw: 0 1px 2px rgb(29 8 5 / 0.04), 0 8px 24px -12px rgb(29 8 5 / 0.18);
+  --rond: 0.75rem;
+  --rond-groot: 1.25rem;
+  --wordmark-filter: none;
+  color-scheme: light;
+}
+
+html[data-stand='donker'] {
+  --grond: var(--color-espresso-900);
+  --vlak: #2a120c;
+  --vlak-rustig: #3a1c12;
+  --rand: #4d2a1c;
+  --rand-zacht: #3d2016;
+  --tekst: var(--color-crema-50);
+  --tekst-gedempt: #c4ab97;
+  --tekst-tweede: var(--color-crema-200);
+  --accent: var(--color-vaniglia-400);
+  --accent-diep: var(--color-vaniglia-300);
+  --accent-tekst: var(--color-espresso-900);
+  --merk: var(--color-vaniglia-400);
+  --goed: var(--color-pistacchio-300);
+  --let-op: #f0928d;
+  --schaduw: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -12px rgb(0 0 0 / 0.7);
+  /* Het woordmerk is een afdruk in espresso; op een donkere grond zie je er
+     niets van. Omkeren is hier goedkoper dan een tweede bestand inbakken. */
+  --wordmark-filter: invert(1) brightness(1.6);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--grond);
+  color: var(--tekst);
+  font-family: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+button, input, textarea, select {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-cacao-700);
+  outline-offset: 2px;
+}
+
+html[data-stand='donker'] :focus-visible { outline-color: var(--accent); }
+
+/* ---------------------------------------------------------------- kopbalk */
+.balk {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0.6rem 1rem;
+  background: var(--grond);
+  border-bottom: 1px solid var(--rand);
+}
+
+.balk__merk {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: none;
+}
+
+.balk__merk img {
+  height: 26px;
+  width: auto;
+  filter: var(--wordmark-filter);
+}
+
+.balk__naam {
+  font-family: 'Baloo 2', ui-rounded, system-ui, sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--tekst-gedempt);
+  white-space: nowrap;
+}
+
+.zoek {
+  flex: 1 1 14rem;
+  min-width: 10rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--rand);
+  background: var(--vlak);
+}
+
+.knop {
+  border: 1px solid var(--rand);
+  background: var(--vlak);
+  border-radius: 999px;
+  padding: 0.42rem 0.85rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.knop:hover { border-color: var(--color-cacao-700); }
+.knop[aria-pressed='true'] { background: var(--accent); border-color: var(--accent-diep); color: var(--accent-tekst); }
+.knop--vol { background: var(--accent); border-color: var(--accent-diep); color: var(--accent-tekst); font-weight: 600; }
+.knop--klein { padding: 0.2rem 0.55rem; font-size: 0.82rem; }
+.knop--kaal { border-color: transparent; background: transparent; }
+
+.teller {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.teller__bol {
+  min-width: 1.4rem;
+  padding: 0 0.35rem;
+  height: 1.4rem;
+  border-radius: 999px;
+  background: var(--merk);
+  color: var(--color-crema-50);
+  display: inline-grid;
+  place-items: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+html[data-stand='donker'] .teller__bol { color: var(--color-espresso-900); }
+
+.wie {
+  font-size: 0.8rem;
+  color: var(--tekst-gedempt);
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------ romp */
+.romp {
+  display: grid;
+  grid-template-columns: 15rem minmax(0, 1fr) 19rem;
+  height: calc(100vh - 3.4rem);
+}
+
+.romp[data-voorbeeld='aan'] { grid-template-columns: 15rem minmax(0, 1fr) 28rem; }
+
+@media (max-width: 1100px) {
+  .romp, .romp[data-voorbeeld='aan'] { grid-template-columns: 1fr; height: auto; }
+  .zijkant { position: static; max-height: none; }
+  /* Op een smal scherm staat het voorbeeldvenster in de weg, tenzij je het
+     zelf aanzet. Dan krijgt het een eigen hoogte: een kolom in een rij die
+     zelf geen hoogte heeft wordt anders nul pixels hoog, en dan lijkt het
+     alsof het venster het niet doet. */
+  .voorbeeld { display: none; }
+  .romp[data-voorbeeld='aan'] .voorbeeld { display: flex; height: 70vh; }
+}
+
+.zijkant {
+  overflow-y: auto;
+  border-right: 1px solid var(--rand);
+  padding: 0.75rem 0.5rem 3rem;
+}
+
+.zijkant__pagina {
+  margin-top: 0.9rem;
+  padding: 0 0.5rem;
+  font-family: 'Baloo 2', ui-rounded, system-ui, sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--tekst-gedempt);
+}
+
+.zijkant__item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  border-radius: var(--rond);
+  padding: 0.34rem 0.5rem;
+  cursor: pointer;
+  color: var(--tekst-tweede);
+}
+
+.zijkant__item:hover { background: var(--vlak-rustig); }
+.zijkant__item[aria-current='true'] { background: var(--accent); color: var(--accent-tekst); font-weight: 600; }
+.zijkant__item span:first-child { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.stip { width: 0.5rem; height: 0.5rem; border-radius: 999px; background: var(--merk); flex: none; }
+.vlag { font-size: 0.7rem; color: var(--let-op); font-weight: 700; flex: none; }
+
+.midden { overflow-y: auto; padding: 1.5rem 1.5rem 6rem; }
+.midden__breed { max-width: 62rem; margin: 0 auto; }
+
+/* ------------------------------------------------------------------ blok */
+.kop-blok { margin-bottom: 1.25rem; }
+.kop-blok h2 { font-size: 1.6rem; }
+
+.wolk {
+  display: inline-block;
+  font-family: 'Baloo 2', ui-rounded, system-ui, sans-serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--tekst-gedempt);
+}
+
+.uitleg {
+  margin: 0.6rem 0 0;
+  color: var(--tekst-tweede);
+  max-width: 46rem;
+}
+
+.uitleg strong { color: var(--tekst); }
+
+.veld {
+  border-top: 1px solid var(--rand-zacht);
+  padding: 1rem 0;
+}
+
+.veld__kop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.veld__label { font-weight: 600; }
+.veld__bron { font-size: 0.74rem; color: var(--tekst-gedempt); font-family: ui-monospace, monospace; }
+
+.talen {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  align-items: start;
+}
+
+@media (max-width: 1500px) {
+  .romp[data-voorbeeld='aan'] .talen { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 900px) { .talen { grid-template-columns: 1fr; } }
+
+.taal__naam {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tekst-gedempt);
+  margin-bottom: 0.2rem;
+}
+
+.taal__naam[data-basis='ja'] { color: var(--tekst-tweede); font-weight: 700; }
+
+textarea, .invoer {
+  width: 100%;
+  border: 1px solid var(--rand);
+  border-radius: var(--rond);
+  background: var(--vlak);
+  padding: 0.5rem 0.6rem;
+  resize: vertical;
+  overflow: hidden;
+  min-height: 2.4rem;
+}
+
+textarea[data-gewijzigd='ja'] { border-color: var(--accent-diep); box-shadow: inset 3px 0 0 var(--accent); }
+textarea[data-leeg='ja'] { border-color: var(--let-op); }
+
+.schaduwtekst {
+  margin-top: 0.2rem;
+  font-size: 0.78rem;
+  color: var(--tekst-gedempt);
+  font-style: italic;
+}
+
+.eentalig-noot {
+  font-size: 0.78rem;
+  color: var(--tekst-gedempt);
+  margin-top: 0.25rem;
+}
+
+/* ----------------------------------------------------------------- foto's */
+.fotos { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: 1rem; }
+
+.foto {
+  border: 1px solid var(--rand);
+  border-radius: var(--rond-groot);
+  overflow: hidden;
+  background: var(--vlak);
+}
+
+.foto img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: var(--vlak-rustig); }
+.foto__voet { padding: 0.55rem 0.7rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.foto__pad { font-size: 0.72rem; font-family: ui-monospace, monospace; color: var(--tekst-gedempt); word-break: break-all; }
+.foto__knoppen { display: flex; gap: 0.4rem; }
+.foto__nieuw { font-size: 0.78rem; color: var(--goed); }
+
+/* ---------------------------------------------------------------- prijzen */
+table.prijzen { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
+table.prijzen th, table.prijzen td { text-align: left; padding: 0.45rem 0.5rem; border-bottom: 1px solid var(--rand-zacht); vertical-align: top; }
+table.prijzen th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--tekst-gedempt); }
+table.prijzen input { width: 6.5rem; }
+
+/* --------------------------------------------------------------- bestanden */
+.bestanden { border: 1px dashed var(--rand); border-radius: var(--rond-groot); padding: 0.9rem; margin-top: 1.5rem; }
+.bestand-rij { display: flex; align-items: center; gap: 0.5rem; padding: 0.3rem 0; font-size: 0.85rem; }
+.bestand-rij__maat { color: var(--tekst-gedempt); font-variant-numeric: tabular-nums; }
+.te-groot { color: var(--let-op); }
+
+/* -------------------------------------------------------------- voorbeeld */
+.voorbeeld { border-left: 1px solid var(--rand); display: flex; flex-direction: column; min-width: 0; }
+.voorbeeld__balk { display: flex; gap: 0.35rem; padding: 0.5rem; border-bottom: 1px solid var(--rand); flex-wrap: wrap; align-items: center; }
+.voorbeeld__adres { flex: 1 1 100%; min-width: 0; font-size: 0.78rem; padding: 0.3rem 0.5rem; border: 1px solid var(--rand); border-radius: var(--rond); background: var(--vlak); }
+.voorbeeld__vlak { flex: 1; overflow: auto; background: var(--vlak-rustig); display: grid; place-items: start center; padding: 0.5rem; }
+/**
+ * De houder is precies zo groot als het geschaalde venster.
+ *
+ * Zonder houder staat er een blok van 1280 pixels in een kolom van 450, en dan
+ * loopt het aan beide kanten over de rand. Een schuifbak kan niet naar links
+ * voorbij nul, dus schoof het hele venster naar rechts en viel de rechterkant
+ * eraf. Met een houder van de geschaalde maat is er niets om over te lopen.
+ */
+.voorbeeld__houder { position: relative; overflow: hidden; box-shadow: var(--schaduw); background: #fff; }
+.voorbeeld__houder iframe { border: 0; background: #fff; transform-origin: top left; display: block; }
+.voorbeeld__uit { padding: 1.5rem; color: var(--tekst-tweede); font-size: 0.9rem; }
+
+/* ------------------------------------------------------------- beginscherm */
+.stappen { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+.stap { border: 1px solid var(--rand); border-radius: var(--rond-groot); padding: 0.9rem 1rem; background: var(--vlak); }
+.stap__nr { font-family: 'Baloo 2', ui-rounded, system-ui, sans-serif; font-size: 1.6rem; line-height: 1; color: var(--accent-diep); }
+.kaarten { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1rem; margin-top: 1.25rem; }
+.kaart { border: 1px solid var(--rand); border-radius: var(--rond-groot); padding: 1rem; background: var(--vlak); text-align: left; cursor: pointer; }
+.kaart:hover { border-color: var(--color-cacao-700); }
+.kaart h3 { font-size: 1.05rem; }
+.kaart p { margin: 0.35rem 0 0; color: var(--tekst-tweede); font-size: 0.88rem; }
+
+.strook { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.25rem; }
+.strook > div { border: 1px solid var(--rand); border-radius: var(--rond); padding: 0.5rem 0.8rem; background: var(--vlak); }
+.strook b { font-variant-numeric: tabular-nums; }
+
+/* ------------------------------------------------------------- overzicht */
+.overzicht-rij { border-top: 1px solid var(--rand-zacht); padding: 0.75rem 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: 0.75rem; align-items: start; }
+@media (max-width: 800px) { .overzicht-rij { grid-template-columns: 1fr; } }
+.oud { color: var(--tekst-gedempt); text-decoration: line-through; }
+.nieuw { color: var(--tekst); }
+.mini { font-size: 0.74rem; color: var(--tekst-gedempt); }
+
+/* ------------------------------------------------------------------ loep */
+dialog.loep { border: 0; border-radius: var(--rond-groot); padding: 0; background: var(--vlak); max-width: 92vw; max-height: 92vh; }
+dialog.loep::backdrop { background: rgb(29 8 5 / 0.65); }
+dialog.loep img { display: block; max-width: 88vw; max-height: 78vh; }
+dialog.loep .voet { padding: 0.6rem 0.8rem; display: flex; justify-content: space-between; gap: 1rem; align-items: center; }
+
+.melding { position: fixed; left: 50%; bottom: 1.25rem; transform: translateX(-50%); background: var(--color-espresso-900); color: var(--color-crema-50); padding: 0.6rem 1rem; border-radius: 999px; box-shadow: var(--schaduw); z-index: 60; }
+html[data-stand='donker'] .melding { background: var(--color-crema-100); color: var(--color-espresso-900); }
+
+.verborgen { display: none !important; }
+</style>
+</head>
+<body>
+
+<script>
+  /*
+   * De stand vóór de eerste verf. Staat dit onderaan, dan flitst het document
+   * eerst licht op en springt daarna pas naar donker: precies de flits die je
+   * niet wilt zien als je 's avonds iets komt aanpassen.
+   */
+  try {
+    var bewaard = localStorage.getItem('beheer-stand')
+    var donker = bewaard
+      ? bewaard === 'donker'
+      : window.matchMedia('(prefers-color-scheme: dark)').matches
+    document.documentElement.dataset.stand = donker ? 'donker' : 'licht'
+  } catch (e) {
+    document.documentElement.dataset.stand = 'licht'
+  }
+</script>
+
+<header class="balk">
+  <div class="balk__merk">
+    <img src="{{WOORDMERK}}" alt="{{SITENAAM}}" />
+    <span class="balk__naam">Content</span>
+  </div>
+
+  <input class="zoek" id="zoek" type="search" placeholder="Search every text, in all three languages" aria-label="Search every text, in all three languages" />
+
+  <button class="knop" id="knop-vertalen" aria-pressed="false" title="Show only the fields where one of the three languages is empty">Needs translation</button>
+  <button class="knop teller" id="knop-teller" title="Go to the list of everything you changed">
+    <span class="teller__bol" id="teller-getal">0</span><span>changes</span>
+  </button>
+  <button class="knop" id="knop-bank">Media</button>
+  <button class="knop" id="knop-stand" title="Switch between light and dark">Dark</button>
+  <span class="wie" id="wie"></span>
+  <button class="knop" id="knop-open">Open a file</button>
+  <button class="knop" id="knop-indienen">Submit</button>
+  <button class="knop" id="knop-uitloggen">Sign out</button>
+  <button class="knop knop--vol" id="knop-opslaan">Save</button>
+  <input type="file" id="bestand-open" accept="application/json,.json" class="verborgen" />
+</header>
+
+<div class="romp" id="romp" data-voorbeeld="uit">
+  <nav class="zijkant" id="zijkant" aria-label="Pages and blocks"></nav>
+  <main class="midden"><div class="midden__breed" id="midden"></div></main>
+  <aside class="voorbeeld" id="voorbeeld">
+    <div class="voorbeeld__balk">
+      <input
+        class="voorbeeld__adres"
+        id="voorbeeld-adres"
+        type="url"
+        inputmode="url"
+        placeholder="https://your-site-address"
+        aria-label="Address of the live site"
+      />
+      <button class="knop knop--klein" data-breedte="1280">Desktop</button>
+      <button class="knop knop--klein" data-breedte="1024">Laptop</button>
+      <button class="knop knop--klein" data-breedte="390">Phone</button>
+      <button class="knop knop--klein" id="voorbeeld-terug">Back</button>
+      <button class="knop knop--klein" id="voorbeeld-ververs">Reload</button>
+      <button class="knop knop--klein" id="voorbeeld-nieuw">New tab</button>
+      <button class="knop knop--klein" id="voorbeeld-uit">Close</button>
+    </div>
+    <div class="voorbeeld__vlak" id="voorbeeld-vlak"></div>
+  </aside>
+</div>
+
+<dialog class="loep" id="loep">
+  <img id="loep-beeld" alt="" />
+  <div class="voet"><span class="mini" id="loep-pad"></span><button class="knop knop--klein" id="loep-sluit">Close</button></div>
+</dialog>
+
+<script id="gegevens" type="application/json">{{GEGEVENS}}</script>
+<script id="duimen" type="application/json">{{DUIMEN}}</script>
+
+<script>
+'use strict'
+/* ===========================================================================
+ * Het beheerdocument.
+ *
+ * Alles hieronder draait in de browser van de salon, zonder server. Wat er
+ * getypt wordt blijft in de browser staan tot iemand op Save drukt; dan valt
+ * er een JSON-bestand uit met alleen de wijzigingen. Dit document verandert de
+ * site niet zelf, en dat is met opzet: een salon die per ongeluk iets
+ * doorstuurt hoort niet meteen de site aan te passen.
+ *
+ * Elke wijziging draagt zijn eigen taal en zijn eigen oude waarde mee. Eén
+ * veld in drie talen aanpassen levert dus drie regels op, want in de code
+ * staan ze op drie verschillende plekken.
+ * ========================================================================= */
+
+const GEGEVENS = JSON.parse(document.getElementById('gegevens').textContent)
+const DUIMEN = JSON.parse(document.getElementById('duimen').textContent)
+/**
+ * Het adres van de echte site, voor het voorbeeldvenster rechts.
+ *
+ * Dit stond eerst als vaste waarde in het document, met een gok als terugval.
+ * Die gok was fout: artevanilla.nl wees naar het Instagram-profiel van de zaak,
+ * en dat weigert in een venster getoond te worden. Het venster bleef dan leeg
+ * zonder te zeggen waarom.
+ *
+ * Nu is de volgorde: wat iemand zelf heeft ingevuld, anders het adres waar dit
+ * document zelf vandaan komt (op de site staat het op /beheer.html, dus dat is
+ * per definitie het goede adres), anders wat er bij het bouwen is meegegeven.
+ * Is er niets van dat alles, dan vraagt het venster erom in plaats van iets te
+ * laden wat de site niet is.
+ */
+const GEBAKKEN_ADRES = '{{SITEURL}}'
+const KENMERK = '{{KENMERK}}'
+const SITENAAM = '{{SITENAAM}}'
+const DOCUMENTDATUM = '{{DATUM}}'
+const BESTANDSVOORVOEGSEL = '{{BESTANDSNAAM}}'
+
+/** Bestandssoorten die mee mogen, en de twee grenzen die ertoe doen. */
+const SOORTEN = ['jpg', 'jpeg', 'png', 'svg', 'pdf', 'mov', 'mp4']
+const MAX_BESTAND = 500 * 1024 * 1024
+const MAX_INGEBAKKEN = 25 * 1024 * 1024
+
+/** Het adres waar het voorbeeldvenster naartoe gaat. */
+function voorbeeldAdres() {
+  let eigen = ''
+  try {
+    eigen = localStorage.getItem('beheer-siteadres') || ''
+  } catch (e) {
+    // Een browser die niets mag bewaren valt terug op de rest.
+  }
+  if (eigen) return eigen.replace(/\/$/, '')
+
+  const vanZelf = window.location
+  if (
+    (vanZelf.protocol === 'https:' || vanZelf.protocol === 'http:') &&
+    vanZelf.hostname !== 'localhost' &&
+    vanZelf.hostname !== '127.0.0.1'
+  ) {
+    return vanZelf.origin
+  }
+
+  return GEBAKKEN_ADRES.replace(/\/$/, '')
+}
+
+function bewaarVoorbeeldAdres(adres) {
+  try {
+    if (adres) localStorage.setItem('beheer-siteadres', adres)
+    else localStorage.removeItem('beheer-siteadres')
+  } catch (e) {
+    melden('This browser will not remember the address, so you may have to type it again.')
+  }
+}
+
+/* --------------------------------------------------------------- bewaren */
+
+/**
+ * Wat er bewaard blijft als het tabblad dichtgaat.
+ *
+ * De sleutel draagt de datum van het document. Komt er een nieuwe versie van
+ * dit document, dan begint het werk niet stiekem met de wijzigingen van een
+ * document dat een andere inhoud had.
+ */
+const BEWAARSLEUTEL = 'beheer-' + BESTANDSVOORVOEGSEL + '-' + DOCUMENTDATUM
+
+const leeg = {
+  wie: '',
+  teksten: {},
+  beelden: {},
+  prijzen: {},
+  notities: {},
+  bestanden: [],
+  bank: [],
+  toegang: null,
+}
+
+let staat = laadStaat()
+
+function laadStaat() {
+  try {
+    const rauw = localStorage.getItem(BEWAARSLEUTEL)
+    if (!rauw) return structuredClone(leeg)
+    return Object.assign(structuredClone(leeg), JSON.parse(rauw))
+  } catch (e) {
+    return structuredClone(leeg)
+  }
+}
+
+function bewaar() {
+  try {
+    localStorage.setItem(BEWAARSLEUTEL, JSON.stringify(staat))
+  } catch (e) {
+    melden('Could not keep your work in this browser. Save to a file to be safe.')
+  }
+  tekenTeller()
+}
+
+/* ------------------------------------------------------------- hulpstukken */
+
+const alles = (kiezer, waar) => Array.from((waar || document).querySelectorAll(kiezer))
+const el = (id) => document.getElementById(id)
+
+function maak(soort, kenmerken, kinderen) {
+  const knoop = document.createElement(soort)
+  for (const [naam, waarde] of Object.entries(kenmerken || {})) {
+    if (naam === 'tekst') knoop.textContent = waarde
+    else if (naam === 'klasse') knoop.className = waarde
+    else if (naam.startsWith('op')) knoop.addEventListener(naam.slice(2), waarde)
+    else if (waarde !== null && waarde !== undefined) knoop.setAttribute(naam, waarde)
+  }
+  for (const kind of kinderen || []) if (kind) knoop.appendChild(kind)
+  return knoop
+}
+
+function melden(tekst) {
+  const oude = document.querySelector('.melding')
+  if (oude) oude.remove()
+  const bord = maak('div', { klasse: 'melding', tekst })
+  document.body.appendChild(bord)
+  setTimeout(() => bord.remove(), 4000)
+}
+
+/** Leest een maat in bytes als iets wat een mens kan bevatten. */
+function alsMaat(bytes) {
+  if (bytes < 1024) return bytes + ' B'
+  if (bytes < 1024 * 1024) return Math.round(bytes / 1024) + ' kB'
+  return (bytes / (1024 * 1024)).toFixed(1) + ' MB'
+}
+
+/** De sleutel waaronder een tekstwijziging staat: veld plus taal. */
+const tekstSleutel = (sleutel, taal) => sleutel + '|' + taal
+
+/** De huidige waarde van een veld in een taal, zoals hij in de code staat. */
+function bronWaarde(veld, taal) {
+  if (!veld.meertalig) return veld.waarde
+  return veld.waarden[taal] || ''
+}
+
+/* ------------------------------------------------------- alles doorzoekbaar */
+
+/** Elke module met zijn velden plat, zodat zoeken en tellen snel is. */
+const ALLE_VELDEN = []
+for (const module of GEGEVENS.modules) {
+  for (const veld of module.velden) ALLE_VELDEN.push({ module, veld })
+}
+
+/** Hoeveel van de drie talen leeg zijn in dit veld. */
+function gatenIn(veld) {
+  if (!veld.meertalig) return 0
+  let gaten = 0
+  for (const taal of GEGEVENS.talen) {
+    const nu = huidigeWaarde(veld, taal)
+    if (!nu || !nu.trim()) gaten++
+  }
+  return gaten
+}
+
+/** Wat er nu in het veld staat: de wijziging als die er is, anders de bron. */
+function huidigeWaarde(veld, taal) {
+  const sleutel = tekstSleutel(veld.sleutel, veld.meertalig ? taal : GEGEVENS.basistaal)
+  const wijziging = staat.teksten[sleutel]
+  if (wijziging) return wijziging.nieuw
+  return bronWaarde(veld, taal)
+}
+
+/** Hoeveel velden in deze module nog een gat hebben. */
+function gatenVanModule(module) {
+  let aantal = 0
+  for (const veld of module.velden) if (gatenIn(veld)) aantal++
+  return aantal
+}
+
+/** Heeft deze module een wijziging? */
+function gewijzigdeModule(module) {
+  for (const veld of module.velden) {
+    for (const taal of GEGEVENS.talen) {
+      if (staat.teksten[tekstSleutel(veld.sleutel, taal)]) return true
+    }
+  }
+  for (const beeld of module.beelden) if (staat.beelden[beeld.pad]) return true
+  for (const prijs of module.prijzen) if (staat.prijzen[prijs.sleutel]) return true
+  if (staat.notities[module.id] && staat.notities[module.id].trim()) return true
+  if (staat.bestanden.some((b) => b.blok === module.id)) return true
+  return false
+}
+
+/** Het totaal dat in de kopbalk staat. */
+function aantalWijzigingen() {
+  return (
+    Object.keys(staat.teksten).length +
+    Object.keys(staat.beelden).length +
+    Object.keys(staat.prijzen).length +
+    staat.bestanden.length +
+    staat.bank.length +
+    Object.values(staat.notities).filter((n) => n && n.trim()).length +
+    (staat.toegang ? 1 : 0)
+  )
+}
+
+/* ------------------------------------------------------------------ scherm */
+
+let scherm = { soort: 'start', module: null }
+let zoekterm = ''
+let alleenVertalen = false
+
+function tekenTeller() {
+  el('teller-getal').textContent = String(aantalWijzigingen())
+}
+
+function tekenZijkant() {
+  const zij = el('zijkant')
+  zij.textContent = ''
+
+  zij.appendChild(
+    maak('button', {
+      klasse: 'zijkant__item',
+      tekst: 'Start here',
+      'aria-current': scherm.soort === 'start' ? 'true' : 'false',
+      opclick: () => ga({ soort: 'start' }),
+    }),
+  )
+
+  for (const pagina of GEGEVENS.paginas) {
+    const eigen = GEGEVENS.modules.filter((m) => m.pagina === pagina.id)
+    if (!eigen.length) continue
+    zij.appendChild(maak('div', { klasse: 'zijkant__pagina', tekst: pagina.naam }))
+
+    for (const module of eigen) {
+      if (alleenVertalen && !gatenVanModule(module)) continue
+      const gaten = gatenVanModule(module)
+      const knop = maak(
+        'button',
+        {
+          klasse: 'zijkant__item',
+          'aria-current': scherm.module === module.id ? 'true' : 'false',
+          opclick: () => ga({ soort: 'module', module: module.id }),
+        },
+        [
+          maak('span', { tekst: module.titel }),
+          gaten ? maak('span', { klasse: 'vlag', tekst: gaten + '!' }) : null,
+          gewijzigdeModule(module) ? maak('span', { klasse: 'stip' }) : null,
+        ],
+      )
+      zij.appendChild(knop)
+    }
+  }
+
+  zij.appendChild(maak('div', { klasse: 'zijkant__pagina', tekst: 'Finishing up' }))
+  zij.appendChild(
+    maak('button', {
+      klasse: 'zijkant__item',
+      tekst: 'Everything you changed',
+      'aria-current': scherm.soort === 'overzicht' ? 'true' : 'false',
+      opclick: () => ga({ soort: 'overzicht' }),
+    }),
+  )
+  zij.appendChild(
+    maak('button', {
+      klasse: 'zijkant__item',
+      tekst: 'Photos and video to send along',
+      'aria-current': scherm.soort === 'bank' ? 'true' : 'false',
+      opclick: () => ga({ soort: 'bank' }),
+    }),
+  )
+  zij.appendChild(
+    maak('button', {
+      klasse: 'zijkant__item',
+      tekst: 'Who can sign in',
+      'aria-current': scherm.soort === 'toegang' ? 'true' : 'false',
+      opclick: () => ga({ soort: 'toegang' }),
+    }),
+  )
+}
+
+function ga(nieuw) {
+  scherm = { soort: nieuw.soort, module: nieuw.module || null }
+  teken()
+  el('midden').scrollIntoView({ block: 'start' })
+  document.querySelector('.midden').scrollTop = 0
+  if (scherm.soort === 'module') springVoorbeeld()
+}
+
+function teken() {
+  tekenZijkant()
+  tekenTeller()
+  const midden = el('midden')
+  midden.textContent = ''
+
+  if (zoekterm) {
+    tekenZoek(midden)
+    return meetStraks()
+  }
+  if (scherm.soort === 'start') return tekenStart(midden)
+  if (scherm.soort === 'overzicht') return tekenOverzicht(midden)
+  if (scherm.soort === 'bank') {
+    tekenBank(midden)
+    return meetStraks()
+  }
+  if (scherm.soort === 'toegang') return tekenToegang(midden)
+
+  const module = GEGEVENS.modules.find((m) => m.id === scherm.module)
+  if (!module) return tekenStart(midden)
+  tekenModule(midden, module)
+  meetStraks()
+}
+
+/* ------------------------------------------------------------- beginscherm */
+
+const STAPPEN = [
+  ['Pick a block', 'The list on the left follows the site from top to bottom. Every block says where it sits.'],
+  ['Change the text', 'English is on the left, Dutch and Italian beside it. Leave a language alone and it stays exactly as it is.'],
+  ['Replace a photo', 'Choose a new file. Nothing is replaced on the site yet; the file travels with your changes.'],
+  ['Check the price list', 'Prices sit in their own table. A price is a number, so it has no language.'],
+  ['Read it back', 'Everything you changed shows old and new side by side, and you can undo any line.'],
+  ['Save or submit', 'Save puts a file on your computer. Submit sends it straight to us.'],
+]
+
+function tekenStart(waar) {
+  waar.appendChild(
+    maak('div', { klasse: 'kop-blok' }, [
+      maak('span', { klasse: 'wolk', tekst: 'Content of ' + SITENAAM }),
+      maak('h2', { tekst: 'Change any text or photo on the site' }),
+      maak('p', {
+        klasse: 'uitleg',
+        tekst:
+          'This document holds every word and every photo that is on the site right now. ' +
+          'You change what you want here, and it collects your changes into one file. ' +
+          'The site itself does not change until we put your file back into it.',
+      }),
+    ]),
+  )
+
+  const t = GEGEVENS.tellingen
+  const strook = maak('div', { klasse: 'strook' })
+  strook.appendChild(maak('div', {}, [maak('span', { tekst: 'Texts from ' }), maak('b', { tekst: DOCUMENTDATUM })]))
+  strook.appendChild(maak('div', {}, [maak('b', { tekst: String(t.teksten) }), maak('span', { tekst: ' texts' })]))
+  strook.appendChild(maak('div', {}, [maak('b', { tekst: String(t.beelden) }), maak('span', { tekst: ' photos' })]))
+  strook.appendChild(maak('div', {}, [maak('b', { tekst: String(t.prijzen) }), maak('span', { tekst: ' prices' })]))
+  for (const taal of GEGEVENS.talen) {
+    const open = tellenOpenPerTaal(taal)
+    strook.appendChild(
+      maak('div', {}, [
+        maak('b', { tekst: String(open) }),
+        maak('span', { tekst: ' still to translate in ' + GEGEVENS.taalnamen[taal] }),
+      ]),
+    )
+  }
+  waar.appendChild(strook)
+
+  const stappen = maak('div', { klasse: 'stappen' })
+  STAPPEN.forEach(([kop, uitleg], i) => {
+    stappen.appendChild(
+      maak('div', { klasse: 'stap' }, [
+        maak('div', { klasse: 'stap__nr', tekst: String(i + 1) }),
+        maak('h3', { tekst: kop }),
+        maak('p', { klasse: 'uitleg', tekst: uitleg }),
+      ]),
+    )
+  })
+  waar.appendChild(stappen)
+
+  waar.appendChild(maak('h3', { tekst: 'The pages', style: 'margin-top:2rem' }))
+  const kaarten = maak('div', { klasse: 'kaarten' })
+  for (const pagina of GEGEVENS.paginas) {
+    const eigen = GEGEVENS.modules.filter((m) => m.pagina === pagina.id)
+    if (!eigen.length) continue
+    kaarten.appendChild(
+      maak('button', { klasse: 'kaart', opclick: () => ga({ soort: 'module', module: eigen[0].id }) }, [
+        maak('h3', { tekst: pagina.naam }),
+        maak('p', { tekst: pagina.uitleg }),
+        maak('p', { klasse: 'mini', tekst: eigen.length + ' blocks' }),
+      ]),
+    )
+  }
+  waar.appendChild(kaarten)
+
+  waar.appendChild(
+    maak('p', {
+      klasse: 'uitleg',
+      style: 'margin-top:2rem',
+      tekst:
+        'Your work stays in this browser while you go, so you can close the tab and come back. ' +
+        'It is only really safe once you press Save or Submit.',
+    }),
+  )
+}
+
+function tellenOpenPerTaal(taal) {
+  let open = 0
+  for (const { veld } of ALLE_VELDEN) {
+    if (!veld.meertalig) continue
+    const nu = huidigeWaarde(veld, taal)
+    if (!nu || !nu.trim()) open++
+  }
+  return open
+}
+
+/* ------------------------------------------------------------------- blok */
+
+function tekenModule(waar, module) {
+  waar.appendChild(
+    maak('div', { klasse: 'kop-blok' }, [
+      maak('span', { klasse: 'wolk', tekst: paginaNaam(module.pagina) }),
+      maak('h2', { tekst: module.titel }),
+      maak('p', { klasse: 'uitleg' }, [
+        maak('strong', { tekst: 'Where: ' }),
+        maak('span', { tekst: module.plek }),
+      ]),
+      maak('p', { klasse: 'uitleg' }, [
+        maak('strong', { tekst: 'What you change here: ' }),
+        maak('span', { tekst: module.wat }),
+      ]),
+    ]),
+  )
+
+  const velden = alleenVertalen ? module.velden.filter((v) => gatenIn(v)) : module.velden
+  for (const veld of velden) waar.appendChild(tekenVeld(veld))
+
+  if (module.beelden.length && !alleenVertalen) {
+    waar.appendChild(maak('h3', { tekst: 'Photos', style: 'margin-top:2rem' }))
+    const rooster = maak('div', { klasse: 'fotos' })
+    for (const beeld of module.beelden) rooster.appendChild(tekenBeeld(beeld))
+    waar.appendChild(rooster)
+  }
+
+  if (module.prijzen.length && !alleenVertalen) {
+    waar.appendChild(maak('h3', { tekst: 'Prices', style: 'margin-top:2rem' }))
+    waar.appendChild(tekenPrijzen(module.prijzen))
+  }
+
+  if (!alleenVertalen) {
+    waar.appendChild(tekenBestanden(module))
+    waar.appendChild(tekenNotitie(module))
+  }
+
+  if (!velden.length && alleenVertalen) {
+    waar.appendChild(maak('p', { klasse: 'uitleg', tekst: 'Nothing left to translate in this block.' }))
+  }
+}
+
+function paginaNaam(id) {
+  const pagina = GEGEVENS.paginas.find((p) => p.id === id)
+  return pagina ? pagina.naam : id
+}
+
+function tekenVeld(veld) {
+  const blok = maak('div', { klasse: 'veld' }, [
+    maak('div', { klasse: 'veld__kop' }, [
+      maak('span', { klasse: 'veld__label', tekst: veld.label }),
+      maak('span', { klasse: 'veld__bron', tekst: veld.bestand }),
+    ]),
+  ])
+
+  if (!veld.meertalig) {
+    blok.appendChild(vak(veld, GEGEVENS.basistaal, true))
+    blok.appendChild(
+      maak('p', {
+        klasse: 'eentalig-noot',
+        tekst: 'This one is the same in all three languages, so it appears once.',
+      }),
+    )
+    return blok
+  }
+
+  const rij = maak('div', { klasse: 'talen' })
+  for (const taal of GEGEVENS.talen) {
+    const kolom = maak('div', {}, [
+      maak('span', {
+        klasse: 'taal__naam',
+        'data-basis': taal === GEGEVENS.basistaal ? 'ja' : 'nee',
+        tekst: GEGEVENS.taalnamen[taal],
+      }),
+    ])
+    kolom.appendChild(vak(veld, taal, false))
+    if (!bronWaarde(veld, taal) && taal !== GEGEVENS.basistaal) {
+      kolom.appendChild(
+        maak('p', {
+          klasse: 'schaduwtekst',
+          tekst: bronWaarde(veld, GEGEVENS.basistaal),
+        }),
+      )
+    }
+    rij.appendChild(kolom)
+  }
+  blok.appendChild(rij)
+  return blok
+}
+
+/**
+ * Eén invoervak.
+ *
+ * Het groeit mee met de tekst, en de drie vakken van dezelfde regel worden na
+ * elke aanslag weer even hoog gemaakt. Zonder dat staan drie vertalingen van
+ * dezelfde zin op drie verschillende hoogtes, en dan lees je ze niet meer als
+ * elkaars gelijken.
+ */
+function vak(veld, taal, eentalig) {
+  const sleutel = tekstSleutel(veld.sleutel, taal)
+  const nu = huidigeWaarde(veld, taal)
+  const vakje = maak('textarea', {
+    rows: '1',
+    'data-sleutel': sleutel,
+    'aria-label': veld.label + ' in ' + GEGEVENS.taalnamen[taal],
+    placeholder: eentalig ? '' : 'Not translated yet',
+  })
+  vakje.value = nu
+  vakje.dataset.gewijzigd = staat.teksten[sleutel] ? 'ja' : 'nee'
+  vakje.dataset.leeg = nu.trim() ? 'nee' : 'ja'
+
+  vakje.addEventListener('input', () => {
+    const nieuw = vakje.value
+    const oorspronkelijk = bronWaarde(veld, taal)
+    if (nieuw === oorspronkelijk) delete staat.teksten[sleutel]
+    else {
+      staat.teksten[sleutel] = {
+        sleutel: veld.sleutel,
+        taal: eentalig ? 'alle' : taal,
+        bestand: veld.bestand,
+        blok: blokNaamVoor(veld),
+        label: veld.label,
+        oud: oorspronkelijk,
+        oudToen: oorspronkelijk,
+        nieuw: nieuw,
+      }
+    }
+    vakje.dataset.gewijzigd = staat.teksten[sleutel] ? 'ja' : 'nee'
+    vakje.dataset.leeg = nieuw.trim() ? 'nee' : 'ja'
+    groei(vakje)
+    gelijkTrekken(vakje)
+    bewaar()
+    tekenZijkant()
+  })
+
+  return vakje
+}
+
+/**
+ * Alle invoervakken op maat brengen.
+ *
+ * Dit gebeurt in één ronde na het tekenen, en niet per vak tijdens het bouwen.
+ * De reden is de eerste keer dat het document opengaat: de lettertypes zitten
+ * er wel in, maar zijn dan nog niet geladen. Meet je op dat moment, dan meet je
+ * de systeemletter, en die is breder: het woord "Moments" wordt dan op drie
+ * regels gerekend en elk vak wordt drie keer zo hoog als het hoeft. Het gebeurt
+ * alleen bij het openen, dus je ziet het pas als je het document een keer met
+ * een leeg cachegeheugen opent.
+ *
+ * Daarom meten we opnieuw zodra de letters er zijn, en opnieuw als het venster
+ * of de kolombreedte verandert.
+ */
+function meetAlles() {
+  for (const rij of alles('.talen', el('midden'))) {
+    const vakjes = alles('textarea', rij)
+    if (vakjes.length) gelijkTrekken(vakjes[0])
+  }
+  for (const los of alles('textarea', el('midden'))) {
+    if (!los.closest('.talen')) groei(los)
+  }
+}
+
+let meetWacht = null
+function meetStraks() {
+  if (meetWacht) cancelAnimationFrame(meetWacht)
+  meetWacht = requestAnimationFrame(() => {
+    meetWacht = null
+    meetAlles()
+  })
+}
+
+function groei(vakje) {
+  vakje.style.height = 'auto'
+  vakje.style.height = vakje.scrollHeight + 2 + 'px'
+}
+
+function gelijkTrekken(vakje) {
+  const rij = vakje.closest('.talen')
+  if (!rij) return
+  const vakjes = alles('textarea', rij)
+  let hoogste = 0
+  for (const ander of vakjes) {
+    ander.style.height = 'auto'
+    hoogste = Math.max(hoogste, ander.scrollHeight)
+  }
+  for (const ander of vakjes) ander.style.height = hoogste + 2 + 'px'
+}
+
+/** In welk blok staat dit veld? De naam gaat mee in het bestand. */
+function blokNaamVoor(veld) {
+  for (const module of GEGEVENS.modules) {
+    if (module.velden.some((v) => v.sleutel === veld.sleutel)) return module.titel
+  }
+  return ''
+}
+
+/* ------------------------------------------------------------------ foto's */
+
+/**
+ * Een foto in een blok.
+ *
+ * Vervangen gaat per bestand en niet per plek: op schijf ligt er een bestand,
+ * dus dezelfde foto op drie plekken is drie keer datzelfde bestand. Daarom
+ * staat een vervanging onder het pad en niet onder de sleutel, en verschijnt
+ * hij meteen op elke plek waar die foto staat. Staat hij ergens anders ook,
+ * dan zegt de kaart dat erbij: anders denkt iemand dat hij alleen deze ene
+ * kaart aanpast.
+ */
+function tekenBeeld(beeld) {
+  const vervangen = staat.beelden[beeld.pad]
+  const bron = vervangen && vervangen.data ? vervangen.data : DUIMEN[beeld.pad] || ''
+
+  const plaatje = maak('img', { src: bron, alt: beeld.label })
+  const kaart = maak('div', { klasse: 'foto' }, [plaatje])
+  const voet = maak('div', { klasse: 'foto__voet' }, [
+    maak('strong', { tekst: beeld.label }),
+    maak('span', { klasse: 'foto__pad', tekst: beeld.pad }),
+  ])
+
+  if (beeld.gedeeldMet && beeld.gedeeldMet.length) {
+    voet.appendChild(
+      maak('span', {
+        klasse: 'mini',
+        tekst:
+          'This is the same photo as in ' +
+          beeld.gedeeldMet.join(', ') +
+          '. Replacing it changes it there too.',
+      }),
+    )
+  }
+
+  const kiezer = maak('input', { type: 'file', accept: '.jpg,.jpeg,.png,.svg', klasse: 'verborgen' })
+  kiezer.addEventListener('change', async () => {
+    const bestand = kiezer.files && kiezer.files[0]
+    if (!bestand) return
+    const gelezen = await neemBestand(bestand)
+    if (!gelezen) return
+    staat.beelden[beeld.pad] = {
+      sleutel: beeld.sleutel,
+      bestand: beeld.bestand,
+      pad: beeld.pad,
+      label: beeld.label,
+      nieuweNaam: gelezen.naam,
+      maat: gelezen.maat,
+      data: gelezen.data,
+      losMeesturen: gelezen.losMeesturen,
+    }
+    bewaar()
+    teken()
+  })
+
+  const knoppen = maak('div', { klasse: 'foto__knoppen' }, [
+    maak('button', { klasse: 'knop knop--klein', tekst: 'Replace', opclick: () => kiezer.click() }),
+    maak('button', {
+      klasse: 'knop knop--klein',
+      tekst: 'View large',
+      opclick: () => toonLoep(bron, beeld.pad),
+    }),
+    vervangen
+      ? maak('button', {
+          klasse: 'knop knop--klein',
+          tekst: 'Undo',
+          opclick: () => {
+            delete staat.beelden[beeld.pad]
+            bewaar()
+            teken()
+          },
+        })
+      : null,
+  ])
+  voet.appendChild(knoppen)
+  if (vervangen) {
+    voet.appendChild(
+      maak('span', {
+        klasse: 'foto__nieuw',
+        tekst:
+          'New: ' +
+          vervangen.nieuweNaam +
+          ' (' +
+          alsMaat(vervangen.maat) +
+          (vervangen.losMeesturen ? ', send this file separately' : '') +
+          ')',
+      }),
+    )
+  }
+  voet.appendChild(kiezer)
+  kaart.appendChild(voet)
+  return kaart
+}
+
+function toonLoep(bron, pad) {
+  el('loep-beeld').src = bron
+  el('loep-pad').textContent = pad
+  el('loep').showModal()
+}
+
+/**
+ * Neemt een bestand aan.
+ *
+ * Tot ongeveer 25 MB gaat het bestand als data-URI mee in de JSON. Daarboven
+ * wordt alleen de naam en de maat genoteerd en moet het bestand los
+ * meegestuurd worden: een JSON van honderden megabytes komt door geen enkel
+ * mailfilter, en een browser die hem probeert te maken loopt vast.
+ */
+async function neemBestand(bestand) {
+  const staart = (bestand.name.split('.').pop() || '').toLowerCase()
+  if (!SOORTEN.includes(staart)) {
+    melden('That file type is not supported. Use ' + SOORTEN.join(', ') + '.')
+    return null
+  }
+  if (bestand.size > MAX_BESTAND) {
+    melden('That file is larger than 500 MB. Please send it to us separately.')
+    return null
+  }
+  if (bestand.size > MAX_INGEBAKKEN) {
+    return { naam: bestand.name, maat: bestand.size, data: null, losMeesturen: true }
+  }
+  const data = await new Promise((klaar) => {
+    const lezer = new FileReader()
+    lezer.onload = () => klaar(lezer.result)
+    lezer.onerror = () => klaar(null)
+    lezer.readAsDataURL(bestand)
+  })
+  if (!data) {
+    melden('Could not read that file. Try again, or send it separately.')
+    return null
+  }
+  return { naam: bestand.name, maat: bestand.size, data: data, losMeesturen: false }
+}
+
+/* ----------------------------------------------------------------- prijzen */
+
+function tekenPrijzen(rijen) {
+  const tabel = maak('table', { klasse: 'prijzen' })
+  const kop = maak('tr', {}, [
+    maak('th', { tekst: 'Item' }),
+    maak('th', { tekst: 'Group' }),
+    maak('th', { tekst: 'Price in euro' }),
+    maak('th', { tekst: '' }),
+  ])
+  tabel.appendChild(maak('thead', {}, [kop]))
+
+  const lijf = maak('tbody')
+  for (const rij of rijen) {
+    const gewijzigd = staat.prijzen[rij.sleutel]
+    const invoer = maak('input', {
+      klasse: 'invoer',
+      type: 'text',
+      inputmode: 'decimal',
+      'aria-label': 'Price for ' + (rij.naam[GEGEVENS.basistaal] || rij.sleutel),
+      placeholder: 'not set',
+    })
+    invoer.value = gewijzigd ? gewijzigd.nieuw : rij.prijs === null ? '' : String(rij.prijs)
+
+    invoer.addEventListener('input', () => {
+      const oorspronkelijk = rij.prijs === null ? '' : String(rij.prijs)
+      if (invoer.value.trim() === oorspronkelijk) delete staat.prijzen[rij.sleutel]
+      else {
+        staat.prijzen[rij.sleutel] = {
+          sleutel: rij.sleutel,
+          bestand: rij.bestand,
+          groep: rij.groep,
+          naam: rij.naam[GEGEVENS.basistaal] || rij.sleutel,
+          oud: rij.prijs,
+          nieuw: invoer.value.trim(),
+        }
+      }
+      bewaar()
+      tekenZijkant()
+    })
+
+    lijf.appendChild(
+      maak('tr', {}, [
+        maak('td', {}, [
+          maak('div', { tekst: rij.naam[GEGEVENS.basistaal] || rij.sleutel }),
+          maak('div', { klasse: 'mini', tekst: rij.toelichting[GEGEVENS.basistaal] || '' }),
+        ]),
+        maak('td', { klasse: 'mini', tekst: rij.groep }),
+        maak('td', {}, [invoer]),
+        maak('td', { klasse: 'mini', tekst: rij.prijs === null ? 'no price yet' : '' }),
+      ]),
+    )
+  }
+  tabel.appendChild(lijf)
+  return tabel
+}
+
+/* -------------------------------------------------- bestanden en notities */
+
+function tekenBestanden(module) {
+  const blokvak = maak('div', { klasse: 'bestanden' }, [
+    maak('h3', { tekst: 'Send files along' }),
+    maak('p', {
+      klasse: 'uitleg',
+      tekst:
+        'A photo, a video or a PDF that belongs with this block. Up to 500 MB each. ' +
+        'Anything over 25 MB is listed by name and has to be sent to us separately.',
+    }),
+  ])
+
+  const kiezer = maak('input', { type: 'file', multiple: 'multiple', accept: SOORTEN.map((s) => '.' + s).join(',') })
+  kiezer.addEventListener('change', async () => {
+    for (const bestand of Array.from(kiezer.files || [])) {
+      const gelezen = await neemBestand(bestand)
+      if (!gelezen) continue
+      staat.bestanden.push({
+        blok: module.id,
+        blokTitel: module.titel,
+        naam: gelezen.naam,
+        maat: gelezen.maat,
+        data: gelezen.data,
+        losMeesturen: gelezen.losMeesturen,
+      })
+    }
+    kiezer.value = ''
+    bewaar()
+    teken()
+  })
+  blokvak.appendChild(kiezer)
+
+  for (const [i, bestand] of staat.bestanden.entries()) {
+    if (bestand.blok !== module.id) continue
+    blokvak.appendChild(bestandRij(bestand, i))
+  }
+  return blokvak
+}
+
+function bestandRij(bestand, index) {
+  return maak('div', { klasse: 'bestand-rij' }, [
+    maak('span', { tekst: bestand.naam }),
+    maak('span', { klasse: 'bestand-rij__maat', tekst: alsMaat(bestand.maat) }),
+    bestand.losMeesturen ? maak('span', { klasse: 'te-groot', tekst: 'send separately' }) : null,
+    maak('button', {
+      klasse: 'knop knop--klein knop--kaal',
+      tekst: 'Remove',
+      opclick: () => {
+        staat.bestanden.splice(index, 1)
+        bewaar()
+        teken()
+      },
+    }),
+  ])
+}
+
+function tekenNotitie(module) {
+  const vakje = maak('textarea', {
+    rows: '2',
+    placeholder: 'Anything you want to tell us about this block',
+    'aria-label': 'Note about ' + module.titel,
+  })
+  vakje.value = staat.notities[module.id] || ''
+  vakje.addEventListener('input', () => {
+    staat.notities[module.id] = vakje.value
+    groei(vakje)
+    bewaar()
+    tekenZijkant()
+  })
+  return maak('div', { style: 'margin-top:1.5rem' }, [maak('h3', { tekst: 'Note for us' }), vakje])
+}
+
+/* ------------------------------------------------------------------ zoeken */
+
+function tekenZoek(waar) {
+  const term = zoekterm.toLowerCase()
+  const treffers = []
+  for (const { module, veld } of ALLE_VELDEN) {
+    if (veld.meertalig) {
+      for (const taal of GEGEVENS.talen) {
+        const waarde = huidigeWaarde(veld, taal)
+        if (waarde && waarde.toLowerCase().includes(term)) treffers.push({ module, veld, taal })
+      }
+    } else {
+      const waarde = huidigeWaarde(veld, GEGEVENS.basistaal)
+      if (waarde && waarde.toLowerCase().includes(term)) {
+        treffers.push({ module, veld, taal: null })
+      }
+    }
+  }
+
+  waar.appendChild(
+    maak('div', { klasse: 'kop-blok' }, [
+      maak('h2', { tekst: treffers.length + ' matches for "' + zoekterm + '"' }),
+      maak('p', { klasse: 'uitleg', tekst: 'Search looks in all three languages and tells you which one matched.' }),
+    ]),
+  )
+
+  const gezien = new Set()
+  for (const treffer of treffers.slice(0, 200)) {
+    const merk = treffer.veld.sleutel + '|' + (treffer.taal || 'alle')
+    if (gezien.has(merk)) continue
+    gezien.add(merk)
+    waar.appendChild(
+      maak('div', { klasse: 'veld' }, [
+        maak('div', { klasse: 'veld__kop' }, [
+          maak('span', { klasse: 'veld__label', tekst: treffer.veld.label }),
+          maak('span', {
+            klasse: 'veld__bron',
+            tekst:
+              treffer.module.titel +
+              ' - ' +
+              (treffer.taal ? GEGEVENS.taalnamen[treffer.taal] : 'all three languages'),
+          }),
+        ]),
+        maak('p', { tekst: huidigeWaarde(treffer.veld, treffer.taal || GEGEVENS.basistaal) }),
+        maak('button', {
+          klasse: 'knop knop--klein',
+          tekst: 'Open this block',
+          opclick: () => {
+            el('zoek').value = ''
+            zoekterm = ''
+            ga({ soort: 'module', module: treffer.module.id })
+          },
+        }),
+      ]),
+    )
+  }
+  if (treffers.length > 200) {
+    waar.appendChild(maak('p', { klasse: 'uitleg', tekst: 'Only the first 200 are shown. Try a longer word.' }))
+  }
+}
+
+/* --------------------------------------------------------------- overzicht */
+
+function tekenOverzicht(waar) {
+  waar.appendChild(
+    maak('div', { klasse: 'kop-blok' }, [
+      maak('h2', { tekst: 'Everything you changed' }),
+      maak('p', {
+        klasse: 'uitleg',
+        tekst: 'This is exactly what goes into the file. Old on the left, new on the right, and you can undo any line.',
+      }),
+    ]),
+  )
+
+  const wie = maak('input', { klasse: 'invoer', placeholder: 'Your name', 'aria-label': 'Your name' })
+  wie.value = staat.wie
+  wie.addEventListener('input', () => {
+    staat.wie = wie.value
+    el('wie').textContent = staat.wie ? 'Signed in as ' + staat.wie : ''
+    bewaar()
+  })
+  waar.appendChild(maak('div', { style: 'margin-bottom:1.5rem;max-width:20rem' }, [
+    maak('span', { klasse: 'taal__naam', tekst: 'Who is making these changes' }),
+    wie,
+  ]))
+
+  const teksten = Object.entries(staat.teksten)
+  if (teksten.length) {
+    waar.appendChild(maak('h3', { tekst: 'Texts (' + teksten.length + ')' }))
+    const perBlok = new Map()
+    for (const [sleutel, wijziging] of teksten) {
+      const blok = wijziging.blok || 'Other'
+      if (!perBlok.has(blok)) perBlok.set(blok, [])
+      perBlok.get(blok).push([sleutel, wijziging])
+    }
+    for (const [blok, regels] of perBlok) {
+      waar.appendChild(maak('p', { klasse: 'wolk', style: 'margin-top:1rem', tekst: blok }))
+      for (const [sleutel, wijziging] of regels) {
+        waar.appendChild(
+          maak('div', { klasse: 'overzicht-rij' }, [
+            maak('div', {}, [
+              maak('div', {
+                klasse: 'mini',
+                tekst:
+                  wijziging.label +
+                  ' - ' +
+                  (wijziging.taal === 'alle' ? 'all three languages' : GEGEVENS.taalnamen[wijziging.taal]),
+              }),
+              maak('div', { klasse: 'oud', tekst: wijziging.oud || '(empty)' }),
+            ]),
+            maak('div', { klasse: 'nieuw', tekst: wijziging.nieuw || '(empty)' }),
+            maak('button', {
+              klasse: 'knop knop--klein',
+              tekst: 'Undo',
+              opclick: () => {
+                delete staat.teksten[sleutel]
+                bewaar()
+                teken()
+              },
+            }),
+          ]),
+        )
+      }
+    }
+  }
+
+  const beelden = Object.entries(staat.beelden)
+  if (beelden.length) {
+    waar.appendChild(maak('h3', { tekst: 'Photos (' + beelden.length + ')', style: 'margin-top:2rem' }))
+    for (const [sleutel, beeld] of beelden) {
+      waar.appendChild(
+        maak('div', { klasse: 'overzicht-rij' }, [
+          maak('div', {}, [
+            maak('div', { klasse: 'mini', tekst: beeld.label }),
+            maak('div', { klasse: 'oud', tekst: beeld.pad }),
+          ]),
+          maak('div', { klasse: 'nieuw', tekst: beeld.nieuweNaam + ' (' + alsMaat(beeld.maat) + ')' }),
+          maak('button', {
+            klasse: 'knop knop--klein',
+            tekst: 'Undo',
+            opclick: () => {
+              delete staat.beelden[sleutel]
+              bewaar()
+              teken()
+            },
+          }),
+        ]),
+      )
+    }
+  }
+
+  const prijzen = Object.entries(staat.prijzen)
+  if (prijzen.length) {
+    waar.appendChild(maak('h3', { tekst: 'Prices (' + prijzen.length + ')', style: 'margin-top:2rem' }))
+    for (const [sleutel, prijs] of prijzen) {
+      waar.appendChild(
+        maak('div', { klasse: 'overzicht-rij' }, [
+          maak('div', {}, [
+            maak('div', { klasse: 'mini', tekst: prijs.naam + ' - ' + prijs.groep }),
+            maak('div', { klasse: 'oud', tekst: prijs.oud === null ? 'no price yet' : String(prijs.oud) }),
+          ]),
+          maak('div', { klasse: 'nieuw', tekst: prijs.nieuw || '(empty)' }),
+          maak('button', {
+            klasse: 'knop knop--klein',
+            tekst: 'Undo',
+            opclick: () => {
+              delete staat.prijzen[sleutel]
+              bewaar()
+              teken()
+            },
+          }),
+        ]),
+      )
+    }
+  }
+
+  const bestanden = staat.bestanden.concat(staat.bank)
+  if (bestanden.length) {
+    waar.appendChild(maak('h3', { tekst: 'Files (' + bestanden.length + ')', style: 'margin-top:2rem' }))
+    for (const bestand of bestanden) {
+      waar.appendChild(
+        maak('div', { klasse: 'bestand-rij' }, [
+          maak('span', { tekst: bestand.naam }),
+          maak('span', { klasse: 'bestand-rij__maat', tekst: alsMaat(bestand.maat) }),
+          maak('span', { klasse: 'mini', tekst: bestand.blokTitel || bestand.notitie || 'media library' }),
+          bestand.losMeesturen ? maak('span', { klasse: 'te-groot', tekst: 'send separately' }) : null,
+        ]),
+      )
+    }
+  }
+
+  const notities = Object.entries(staat.notities).filter(([, n]) => n && n.trim())
+  if (notities.length) {
+    waar.appendChild(maak('h3', { tekst: 'Notes (' + notities.length + ')', style: 'margin-top:2rem' }))
+    for (const [id, notitie] of notities) {
+      const module = GEGEVENS.modules.find((m) => m.id === id)
+      waar.appendChild(
+        maak('div', { klasse: 'overzicht-rij' }, [
+          maak('div', { klasse: 'mini', tekst: module ? module.titel : id }),
+          maak('div', { tekst: notitie }),
+          maak('button', {
+            klasse: 'knop knop--klein',
+            tekst: 'Undo',
+            opclick: () => {
+              delete staat.notities[id]
+              bewaar()
+              teken()
+            },
+          }),
+        ]),
+      )
+    }
+  }
+
+  if (!aantalWijzigingen()) {
+    waar.appendChild(maak('p', { klasse: 'uitleg', tekst: 'Nothing changed yet.' }))
+  }
+}
+
+/* ------------------------------------------------------------------- bank */
+
+function tekenBank(waar) {
+  waar.appendChild(
+    maak('div', { klasse: 'kop-blok' }, [
+      maak('h2', { tekst: 'Photos and video to send along' }),
+      maak('p', {
+        klasse: 'uitleg',
+        tekst:
+          'For anything you want us to have without knowing yet where it goes. ' +
+          'Add a note so we know what we are looking at.',
+      }),
+    ]),
+  )
+
+  const kiezer = maak('input', { type: 'file', multiple: 'multiple', accept: SOORTEN.map((s) => '.' + s).join(',') })
+  kiezer.addEventListener('change', async () => {
+    for (const bestand of Array.from(kiezer.files || [])) {
+      const gelezen = await neemBestand(bestand)
+      if (!gelezen) continue
+      staat.bank.push({
+        naam: gelezen.naam,
+        maat: gelezen.maat,
+        data: gelezen.data,
+        losMeesturen: gelezen.losMeesturen,
+        notitie: '',
+      })
+    }
+    kiezer.value = ''
+    bewaar()
+    teken()
+  })
+  waar.appendChild(kiezer)
+
+  staat.bank.forEach((bestand, i) => {
+    const notitie = maak('input', { klasse: 'invoer', placeholder: 'What is this?', 'aria-label': 'Note for ' + bestand.naam })
+    notitie.value = bestand.notitie || ''
+    notitie.addEventListener('input', () => {
+      staat.bank[i].notitie = notitie.value
+      bewaar()
+    })
+    waar.appendChild(
+      maak('div', { klasse: 'veld' }, [
+        maak('div', { klasse: 'veld__kop' }, [
+          maak('span', { klasse: 'veld__label', tekst: bestand.naam }),
+          maak('span', { klasse: 'veld__bron', tekst: alsMaat(bestand.maat) + (bestand.losMeesturen ? ' - send separately' : '') }),
+        ]),
+        notitie,
+        maak('button', {
+          klasse: 'knop knop--klein',
+          style: 'margin-top:.5rem',
+          tekst: 'Remove',
+          opclick: () => {
+            staat.bank.splice(i, 1)
+            bewaar()
+            teken()
+          },
+        }),
+      ]),
+    )
+  })
+}
+
+/* ---------------------------------------------------------------- toegang */
+
+function tekenToegang(waar) {
+  waar.appendChild(
+    maak('div', { klasse: 'kop-blok' }, [
+      maak('h2', { tekst: 'Who can sign in' }),
+      maak('p', {
+        klasse: 'uitleg',
+        tekst:
+          'Add or remove the people who can open this document. Only an administrator can do this, ' +
+          'and you have to type your own password once more to confirm.',
+      }),
+    ]),
+  )
+
+  const naam = maak('input', { klasse: 'invoer', placeholder: 'Name', 'aria-label': 'Name of the new person' })
+  const woord = maak('input', { klasse: 'invoer', type: 'password', placeholder: 'Password for this person', 'aria-label': 'Password for the new person' })
+  const beheerder = maak('input', { type: 'checkbox', id: 'nieuw-beheerder' })
+  const eigenNaam = maak('input', { klasse: 'invoer', placeholder: 'Your own name', 'aria-label': 'Your own name' })
+  const eigenWoord = maak('input', { klasse: 'invoer', type: 'password', placeholder: 'Your own password', 'aria-label': 'Your own password' })
+  eigenNaam.value = staat.wie || ''
+
+  const lijstVak = maak('div', { style: 'margin-top:1.5rem' })
+
+  async function haalLijst() {
+    lijstVak.textContent = ''
+    lijstVak.appendChild(maak('p', { klasse: 'mini', tekst: 'Loading the list...' }))
+    try {
+      const antwoord = await fetch('/api/beheer-toegang', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ actie: 'lijst', naam: eigenNaam.value, wachtwoord: eigenWoord.value }),
+      })
+      const uitslag = await antwoord.json()
+      lijstVak.textContent = ''
+      if (!antwoord.ok) {
+        lijstVak.appendChild(maak('p', { klasse: 'te-groot', tekst: uitslag.melding || 'Could not load the list.' }))
+        return
+      }
+      for (const persoon of uitslag.mensen || []) {
+        lijstVak.appendChild(
+          maak('div', { klasse: 'bestand-rij' }, [
+            maak('span', { tekst: persoon.naam }),
+            maak('span', { klasse: 'mini', tekst: persoon.beheerder ? 'administrator' : 'editor' }),
+            maak('button', {
+              klasse: 'knop knop--klein',
+              tekst: 'Remove',
+              opclick: () => stuurToegang({ actie: 'verwijder', wie: persoon.naam }),
+            }),
+          ]),
+        )
+      }
+      if (!(uitslag.mensen || []).length) {
+        lijstVak.appendChild(maak('p', { klasse: 'mini', tekst: 'Nobody in the list yet.' }))
+      }
+    } catch (fout) {
+      lijstVak.textContent = ''
+      lijstVak.appendChild(
+        maak('p', {
+          klasse: 'mini',
+          tekst: 'This document is not connected to the site right now, so the list cannot be loaded. Your change will travel in the file instead.',
+        }),
+      )
+    }
+  }
+
+  async function stuurToegang(opdracht) {
+    const lichaam = Object.assign(
+      { naam: eigenNaam.value, wachtwoord: eigenWoord.value },
+      opdracht,
+    )
+    try {
+      const antwoord = await fetch('/api/beheer-toegang', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(lichaam),
+      })
+      const uitslag = await antwoord.json()
+      if (!antwoord.ok) {
+        melden(uitslag.melding || 'That did not work.')
+        return
+      }
+      melden(uitslag.melding || 'Done.')
+      haalLijst()
+    } catch (fout) {
+      // Geen verbinding met de site: de wijziging reist mee in het bestand.
+      staat.toegang = staat.toegang || { toevoegen: [], verwijderen: [] }
+      if (opdracht.actie === 'voegtoe') {
+        staat.toegang.toevoegen.push({ naam: opdracht.wie, wachtwoord: opdracht.nieuwWachtwoord, beheerder: opdracht.beheerder })
+      } else {
+        staat.toegang.verwijderen.push(opdracht.wie)
+      }
+      bewaar()
+      melden('Not connected to the site, so this travels in your file instead.')
+    }
+  }
+
+  waar.appendChild(
+    maak('div', { klasse: 'veld' }, [
+      maak('h3', { tekst: 'Confirm it is you' }),
+      eigenNaam,
+      maak('div', { style: 'height:.4rem' }),
+      eigenWoord,
+      maak('div', { style: 'height:.4rem' }),
+      maak('button', { klasse: 'knop', tekst: 'Show the list', opclick: haalLijst }),
+    ]),
+  )
+
+  waar.appendChild(
+    maak('div', { klasse: 'veld' }, [
+      maak('h3', { tekst: 'Add someone' }),
+      naam,
+      maak('div', { style: 'height:.4rem' }),
+      woord,
+      maak('div', { style: 'height:.4rem' }),
+      maak('label', { style: 'display:flex;gap:.4rem;align-items:center' }, [
+        beheerder,
+        maak('span', { tekst: 'This person may also manage who can sign in' }),
+      ]),
+      maak('div', { style: 'height:.4rem' }),
+      maak('button', {
+        klasse: 'knop',
+        tekst: 'Add',
+        opclick: () => {
+          if (!naam.value.trim() || woord.value.length < 8) {
+            melden('Give a name and a password of at least eight characters.')
+            return
+          }
+          stuurToegang({
+            actie: 'voegtoe',
+            wie: naam.value.trim(),
+            nieuwWachtwoord: woord.value,
+            beheerder: beheerder.checked,
+          })
+          naam.value = ''
+          woord.value = ''
+        },
+      }),
+    ]),
+  )
+
+  waar.appendChild(maak('h3', { tekst: 'People', style: 'margin-top:2rem' }))
+  waar.appendChild(lijstVak)
+}
+
+/* ------------------------------------------------------------- voorbeeld */
+
+let voorbeeldBreedte = 1280
+
+function voorbeeldAan() {
+  el('romp').dataset.voorbeeld = 'aan'
+  springVoorbeeld()
+  // De middenkolom wordt smaller, dus de vakken moeten opnieuw gemeten.
+  meetStraks()
+}
+
+/** Het volledige adres van de pagina die bij het geopende blok hoort. */
+function voorbeeldDoel() {
+  const basis = voorbeeldAdres()
+  if (!basis) return ''
+  const module = GEGEVENS.modules.find((m) => m.id === scherm.module)
+  const pagina = module ? GEGEVENS.paginas.find((p) => p.id === module.pagina) : GEGEVENS.paginas[0]
+  return basis + (pagina ? pagina.route : '/') + (module && module.anker ? '#' + module.anker : '')
+}
+
+/**
+ * Zet het voorbeeldvenster op de juiste pagina.
+ *
+ * De hoogte wordt hier met een ondergrens berekend. Zonder die ondergrens komt
+ * er nul uit zodra de kolom nog geen hoogte heeft: bij het aanzetten voordat
+ * de rij is uitgerekend, of in de smalle indeling waar de rij zelf meegroeit
+ * met zijn inhoud. Het venster is dan nul pixels hoog, en dat ziet eruit als
+ * een voorbeeldvenster dat het niet doet.
+ */
+function springVoorbeeld() {
+  const vlak = el('voorbeeld-vlak')
+  if (el('romp').dataset.voorbeeld !== 'aan') return
+
+  const adres = voorbeeldDoel()
+  if (!adres) return vraagAdres()
+
+  vlak.textContent = ''
+
+  const breed = Math.max(vlak.clientWidth - 16, 280)
+  const hoog = Math.max(vlak.clientHeight - 16, 360)
+  const schaal = Math.min(1, breed / voorbeeldBreedte)
+  const raamHoogte = Math.round(hoog / schaal)
+
+  // Zonder anker in het adres, anders gebeurt er niets: de pagina bouwt zichzelf
+  // pas op nadat hij binnen is, en dan bestaat het anker nog niet.
+  const zonderAnker = adres.split('#')[0]
+  const raam = maak('iframe', { src: zonderAnker, title: 'The live site' })
+  raam.style.width = voorbeeldBreedte + 'px'
+  raam.style.height = raamHoogte + 'px'
+  raam.style.transform = 'scale(' + schaal + ')'
+
+  const houder = maak('div', { klasse: 'voorbeeld__houder' }, [raam])
+  houder.style.width = Math.round(voorbeeldBreedte * schaal) + 'px'
+  houder.style.height = Math.round(raamHoogte * schaal) + 'px'
+  vlak.appendChild(houder)
+
+  /**
+   * Springen naar het blok dat openstaat.
+   *
+   * Het adres met anker meteen laden helpt niet: de site zet zijn eigen inhoud
+   * pas neer als het javascript gedraaid heeft, en op dat moment is de browser
+   * al klaar met zoeken naar het anker. Daarom laden we eerst zonder, en zetten
+   * we het anker er daarna bij. Alleen het deel achter de hekjes verandert dan,
+   * dus de pagina laadt niet opnieuw maar schuift naar de goede plek.
+   */
+  if (adres !== zonderAnker) {
+    raam.addEventListener('load', () => {
+      setTimeout(() => {
+        if (raam.isConnected) raam.src = adres
+      }, 900)
+    }, { once: true })
+  }
+
+  /**
+   * Sommige sites weigeren in een venster van een andere pagina te staan.
+   * Van buitenaf is niet te zien of dat gebeurd is: het venster blijft leeg en
+   * de browser zegt er niets over. Daarom komt er na een paar seconden een
+   * regel onder te staan die zegt wat je dan kunt doen.
+   */
+  const waarschuwing = maak('p', {
+    klasse: 'voorbeeld__uit',
+    style: 'padding:.6rem;font-size:.8rem',
+    tekst:
+      'Nothing showing? Some sites refuse to be displayed inside another page. ' +
+      'Use New tab, or check the address above.',
+  })
+  waarschuwing.hidden = true
+  vlak.appendChild(waarschuwing)
+  setTimeout(() => {
+    waarschuwing.hidden = false
+  }, 4000)
+}
+
+/** Er is geen adres bekend; dan vragen we erom in plaats van iets te gokken. */
+function vraagAdres() {
+  const vlak = el('voorbeeld-vlak')
+  vlak.textContent = ''
+  vlak.appendChild(
+    maak('div', { klasse: 'voorbeeld__uit' }, [
+      maak('p', { tekst: 'The preview needs the address of the live site.' }),
+      maak('p', {
+        tekst: 'Type it in the box above, for example https://arte-vanilla.vercel.app, and press Reload.',
+      }),
+    ]),
+  )
+}
+
+function tekenVoorbeeldUit() {
+  const vlak = el('voorbeeld-vlak')
+  vlak.textContent = ''
+  const adres = voorbeeldAdres()
+  vlak.appendChild(
+    maak('div', { klasse: 'voorbeeld__uit' }, [
+      maak('p', { tekst: 'The preview shows the live site next to your changes.' }),
+      maak('p', { tekst: 'It is off until you turn it on, because it loads the site from the internet.' }),
+      maak('p', {
+        klasse: 'mini',
+        tekst: adres ? 'It will open ' + adres : 'No site address yet. Fill it in above.',
+      }),
+      maak('button', { klasse: 'knop knop--vol', tekst: 'Turn on the preview', opclick: voorbeeldAan }),
+    ]),
+  )
+}
+
+/* ---------------------------------------------------------- opslaan en meer */
+
+/** Het bestand dat de salon bewaart. Engelse naam, met de datum erin. */
+function bestandsnaam() {
+  const nu = new Date()
+  const datum = [
+    nu.getFullYear(),
+    String(nu.getMonth() + 1).padStart(2, '0'),
+    String(nu.getDate()).padStart(2, '0'),
+  ].join('-')
+  return BESTANDSVOORVOEGSEL + '-changes-' + datum + '.json'
+}
+
+/**
+ * Alles wat er in het bestand komt.
+ *
+ * `kenmerk` verandert nooit: daaraan herkent het toepasscript dat dit bestand
+ * uit dit document komt en niet uit iets anders.
+ *
+ * Bij elke tekst staat de oude waarde in díe taal. Staat er in het document
+ * inmiddels iets anders dan toen de wijziging werd gemaakt, dan reist
+ * `oudToen` mee, zodat het toepasscript kan waarschuwen.
+ */
+function bouwUitvoer() {
+  const teksten = Object.values(staat.teksten).map((wijziging) => {
+    const veld = ALLE_VELDEN.find((v) => v.veld.sleutel === wijziging.sleutel)
+    const nu = veld
+      ? bronWaarde(veld.veld, wijziging.taal === 'alle' ? GEGEVENS.basistaal : wijziging.taal)
+      : wijziging.oud
+    const regel = {
+      sleutel: wijziging.sleutel,
+      taal: wijziging.taal,
+      bestand: wijziging.bestand,
+      blok: wijziging.blok,
+      label: wijziging.label,
+      oud: nu,
+      nieuw: wijziging.nieuw,
+    }
+    if (nu !== wijziging.oudToen) regel.oudToen = wijziging.oudToen
+    return regel
+  })
+
+  return {
+    kenmerk: KENMERK,
+    site: SITENAAM,
+    door: staat.wie || 'unknown',
+    wanneer: new Date().toISOString(),
+    documentDatum: DOCUMENTDATUM,
+    teksten: teksten,
+    beelden: Object.values(staat.beelden).map((beeld) => {
+      // Alle plekken waar dit bestand staat, zodat het verslag bij het
+      // terugzetten laat zien wat er allemaal mee verandert.
+      const plekken = []
+      for (const module of GEGEVENS.modules) {
+        for (const kaart of module.beelden) {
+          if (kaart.pad === beeld.pad) {
+            plekken.push({ blok: module.titel, sleutel: kaart.sleutel, bestand: kaart.bestand })
+          }
+        }
+      }
+      return Object.assign({}, beeld, { plekken })
+    }),
+    prijzen: Object.values(staat.prijzen),
+    bestanden: staat.bestanden.concat(staat.bank.map((b) => Object.assign({ blok: 'media library' }, b))),
+    notities: Object.entries(staat.notities)
+      .filter(([, n]) => n && n.trim())
+      .map(([id, n]) => {
+        const module = GEGEVENS.modules.find((m) => m.id === id)
+        return { blok: module ? module.titel : id, notitie: n }
+      }),
+    toegang: staat.toegang || undefined,
+  }
+}
+
+function opslaan() {
+  if (!staat.wie) {
+    const naam = prompt('What is your name? It goes in the file so we know who made these changes.')
+    if (naam) {
+      staat.wie = naam
+      el('wie').textContent = 'Signed in as ' + naam
+      bewaar()
+    }
+  }
+  const tekst = JSON.stringify(bouwUitvoer(), null, 2)
+  const blob = new Blob([tekst], { type: 'application/json' })
+  const link = document.createElement('a')
+  link.href = URL.createObjectURL(blob)
+  link.download = bestandsnaam()
+  link.click()
+  setTimeout(() => URL.revokeObjectURL(link.href), 1000)
+  melden('Saved as ' + link.download)
+}
+
+async function indienen() {
+  if (!aantalWijzigingen()) {
+    melden('Nothing to submit yet.')
+    return
+  }
+  try {
+    const antwoord = await fetch('/api/beheer-inzending', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(bouwUitvoer()),
+    })
+    const uitslag = await antwoord.json().catch(() => ({}))
+    if (!antwoord.ok) {
+      melden(uitslag.melding || 'Could not submit. Please save the file and send it to us.')
+      return
+    }
+    melden(uitslag.melding || 'Submitted. Thank you.')
+  } catch (fout) {
+    melden('Could not reach the site. Please save the file and send it to us.')
+  }
+}
+
+function openBestand(tekst) {
+  let inhoud
+  try {
+    inhoud = JSON.parse(tekst)
+  } catch (fout) {
+    melden('That is not a file this document can read.')
+    return
+  }
+  if (inhoud.kenmerk !== KENMERK) {
+    melden('That file does not come from this document.')
+    return
+  }
+
+  staat.wie = inhoud.door && inhoud.door !== 'unknown' ? inhoud.door : staat.wie
+  for (const regel of inhoud.teksten || []) {
+    const taal = regel.taal === 'alle' ? GEGEVENS.basistaal : regel.taal
+    staat.teksten[tekstSleutel(regel.sleutel, taal)] = {
+      sleutel: regel.sleutel,
+      taal: regel.taal,
+      bestand: regel.bestand,
+      blok: regel.blok,
+      label: regel.label,
+      oud: regel.oud,
+      oudToen: regel.oudToen || regel.oud,
+      nieuw: regel.nieuw,
+    }
+  }
+  for (const beeld of inhoud.beelden || []) staat.beelden[beeld.pad] = beeld
+  for (const prijs of inhoud.prijzen || []) staat.prijzen[prijs.sleutel] = prijs
+  for (const notitie of inhoud.notities || []) {
+    const module = GEGEVENS.modules.find((m) => m.titel === notitie.blok)
+    if (module) staat.notities[module.id] = notitie.notitie
+  }
+  // De meegestuurde bestanden horen er ook weer bij. Wat uit de beeldbank
+  // kwam draagt dat als blok en gaat daar terug in; de rest hoort bij een blok.
+  for (const bestand of inhoud.bestanden || []) {
+    if (bestand.blok === 'media library') {
+      staat.bank.push({
+        naam: bestand.naam,
+        maat: bestand.maat,
+        data: bestand.data,
+        losMeesturen: bestand.losMeesturen,
+        notitie: bestand.notitie || '',
+      })
+      continue
+    }
+    const module = GEGEVENS.modules.find((m) => m.titel === bestand.blokTitel)
+    staat.bestanden.push(
+      Object.assign({}, bestand, { blok: module ? module.id : bestand.blok }),
+    )
+  }
+  bewaar()
+  el('wie').textContent = staat.wie ? 'Signed in as ' + staat.wie : ''
+  teken()
+  melden('Opened. Your earlier changes are back.')
+}
+
+/* ------------------------------------------------------------------ knopen */
+
+el('zoek').addEventListener('input', (gebeurtenis) => {
+  zoekterm = gebeurtenis.target.value.trim()
+  teken()
+})
+
+el('knop-vertalen').addEventListener('click', () => {
+  alleenVertalen = !alleenVertalen
+  el('knop-vertalen').setAttribute('aria-pressed', alleenVertalen ? 'true' : 'false')
+  teken()
+})
+
+el('knop-teller').addEventListener('click', () => ga({ soort: 'overzicht' }))
+el('knop-bank').addEventListener('click', () => ga({ soort: 'bank' }))
+
+el('knop-stand').addEventListener('click', () => {
+  const donker = document.documentElement.dataset.stand === 'donker'
+  document.documentElement.dataset.stand = donker ? 'licht' : 'donker'
+  el('knop-stand').textContent = donker ? 'Dark' : 'Light'
+  try {
+    localStorage.setItem('beheer-stand', donker ? 'licht' : 'donker')
+  } catch (e) {
+    // Een browser die niets mag bewaren mag ook gewoon licht blijven.
+  }
+})
+
+el('knop-opslaan').addEventListener('click', opslaan)
+el('knop-indienen').addEventListener('click', indienen)
+el('knop-uitloggen').addEventListener('click', () => {
+  window.location.href = '/beheer/uitloggen'
+})
+el('knop-open').addEventListener('click', () => el('bestand-open').click())
+el('bestand-open').addEventListener('change', () => {
+  const bestand = el('bestand-open').files[0]
+  if (!bestand) return
+  const lezer = new FileReader()
+  lezer.onload = () => openBestand(String(lezer.result))
+  lezer.readAsText(bestand)
+  el('bestand-open').value = ''
+})
+
+el('loep-sluit').addEventListener('click', () => el('loep').close())
+
+for (const knop of alles('[data-breedte]')) {
+  knop.addEventListener('click', () => {
+    voorbeeldBreedte = Number(knop.dataset.breedte)
+    voorbeeldAan()
+  })
+}
+el('voorbeeld-terug').addEventListener('click', () => {
+  const raam = document.querySelector('#voorbeeld-vlak iframe')
+  if (raam) raam.contentWindow.history.back()
+})
+el('voorbeeld-ververs').addEventListener('click', springVoorbeeld)
+
+el('voorbeeld-adres').value = voorbeeldAdres()
+el('voorbeeld-adres').addEventListener('change', () => {
+  const getypt = el('voorbeeld-adres').value.trim().replace(/\/$/, '')
+  bewaarVoorbeeldAdres(getypt)
+  el('voorbeeld-adres').value = voorbeeldAdres()
+  if (el('romp').dataset.voorbeeld === 'aan') springVoorbeeld()
+  else tekenVoorbeeldUit()
+})
+el('voorbeeld-nieuw').addEventListener('click', () => {
+  const adres = voorbeeldDoel()
+  if (!adres) {
+    melden('Fill in the address of the live site first.')
+    return
+  }
+  window.open(adres, '_blank')
+})
+el('voorbeeld-uit').addEventListener('click', () => {
+  el('romp').dataset.voorbeeld = 'uit'
+  tekenVoorbeeldUit()
+  meetStraks()
+})
+
+// De letters komen na de eerste verf binnen; dan kloppen de maten pas.
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(meetStraks)
+
+let venstertimer = null
+window.addEventListener('resize', () => {
+  clearTimeout(venstertimer)
+  venstertimer = setTimeout(() => {
+    meetStraks()
+    springVoorbeeld()
+  }, 150)
+})
+
+window.addEventListener('beforeunload', (gebeurtenis) => {
+  if (!aantalWijzigingen()) return
+  gebeurtenis.preventDefault()
+  gebeurtenis.returnValue = ''
+})
+
+/* ------------------------------------------------------------------- start */
+
+el('knop-stand').textContent = document.documentElement.dataset.stand === 'donker' ? 'Light' : 'Dark'
+el('wie').textContent = staat.wie ? 'Signed in as ' + staat.wie : ''
+tekenVoorbeeldUit()
+teken()
+</script>
+</body>
+</html>

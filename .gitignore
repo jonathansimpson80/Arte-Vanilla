@@ -20,3 +20,15 @@ dist/
 # Wil je alsnog automatisch deployen bij elke push, haal deze regel dan weg
 # nadat je je token de `workflow`-scope hebt gegeven.
 .github/workflows/deploy.yml
+
+# Het beheerdocument wordt bij elke build gemaakt uit de bron; het hoort dus
+# niet in de repo. `npm run beheer` zet hem hier neer, `npm run build` ook.
+public/beheer.html
+
+# Wat de salon meestuurt met een inzending. Foto's en video horen niet in de
+# geschiedenis van de code; ze gaan door tools/beelden.mjs en komen daarna in
+# public/media terecht.
+aangeleverd/
+
+# Kopieen van het beheerdocument om te bekijken of te mailen.
+voorbeeld/

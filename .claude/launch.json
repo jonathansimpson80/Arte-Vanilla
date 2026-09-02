@@ -6,6 +6,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "port": 5173
+    },
+    {
+      "name": "beheerdocument",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "http-server", "voorbeeld", "-p", "5199", "-c-1", "--silent"],
+      "port": 5199
     }
   ]
 }
