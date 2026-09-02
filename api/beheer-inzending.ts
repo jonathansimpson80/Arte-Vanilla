@@ -22,7 +22,7 @@ import {
   controleer,
   leesBewijs,
   uitInlogkop,
-} from '../lib/beheer-mensen'
+} from '../lib/beheer-mensen.ts'
 import {
   MAX_INZENDING,
   duwAchteraan,
@@ -30,7 +30,7 @@ import {
   leesLijst,
   opslagWerkt,
   schrijfLijst,
-} from '../lib/beheer-opslag'
+} from '../lib/beheer-opslag.ts'
 
 const SLEUTEL = 'beheer:inzendingen'
 

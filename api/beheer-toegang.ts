@@ -25,8 +25,8 @@ import {
   maakAfdruk,
   nieuwZout,
   type Persoon,
-} from '../lib/beheer-mensen'
-import { erIsOpslag, schrijf } from '../lib/beheer-opslag'
+} from '../lib/beheer-mensen.ts'
+import { erIsOpslag, schrijf } from '../lib/beheer-opslag.ts'
 
 function antwoord(gegevens: unknown, code = 200) {
   return new Response(JSON.stringify(gegevens), {

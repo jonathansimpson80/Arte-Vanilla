@@ -23,8 +23,17 @@
  * die beschikbaar is.
  */
 
-import { lees, telOp, stand, wis, erIsOpslag } from './beheer-opslag'
-import { mensen as repoLijst } from './beheer-toegang'
+/*
+ * De .ts erachter hoort er te staan, en dat is geen slordigheid.
+ *
+ * Deze repo is `"type": "module"`, en Vercel draait de functies rechtstreeks
+ * met de TypeScript-ondersteuning van Node in plaats van ze te bundelen. De
+ * ESM-resolver van Node raadt geen extensies: zonder .ts valt de functie om
+ * met ERR_MODULE_NOT_FOUND, en dat merk je pas bij het aanroepen, want bij het
+ * bouwen wordt er niets opgezocht.
+ */
+import { lees, telOp, stand, wis, erIsOpslag } from './beheer-opslag.ts'
+import { mensen as repoLijst } from './beheer-toegang.ts'
 
 export type Persoon = {
   naam: string
