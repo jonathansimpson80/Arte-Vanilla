@@ -62,8 +62,15 @@ const REM_SECONDEN = 10 * 60
  */
 const geheugenRem = new Map<string, { aantal: number; tot: number }>()
 
-function hexNaarBytes(hex: string): Uint8Array {
-  const uit = new Uint8Array(hex.length / 2)
+/**
+ * Een eigen buffer, en niet zomaar een Uint8Array.
+ *
+ * `crypto.subtle` wil een BufferSource die op een gewone ArrayBuffer staat. Een
+ * kale `new Uint8Array(n)` mag van TypeScript ook op een gedeelde buffer staan,
+ * en dan past hij niet. Zo staat het vast.
+ */
+function hexNaarBytes(hex: string): Uint8Array<ArrayBuffer> {
+  const uit = new Uint8Array(new ArrayBuffer(hex.length / 2))
   for (let i = 0; i < uit.length; i++) uit[i] = parseInt(hex.slice(i * 2, i * 2 + 2), 16)
   return uit
 }

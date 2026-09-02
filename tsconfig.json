@@ -1,7 +1,21 @@
 {
+  /*
+   * De wortel wijst alleen naar de drie deelprojecten; `tsc -b` doet de rest.
+   *
+   * De twee opties hieronder staan er voor het platform, niet voor ons. Vercel
+   * compileert de middleware met zijn eigen aanroep en pakt daarbij deze
+   * tsconfig. Zonder `allowImportingTsExtensions` weigert het de imports die op
+   * .ts eindigen, en die extensies zijn nodig: deze repo is `"type": "module"`
+   * en de functies draaien als gewone ESM, waar Node geen extensies raadt.
+   */
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
+    { "path": "./tsconfig.node.json" },
+    { "path": "./tsconfig.server.json" }
   ]
 }

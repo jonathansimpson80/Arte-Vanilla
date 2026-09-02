@@ -1,0 +1,35 @@
+{
+  /*
+   * De serverkant: de middleware, de serverloze functies en wat ze delen.
+   *
+   * Die stonden buiten elke typecontrole, want tsconfig.app.json kijkt alleen
+   * naar src/. Daardoor bleven twee echte fouten staan tot ze in productie
+   * omvielen. Nu loopt `npm run build` er ook overheen.
+   *
+   * `allowImportingTsExtensions` moet aan: deze repo is `"type": "module"` en
+   * Vercel draait de functies rechtstreeks met de TypeScript-ondersteuning van
+   * Node. De ESM-resolver raadt geen extensies, dus de imports moeten op .ts
+   * eindigen, en dan wil TypeScript deze vlag zien.
+   */
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023", "DOM"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "types": ["node"],
+
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "erasableSyntaxOnly": true,
+
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.server.tsbuildinfo"
+  },
+  "include": ["api", "lib", "middleware.ts"]
+}
