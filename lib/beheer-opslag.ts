@@ -53,6 +53,27 @@ async function roep(opdracht: (string | number)[]): Promise<unknown> {
   return uitslag.result
 }
 
+/**
+ * Doet de opslag het echt?
+ *
+ * `erIsOpslag` zegt alleen dat de twee variabelen ingevuld zijn, niet dat ze
+ * kloppen. Een adres met een aanhalingsteken erin of een half gekopieerde
+ * sleutel geeft precies hetzelfde beeld als helemaal geen opslag: elke
+ * schrijfpoging mislukt stil en elke lijst komt leeg terug. Dat verschil moet
+ * je kunnen zien zonder in de logs te duiken, want anders zoek je bij de
+ * verkeerde oorzaak.
+ *
+ * PING is de goedkoopste opdracht die er is en verandert niets.
+ */
+export async function opslagWerkt(): Promise<'niet-ingesteld' | 'onbereikbaar' | 'werkt'> {
+  if (!erIsOpslag) return 'niet-ingesteld'
+  try {
+    return (await roep(['PING'])) === 'PONG' ? 'werkt' : 'onbereikbaar'
+  } catch {
+    return 'onbereikbaar'
+  }
+}
+
 /** Leest een waarde. Geen opslag of niets gevonden levert null. */
 export async function lees<T>(sleutel: string): Promise<T | null> {
   if (!erIsOpslag) return null

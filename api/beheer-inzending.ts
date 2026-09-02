@@ -28,6 +28,7 @@ import {
   duwAchteraan,
   erIsOpslag,
   leesLijst,
+  opslagWerkt,
   schrijfLijst,
 } from '../lib/beheer-opslag'
 
@@ -68,9 +69,12 @@ export async function GET(verzoek: Request) {
   const alles = await leesLijst<Inzending>(SLEUTEL)
   const wachtend = alles.filter((item) => item.stand === 'nieuw').length
 
+  // Zonder wachtwoord alleen een getal en de staat van de opslag. Dat verraadt
+  // niets over de inhoud, en het is het enige wat je van buitenaf nodig hebt om
+  // te zien of het bewaren werkt.
   const wie = await wieIsDit(verzoek)
   if (!wie || !wie.beheerder) {
-    return antwoord({ wachtend, opslag: erIsOpslag })
+    return antwoord({ wachtend, opslag: await opslagWerkt() })
   }
 
   const url = new URL(verzoek.url)
@@ -83,7 +87,7 @@ export async function GET(verzoek: Request) {
 
   return antwoord({
     wachtend,
-    opslag: erIsOpslag,
+    opslag: await opslagWerkt(),
     inzendingen: alles.map((item) => ({
       id: item.id,
       ontvangen: item.ontvangen,
