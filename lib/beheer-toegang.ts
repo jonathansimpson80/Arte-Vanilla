@@ -32,4 +32,12 @@ export type Login = {
   beheerder?: boolean
 }
 
-export const mensen: Login[] = []
+export const mensen: Login[] = [
+  {
+    naam: "Jonathan",
+    zout: '62634bb72ca33fe5c1bedc16072da9e9',
+    afdruk: '3a77f4b91feb4e3795918f819db4205e3e0fc0678da7cca25657176a38a82f3a',
+    iteraties: 210000,
+    beheerder: true,
+  },
+]
