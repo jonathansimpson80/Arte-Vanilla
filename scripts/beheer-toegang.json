@@ -1,4 +1,0 @@
-{
-  "_uitleg": "Wie het beheerdocument op /beheer mag openen. Per persoon staat hier alleen een afdruk van het wachtwoord: PBKDF2-SHA256 met een eigen zout. Er staat nooit een wachtwoord in dit bestand. Iemand toevoegen doe je met `node scripts/beheer-wachtwoord.cjs \"Naam\" --beheerder`, of vanuit het beheerdocument zelf onder 'Who can sign in'. Is deze lijst leeg, dan valt het slot terug op BEHEER_LOGINS of BEHEER_WACHTWOORD in de omgeving; staat daar ook niets, dan gaat de deur op slot en niet open.",
-  "mensen": []
-}

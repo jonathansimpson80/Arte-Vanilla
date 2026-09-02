@@ -29,7 +29,7 @@ const SJABLOON = path.join(__dirname, 'beheer-sjabloon.html')
 const FONTS = path.join(__dirname, 'beheer-fonts.css')
 const DUIMEN = path.join(__dirname, 'beheer-duimen.json')
 const DUIMSCRIPT = path.join(__dirname, 'beheer-duimen.py')
-const TOEGANG = path.join(__dirname, 'beheer-toegang.json')
+const TOEGANG = path.join(WORTEL, 'lib', 'beheer-toegang.ts')
 const TOKENS = path.join(WORTEL, 'src', 'styles', 'tokens.css')
 const PUBLIEK = path.join(WORTEL, 'public')
 
@@ -200,12 +200,18 @@ function leesSiteAdres() {
   return SITEADRES
 }
 
-/** Wie het document mag openen; alleen de namen, nooit de afdrukken. */
+/**
+ * Wie het document mag openen; alleen de namen, nooit de afdrukken.
+ *
+ * De lijst wordt uitgevoerd en niet gelezen als tekst: het is een
+ * TypeScript-module, en dezelfde lader die de contentbestanden inleest kan hem
+ * gewoon draaien.
+ */
 function leesToegang() {
   if (!fs.existsSync(TOEGANG)) return []
   try {
-    const inhoud = JSON.parse(fs.readFileSync(TOEGANG, 'utf8'))
-    return (inhoud.mensen || []).map((p) => `${p.naam}${p.beheerder ? ' (beheerder)' : ''}`)
+    const mensen = laadModule(TOEGANG).mensen || []
+    return mensen.map((p) => `${p.naam}${p.beheerder ? ' (beheerder)' : ''}`)
   } catch (fout) {
     return []
   }
@@ -320,7 +326,7 @@ function verslag(gegevens, extra) {
   if (extra.toegang.length) {
     for (const wie of extra.toegang) regels.push(`    ${wie}`)
   } else {
-    regels.push('    niemand in scripts/beheer-toegang.json')
+    regels.push('    niemand in lib/beheer-toegang.ts')
     regels.push('    terugval: BEHEER_LOGINS of BEHEER_WACHTWOORD in de omgeving')
     regels.push('    staat daar ook niets, dan gaat /beheer op slot en niet open')
   }

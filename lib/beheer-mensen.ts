@@ -5,7 +5,7 @@
  *
  * 1. De sleutelopslag, als die er is. Daar zet het beheerdocument zelf de
  *    lijst neer als een beheerder iemand toevoegt, en dan geldt dat meteen.
- * 2. `scripts/beheer-toegang.json` in de repo. Per persoon staat daar alleen
+ * 2. `lib/beheer-toegang.ts` in de repo. Per persoon staat daar alleen
  *    een afdruk: PBKDF2-SHA256 met een eigen zout. Er staat nooit een
  *    wachtwoord in de repo, ook niet versleuteld.
  * 3. De omgeving, als de lijst leeg is. `BEHEER_LOGINS` met regels
@@ -23,8 +23,8 @@
  * die beschikbaar is.
  */
 
-import { lees, telOp, stand, wis, erIsOpslag } from './_beheer-opslag.ts'
-import repoLijst from '../scripts/beheer-toegang.json' with { type: 'json' }
+import { lees, telOp, stand, wis, erIsOpslag } from './beheer-opslag'
+import { mensen as repoLijst } from './beheer-toegang'
 
 export type Persoon = {
   naam: string
@@ -104,8 +104,7 @@ function gelijk(a: string, b: string) {
 export async function haalMensen(): Promise<Persoon[]> {
   const uitOpslag = await lees<Persoon[]>(OPSLAGSLEUTEL)
   if (uitOpslag && uitOpslag.length) return uitOpslag
-  const uitRepo = (repoLijst as { mensen?: Persoon[] }).mensen
-  return Array.isArray(uitRepo) ? uitRepo : []
+  return Array.isArray(repoLijst) ? (repoLijst as Persoon[]) : []
 }
 
 /** De terugval uit de omgeving, als de lijst leeg is. */

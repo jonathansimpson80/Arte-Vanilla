@@ -22,14 +22,14 @@ import {
   controleer,
   leesBewijs,
   uitInlogkop,
-} from './_beheer-mensen.ts'
+} from '../lib/beheer-mensen'
 import {
   MAX_INZENDING,
   duwAchteraan,
   erIsOpslag,
   leesLijst,
   schrijfLijst,
-} from './_beheer-opslag.ts'
+} from '../lib/beheer-opslag'
 
 const SLEUTEL = 'beheer:inzendingen'
 

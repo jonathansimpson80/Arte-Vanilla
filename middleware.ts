@@ -24,7 +24,7 @@
  */
 
 import { next } from '@vercel/edge'
-import { adresVan, controleer, maakBewijs, KOEKJENAAM, uitInlogkop } from './api/_beheer-mensen.ts'
+import { adresVan, controleer, maakBewijs, KOEKJENAAM, uitInlogkop } from './lib/beheer-mensen'
 
 export const config = {
   matcher: ['/beheer', '/beheer.html', '/beheer/:pad*'],

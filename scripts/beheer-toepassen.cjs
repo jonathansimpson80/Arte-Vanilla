@@ -477,7 +477,7 @@ for (const bestand of inzending.bestanden || []) {
 if (inzending.toegang) {
   opmerkingen.push(
     'Dit bestand bevat een wijziging in wie er mag inloggen. Die is niet automatisch ' +
-      'doorgevoerd: zet hem met de hand in scripts/beheer-toegang.json, of gebruik ' +
+      'doorgevoerd: zet hem met de hand in lib/beheer-toegang.ts, of gebruik ' +
       'het beheerdocument terwijl de site bereikbaar is.',
   )
 }

@@ -87,8 +87,10 @@ waarde in de code op en zet de nieuwe ervoor in de plaats.
 | `scripts/beheer-fonts.cjs` | Bakt de vier lettertypes in als data-URI in `beheer-fonts.css` |
 | `scripts/beheer-duimen.py` | Maakt de voorbeeldjes van de foto's met Pillow, in `beheer-duimen.json` |
 | `scripts/beheer-toepassen.cjs` | Zet een ingezonden bestand terug in de code |
-| `scripts/beheer-wachtwoord.cjs` | Zet iemand in de lijst met logins |
+| `scripts/beheer-wachtwoord.cjs` | Zet iemand in de lijst met logins (`lib/beheer-toegang.ts`) |
 | `middleware.ts` | Het slot op `/beheer` |
+| `lib/beheer-mensen.ts` | Wie mag inloggen, en of het wachtwoord klopt |
+| `lib/beheer-opslag.ts` | De weg naar de sleutelopslag; zonder opslag geeft die leeg terug |
 | `api/beheer-inzending.ts` | Inzendingen aannemen, tonen, goedkeuren, weggooien |
 | `api/beheer-toegang.ts` | De lijst met logins lezen en bijwerken |
 
@@ -124,11 +126,11 @@ site gewoon; alleen het beheerdocument valt dan terug op minder.
 | Naam | Waarvoor | Zonder |
 |---|---|---|
 | `BEHEER_GEHEIM` | Ondertekent het bewijsje dat de middleware na het inloggen meegeeft aan de twee serverfuncties | "Submit" werkt niet; het document zegt dat de salon het bestand kan opslaan en opsturen |
-| `BEHEER_LOGINS` | Terugval zolang `scripts/beheer-toegang.json` leeg is; regels `naam:wachtwoord`, gescheiden door komma's of regeleindes | Zie `BEHEER_WACHTWOORD` |
+| `BEHEER_LOGINS` | Terugval zolang `lib/beheer-toegang.ts` leeg is; regels `naam:wachtwoord`, gescheiden door komma's of regeleindes | Zie `BEHEER_WACHTWOORD` |
 | `BEHEER_WACHTWOORD` | Eén gedeeld wachtwoord, als er ook geen `BEHEER_LOGINS` is | Staat er niets én is de lijst leeg, dan gaat `/beheer` op slot en niet open |
 | `KV_REST_API_URL` en `KV_REST_API_TOKEN` | Sleutelopslag voor inzendingen, de lijst met logins en de rem op verkeerde wachtwoorden. `UPSTASH_REDIS_REST_URL` en `UPSTASH_REDIS_REST_TOKEN` werken ook | Inzendingen kunnen niet bewaard worden (het document zegt dat in het Engels), de lijst komt uit de repo, en de rem telt alleen binnen één machine |
 
-De wachtwoorden zelf staan nergens in de repo. In `scripts/beheer-toegang.json`
+De wachtwoorden zelf staan nergens in de repo. In `lib/beheer-toegang.ts`
 staat per persoon alleen een afdruk: PBKDF2-SHA256 met een eigen zout.
 
 ### Een inzending terugzetten
