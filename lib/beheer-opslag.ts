@@ -65,12 +65,23 @@ async function roep(opdracht: (string | number)[]): Promise<unknown> {
  *
  * PING is de goedkoopste opdracht die er is en verandert niets.
  */
-export async function opslagWerkt(): Promise<'niet-ingesteld' | 'onbereikbaar' | 'werkt'> {
+export async function opslagWerkt(): Promise<string> {
   if (!erIsOpslag) return 'niet-ingesteld'
   try {
-    return (await roep(['PING'])) === 'PONG' ? 'werkt' : 'onbereikbaar'
-  } catch {
-    return 'onbereikbaar'
+    const antwoord = await fetch(ADRES, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${SLEUTEL}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(['PING']),
+    })
+    // De reden erbij, want "onbereikbaar" alleen laat je raden welke van de
+    // twee waarden fout is. 401 is de sleutel, een fout bij het opbouwen van
+    // het verzoek is het adres. Er gaat niets uit dit antwoord wat geheim is:
+    // alleen een getal en een soortnaam.
+    if (!antwoord.ok) return `onbereikbaar (${antwoord.status})`
+    const uitslag = (await antwoord.json()) as { result?: unknown }
+    return uitslag.result === 'PONG' ? 'werkt' : 'onbereikbaar (onverwacht antwoord)'
+  } catch (fout) {
+    return `onbereikbaar (${fout instanceof Error ? fout.name : 'onbekend'})`
   }
 }
 
