@@ -86,9 +86,10 @@ waarde in de code op en zet de nieuwe ervoor in de plaats.
 | `scripts/beheer-sjabloon.html` | Het scherm zelf: gewone HTML en JavaScript, geen framework |
 | `scripts/beheer-fonts.cjs` | Bakt de vier lettertypes in als data-URI in `beheer-fonts.css` |
 | `scripts/beheer-duimen.py` | Maakt de voorbeeldjes van de foto's met Pillow, in `beheer-duimen.json` |
+| `scripts/beheer-wordmerk.cjs` | Bakt het woordmerk in als data-URI voor het inlogscherm |
 | `scripts/beheer-toepassen.cjs` | Zet een ingezonden bestand terug in de code |
 | `scripts/beheer-wachtwoord.cjs` | Zet iemand in de lijst met logins (`lib/beheer-toegang.ts`) |
-| `middleware.ts` | Het slot op `/beheer` |
+| `middleware.ts` | Het slot op `/beheer`, plus het inlogscherm met het streeppatroon |
 | `lib/beheer-mensen.ts` | Wie mag inloggen, en of het wachtwoord klopt |
 | `lib/beheer-opslag.ts` | De weg naar de sleutelopslag; zonder opslag geeft die leeg terug |
 | `api/beheer-inzending.ts` | Inzendingen aannemen, tonen, goedkeuren, weggooien |
@@ -131,7 +132,21 @@ site gewoon; alleen het beheerdocument valt dan terug op minder.
 | `KV_REST_API_URL` en `KV_REST_API_TOKEN` | Sleutelopslag voor inzendingen, de lijst met logins en de rem op verkeerde wachtwoorden. `UPSTASH_REDIS_REST_URL` en `UPSTASH_REDIS_REST_TOKEN` werken ook | Inzendingen kunnen niet bewaard worden (het document zegt dat in het Engels), de lijst komt uit de repo, en de rem telt alleen binnen één machine |
 
 De wachtwoorden zelf staan nergens in de repo. In `lib/beheer-toegang.ts`
-staat per persoon alleen een afdruk: PBKDF2-SHA256 met een eigen zout.
+staat per persoon alleen een afdruk: PBKDF2-SHA256 met een eigen zout. De naam
+is niet hoofdlettergevoelig; het wachtwoord natuurlijk wel.
+
+### Twee dingen om niet te veranderen
+
+De middleware en de twee beheerfuncties draaien allemaal op de **edge**, en de
+imports ertussen hebben **geen `.ts`-extensie**. Dat is geen willekeur: de
+edge-bundelaar weigert een import die op `.ts` eindigt, en een functie op de
+gewone Node-runtime eist hem juist, want die draait als kale ESM en raadt geen
+extensies. Alles op de edge maakt dat verschil weg.
+
+`tsconfig.json` in de wortel erft de opties van `tsconfig.server.json`. Dat
+moet zo blijven: Vercel compileert de middleware en de functies met die
+tsconfig, en staat `strict` daar niet aan, dan versmalt TypeScript een union
+niet en valt de deploy om over iets wat lokaal schoon was.
 
 ### Een inzending terugzetten
 

@@ -57,6 +57,10 @@ Allow: /
 # De styleguide is een intern document, geen pagina voor bezoekers.
 Disallow: /styleguide
 
+# Het beheerdocument. Het slot en de noindex-kop doen het echte werk; dit staat
+# er zodat een crawler er niet eens langs hoeft te komen.
+Disallow: /beheer
+
 Sitemap: ${SITE}/sitemap.xml
 `
 
