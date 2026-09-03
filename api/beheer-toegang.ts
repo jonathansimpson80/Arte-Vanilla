@@ -25,8 +25,19 @@ import {
   maakAfdruk,
   nieuwZout,
   type Persoon,
-} from '../lib/beheer-mensen.ts'
-import { erIsOpslag, schrijf } from '../lib/beheer-opslag.ts'
+} from '../lib/beheer-mensen'
+import { erIsOpslag, schrijf } from '../lib/beheer-opslag'
+
+/**
+ * Draait op de edge, net als de middleware.
+ *
+ * Niet om de snelheid, maar omdat het de enige manier is waarop de gedeelde
+ * modules zich hetzelfde gedragen. Een functie op Node draait als kale ESM en
+ * eist een .ts achter elke import; de edge-bundelaar weigert die juist. Alles
+ * op de edge maakt dat verschil weg. Er zit hier niets in wat Node nodig heeft:
+ * alleen fetch, Request, Response en crypto.
+ */
+export const config = { runtime: 'edge' }
 
 function antwoord(gegevens: unknown, code = 200) {
   return new Response(JSON.stringify(gegevens), {

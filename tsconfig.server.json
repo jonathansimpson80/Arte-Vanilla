@@ -6,10 +6,10 @@
    * naar src/. Daardoor bleven twee echte fouten staan tot ze in productie
    * omvielen. Nu loopt `npm run build` er ook overheen.
    *
-   * `allowImportingTsExtensions` moet aan: deze repo is `"type": "module"` en
-   * Vercel draait de functies rechtstreeks met de TypeScript-ondersteuning van
-   * Node. De ESM-resolver raadt geen extensies, dus de imports moeten op .ts
-   * eindigen, en dan wil TypeScript deze vlag zien.
+   * Deze opties gelden ook voor de bouw op het platform: tsconfig.json in de
+   * wortel erft ze, zodat Vercel met precies dezelfde strengheid compileert als
+   * deze machine. Loopt dat uiteen, dan valt de deploy om over iets wat hier
+   * schoon was.
    */
   "compilerOptions": {
     "target": "ES2022",
@@ -25,7 +25,6 @@
     "verbatimModuleSyntax": true,
     "erasableSyntaxOnly": true,
 
-    "allowImportingTsExtensions": true,
     "noEmit": true,
     "skipLibCheck": true,
 

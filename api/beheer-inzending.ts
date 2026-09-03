@@ -22,7 +22,7 @@ import {
   controleer,
   leesBewijs,
   uitInlogkop,
-} from '../lib/beheer-mensen.ts'
+} from '../lib/beheer-mensen'
 import {
   MAX_INZENDING,
   duwAchteraan,
@@ -30,7 +30,18 @@ import {
   leesLijst,
   opslagWerkt,
   schrijfLijst,
-} from '../lib/beheer-opslag.ts'
+} from '../lib/beheer-opslag'
+
+/**
+ * Draait op de edge, net als de middleware.
+ *
+ * Niet om de snelheid, maar omdat het de enige manier is waarop de gedeelde
+ * modules zich hetzelfde gedragen. Een functie op Node draait als kale ESM en
+ * eist een .ts achter elke import; de edge-bundelaar weigert die juist. Alles
+ * op de edge maakt dat verschil weg. Er zit hier niets in wat Node nodig heeft:
+ * alleen fetch, Request, Response en crypto.
+ */
+export const config = { runtime: 'edge' }
 
 const SLEUTEL = 'beheer:inzendingen'
 

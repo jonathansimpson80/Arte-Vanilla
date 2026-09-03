@@ -24,16 +24,19 @@
  */
 
 /*
- * De .ts erachter hoort er te staan, en dat is geen slordigheid.
+ * Geen .ts achter deze imports, en dat is geen slordigheid.
  *
- * Deze repo is `"type": "module"`, en Vercel draait de functies rechtstreeks
- * met de TypeScript-ondersteuning van Node in plaats van ze te bundelen. De
- * ESM-resolver van Node raadt geen extensies: zonder .ts valt de functie om
- * met ERR_MODULE_NOT_FOUND, en dat merk je pas bij het aanroepen, want bij het
- * bouwen wordt er niets opgezocht.
+ * De edge-bundelaar weigert ze ronduit: "The Edge Function middleware is
+ * referencing unsupported modules". Node's ESM-resolver wil ze juist wel, want
+ * die raadt geen extensies. Dat is een tegenstelling die je niet kunt oplossen
+ * door te kiezen.
+ *
+ * Daarom draaien de twee beheerfuncties ook op de edge, net als de middleware.
+ * Dan wordt alles gebundeld door dezelfde bundelaar, geldt overal dezelfde
+ * schrijfwijze, en hoeft niemand te onthouden welk bestand welke kant op moet.
  */
-import { lees, telOp, stand, wis, erIsOpslag } from './beheer-opslag.ts'
-import { mensen as repoLijst } from './beheer-toegang.ts'
+import { lees, telOp, stand, wis, erIsOpslag } from './beheer-opslag'
+import { mensen as repoLijst } from './beheer-toegang'
 
 export type Persoon = {
   naam: string
@@ -261,12 +264,26 @@ const KOEKJE_UREN = 12
 
 export const KOEKJENAAM = 'beheer_sessie'
 
+/**
+ * Tekst naar base64 en terug, zonder `escape` en `unescape`.
+ *
+ * Die twee zijn het bekende trucje om btoa met accenten te laten werken, maar
+ * ze horen bij een oud aanhangsel van de taal en staan er niet overal. Dit
+ * draait op de edge, en daar is niet gezegd dat ze bestaan. TextEncoder is de
+ * gewone weg en doet precies hetzelfde.
+ */
 function grondslag(tekst: string) {
-  return btoa(unescape(encodeURIComponent(tekst))).replace(/=+$/, '')
+  const bytes = new TextEncoder().encode(tekst)
+  let binair = ''
+  for (const byte of bytes) binair += String.fromCharCode(byte)
+  return btoa(binair).replace(/=+$/, '')
 }
 
 function uitGrondslag(tekst: string) {
-  return decodeURIComponent(escape(atob(tekst)))
+  const binair = atob(tekst)
+  const bytes = new Uint8Array(binair.length)
+  for (let i = 0; i < binair.length; i++) bytes[i] = binair.charCodeAt(i)
+  return new TextDecoder().decode(bytes)
 }
 
 async function teken(lading: string, geheim: string) {

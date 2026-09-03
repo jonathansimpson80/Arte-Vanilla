@@ -1,18 +1,22 @@
 {
   /*
-   * De wortel wijst alleen naar de drie deelprojecten; `tsc -b` doet de rest.
+   * De wortel wijst naar de drie deelprojecten; `tsc -b` doet de rest.
    *
-   * De twee opties hieronder staan er voor het platform, niet voor ons. Vercel
-   * compileert de middleware met zijn eigen aanroep en pakt daarbij deze
-   * tsconfig. Zonder `allowImportingTsExtensions` weigert het de imports die op
-   * .ts eindigen, en die extensies zijn nodig: deze repo is `"type": "module"`
-   * en de functies draaien als gewone ESM, waar Node geen extensies raadt.
+   * De opties hieronder zijn er voor het platform. Vercel compileert de
+   * functies en de middleware met zijn eigen aanroep en pakt daarbij deze
+   * tsconfig, niet de deelprojecten. Stond `strict` hier niet, dan versmalt
+   * TypeScript een union niet en ziet Vercel fouten die op deze machine niet
+   * bestaan. Dat is precies wat er twee deploys heeft gekost, dus dit hoort
+   * gelijk te staan aan tsconfig.server.json.
    */
+  "extends": "./tsconfig.server.json",
   "compilerOptions": {
-    "allowImportingTsExtensions": true,
-    "noEmit": true
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.wortel.tsbuildinfo"
   },
+  // Het geerfde `include` moet hier uit: de wortel bouwt zelf niets, hij
+  // verwijst alleen door. De opties erven we wel, want die pakt Vercel.
   "files": [],
+  "include": [],
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" },

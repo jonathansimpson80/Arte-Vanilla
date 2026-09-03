@@ -31,7 +31,7 @@ import {
   maakBewijs,
   KOEKJENAAM,
   uitInlogkop,
-} from './lib/beheer-mensen.ts'
+} from './lib/beheer-mensen'
 
 export const config = {
   matcher: ['/beheer', '/beheer.html', '/beheer/:pad*'],
