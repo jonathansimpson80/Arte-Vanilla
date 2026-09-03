@@ -34,10 +34,14 @@ function smakenVan(item: Mood, t: (tekst: Vertaald) => string) {
 function Vitrine({
   item,
   actief,
+  eigen,
   t,
 }: {
   item: Mood
+  /** Welke stemming nu de toon zet — stuurt de bolletjes onderaan. */
   actief: number
+  /** Plek van deze kaart in de rij; ontbreekt bij de ene kaart op laptop. */
+  eigen?: number
   t: (tekst: Vertaald) => string
 }) {
   return (
@@ -47,8 +51,13 @@ function Vitrine({
     >
       <div className="relative overflow-hidden rounded-scoop">
         <Foto src={item.image} alt={t(item.title)} className="aspect-4/3 w-full object-cover" />
-        <span className="chunk absolute left-4 top-4 rounded-full bg-crema-50 px-4 py-2 text-[0.7rem] tabular-nums text-espresso-900">
-          {item.number} / 0{moods.length}
+        {/* Alleen het nummer. Hoeveel kaarten er zijn lees je onderaan al af
+            aan de bolletjes; het er hier nog eens bij zetten voegt niets toe.
+            Het rolt zodra deze kaart de toon zet en de achtergrond van kleur
+            wisselt. Op laptop staat er één kaart voor de hele rij en wisselt
+            het getal zelf; ook dan rolt hij. */}
+        <span className="chunk absolute left-4 top-4 rounded-full bg-crema-50 px-4 py-1.5 text-[0.7rem] tabular-nums text-espresso-900">
+          <RolCijfer waarde={item.number} actief={eigen === undefined ? undefined : eigen === actief} />
         </span>
       </div>
 
@@ -212,7 +221,7 @@ export function MoodsSection() {
             >
               {moods.map((item, i) => (
                 <li key={item.number} data-index={i}>
-                  <Vitrine item={item} actief={active} t={t} />
+                  <Vitrine item={item} actief={active} eigen={i} t={t} />
                 </li>
               ))}
             </Carrousel>

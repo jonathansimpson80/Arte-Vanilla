@@ -93,7 +93,7 @@ export function ExpandingPanels({ panels, families = [], onChange, className = '
   }
 
   return (
-    <div className={`flex gap-2 overflow-x-auto sm:overflow-visible ${className}`}>
+    <div className={`veegbaar flex gap-2 overflow-x-auto sm:overflow-visible ${className}`}>
       {panels.map((panel, i) => {
         const isOpen = i === open
 

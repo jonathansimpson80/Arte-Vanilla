@@ -36,17 +36,23 @@ export function RolCijfer({ waarde, actief, className = '', style }: Props) {
   const { ref, phase } = useReveal<HTMLSpanElement>({ y: 0, amount: 0.5 })
   const [stand, setStand] = useState<Stand>('rust')
   const vorigActief = useRef(actief)
+  const vorigeWaarde = useRef(waarde)
 
   useEffect(() => {
+    // Twee aanleidingen: deze kaart wordt de actieve, of er komt een ander
+    // getal in dezelfde plek te staan — dat laatste gebeurt in de vitrine op
+    // laptop, waar één kaart de hele rij bedient.
     const werdActief = actief === true && vorigActief.current === false
+    const nieuweWaarde = waarde !== vorigeWaarde.current
     vorigActief.current = actief
+    vorigeWaarde.current = waarde
     // Nog niet in beeld of geen animatie gewenst: de opkomst doet het werk.
-    if (!werdActief || phase !== 'animate') return
+    if ((!werdActief && !nieuweWaarde) || phase !== 'animate') return
 
     setStand('rollend')
     const id = window.setTimeout(() => setStand('terug'), DUUR + (waarde.length - 1) * STAP)
     return () => window.clearTimeout(id)
-  }, [actief, phase, waarde.length])
+  }, [actief, phase, waarde])
 
   useEffect(() => {
     if (stand !== 'terug') return
