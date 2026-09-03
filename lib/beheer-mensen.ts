@@ -139,7 +139,9 @@ function uitDeOmgeving(naam: string, wachtwoord: string) {
       if (scheiding < 0) continue
       const wie = regel.slice(0, scheiding)
       const woord = regel.slice(scheiding + 1)
-      if (wie === naam && gelijk(woord, wachtwoord)) return { naam: wie, beheerder: true }
+      if (wie.toLowerCase() === naam.toLowerCase() && gelijk(woord, wachtwoord)) {
+        return { naam: wie, beheerder: true }
+      }
     }
     return null
   }
@@ -191,7 +193,13 @@ export async function controleer(
 
   if (mensen.length) {
     for (const persoon of mensen) {
-      if (persoon.naam !== naam) continue
+      // Hoofdletters tellen niet mee bij de naam.
+      //
+      // Je eigen naam met een hoofdletter moeten typen is een eis die niemand
+      // verwacht, en het scherm kan alleen maar zeggen dat naam en wachtwoord
+      // niet kloppen: je ziet nooit welke van de twee het was. Het wachtwoord
+      // blijft natuurlijk wel precies zoals het getypt is.
+      if (persoon.naam.toLowerCase() !== naam.toLowerCase()) continue
       const afdruk = await maakAfdruk(wachtwoord, persoon.zout, persoon.iteraties || RONDES)
       if (gelijk(afdruk, persoon.afdruk)) {
         if (erIsOpslag) await wis(remSleutel)

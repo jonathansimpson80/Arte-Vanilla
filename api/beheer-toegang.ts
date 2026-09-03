@@ -132,12 +132,15 @@ export async function POST(verzoek: Request) {
 
     const zout = nieuwZout()
     const afdruk = await maakAfdruk(woord, zout, RONDES)
+    // Ook hier zonder hoofdletters vergelijken: anders levert "simone" naast
+    // "Simone" twee regels op voor dezelfde persoon, en wint een van de twee
+    // willekeurig.
     nieuweLijst = mensen
-      .filter((persoon) => persoon.naam !== wie)
+      .filter((persoon) => persoon.naam.toLowerCase() !== wie.toLowerCase())
       .concat([{ naam: wie, zout, afdruk, iteraties: RONDES, beheerder: Boolean(opdracht.beheerder) }])
   } else if (opdracht.actie === 'verwijder') {
     const wie = (opdracht.wie ?? '').trim()
-    nieuweLijst = mensen.filter((persoon) => persoon.naam !== wie)
+    nieuweLijst = mensen.filter((persoon) => persoon.naam.toLowerCase() !== wie.toLowerCase())
 
     // De laatste beheerder weghalen zou de deur voorgoed dichttrekken.
     if (!nieuweLijst.some((persoon) => persoon.beheerder)) {
