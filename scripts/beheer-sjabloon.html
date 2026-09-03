@@ -1698,7 +1698,7 @@ function tekenToegang(waar) {
       const antwoord = await fetch('/api/beheer-toegang', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ actie: 'lijst', naam: eigenNaam.value, wachtwoord: eigenWoord.value }),
+        body: JSON.stringify({ actie: 'lijst', naam: eigenNaam.value.trim(), wachtwoord: eigenWoord.value }),
       })
       const uitslag = await antwoord.json()
       lijstVak.textContent = ''
@@ -1734,8 +1734,9 @@ function tekenToegang(waar) {
   }
 
   async function stuurToegang(opdracht) {
+    // Naam zonder spaties eromheen; het wachtwoord blijft zoals het getypt is.
     const lichaam = Object.assign(
-      { naam: eigenNaam.value, wachtwoord: eigenWoord.value },
+      { naam: eigenNaam.value.trim(), wachtwoord: eigenWoord.value },
       opdracht,
     )
     try {

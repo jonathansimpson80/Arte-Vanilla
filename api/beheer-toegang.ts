@@ -63,8 +63,15 @@ export async function POST(verzoek: Request) {
     return antwoord({ melding: 'We could not read that request.' }, 400)
   }
 
+  /*
+   * De naam wordt van spaties ontdaan, het wachtwoord niet.
+   *
+   * Een spatie die bij het plakken meekomt zie je niet staan, en hij leverde
+   * hier een weigering op die niet uit te leggen was. Bij een wachtwoord mag
+   * dat juist nooit: daar kan een spatie een echt teken zijn.
+   */
   const uitslag = await controleer(
-    opdracht.naam ?? '',
+    (opdracht.naam ?? '').trim(),
     opdracht.wachtwoord ?? '',
     adresVan(verzoek),
   )
